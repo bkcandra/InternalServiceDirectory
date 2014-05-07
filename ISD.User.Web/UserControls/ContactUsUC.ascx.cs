@@ -4,10 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ISD.User.Customer.EDS;
-using ISD.User.Customer.DA;
+using ISD.EDS;
+using ISD.DA;
 using System.Web.Security;
-using ISD.User.Utility;
+using ISD.Util;
 using System.Net.Mail;
 using BCUtility;
 
@@ -38,7 +38,7 @@ namespace ISD.User.Web.UserControls
                 if (Membership.GetUser() != null && Membership.GetUser().IsOnline)
                 {
 
-                    var dr = new CustomerDAC().RetrieveUserProfiles(new Guid(Membership.GetUser().ProviderUserKey.ToString()));
+                    var dr = new DataAccessComponent().RetrieveUserProfiles(new Guid(Membership.GetUser().ProviderUserKey.ToString()));
                     if (dr != null)
                         SetData(dr);
                 }
@@ -47,7 +47,7 @@ namespace ISD.User.Web.UserControls
             }
         }
 
-        private void SetData(CustomerEDSC.UserProfilesDTRow dr)
+        private void SetData(EntityDataSetComponent.UserProfilesRow dr)
         {
             txtContactPerson.Text = dr.FirstName + " " + dr.LastName;
             txtEmail.Text = dr.Email;
@@ -63,15 +63,15 @@ namespace ISD.User.Web.UserControls
 
         protected void btnNextStep_Click(object sender, EventArgs e)
         {
-            //CustomerEDSC.CartDTRow dr = GetData();
+            //EntityDataSetComponent.CartRow dr = GetData();
 
-            //CustomerEDSC.CartItemDTDataTable dt = new CartHelper(Session).RetrieveCartItem();
-            //CustomerEDSC.CartItemDTDataTable dt = new CustomerEDSC.CartItemDTDataTable();
-            //new CustomerDAC().CreateCart(dr, dt);
+            //EntityDataSetComponent.CartItemDataTable dt = new CartHelper(Session).RetrieveCartItem();
+            //EntityDataSetComponent.CartItemDataTable dt = new EntityDataSetComponent.CartItemDataTable();
+            //new DataAccessComponent().CreateCart(dr, dt);
             //Session["OrderID"] = dr.ID;
 
             
-            CustomerEDSC.WebConfigurationDTRow drSmtp = new CustomerDAC().RetrieveEmailServerSetting();
+            EntityDataSetComponent.WebConfigurationRow drSmtp = new DataAccessComponent().RetrieveEmailServerSetting();
             if (drSmtp != null)
             {
                 //SendEmail to HelpDesk
@@ -90,9 +90,9 @@ namespace ISD.User.Web.UserControls
             }
         }
 
-        private CustomerEDSC.ContactUsDTRow GetData()
+        private EntityDataSetComponent.ContactUsRow GetData()
         {
-            CustomerEDSC.ContactUsDTRow dr = new CustomerEDSC.ContactUsDTDataTable().NewContactUsDTRow();
+            EntityDataSetComponent.ContactUsRow dr = new EntityDataSetComponent.ContactUsDataTable().NewContactUsRow();
             dr.ContactPerson = txtContactPerson.Text;
             dr.Phone = txtPhone.Text;
             dr.Email = txtEmail.Text;

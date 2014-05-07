@@ -4,12 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ISD.User.Customer.EDS;
-using ISD.User.Customer.DA;
+using ISD.EDS;
+using ISD.DA;
 using System.Web.Security;
-using ISD.User.Utility;
+using ISD.Util;
 using WebMatrix.WebData;
-using ISD.User.Customer.BF;
+using ISD.BF;
 using BCUtility;
 using System.Text.RegularExpressions;
 
@@ -94,8 +94,8 @@ namespace ISD.User.Customer.Web.UserControls
                 for (int j = 0; j < quant; j++)
                 {
 
-                    CustomerEDSC.VoucherDetailsDTRow dr = new CustomerEDSC.VoucherDetailsDTDataTable().NewVoucherDetailsDTRow();
-                    CustomerDAC dac = new CustomerDAC();
+                    EntityDataSetComponent.VoucherDetailsRow dr = new EntityDataSetComponent.VoucherDetailsDataTable().NewVoucherDetailsRow();
+                    DataAccessComponent dac = new DataAccessComponent();
                     dr.RewardID = Convert.ToInt32(ID[i]);
                     dr.SponsorID = dac.getSponsorID(Convert.ToInt32(ID[i]));
 
@@ -161,7 +161,7 @@ namespace ISD.User.Customer.Web.UserControls
         }
         protected void Refresh()
         {
-            ods.TypeName = typeof(CustomerDAC).FullName;
+            ods.TypeName = typeof(DataAccessComponent).FullName;
             ods.SelectParameters.Clear();
             string RewardID = "0";
             RewardID = RewardCart.Instance.getItems();
@@ -185,7 +185,7 @@ namespace ISD.User.Customer.Web.UserControls
             ods.SelectCountMethod = "RetrieveRewardCartCount";
             RewardCheckoutView.DataSourceID = "ods";
             
-            ods1.TypeName = typeof(CustomerDAC).FullName;
+            ods1.TypeName = typeof(DataAccessComponent).FullName;
             ods1.SelectParameters.Clear();
             ods1.SelectParameters.Add("VoucherID", selected.ToString());
             ods1.SelectMethod = "RetrieveVouchers";
@@ -255,7 +255,7 @@ namespace ISD.User.Customer.Web.UserControls
             {
                 if (Convert.ToBoolean(hdnRewardImage.Value))
                 {
-                    var dr = new CustomerDAC().RetrieveRewardPrimaryImage(Convert.ToInt32(hdnRewardsID.Value));
+                    var dr = new DataAccessComponent().RetrieveRewardPrimaryImage(Convert.ToInt32(hdnRewardsID.Value));
                     if (dr != null || dr.ImageStream != null)
                         //Convert byte directly, while its easier, its not suppose to be 
                         //imgPreview.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(dr.ImageStream);

@@ -4,12 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ISD.User.Customer.EDS;
-using ISD.User.Customer.DA;
+using ISD.EDS;
+using ISD.DA;
 using System.Web.Security;
-using ISD.User.Utility;
+using ISD.Util;
 using WebMatrix.WebData;
-using ISD.User.Customer.BF;
+using ISD.BF;
 using BCUtility;
 using System.Text.RegularExpressions;
 
@@ -33,7 +33,7 @@ namespace ISD.User.Web.UserControls
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            var web = new CustomerDAC().RetrieveWebConfiguration();
+            var web = new DataAccessComponent().RetrieveWebConfiguration();
             EnableRecaptcha = web.EnableCaptcha;
             if (EnableRecaptcha)
             {
@@ -57,8 +57,8 @@ namespace ISD.User.Web.UserControls
 
         private void setRegistrationDDL()
         {
-            CustomerEDSC.v_SuburbExplorerDTDataTable dt = new CustomerDAC().RetrieveSuburbs();
-            CustomerEDSC.StateDTDataTable dtState = new CustomerDAC().RetrieveStates();
+            EntityDataSetComponent.v_SuburbExplorerDataTable dt = new DataAccessComponent().RetrieveSuburbs();
+            EntityDataSetComponent.StateDataTable dtState = new DataAccessComponent().RetrieveStates();
 
             ddlState.Items.Clear();
 
@@ -79,27 +79,27 @@ namespace ISD.User.Web.UserControls
 
         protected void CreateUser(Guid userID)
         {
-            CustomerBFC bfc = new CustomerBFC();
-            CustomerDAC dac = new CustomerDAC();
+            BusinessFunctionComponent bfc = new BusinessFunctionComponent();
+            DataAccessComponent dac = new DataAccessComponent();
 
-            CustomerEDSC.UserProfilesDTRow dr = GetRegistrationData();
+            EntityDataSetComponent.UserProfilesRow dr = GetRegistrationData();
 
 
             dr.UserID = userID;
             dac.InsertNewUserProfiles(dr);
-            CustomerEDSC.UserRewardDTRow drr = GetRewardData();
+            EntityDataSetComponent.UserRewardRow drr = GetRewardData();
             drr.UserID = userID;
             dac.InsertNewRewardUser(drr);
 
-            var drRef = new CustomerEDSC.UserReferenceDTDataTable().NewUserReferenceDTRow();
+            var drRef = new EntityDataSetComponent.UserReferenceDataTable().NewUserReferenceRow();
             drRef.UserID = userID;
             drRef.ReferenceID = bfc.GenerateUserRefID(dr.LastName, dr.FirstName);
             dac.insertNewUserReference(drRef);
         }
-        private CustomerEDSC.UserRewardDTRow GetRewardData()
+        private EntityDataSetComponent.UserRewardRow GetRewardData()
         {
 
-            CustomerEDSC.UserRewardDTRow drr = new CustomerEDSC.UserRewardDTDataTable().NewUserRewardDTRow();
+            EntityDataSetComponent.UserRewardRow drr = new EntityDataSetComponent.UserRewardDataTable().NewUserRewardRow();
             drr.RewardPoint = 0;
             drr.RedeemedtPoint = 0;
             drr.BonusPoint = 0;
@@ -108,12 +108,12 @@ namespace ISD.User.Web.UserControls
             return drr;
         }
 
-        private CustomerEDSC.UserProfilesDTRow GetRegistrationData()
+        private EntityDataSetComponent.UserProfilesRow GetRegistrationData()
         {
             //Reference wizard's controls
             //CreateUserWizardStep ProviderProfiles = CreateNewMember.FindControl("ProviderProfiles") as CreateUserWizardStep;
 
-            CustomerEDSC.UserProfilesDTRow dr = new CustomerEDSC.UserProfilesDTDataTable().NewUserProfilesDTRow();
+            EntityDataSetComponent.UserProfilesRow dr = new EntityDataSetComponent.UserProfilesDataTable().NewUserProfilesRow();
 
             dr.Username = Username.Text;
             dr.Title = Convert.ToInt32(ddlTitle.SelectedValue);
@@ -215,7 +215,7 @@ namespace ISD.User.Web.UserControls
                 ErrorText += SystemConstants.ErrorUsernameTaken;
                 error = true;
             }
-            if (new CustomerDAC().isEmailAddressExist(Email.Text.ToLower()))
+            if (new DataAccessComponent().isEmailAddressExist(Email.Text.ToLower()))
             {
                 if (!string.IsNullOrEmpty(lblError.Text))
                     lblError.Text += "</br>";
@@ -270,7 +270,7 @@ namespace ISD.User.Web.UserControls
                     Roles.CreateRole(SystemConstants.CustomerRole);
 
                 Roles.AddUserToRole(Username.Text, SystemConstants.CustomerRole);
-                Guid userID = new CustomerDAC().RetrieveUserGUID(Username.Text);
+                Guid userID = new DataAccessComponent().RetrieveUserGUID(Username.Text);
 
                 if (userID != Guid.Empty)
                     CreateUser(userID);
@@ -285,10 +285,10 @@ namespace ISD.User.Web.UserControls
 
         private void SendConfirmationEmail(Guid userID, string token)
         {
-            var MailConf = new CustomerDAC().RetrieveWebConfiguration();
-            var emTemp = new CustomerDAC().RetrieveMailTemplate((int)SystemConstants.EmailTemplateType.ConfirmationEmail);
+            var MailConf = new DataAccessComponent().RetrieveWebConfiguration();
+            var emTemp = new DataAccessComponent().RetrieveMailTemplate((int)SystemConstants.EmailTemplateType.ConfirmationEmail);
 
-            new CustomerBFC().ParseEmail(emTemp, userID, token, (int)SystemConstants.EmailTemplateType.ConfirmationEmail, 0);
+            new BusinessFunctionComponent().ParseEmail(emTemp, userID, token, (int)SystemConstants.EmailTemplateType.ConfirmationEmail, 0);
 
             EmailSender.SendEmail(MailConf.SMTPAccount, Email.Text, emTemp.EmailSubject, emTemp.EmailBody, MailConf.SMTPHost, MailConf.SMTPPort, MailConf.SMTPUserName, MailConf.SMTPPassword, MailConf.SMTPSSL, MailConf.SMTPIIS);
         }
@@ -309,7 +309,7 @@ namespace ISD.User.Web.UserControls
             {
                 ReqEmailAddress.Visible = false;
                 if (Email.Text.Length >= 5)
-                    lblEmailTaken.Visible = new CustomerDAC().isEmailAddressExist(Email.Text.ToLower());
+                    lblEmailTaken.Visible = new DataAccessComponent().isEmailAddressExist(Email.Text.ToLower());
 
 
                 var emailReg = @"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*";

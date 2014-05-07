@@ -4,16 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ISD.User.Utility;
-using ISD.User.Customer.EDS;
+using ISD.Util;
+using ISD.EDS;
 using System.Web.Security;
-using ISD.User.Customer.BF;
-using ISD.User.Customer.DA;
+using ISD.BF;
+using ISD.DA;
 using System.Net;
 using System.Xml.Linq;
 using WebMatrix.WebData;
-using Segmentio;
-using Segmentio.Model;
 
 
 
@@ -141,7 +139,7 @@ namespace ISD.User.Web.UserControls
         private void LogVisitor()
         {
             string info = string.Empty;
-            var dr = new CustomerEDSC.ActivityVisitorDTDataTable().NewActivityVisitorDTRow();
+            var dr = new EntityDataSetComponent.ActivityVisitorDataTable().NewActivityVisitorRow();
             dr.ActivityID = ActivityID;
             if (!string.IsNullOrEmpty((string)Session[SystemConstants.ses_IPAddress]))
             {
@@ -176,19 +174,19 @@ namespace ISD.User.Web.UserControls
             dr.CreatedBy = SystemConstants.SystemName;
             dr.CreatedDatetime = DateTime.Now;
 
-            new CustomerDAC().InsertVisitor(dr);
+            new DataAccessComponent().InsertVisitor(dr);
         }
 
         private void LogVisitors(int count)
         {
-            var dt = new CustomerEDSC.ActivityVisitorDTDataTable();
+            var dt = new EntityDataSetComponent.ActivityVisitorDataTable();
             DateTime start = DateTime.Now.AddYears(-1);
             Random gen = new Random();
 
-            HashSet<int> actIDs = new CustomerDAC().RetrieveActivitiesIDs();
+            HashSet<int> actIDs = new DataAccessComponent().RetrieveActivitiesIDs();
             for (int i = 0; i <= count; i++)
             {
-                var dr = dt.NewActivityVisitorDTRow();
+                var dr = dt.NewActivityVisitorRow();
                 string info = string.Empty;
 
                 int curValue = gen.Next(62, 426);
@@ -235,13 +233,13 @@ namespace ISD.User.Web.UserControls
                 int range = (DateTime.Today - start).Days;
                 dr.CreatedDatetime = start.AddDays(gen.Next(range));
 
-                dt.AddActivityVisitorDTRow(dr);
+                dt.AddActivityVisitorRow(dr);
             }
-            new CustomerDAC().InsertVisitors(dt);
+            new DataAccessComponent().InsertVisitors(dt);
         }
         private void Refresh()
         {
-            var dr = new CustomerDAC().RetrieveActivityExplorer(ActivityID);
+            var dr = new DataAccessComponent().RetrieveActivityExplorer(ActivityID);
             if (dr != null)
             {
                 LogVisitor();
@@ -250,7 +248,7 @@ namespace ISD.User.Web.UserControls
                 SetTimetableInformation();
                 ActivityNavigationUC1.SetNavigation(dr.Name, dr.ID, dr.CategoryID, dr.CategoryName);
 
-                var drimages = new CustomerDAC().RetrieveActivityImages(ActivityID);
+                var drimages = new DataAccessComponent().RetrieveActivityImages(ActivityID);
                 if (drimages != null)
                     ImagesListViewUC1.ActivityID = ActivityID;
                 else
@@ -264,13 +262,13 @@ namespace ISD.User.Web.UserControls
 
         private void SetTitle(Guid providerID)
         {
-            CustomerDAC dac = new CustomerDAC();
+            DataAccessComponent dac = new DataAccessComponent();
 
             if (dac.IsUserImageExist(providerID))
             {
                 divWithImage.Visible = true;
                 divNoImage.Visible = false;
-                int ImageID = new CustomerBFC().getProviderPrimaryImage(providerID);
+                int ImageID = new BusinessFunctionComponent().getProviderPrimaryImage(providerID);
                 if (ImageID != 0)
                     ProviderImage.ImageUrl = "~/ImageHandler.ashx?" + SystemConstants.qs_UserImageID + "=" + ImageID;
                 else
@@ -293,7 +291,7 @@ namespace ISD.User.Web.UserControls
             ScheduleViewerUC1.timetableFormat = (int)SystemConstants.TimetableFormat.Seasonal;
         }
 
-        private void SetActivityInformation(CustomerEDSC.v_ActivityExplorerDTRow dr)
+        private void SetActivityInformation(EntityDataSetComponent.v_ActivityExplorerRow dr)
         {
             divProductDesc.InnerHtml = dr.FullDescription;
             if (!string.IsNullOrEmpty(dr.Price))
@@ -348,7 +346,7 @@ namespace ISD.User.Web.UserControls
             if (Membership.GetUser() != null)
             {
                 var providerID = new Guid(Membership.GetUser().ProviderUserKey.ToString());
-                var ownerLogin = new CustomerBFC().CheckActivityOwner(ActivityID, providerID);
+                var ownerLogin = new BusinessFunctionComponent().CheckActivityOwner(ActivityID, providerID);
 
                 return ownerLogin;
             }

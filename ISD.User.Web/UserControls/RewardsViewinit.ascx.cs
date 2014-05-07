@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Drawing;
-using ISD.User.Utility;
-using ISD.User.Customer.BF;
-using ISD.User.Customer.DA;
+using ISD.Util;
+using ISD.BF;
+using ISD.DA;
 
 namespace ISD.User.Customer.Web.UserControls
 {
@@ -169,12 +169,12 @@ namespace ISD.User.Customer.Web.UserControls
 
             if (SearchKey != null)
             {
-                String SearchPhrase = new CustomerBFC().RefineSearchKeyreward(SearchKey);
+                String SearchPhrase = new BusinessFunctionComponent().RefineSearchKeyreward(SearchKey);
                 SetDataSourcebySearchKey(SearchPhrase);
 
                 
 
-                lblAmount.Text = new CustomerDAC().RetrieveAdminRewardsbySearchPhraseCount(ProviderID, AgeFrom, AgeTo, RewardType, CategoryID, SearchPhrase).ToString();
+                lblAmount.Text = new DataAccessComponent().RetrieveAdminRewardsbySearchPhraseCount(ProviderID, AgeFrom, AgeTo, RewardType, CategoryID, SearchPhrase).ToString();
                 if (Convert.ToInt32(lblAmount.Text) <= Convert.ToInt32(PageSize + StartRow))
                 {
                     lblEndIndex.Text = lblAmount.Text;
@@ -208,7 +208,7 @@ namespace ISD.User.Customer.Web.UserControls
             else
             {
                 SetDataSourcebyProviderCategory();
-                int amount = new CustomerDAC().RetrieveAdminRewardsCount(ProviderID, AgeFrom, AgeTo, RewardType, CategoryID);
+                int amount = new DataAccessComponent().RetrieveAdminRewardsCount(ProviderID, AgeFrom, AgeTo, RewardType, CategoryID);
                 lblAmount.Text = amount.ToString();
                 if (Convert.ToInt32(lblAmount.Text) <= Convert.ToInt32(PageSize + StartRow))
                 {
@@ -251,7 +251,7 @@ namespace ISD.User.Customer.Web.UserControls
 
         private void SetDataSourcebySearchKey(String SearchPhrase)
         {
-            ods.TypeName = typeof(CustomerDAC).FullName;
+            ods.TypeName = typeof(DataAccessComponent).FullName;
             ods.EnablePaging = true;
             ods.SelectParameters.Clear();
             
@@ -278,7 +278,7 @@ namespace ISD.User.Customer.Web.UserControls
 
         private void SetDataSourcebyProviderCategory()
         {
-            ods.TypeName = typeof(CustomerDAC).FullName;
+            ods.TypeName = typeof(DataAccessComponent).FullName;
             ods.EnablePaging = true;
             ods.SelectParameters.Clear();
             ods.SelectParameters.Add("categoryID", CategoryID.ToString());
@@ -473,7 +473,7 @@ namespace ISD.User.Customer.Web.UserControls
             {
                 if (Convert.ToBoolean(hdnRewardImage.Value))
                 {
-                    var dr = new CustomerDAC().RetrieveRewardPrimaryImage(Convert.ToInt32(hdnRewardsID.Value));
+                    var dr = new DataAccessComponent().RetrieveRewardPrimaryImage(Convert.ToInt32(hdnRewardsID.Value));
                     if (dr != null)
                         //Convert byte directly, while its easier, its not suppose to be 
                         //imgPreview.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(dr.ImageStream);

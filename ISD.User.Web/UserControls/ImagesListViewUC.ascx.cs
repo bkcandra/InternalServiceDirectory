@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ISD.User.Customer.DA;
-using ISD.User.Customer.EDS;
-using ISD.User.Utility;
+using ISD.DA;
+using ISD.EDS;
+using ISD.Util;
 using System.Web.UI.HtmlControls;
 
 namespace ISD.User.Web.UserControls
@@ -38,9 +38,9 @@ namespace ISD.User.Web.UserControls
 
         public void Refresh()
         {
-            ListView1.DataSource = new CustomerDAC().RetrieveActivityImages(ActivityID);
+            ListView1.DataSource = new DataAccessComponent().RetrieveActivityImages(ActivityID);
             ListView1.DataBind();
-            ListView2.DataSource = new CustomerDAC().RetrieveActivityImages(ActivityID);
+            ListView2.DataSource = new DataAccessComponent().RetrieveActivityImages(ActivityID);
             ListView2.DataBind();
             if (ListView1.DataSource == null)
             {

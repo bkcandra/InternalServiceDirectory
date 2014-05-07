@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Drawing;
-using ISD.User.Utility;
-using ISD.User.Customer.BF;
-using ISD.User.Customer.DA;
+using ISD.Util;
+using ISD.BF;
+using ISD.DA;
 using System.Diagnostics;
 
 namespace ISD.User.Web.UserControls
@@ -338,7 +338,7 @@ namespace ISD.User.Web.UserControls
 
             if (SearchKey != null)
             {
-                List<String> parameters = new CustomerBFC().RefineSearchKey(SearchKey);
+                List<String> parameters = new BusinessFunctionComponent().RefineSearchKey(SearchKey);
 
                 foreach (var parameter in parameters)
                 {
@@ -351,7 +351,7 @@ namespace ISD.User.Web.UserControls
                         else if (parameter.StartsWith(SystemConstants.Location))
                         {
                             String[] locs = parameter.Replace(SystemConstants.Location, string.Empty).ToUpper().Split(';');
-                            var subDT = new CustomerDAC().RetrieveSuburbs();
+                            var subDT = new DataAccessComponent().RetrieveSuburbs();
 
                             var suburbs = subDT.Where(x => locs.Contains(x.Name.ToUpper()));
 
@@ -411,7 +411,7 @@ namespace ISD.User.Web.UserControls
                 SetDataSourceFromSearchKey(query);
 
 
-                lblAmount.Text = new CustomerDAC().RetrieveProviderActivitiesbySearchPhraseCount(ProviderID, dtFrom.ToString(), dtTo.ToString(),tmFrom.ToString(),tmTo.ToString(), AgeFrom, AgeTo, SuburbID, CategoryID, query, MonFilter.ToString(), TueFilter.ToString(), WedFilter.ToString(), ThursFilter.ToString(), FriFilter.ToString(), SatFilter.ToString(), SunFilter.ToString()).ToString();
+                lblAmount.Text = new DataAccessComponent().RetrieveProviderActivitiesbySearchPhraseCount(ProviderID, dtFrom.ToString(), dtTo.ToString(),tmFrom.ToString(),tmTo.ToString(), AgeFrom, AgeTo, SuburbID, CategoryID, query, MonFilter.ToString(), TueFilter.ToString(), WedFilter.ToString(), ThursFilter.ToString(), FriFilter.ToString(), SatFilter.ToString(), SunFilter.ToString()).ToString();
 
                 if (Convert.ToInt32(lblAmount.Text) <= Convert.ToInt32(PageSize + StartRow))
                 {
@@ -448,7 +448,7 @@ namespace ISD.User.Web.UserControls
             else
             {
                 SetDataSourceFromCategoryProvider();
-                lblAmount.Text = new CustomerDAC().RetrieveProviderActivitiesCount(ProviderID, dtFrom.ToString(), dtTo.ToString(), tmFrom.ToString(), tmTo.ToString(), AgeFrom, AgeTo, SuburbID, CategoryID, MonFilter.ToString(), TueFilter.ToString(), WedFilter.ToString(), ThursFilter.ToString(), FriFilter.ToString(), SatFilter.ToString(), SunFilter.ToString()).ToString();
+                lblAmount.Text = new DataAccessComponent().RetrieveProviderActivitiesCount(ProviderID, dtFrom.ToString(), dtTo.ToString(), tmFrom.ToString(), tmTo.ToString(), AgeFrom, AgeTo, SuburbID, CategoryID, MonFilter.ToString(), TueFilter.ToString(), WedFilter.ToString(), ThursFilter.ToString(), FriFilter.ToString(), SatFilter.ToString(), SunFilter.ToString()).ToString();
 
                 if (Convert.ToInt32(lblAmount.Text) <= Convert.ToInt32(PageSize + StartRow))
                 {
@@ -477,7 +477,7 @@ namespace ISD.User.Web.UserControls
 
         private void SetDataSourceFromSearchKey(String SearchPhrase)
         {
-            ods.TypeName = typeof(CustomerDAC).FullName;
+            ods.TypeName = typeof(DataAccessComponent).FullName;
             ods.EnablePaging = true;
             ods.SelectParameters.Clear();
             ods.SelectParameters.Add("searchKey", SearchPhrase);
@@ -510,7 +510,7 @@ namespace ISD.User.Web.UserControls
 
         private void SetDataSourceFromCategoryProvider()
         {
-            ods.TypeName = typeof(CustomerDAC).FullName;
+            ods.TypeName = typeof(DataAccessComponent).FullName;
             ods.EnablePaging = true;
             ods.SelectParameters.Clear();
             ods.SelectParameters.Add("categoryID", CategoryID.ToString());

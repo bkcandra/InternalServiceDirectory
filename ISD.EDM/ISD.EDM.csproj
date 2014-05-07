@@ -48,44 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ISDEDMC.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ISDEDMC.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ISDEDMC.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ISDEDMC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ISDEDMC.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ISDEDMC.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="ISDEDMC.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ISDEDMC.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
-    <None Include="ISDEDMC.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ISDEDMC.edmx</DependentUpon>
-      <LastGenOutput>ISDEDMC.Context.cs</LastGenOutput>
-    </None>
-    <None Include="ISDEDMC.edmx.diagram">
-      <DependentUpon>ISDEDMC.edmx</DependentUpon>
-    </None>
-    <None Include="ISDEDMC.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ISDEDMC.edmx</DependentUpon>
-      <LastGenOutput>ISDEDMC.cs</LastGenOutput>
-    </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

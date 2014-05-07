@@ -1,8 +1,6 @@
-﻿using ISD.User.Customer.BF;
-using ISD.User.Customer.DA;
-using ISD.User.Customer.EDS;
-using ISD.User.Utility;
-using ISD.User.Web.UserControls;
+﻿using ISD.User.Web.UserControls;
+using ISD.Util;
+using ISD.BF;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -332,7 +330,7 @@ namespace ISD.User.Customer.Web.UserControls
 
         private void RetrieveSavedList()
         {
-            var dt = new CustomerDAC().retrieveUserActivityList(new Guid(Session[SystemConstants.ses_UserID].ToString()));
+            var dt = new DataAccessComponent().retrieveUserActivityList(new Guid(Session[SystemConstants.ses_UserID].ToString()));
             if (dt != null)
             {
                 List<int> savedList = new List<int>(dt.Select(x => x.ListValue));
@@ -358,17 +356,17 @@ namespace ISD.User.Customer.Web.UserControls
                 string[] savedActsArr = SavedList.Split('|');
 
                 HashSet<int> savedActs = new HashSet<int>(savedActsArr.Select(x => Convert.ToInt32(x)));
-                CustomerEDSC.v_ActivityExplorerDTDataTable dt = new CustomerDAC().RetrieveActivityExplorersbyIDs(savedActs, "");
+                EntityDataSetComponent.v_ActivityExplorerDataTable dt = new DataAccessComponent().RetrieveActivityExplorersbyIDs(savedActs, "");
                 ListViewActivities.DataSource = dt;
                 ListViewActivities.DataBind();
                 SortProducts();
 
-                amount = new CustomerDAC().RetrieveActivityExplorersbyIDsCount(savedActs);
+                amount = new DataAccessComponent().RetrieveActivityExplorersbyIDsCount(savedActs);
                 
             }
             else
             {
-                CustomerEDSC.v_ActivityExplorerDTDataTable dt = null;
+                EntityDataSetComponent.v_ActivityExplorerDataTable dt = null;
                 ListViewActivities.DataSource = dt;
                 ListViewActivities.DataBind();
             }
@@ -550,20 +548,20 @@ namespace ISD.User.Customer.Web.UserControls
                     {
                         lnkSaved.Attributes.CssStyle.Clear();
                         lnkSaved.Attributes.Add("Class", "btn-icon btn-white btn-radius btn-star");
-                        new CustomerDAC().RemoveFromSavedList(WebSecurity.CurrentUserName, userID, Convert.ToInt32(hdnActivityID.Value));
+                        new DataAccessComponent().RemoveFromSavedList(WebSecurity.CurrentUserName, userID, Convert.ToInt32(hdnActivityID.Value));
                     }
                     else
                     {
                         lnkSaved.Attributes.CssStyle.Clear();
                         lnkSaved.Attributes.Add("Class", "btn-icon btn-white btn-radius btn-starred");
-                        var dr = new CustomerEDSC.UserSavedListDTDataTable().NewUserSavedListDTRow();
+                        var dr = new EntityDataSetComponent.UserSavedListDataTable().NewUserSavedListRow();
                         dr.ID = 0;
                         dr.ListType = (int)SystemConstants.SavedListType.Activity;
                         dr.ListValue = Convert.ToInt32(hdnActivityID.Value);
                         dr.OwnerGuid = new MembershipHelper().GetProviderUserKey(WebSecurity.CurrentUserId);
                         dr.CreatedBy = WebSecurity.CurrentUserName;
                         dr.CreatedDatetime = DateTime.Now;
-                        new CustomerDAC().AddToSavedList(dr);
+                        new DataAccessComponent().AddToSavedList(dr);
                     }
                 }
             }
@@ -681,7 +679,7 @@ namespace ISD.User.Customer.Web.UserControls
                 imgCostIcon.ToolTip = "This activity has a fee";
                 imgCostIcon.ImageUrl = "~/Content/StyleImages/Paid.png";
             }
-            var dr = new CustomerDAC().RetrieveActivityPrimaryImage(Convert.ToInt32(hdnActivityID.Value));
+            var dr = new DataAccessComponent().RetrieveActivityPrimaryImage(Convert.ToInt32(hdnActivityID.Value));
             if (dr != null && dr.ImageStream != null)
             {
                 //imgPreview.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(dr.ImageStream);                 Convert byte directly, while its easier, its not suppose to be
@@ -690,9 +688,9 @@ namespace ISD.User.Customer.Web.UserControls
             else
             {
 
-                if (new CustomerDAC().IsUserImageExist(new Guid(hdnProviderID.Value)))
+                if (new DataAccessComponent().IsUserImageExist(new Guid(hdnProviderID.Value)))
                 {
-                    int ImageID = new CustomerBFC().getProviderPrimaryImage(new Guid(hdnProviderID.Value));
+                    int ImageID = new BusinessFunctionComponent().getProviderPrimaryImage(new Guid(hdnProviderID.Value));
                     if (ImageID != 0)
                         imgPreview.ImageUrl = "~/ImageHandler.ashx?" + SystemConstants.qs_UserImageID + "=" + ImageID;
                     else

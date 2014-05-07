@@ -1,5 +1,5 @@
-﻿using ISD.User.Customer.DA;
-using ISD.User.Utility;
+﻿using ISD.DA;
+using ISD.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +27,7 @@ namespace ISD.User.Customer.Web.UserControls
 
         private void CheckUserStatus()
         {
-            CustomerDAC dac = new CustomerDAC();
+            DataAccessComponent dac = new DataAccessComponent();
             Guid userID = dac.RetrieveUserGUID(WebSecurity.CurrentUserName);
             var drP = dac.RetrieveUserProfiles(userID);
 
@@ -73,7 +73,7 @@ namespace ISD.User.Customer.Web.UserControls
             {
                 if (Membership.ValidateUser(usr, txtPassword.Text))
                 {
-                    CustomerDAC dac = new CustomerDAC();
+                    DataAccessComponent dac = new DataAccessComponent();
                     Guid userID = dac.RetrieveUserGUID(usr);
                     string err = "";
                     if (dac.DeactivateUser(usr, userID, out err))

@@ -1,6 +1,6 @@
-﻿using ISD.User.Customer.DA;
-using ISD.User.Customer.BF;
-using ISD.User.Utility;
+﻿using ISD.DA;
+using ISD.BF;
+using ISD.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -209,7 +209,7 @@ namespace ISD.User.Customer.Web.UserControls
                 PageSize = 10;
           /*  if (SearchKey != null)
             {
-                String SearchPhrases = new CustomerBFC().RefineSearchKeyreward(SearchKey);
+                String SearchPhrases = new BusinessFunctionComponent().RefineSearchKeyreward(SearchKey);
                 string query = "";
                 foreach (var phrase in SearchPhrases)
                 {
@@ -222,11 +222,11 @@ namespace ISD.User.Customer.Web.UserControls
                 SetDataSourcebySearchKey(query);*/
             if (SearchKey != null)
             {
-                String SearchPhrase = new CustomerBFC().RefineSearchKeyreward(SearchKey);
+                String SearchPhrase = new BusinessFunctionComponent().RefineSearchKeyreward(SearchKey);
                 SetDataSourcebySearchKey(SearchPhrase);
 
 
-                int amount = new CustomerDAC().RetrieveAdminRewardsbySearchPhraseCount(ProviderID, AgeFrom, AgeTo, RewardType, CategoryID, SearchPhrase);
+                int amount = new DataAccessComponent().RetrieveAdminRewardsbySearchPhraseCount(ProviderID, AgeFrom, AgeTo, RewardType, CategoryID, SearchPhrase);
                 lblAmount.Text = amount.ToString();
                 if (Convert.ToInt32(lblAmount.Text) <= Convert.ToInt32(PageSize + StartRow))
                 {
@@ -261,7 +261,7 @@ namespace ISD.User.Customer.Web.UserControls
             else
             {
                 SetDataSourcebyProviderCategory();
-                int amount = new CustomerDAC().RetrieveAdminRewardsCount(ProviderID, AgeFrom, AgeTo, RewardType, CategoryID);
+                int amount = new DataAccessComponent().RetrieveAdminRewardsCount(ProviderID, AgeFrom, AgeTo, RewardType, CategoryID);
                 lblAmount.Text = amount.ToString();
                 if (Convert.ToInt32(lblAmount.Text) <= Convert.ToInt32(PageSize + StartRow))
                 {
@@ -303,7 +303,7 @@ namespace ISD.User.Customer.Web.UserControls
         }
         private void SetDataSourcebySearchKey(String SearchPhrase)
         {
-            ods.TypeName = typeof(CustomerDAC).FullName;
+            ods.TypeName = typeof(DataAccessComponent).FullName;
             ods.EnablePaging = true;
             ods.SelectParameters.Clear();
             
@@ -328,7 +328,7 @@ namespace ISD.User.Customer.Web.UserControls
 
         private void SetDataSourcebyProviderCategory()
         {
-            ods.TypeName = typeof(CustomerDAC).FullName;
+            ods.TypeName = typeof(DataAccessComponent).FullName;
             ods.EnablePaging = true;
             ods.SelectParameters.Clear();
             ods.SelectParameters.Add("categoryID", CategoryID.ToString());
@@ -542,7 +542,7 @@ namespace ISD.User.Customer.Web.UserControls
             {
                 if (Convert.ToBoolean(hdnRewardImage.Value))
                 {
-                    var dr = new CustomerDAC().RetrieveRewardPrimaryImage(Convert.ToInt32(hdnRewardsID.Value));
+                    var dr = new DataAccessComponent().RetrieveRewardPrimaryImage(Convert.ToInt32(hdnRewardsID.Value));
                     if (dr != null || dr.ImageStream != null)
                         //Convert byte directly, while its easier, its not suppose to be 
                         //imgPreview.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(dr.ImageStream);

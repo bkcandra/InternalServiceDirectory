@@ -4,8 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ISD.User.Utility;
-using ISD.User.Customer.DA;
+using ISD.Util;
+using ISD.DA;
 
 namespace ISD.User.Web.UserControls
 {
@@ -72,7 +72,7 @@ namespace ISD.User.Web.UserControls
         {
             if (!string.IsNullOrEmpty(PageName))
             {
-                var drname = new CustomerDAC().RetrievePage(PageName);
+                var drname = new DataAccessComponent().RetrievePage(PageName);
                 if (drname != null)
                 {
                     Page.Title = drname.Title;
@@ -85,7 +85,7 @@ namespace ISD.User.Web.UserControls
             }
             else
             {
-                var dr = new CustomerDAC().RetrievePage(PageID);
+                var dr = new DataAccessComponent().RetrievePage(PageID);
                 if (dr != null)
                 {
                     Page.Title = dr.Title;

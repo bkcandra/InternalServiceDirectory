@@ -4,16 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ISD.User.Utility;
-using ISD.User.Customer.EDS;
+using ISD.Util;
+using ISD.EDS;
 using System.Web.Security;
-using ISD.User.Customer.BF;
-using ISD.User.Customer.DA;
+using ISD.BF;
+using ISD.DA;
 using System.Net;
 using System.Xml.Linq;
 using WebMatrix.WebData;
-using Segmentio;
-using Segmentio.Model;
 using System.Configuration;
 using System.Data;
 
@@ -21,8 +19,6 @@ namespace ISD.User.Customer.Web.UserControls
 {
     public partial class Assess : System.Web.UI.UserControl
     {
-                  
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -52,11 +48,11 @@ namespace ISD.User.Customer.Web.UserControls
             if (Session[SystemConstants.ses_FName] != null)
                 fName = (String)(Session[SystemConstants.ses_FName]);
 
-            var dr = new CustomerDAC().RetrieveUserRewardDetails(fName);
+            var dr = new DataAccessComponent().RetrieveUserRewardDetails(fName);
             if (dr != null)
             {
                 userId = dr.UserID;
-                var dt = new CustomerDAC().RetrieveActAttendance(userId);
+                var dt = new DataAccessComponent().RetrieveActAttendance(userId);
                 
                 decimal[] y = new decimal[12];
                 decimal[] n = new decimal[12];
@@ -112,7 +108,7 @@ namespace ISD.User.Customer.Web.UserControls
                 if (Session[SystemConstants.ses_FName] != null)
                     fName = (String)(Session[SystemConstants.ses_FName]);
 
-                var dr = new CustomerDAC().RetrieveUserRewardDetails(fName);
+                var dr = new DataAccessComponent().RetrieveUserRewardDetails(fName);
                 if (dr != null)
                 {
                     RewardPts.Text = Convert.ToString(dr.RewardPoint);
@@ -122,7 +118,7 @@ namespace ISD.User.Customer.Web.UserControls
 
                 }
             }
-            ods.TypeName = typeof(CustomerDAC).FullName;
+            ods.TypeName = typeof(DataAccessComponent).FullName;
             ods.SelectParameters.Clear();
            
             ods.SelectParameters.Add("UserId", Convert.ToString(userId));

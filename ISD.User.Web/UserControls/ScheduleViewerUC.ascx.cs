@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ISD.User.Customer.DA;
-using ISD.User.Customer.EDS;
-using ISD.User.Utility;
+using ISD.DA;
+using ISD.EDS;
+using ISD.Util;
 
 namespace ISD.User.Web.UserControls
 {
@@ -48,7 +48,7 @@ namespace ISD.User.Web.UserControls
 
         private void initTimetable()
         {
-            var SchedulesDT = new CustomerDAC().RetrieveActivitySchedules(ActivityID);
+            var SchedulesDT = new DataAccessComponent().RetrieveActivitySchedules(ActivityID);
             if (SchedulesDT != null)
             {
                 var schedule = CreateSeasonalTimetable(SchedulesDT);
@@ -63,7 +63,7 @@ namespace ISD.User.Web.UserControls
             }
         }
 
-        private List<List<slot>> CreateSeasonalTimetable(CustomerEDSC.ActivityScheduleDTDataTable SchedulesDT)
+        private List<List<slot>> CreateSeasonalTimetable(EntityDataSetComponent.ActivityScheduleDataTable SchedulesDT)
         {
             List<List<slot>> schedule = new List<List<slot>>();
             List<slot> monday = new List<slot>();

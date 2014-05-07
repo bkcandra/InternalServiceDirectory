@@ -4,16 +4,17 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ISD.User.Utility;
-using ISD.User.Customer.EDS;
+using ISD.User.Web;
+using ISD.Util;
+using ISD.EDS;
 using System.Web.Security;
-using ISD.User.Customer.BF;
-using ISD.User.Customer.DA;
+using ISD.BF;
+using ISD.DA;
 using System.Net;
 using System.Xml.Linq;
+using Microsoft.AspNet.Identity;
 using WebMatrix.WebData;
-using Segmentio;
-using Segmentio.Model;
+
 
 namespace ISD.User.Customer.Web.UserControls
 {
@@ -49,7 +50,7 @@ namespace ISD.User.Customer.Web.UserControls
                 }
                 if (WebSecurity.IsAuthenticated)
                 {
-
+                  
                     string fName = "Anonymous";
                     string lName = "User";
                     string rName = "Anonymous";
@@ -77,7 +78,7 @@ namespace ISD.User.Customer.Web.UserControls
         {
             Addtocart.CommandName = Convert.ToString(RewardID);
             AddtocartNcheckout.CommandName = Convert.ToString(RewardID);
-            var dr = new CustomerDAC().RetrieveRewardInfo(Convert.ToInt32(RewardID));
+            var dr = new DataAccessComponent().RetrieveRewardInfo(Convert.ToInt32(RewardID));
             if (dr != null)
             {
                 string check = Convert.ToString(dr.RewardImage);
@@ -85,7 +86,7 @@ namespace ISD.User.Customer.Web.UserControls
                 {
                     if (Convert.ToBoolean(check))
                     {
-                        var drr = new CustomerDAC().RetrieveRewardPrimaryImage(Convert.ToInt32(RewardID));
+                        var drr = new DataAccessComponent().RetrieveRewardPrimaryImage(Convert.ToInt32(RewardID));
                         if (drr != null || drr.ImageStream != null)
                             //Convert byte directly, while its easier, its not suppose to be 
                             //imgPreview.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(dr.ImageStream);

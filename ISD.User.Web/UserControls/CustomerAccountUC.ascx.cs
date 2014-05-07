@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ISD.User.Utility;
-using ISD.User.Customer.EDS;
-using ISD.User.Customer.DA;
+using ISD.Util;
+using ISD.EDS;
+using ISD.DA;
 using System.Web.Security;
 using WebMatrix.WebData;
 
@@ -138,7 +138,7 @@ namespace ISD.User.Web.UserControls
 
         private void SetDDL()
         {
-            CustomerEDSC.StateDTDataTable dtState = new CustomerDAC().RetrieveStates();
+            EntityDataSetComponent.StateDataTable dtState = new DataAccessComponent().RetrieveStates();
 
             ddlState.Items.Clear();
 
@@ -156,7 +156,7 @@ namespace ISD.User.Web.UserControls
                 ddlState.Items.Add(lis);
             }
 
-            CustomerEDSC.StateDTDataTable dtState2 = new CustomerDAC().RetrieveStates();
+            EntityDataSetComponent.StateDataTable dtState2 = new DataAccessComponent().RetrieveStates();
 
             ddlState.Items.Clear();
 
@@ -176,7 +176,7 @@ namespace ISD.User.Web.UserControls
 
         private void SetUserInformation()
         {
-            var dr = new CustomerDAC().RetrieveUserProfiles(UserID);
+            var dr = new DataAccessComponent().RetrieveUserProfiles(UserID);
             if (dr != null)
             {
                 hdnID.Value = dr.ID.ToString();
@@ -243,7 +243,7 @@ namespace ISD.User.Web.UserControls
             }
             else if (dr == null)
             {
-                var drProvider = new CustomerDAC().RetrieveProviderProfiles(UserID);
+                var drProvider = new DataAccessComponent().RetrieveProviderProfiles(UserID);
                 if (drProvider != null)
                 {
                     Response.Redirect(SystemConstants.ProviderUrl + "Account/");
@@ -296,9 +296,9 @@ namespace ISD.User.Web.UserControls
         {
             if (!isError())
             {
-                CustomerEDSC.UserProfilesDTRow dr = GetRegistrationData();
+                EntityDataSetComponent.UserProfilesRow dr = GetRegistrationData();
 
-                CustomerDAC dac = new CustomerDAC();
+                DataAccessComponent dac = new DataAccessComponent();
                 dac.UpdateUserProfiles(dr);
                 Membership.GetUser().Email = dr.Email;
             }
@@ -306,9 +306,9 @@ namespace ISD.User.Web.UserControls
             SetUserInformation();
         }
 
-        private CustomerEDSC.UserProfilesDTRow GetRegistrationData()
+        private EntityDataSetComponent.UserProfilesRow GetRegistrationData()
         {
-            CustomerEDSC.UserProfilesDTRow dr = new CustomerEDSC.UserProfilesDTDataTable().NewUserProfilesDTRow();
+            EntityDataSetComponent.UserProfilesRow dr = new EntityDataSetComponent.UserProfilesDataTable().NewUserProfilesRow();
 
             dr.ID = Convert.ToInt32(hdnID.Value);
             dr.UserID = UserID;
