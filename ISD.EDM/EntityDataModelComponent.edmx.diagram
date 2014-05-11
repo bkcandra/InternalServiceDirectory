@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d38c2d684fdd48cf9acf466a125db733" Name="Diagram1">
+        <EntityTypeShape EntityType="IECHS_ISDModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivitiesLog" Width="1.5" PointX="12" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivitiesLogGroup" Width="1.5" PointX="9.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.Activity" Width="1.5" PointX="7.5" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityContactDetail" Width="1.5" PointX="9.75" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityGrouping" Width="1.5" PointX="9.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityImage" Width="1.5" PointX="9.75" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityImageDetail" Width="1.5" PointX="12" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityReferenceCode" Width="1.5" PointX="9.75" PointY="27.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityRewards" Width="1.5" PointX="9.75" PointY="30.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivitySchedule" Width="1.5" PointX="9.75" PointY="34" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityScheduleDetail" Width="1.5" PointX="9.75" PointY="38.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivitySettings" Width="1.5" PointX="9.75" PointY="41.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityUserAttendance" Width="1.5" PointX="9.75" PointY="44.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityUserLog" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityVisitor" Width="1.5" PointX="9.75" PointY="48" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="36" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.AspNetUsers" Width="1.5" PointX="3" PointY="34" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.Category" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ContactUs" Width="1.5" PointX="9.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.Council" Width="1.5" PointX="14" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.CustomerContact" Width="1.5" PointX="16.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.EmailSetting" Width="1.5" PointX="11.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.EmailTemplate" Width="1.5" PointX="17.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.FooterMenu" Width="1.5" PointX="15" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.KeyCollection" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.Keyword" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.Link" Width="1.5" PointX="12.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.Menu" Width="1.5" PointX="15" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.Page" Width="1.5" PointX="16.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ProviderLog" Width="1.5" PointX="7.5" PointY="51.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ProviderProfiles" Width="1.5" PointX="5.25" PointY="30.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ProviderSettings" Width="1.5" PointX="7.5" PointY="55" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.Reward" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.RewardImage" Width="1.5" PointX="5.25" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.RewardsDetails" Width="1.5" PointX="5.25" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.RewardsType" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.Sponsor" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.State" Width="1.5" PointX="11.75" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.Suburb" Width="1.5" PointX="16.25" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.UserImage" Width="1.5" PointX="7.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.UserImageDetail" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.UserLog" Width="1.5" PointX="7.5" PointY="60.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.UserProfiles" Width="1.5" PointX="5.25" PointY="61.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.UserReference" Width="1.5" PointX="5.25" PointY="57.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.UserReward" Width="1.5" PointX="7.5" PointY="63.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.UserRewardLog" Width="1.5" PointX="9.75" PointY="63.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.UserSavedList" Width="1.5" PointX="7.5" PointY="67.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.VoucherDetails" Width="1.5" PointX="5.25" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.WebAssets" Width="1.5" PointX="0.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.WebConfiguration" Width="1.5" PointX="18.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.WeblLogAction" Width="1.5" PointX="17" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.WebLog" Width="1.5" PointX="14.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_ActivitiesLogExplorer" Width="1.5" PointX="11.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_ActivityExpiryView" Width="1.5" PointX="13.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_ActivityExplorer" Width="1.5" PointX="18.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_ActivityImageExplorer" Width="1.5" PointX="19.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_ActivityView" Width="1.5" PointX="20.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_ActivityVisitorCount" Width="1.5" PointX="2.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_CategoryCount" Width="1.5" PointX="4.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_CategoryExplorer" Width="1.5" PointX="20.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_CouncilExplorer" Width="1.5" PointX="21.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_EmailExplorer" Width="1.5" PointX="15.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_FooterMenu" Width="1.5" PointX="0.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_KeyCollectionView" Width="1.5" PointX="22.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_Menu" Width="1.5" PointX="22.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_ProviderActivityCount" Width="1.5" PointX="6.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_ProviderExplorer" Width="1.5" PointX="22.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_RewardExplorer" Width="1.5" PointX="22.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_RewardUserExplorer" Width="1.5" PointX="20.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_ScheduleCount" Width="1.5" PointX="17.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_SuburbExplorer" Width="1.5" PointX="22.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_UserAttendanceView" Width="1.5" PointX="2.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_UserExplorer" Width="1.5" PointX="4.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_VoucherExplorer" Width="1.5" PointX="24.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_WebLogExplorer" Width="1.5" PointX="24.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_ActivitiesLog_ActivitiesLogGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_ActivitiesLogGroup_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_Activity_ProviderProfiles" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_ActivityAttendanceLog_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_ActivityContactDetails_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_ActivityGrouping_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_ActivityImage_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_ActivityReference_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_ActivityRewards_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_ActivitySchedule_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_ActivitySchedule_Activity1" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_ActivitySettings_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_ActivityVisitorLog_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_ActivityImageDetail_ActivityImageDetail" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_AspNetUsers_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_ProviderProfiles_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_UserProfiles_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_UserReference_AspNetUsers1" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_Council_State" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_Suburb_Council" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_FooterMenu_Link" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_Keyword_Keyword" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_Menu_Link" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_ProviderLog_ProviderProfiles" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_ProviderSettings_ProviderProfiles" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_Admin_Rewards_ProviderProfiles" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_Admin_Rewards_Rewards_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_RewardImage_Reward" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_RewardsDetails_Reward" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_Voucher_Details_Admin_Rewards" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_VoucherDetails_Sponsor" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_UserImage_UserImage" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_UserImageDetail_UserImage" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_UserProfiles_UserLog" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_Reward_User_UserProfiles" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_SavedList_UserProfiles" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_UserRewardLog_UserReward" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_WeblLogAction_WebLog" ManuallyRouted="false" />
+        <AssociationConnector Association="IECHS_ISDModel.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

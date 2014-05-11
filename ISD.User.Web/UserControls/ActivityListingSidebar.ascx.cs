@@ -236,9 +236,9 @@ namespace ISD.User.Web.UserControls
 
         private void initDDLSuburbs()
         {
-            EntityDataSetComponent.v_SuburbExplorerDataTable dt = new DataAccessComponent().RetrieveSuburbs();
+            DataSetComponent.v_SuburbExplorerDataTable dt = new DataAccessComponent().RetrieveSuburbs();
 
-            EntityDataSetComponent.v_SuburbExplorerDataTable dtSub = new DataAccessComponent().RetrieveSuburbs();
+            DataSetComponent.v_SuburbExplorerDataTable dtSub = new DataAccessComponent().RetrieveSuburbs();
 
             ListItemCollection subList = new ListItemCollection();
 
@@ -356,8 +356,8 @@ namespace ISD.User.Web.UserControls
                 //keep load all category nodes
                 hdnStartingRef.Value = "0";
 
-                EntityDataSetComponent.v_CategoryExplorerDataTable categoryDT = new DataAccessComponent().RetrieveCategories(StartingRef);
-                EntityDataSetComponent.v_CategoryExplorerRow categoryDR = new DataAccessComponent().RetrieveCategory(StartingRef);
+                DataSetComponent.v_CategoryExplorerDataTable categoryDT = new DataAccessComponent().RetrieveCategories(StartingRef);
+                DataSetComponent.v_CategoryExplorerRow categoryDR = new DataAccessComponent().RetrieveCategory(StartingRef);
                 TreeView1.Nodes.Clear();
 
                 if (ShowAllCategoryListing)
@@ -586,9 +586,9 @@ namespace ISD.User.Web.UserControls
                 list.Add(treeNodeValue);
         }
 
-        private void LoadTree(TreeNode node, EntityDataSetComponent.v_CategoryExplorerRow categoryDR, EntityDataSetComponent.v_CategoryExplorerDataTable categoryDT)
+        private void LoadTree(TreeNode node, DataSetComponent.v_CategoryExplorerRow categoryDR, DataSetComponent.v_CategoryExplorerDataTable categoryDT)
         {
-            IEnumerable<EntityDataSetComponent.v_CategoryExplorerRow> list = null;
+            IEnumerable<DataSetComponent.v_CategoryExplorerRow> list = null;
 
             if (node == null && categoryDR != null)
             {
@@ -635,7 +635,7 @@ namespace ISD.User.Web.UserControls
                        select b;
             }
 
-            EntityDataSetComponent.v_CategoryExplorerRow drwait = new EntityDataSetComponent.v_CategoryExplorerDataTable().Newv_CategoryExplorerRow();
+            DataSetComponent.v_CategoryExplorerRow drwait = new DataSetComponent.v_CategoryExplorerDataTable().Newv_CategoryExplorerRow();
             drwait.Name = "";
             foreach (var dr in list)
             {

@@ -57,8 +57,8 @@ namespace ISD.User.Web.UserControls
 
         private void setRegistrationDDL()
         {
-            EntityDataSetComponent.v_SuburbExplorerDataTable dt = new DataAccessComponent().RetrieveSuburbs();
-            EntityDataSetComponent.StateDataTable dtState = new DataAccessComponent().RetrieveStates();
+            DataSetComponent.v_SuburbExplorerDataTable dt = new DataAccessComponent().RetrieveSuburbs();
+            DataSetComponent.StateDataTable dtState = new DataAccessComponent().RetrieveStates();
 
             ddlState.Items.Clear();
 
@@ -82,24 +82,24 @@ namespace ISD.User.Web.UserControls
             BusinessFunctionComponent bfc = new BusinessFunctionComponent();
             DataAccessComponent dac = new DataAccessComponent();
 
-            EntityDataSetComponent.UserProfilesRow dr = GetRegistrationData();
+            DataSetComponent.UserProfilesRow dr = GetRegistrationData();
 
 
             dr.UserID = userID;
             dac.InsertNewUserProfiles(dr);
-            EntityDataSetComponent.UserRewardRow drr = GetRewardData();
+            DataSetComponent.UserRewardRow drr = GetRewardData();
             drr.UserID = userID;
             dac.InsertNewRewardUser(drr);
 
-            var drRef = new EntityDataSetComponent.UserReferenceDataTable().NewUserReferenceRow();
+            var drRef = new DataSetComponent.UserReferenceDataTable().NewUserReferenceRow();
             drRef.UserID = userID;
             drRef.ReferenceID = bfc.GenerateUserRefID(dr.LastName, dr.FirstName);
             dac.insertNewUserReference(drRef);
         }
-        private EntityDataSetComponent.UserRewardRow GetRewardData()
+        private DataSetComponent.UserRewardRow GetRewardData()
         {
 
-            EntityDataSetComponent.UserRewardRow drr = new EntityDataSetComponent.UserRewardDataTable().NewUserRewardRow();
+            DataSetComponent.UserRewardRow drr = new DataSetComponent.UserRewardDataTable().NewUserRewardRow();
             drr.RewardPoint = 0;
             drr.RedeemedtPoint = 0;
             drr.BonusPoint = 0;
@@ -108,12 +108,12 @@ namespace ISD.User.Web.UserControls
             return drr;
         }
 
-        private EntityDataSetComponent.UserProfilesRow GetRegistrationData()
+        private DataSetComponent.UserProfilesRow GetRegistrationData()
         {
             //Reference wizard's controls
             //CreateUserWizardStep ProviderProfiles = CreateNewMember.FindControl("ProviderProfiles") as CreateUserWizardStep;
 
-            EntityDataSetComponent.UserProfilesRow dr = new EntityDataSetComponent.UserProfilesDataTable().NewUserProfilesRow();
+            DataSetComponent.UserProfilesRow dr = new DataSetComponent.UserProfilesDataTable().NewUserProfilesRow();
 
             dr.Username = Username.Text;
             dr.Title = Convert.ToInt32(ddlTitle.SelectedValue);

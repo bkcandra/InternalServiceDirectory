@@ -356,7 +356,7 @@ namespace ISD.User.Customer.Web.UserControls
                 string[] savedActsArr = SavedList.Split('|');
 
                 HashSet<int> savedActs = new HashSet<int>(savedActsArr.Select(x => Convert.ToInt32(x)));
-                EntityDataSetComponent.v_ActivityExplorerDataTable dt = new DataAccessComponent().RetrieveActivityExplorersbyIDs(savedActs, "");
+                DataSetComponent.v_ActivityExplorerDataTable dt = new DataAccessComponent().RetrieveActivityExplorersbyIDs(savedActs, "");
                 ListViewActivities.DataSource = dt;
                 ListViewActivities.DataBind();
                 SortProducts();
@@ -366,7 +366,7 @@ namespace ISD.User.Customer.Web.UserControls
             }
             else
             {
-                EntityDataSetComponent.v_ActivityExplorerDataTable dt = null;
+                DataSetComponent.v_ActivityExplorerDataTable dt = null;
                 ListViewActivities.DataSource = dt;
                 ListViewActivities.DataBind();
             }
@@ -554,7 +554,7 @@ namespace ISD.User.Customer.Web.UserControls
                     {
                         lnkSaved.Attributes.CssStyle.Clear();
                         lnkSaved.Attributes.Add("Class", "btn-icon btn-white btn-radius btn-starred");
-                        var dr = new EntityDataSetComponent.UserSavedListDataTable().NewUserSavedListRow();
+                        var dr = new DataSetComponent.UserSavedListDataTable().NewUserSavedListRow();
                         dr.ID = 0;
                         dr.ListType = (int)SystemConstants.SavedListType.Activity;
                         dr.ListValue = Convert.ToInt32(hdnActivityID.Value);

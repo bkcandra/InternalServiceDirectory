@@ -139,7 +139,7 @@ namespace ISD.User.Web.UserControls
         private void LogVisitor()
         {
             string info = string.Empty;
-            var dr = new EntityDataSetComponent.ActivityVisitorDataTable().NewActivityVisitorRow();
+            var dr = new DataSetComponent.ActivityVisitorDataTable().NewActivityVisitorRow();
             dr.ActivityID = ActivityID;
             if (!string.IsNullOrEmpty((string)Session[SystemConstants.ses_IPAddress]))
             {
@@ -179,7 +179,7 @@ namespace ISD.User.Web.UserControls
 
         private void LogVisitors(int count)
         {
-            var dt = new EntityDataSetComponent.ActivityVisitorDataTable();
+            var dt = new DataSetComponent.ActivityVisitorDataTable();
             DateTime start = DateTime.Now.AddYears(-1);
             Random gen = new Random();
 
@@ -291,7 +291,7 @@ namespace ISD.User.Web.UserControls
             ScheduleViewerUC1.timetableFormat = (int)SystemConstants.TimetableFormat.Seasonal;
         }
 
-        private void SetActivityInformation(EntityDataSetComponent.v_ActivityExplorerRow dr)
+        private void SetActivityInformation(DataSetComponent.v_ActivityExplorerRow dr)
         {
             divProductDesc.InnerHtml = dr.FullDescription;
             if (!string.IsNullOrEmpty(dr.Price))

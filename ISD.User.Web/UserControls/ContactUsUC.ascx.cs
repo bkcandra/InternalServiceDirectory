@@ -47,7 +47,7 @@ namespace ISD.User.Web.UserControls
             }
         }
 
-        private void SetData(EntityDataSetComponent.UserProfilesRow dr)
+        private void SetData(DataSetComponent.UserProfilesRow dr)
         {
             txtContactPerson.Text = dr.FirstName + " " + dr.LastName;
             txtEmail.Text = dr.Email;
@@ -63,15 +63,15 @@ namespace ISD.User.Web.UserControls
 
         protected void btnNextStep_Click(object sender, EventArgs e)
         {
-            //EntityDataSetComponent.CartRow dr = GetData();
+            //DataSetComponent.CartRow dr = GetData();
 
-            //EntityDataSetComponent.CartItemDataTable dt = new CartHelper(Session).RetrieveCartItem();
-            //EntityDataSetComponent.CartItemDataTable dt = new EntityDataSetComponent.CartItemDataTable();
+            //DataSetComponent.CartItemDataTable dt = new CartHelper(Session).RetrieveCartItem();
+            //DataSetComponent.CartItemDataTable dt = new DataSetComponent.CartItemDataTable();
             //new DataAccessComponent().CreateCart(dr, dt);
             //Session["OrderID"] = dr.ID;
 
             
-            EntityDataSetComponent.WebConfigurationRow drSmtp = new DataAccessComponent().RetrieveEmailServerSetting();
+            DataSetComponent.WebConfigurationRow drSmtp = new DataAccessComponent().RetrieveEmailServerSetting();
             if (drSmtp != null)
             {
                 //SendEmail to HelpDesk
@@ -90,9 +90,9 @@ namespace ISD.User.Web.UserControls
             }
         }
 
-        private EntityDataSetComponent.ContactUsRow GetData()
+        private DataSetComponent.ContactUsRow GetData()
         {
-            EntityDataSetComponent.ContactUsRow dr = new EntityDataSetComponent.ContactUsDataTable().NewContactUsRow();
+            DataSetComponent.ContactUsRow dr = new DataSetComponent.ContactUsDataTable().NewContactUsRow();
             dr.ContactPerson = txtContactPerson.Text;
             dr.Phone = txtPhone.Text;
             dr.Email = txtEmail.Text;

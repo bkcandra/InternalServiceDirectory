@@ -359,7 +359,7 @@ namespace ISD.User.Web.UserControls
         {
             if (Session[SystemConstants.ses_UserID] != null)
             {
-                var dt = new DataAccessComponent().retrieveUserActivityList(new Guid(Session[SystemConstants.ses_UserID].ToString()));
+                var dt = new DataAccessComponent().retrieveUserActivityList(Session[SystemConstants.ses_UserID].ToString());
                 if (dt != null)
                 {
                     List<int> savedList = new List<int>(dt.Select(x => x.ListValue));
@@ -752,7 +752,7 @@ namespace ISD.User.Web.UserControls
                         lnkSaved.Attributes.CssStyle.Clear();
                         lnkSaved.Attributes.Add("Class", "btn-icon btn-white btn-radius btn-starred");
                         lnkSaved.Text = "Saved";
-                        var dr = new EntityDataSetComponent.UserSavedListDataTable().NewUserSavedListRow();
+                        var dr = new DataSetComponent.UserSavedListDataTable().NewUserSavedListRow();
                         dr.ID = 0;
                         dr.ListType = (int)SystemConstants.SavedListType.Activity;
                         dr.ListValue = Convert.ToInt32(hdnActivityID.Value);

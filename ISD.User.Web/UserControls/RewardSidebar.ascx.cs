@@ -299,8 +299,8 @@ namespace ISD.User.Web.UserControls
 
                 //keep load all category nodes
                 hdnStartingRef.Value = "0";
-                EntityDataSetComponent.v_CategoryExplorerDataTable categoryDT = new DataAccessComponent().RetrieveCategories(StartingRef);
-                EntityDataSetComponent.v_CategoryExplorerRow categoryDR = new DataAccessComponent().RetrieveCategory(StartingRef);
+                DataSetComponent.v_CategoryExplorerDataTable categoryDT = new DataAccessComponent().RetrieveCategories(StartingRef);
+                DataSetComponent.v_CategoryExplorerRow categoryDR = new DataAccessComponent().RetrieveCategory(StartingRef);
 
 
                 if (ShowAllCategoryListing)
@@ -487,7 +487,7 @@ namespace ISD.User.Web.UserControls
                 list.Add(treeNodeValue);
         }
 
-        private void LoadList(EntityDataSetComponent.v_CategoryExplorerRow categoryDR)
+        private void LoadList(DataSetComponent.v_CategoryExplorerRow categoryDR)
         {
             
 

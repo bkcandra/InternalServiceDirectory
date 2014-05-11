@@ -94,7 +94,7 @@ namespace ISD.User.Customer.Web.UserControls
                 for (int j = 0; j < quant; j++)
                 {
 
-                    EntityDataSetComponent.VoucherDetailsRow dr = new EntityDataSetComponent.VoucherDetailsDataTable().NewVoucherDetailsRow();
+                    DataSetComponent.VoucherDetailsRow dr = new DataSetComponent.VoucherDetailsDataTable().NewVoucherDetailsRow();
                     DataAccessComponent dac = new DataAccessComponent();
                     dr.RewardID = Convert.ToInt32(ID[i]);
                     dr.SponsorID = dac.getSponsorID(Convert.ToInt32(ID[i]));

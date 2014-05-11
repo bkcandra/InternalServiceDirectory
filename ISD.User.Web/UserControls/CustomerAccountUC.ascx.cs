@@ -138,7 +138,7 @@ namespace ISD.User.Web.UserControls
 
         private void SetDDL()
         {
-            EntityDataSetComponent.StateDataTable dtState = new DataAccessComponent().RetrieveStates();
+            DataSetComponent.StateDataTable dtState = new DataAccessComponent().RetrieveStates();
 
             ddlState.Items.Clear();
 
@@ -156,7 +156,7 @@ namespace ISD.User.Web.UserControls
                 ddlState.Items.Add(lis);
             }
 
-            EntityDataSetComponent.StateDataTable dtState2 = new DataAccessComponent().RetrieveStates();
+            DataSetComponent.StateDataTable dtState2 = new DataAccessComponent().RetrieveStates();
 
             ddlState.Items.Clear();
 
@@ -243,7 +243,7 @@ namespace ISD.User.Web.UserControls
             }
             else if (dr == null)
             {
-                var drProvider = new DataAccessComponent().RetrieveProviderProfiles(UserID);
+                var drProvider = new DataAccessComponent().RetrieveProviderProfilesByID(UserID);
                 if (drProvider != null)
                 {
                     Response.Redirect(SystemConstants.ProviderUrl + "Account/");
@@ -296,7 +296,7 @@ namespace ISD.User.Web.UserControls
         {
             if (!isError())
             {
-                EntityDataSetComponent.UserProfilesRow dr = GetRegistrationData();
+                DataSetComponent.UserProfilesRow dr = GetRegistrationData();
 
                 DataAccessComponent dac = new DataAccessComponent();
                 dac.UpdateUserProfiles(dr);
@@ -306,9 +306,9 @@ namespace ISD.User.Web.UserControls
             SetUserInformation();
         }
 
-        private EntityDataSetComponent.UserProfilesRow GetRegistrationData()
+        private DataSetComponent.UserProfilesRow GetRegistrationData()
         {
-            EntityDataSetComponent.UserProfilesRow dr = new EntityDataSetComponent.UserProfilesDataTable().NewUserProfilesRow();
+            DataSetComponent.UserProfilesRow dr = new DataSetComponent.UserProfilesDataTable().NewUserProfilesRow();
 
             dr.ID = Convert.ToInt32(hdnID.Value);
             dr.UserID = UserID;

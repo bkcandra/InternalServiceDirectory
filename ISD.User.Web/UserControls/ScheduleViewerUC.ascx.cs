@@ -63,7 +63,7 @@ namespace ISD.User.Web.UserControls
             }
         }
 
-        private List<List<slot>> CreateSeasonalTimetable(EntityDataSetComponent.ActivityScheduleDataTable SchedulesDT)
+        private List<List<slot>> CreateSeasonalTimetable(DataSetComponent.ActivityScheduleDataTable SchedulesDT)
         {
             List<List<slot>> schedule = new List<List<slot>>();
             List<slot> monday = new List<slot>();
