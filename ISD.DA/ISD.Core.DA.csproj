@@ -59,10 +59,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ISD.EDM\ISD.Data.EDM.csproj">
-      <Project>{8b46691a-ba9c-4e80-8f57-a6aeeb248153}</Project>
-      <Name>ISD.Data.EDM</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ISD.EDS\ISD.Data.EDS.csproj">
       <Project>{16c24b4b-9b36-40b9-a6b4-44900298e5ce}</Project>
       <Name>ISD.Data.EDS</Name>
