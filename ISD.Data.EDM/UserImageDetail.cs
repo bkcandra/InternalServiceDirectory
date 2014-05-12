@@ -15,7 +15,7 @@ namespace ISD.Data.EDM
     public partial class UserImageDetail
     {
         public int ID { get; set; }
-        public Nullable<System.Guid> UserID { get; set; }
+        public string UserID { get; set; }
         public Nullable<int> UserImageID { get; set; }
         public string Filename { get; set; }
         public string ImageTitle { get; set; }

@@ -20,7 +20,7 @@ namespace ISD.Data.EDM
             this.VoucherDetails = new HashSet<VoucherDetails>();
         }
     
-        public System.Guid ID { get; set; }
+        public string ID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string Website { get; set; }

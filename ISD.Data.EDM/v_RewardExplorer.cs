@@ -15,7 +15,6 @@ namespace ISD.Data.EDM
     public partial class v_RewardExplorer
     {
         public int ID { get; set; }
-        public System.Guid ProviderID { get; set; }
         public Nullable<int> RequiredRewardPoint { get; set; }
         public Nullable<int> CategoryID { get; set; }
         public string RewardsName { get; set; }
@@ -38,5 +37,6 @@ namespace ISD.Data.EDM
         public string ModifiedBy { get; set; }
         public string CreatedBy { get; set; }
         public string Keywords { get; set; }
+        public string ProviderID { get; set; }
     }
 }

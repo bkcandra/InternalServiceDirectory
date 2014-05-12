@@ -327,12 +327,12 @@ namespace ISD.Util
 
         #region ReturnURI
 
-        public static string GetUserImageURL(Guid ProviderID, int imageID, string imageName)
+        public static string GetUserImageURL(String ProviderID, int imageID, string imageName)
         {
             return UsrImageDirectory + ProviderID + "/" + imageID + "_" + imageName;
         }
 
-        public static string GetUserImageThumbURL(Guid ProviderID, int imageID, string imageName)
+        public static string GetUserImageThumbURL(String ProviderID, int imageID, string imageName)
         {
             return UsrImageDirectory + ProviderID + "/" + ImageThumbDirectory + imageID + "_" + imageName;
         }

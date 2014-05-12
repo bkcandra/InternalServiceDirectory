@@ -51,10 +51,9 @@ namespace ISD.Data.EDM
         public string CategoryLevel1ParentName { get; set; }
         public Nullable<int> CategoryLevel2ParentID { get; set; }
         public string CategoryLevel2ParentName { get; set; }
-        public Nullable<System.Guid> UserID { get; set; }
         public string Suburb { get; set; }
         public string StateName { get; set; }
-        public Nullable<System.Guid> ProviderID { get; set; }
+        public string ProviderID { get; set; }
         public string Website { get; set; }
         public string Keywords { get; set; }
         public Nullable<int> AltStateID { get; set; }
@@ -68,5 +67,6 @@ namespace ISD.Data.EDM
         public string eligibilityDescription { get; set; }
         public Nullable<int> ActivityID { get; set; }
         public int Status { get; set; }
+        public string UserID { get; set; }
     }
 }

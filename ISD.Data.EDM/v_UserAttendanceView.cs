@@ -15,7 +15,6 @@ namespace ISD.Data.EDM
     public partial class v_UserAttendanceView
     {
         public int ID { get; set; }
-        public Nullable<System.Guid> UserID { get; set; }
         public int ActivityID { get; set; }
         public string Name { get; set; }
         public string FullDescription { get; set; }
@@ -30,5 +29,6 @@ namespace ISD.Data.EDM
         public Nullable<int> BonusPoints { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public string CreatedBy { get; set; }
+        public string UserId { get; set; }
     }
 }

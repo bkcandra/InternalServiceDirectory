@@ -22,7 +22,7 @@ namespace ISD.Data.EDM
         }
     
         public int ID { get; set; }
-        public System.Guid ProviderID { get; set; }
+        public string ProviderID { get; set; }
         public Nullable<int> RequiredRewardPoint { get; set; }
         public Nullable<int> CategoryID { get; set; }
         public string RewardsName { get; set; }

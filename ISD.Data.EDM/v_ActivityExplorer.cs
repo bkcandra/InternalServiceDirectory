@@ -22,7 +22,6 @@ namespace ISD.Data.EDM
         public string Suburb { get; set; }
         public string ShortDescription { get; set; }
         public string StateName { get; set; }
-        public Nullable<System.Guid> ProviderID { get; set; }
         public Nullable<int> CategoryID { get; set; }
         public string CategoryName { get; set; }
         public Nullable<int> CategoryLevel1ParentID { get; set; }
@@ -79,5 +78,6 @@ namespace ISD.Data.EDM
         public Nullable<int> CouncilID { get; set; }
         public string ReferenceID { get; set; }
         public Nullable<int> Visitor { get; set; }
+        public string ProviderID { get; set; }
     }
 }

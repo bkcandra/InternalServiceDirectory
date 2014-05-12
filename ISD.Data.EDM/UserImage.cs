@@ -20,7 +20,7 @@ namespace ISD.Data.EDM
         }
     
         public int ID { get; set; }
-        public Nullable<System.Guid> UserID { get; set; }
+        public string UserID { get; set; }
         public Nullable<int> StorageUsed { get; set; }
         public Nullable<int> FreeStorage { get; set; }
         public Nullable<int> ImageAmount { get; set; }

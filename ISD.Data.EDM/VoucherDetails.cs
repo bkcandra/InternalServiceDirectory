@@ -21,7 +21,7 @@ namespace ISD.Data.EDM
         public System.DateTime IssueDate { get; set; }
         public Nullable<bool> UsageStatus { get; set; }
         public string RewardName { get; set; }
-        public System.Guid SponsorID { get; set; }
+        public string SponsorID { get; set; }
     
         public virtual Reward Reward { get; set; }
         public virtual Sponsor Sponsor { get; set; }
