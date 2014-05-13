@@ -1,5 +1,5 @@
 ﻿using System.Security.Claims;
-using System.Web.Security;
+
 using ISD.User.Web;
 using ISD.User.Web.UserControls;
 using ISD.Util;
@@ -349,7 +349,7 @@ namespace ISD.User.Customer.Web.UserControls
 
         public void Refresh()
         {
-            if (Membership.GetUser().IsOnline)
+            if (Context.User.Identity.IsAuthenticated)
             {
                 RetrieveSavedList();
             }
@@ -705,7 +705,7 @@ namespace ISD.User.Customer.Web.UserControls
                     }
                 }
             }
-            if (Membership.GetUser().IsOnline)
+            if (Context.User.Identity.IsAuthenticated)
             {
                 if (SavedList.Equals(string.Empty))
                 {

@@ -211,7 +211,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="ActivityID" Type="int" Nullable="false" />
           <Property Name="AttendanceDatetime" Type="datetime2" Precision="7" />
           <Property Name="CreatedDateTime" Type="datetime2" Precision="7" />
@@ -316,7 +316,7 @@
           <Property Name="Email" Type="nvarchar" MaxLength="100" />
           <Property Name="Remarks" Type="nvarchar(max)" />
           <Property Name="PreferredContact" Type="int" />
-          <Property Name="UserID" Type="uniqueidentifier" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" />
           <Property Name="CreatedDatetime" Type="datetime" />
           <Property Name="ModifiedDatetime" Type="datetime" />
         </EntityType>
@@ -2942,7 +2942,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Guid" Nullable="false" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ActivityID" Type="Int32" Nullable="false" />
           <Property Name="AttendanceDatetime" Type="DateTime" Precision="7" />
           <Property Name="CreatedDateTime" Type="DateTime" Precision="7" />
@@ -3052,7 +3052,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PreferredContact" Type="Int32" />
-          <Property Name="UserID" Type="Guid" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="CreatedDatetime" Type="DateTime" Precision="3" />
           <Property Name="ModifiedDatetime" Type="DateTime" Precision="3" />
         </EntityType>

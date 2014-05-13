@@ -262,7 +262,7 @@
                         <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender1" runat="server" Mask="99/99/9999" PromptCharacter=" "
                             MaskType="Date" TargetControlID="txtCalendarFrom">
                         </ajaxToolkit:MaskedEditExtender>
-
+                        
                     </div>
                     <div style="float: right">
                         <asp:TextBox ID="txtCalendarTo" runat="server" Width="80px" CssClass="textbox"></asp:TextBox>

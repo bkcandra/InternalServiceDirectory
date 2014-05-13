@@ -20,7 +20,7 @@ namespace ISD.Data.EDM
         public string Email { get; set; }
         public string Remarks { get; set; }
         public Nullable<int> PreferredContact { get; set; }
-        public Nullable<System.Guid> UserID { get; set; }
+        public string UserID { get; set; }
         public Nullable<System.DateTime> CreatedDatetime { get; set; }
         public Nullable<System.DateTime> ModifiedDatetime { get; set; }
     }

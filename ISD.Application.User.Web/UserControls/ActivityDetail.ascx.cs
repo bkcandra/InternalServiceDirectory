@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ISD.Util;
 using ISD.EDS;
-using System.Web.Security;
+
 using ISD.BF;
 using ISD.DA;
 using System.Net;
@@ -342,9 +342,9 @@ namespace ISD.User.Web.UserControls
 
         private bool AuthUser()
         {
-            if (Membership.GetUser() != null)
+            if (Context.User.Identity.IsAuthenticated)
             {
-                var providerID = Membership.GetUser().ProviderUserKey.ToString();
+                var providerID = IdentityHelper.GetUserIdFromRequest(Request);
                 var ownerLogin = new BusinessFunctionComponent().CheckActivityOwner(ActivityID, providerID);
 
                 return ownerLogin;

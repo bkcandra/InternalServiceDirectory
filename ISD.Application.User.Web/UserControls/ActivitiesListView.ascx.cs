@@ -15,7 +15,7 @@ using System.Web.UI.HtmlControls;
 using ISD.EDS;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity;
-using System.Web.Security;
+
 
 namespace ISD.User.Web.UserControls
 {
@@ -370,9 +370,9 @@ namespace ISD.User.Web.UserControls
 
         public void Refresh()
         {
-            
 
-            if (Membership.GetUser().IsOnline)
+
+            if (Context.User.Identity.IsAuthenticated)
             {
                 RetrieveSavedList();
             }
@@ -894,7 +894,7 @@ namespace ISD.User.Web.UserControls
                     }
                 }
             }
-            if (Membership.GetUser().IsOnline)
+            if (Context.User.Identity.IsAuthenticated)
             {
                 if (SavedList.Equals(string.Empty))
                 {

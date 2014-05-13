@@ -15,7 +15,7 @@ namespace ISD.Data.EDM
     public partial class ActivityUserAttendance
     {
         public int ID { get; set; }
-        public System.Guid UserID { get; set; }
+        public string UserID { get; set; }
         public int ActivityID { get; set; }
         public Nullable<System.DateTime> AttendanceDatetime { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }

@@ -420,7 +420,7 @@ namespace ISD.Util
 
     public class PointAwards
     {
-        public Guid UserID { get; set; }
+        public String UserID { get; set; }
         public int points { get; set; }
         public int bonuspoints { get; set; }
     }

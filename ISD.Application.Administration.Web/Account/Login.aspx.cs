@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Web;
-using System.Web.UI;
+using ISD.Data.EDM;
+using ISD.Util;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Owin;
 using ISD.Administration.Web.Models;
+using Page = System.Web.UI.Page;
 
 namespace ISD.Administration.Web.Account
 {
@@ -32,8 +35,16 @@ namespace ISD.Administration.Web.Account
                 ApplicationUser user = manager.Find(Email.Text, Password.Text);
                 if (user != null)
                 {
-                    IdentityHelper.SignIn(manager, user, RememberMe.Checked);
-                    IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+                    if (manager.IsInRole(user.Id, SystemConstants.AdministratorRole))
+                    {
+                        IdentityHelper.SignIn(manager, user, RememberMe.Checked);
+                        IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+                    }
+                    else
+                    {
+                        FailureText.Text = "User doesn't have permission to log in, please contact Healthy Club Administration for further information.";
+                        ErrorMessage.Visible = true;
+                    }
                 }
                 else
                 {
