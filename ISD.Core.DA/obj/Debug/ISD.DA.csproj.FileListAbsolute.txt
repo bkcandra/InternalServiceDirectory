@@ -1,0 +1,4 @@
+E:\Work\Projects\InternalServiceDirectory\ISD.DA\bin\Debug\ISD.DA.dll
+E:\Work\Projects\InternalServiceDirectory\ISD.DA\bin\Debug\ISD.DA.pdb
+E:\Work\Projects\InternalServiceDirectory\ISD.DA\obj\Debug\ISD.DA.dll
+E:\Work\Projects\InternalServiceDirectory\ISD.DA\obj\Debug\ISD.DA.pdb

@@ -1,0 +1,8 @@
+E:\Work\Projects\InternalServiceDirectory\ISD.EDS\bin\Debug\ISD.EDS.dll
+E:\Work\Projects\InternalServiceDirectory\ISD.EDS\bin\Debug\ISD.EDS.pdb
+E:\Work\Projects\InternalServiceDirectory\ISD.EDS\bin\Debug\EntityFramework.dll
+E:\Work\Projects\InternalServiceDirectory\ISD.EDS\bin\Debug\EntityFramework.SqlServer.dll
+E:\Work\Projects\InternalServiceDirectory\ISD.EDS\bin\Debug\EntityFramework.xml
+E:\Work\Projects\InternalServiceDirectory\ISD.EDS\bin\Debug\EntityFramework.SqlServer.xml
+E:\Work\Projects\InternalServiceDirectory\ISD.EDS\obj\Debug\ISD.EDS.dll
+E:\Work\Projects\InternalServiceDirectory\ISD.EDS\obj\Debug\ISD.EDS.pdb
