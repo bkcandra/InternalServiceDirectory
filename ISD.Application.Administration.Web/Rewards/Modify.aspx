@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Modify Reward" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Modify.aspx.cs" Inherits="HealthyClub.Administration.Web.Rewards.Modify" EnableViewState="true" %>
+﻿<%@ Page Title="Modify Reward" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Modify.aspx.cs" Inherits="ISD.Administration.Web.Rewards.Modify" EnableViewState="true" %>
 
 <%@ Register Src="~/UserControls/RewardModify.ascx" TagPrefix="uc1" TagName="RewardModify" %>
 

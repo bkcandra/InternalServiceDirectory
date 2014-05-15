@@ -12,7 +12,7 @@ using CKEditor.NET;
 using System.Net;
 
 
-namespace HealthyClub.Administration.Web.UserControls
+namespace ISD.Administration.Web.UserControls
 {
     public partial class ActivityRegistrationDetailUC : System.Web.UI.UserControl
     {

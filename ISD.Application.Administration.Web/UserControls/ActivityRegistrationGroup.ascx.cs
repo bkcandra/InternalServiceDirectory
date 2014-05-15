@@ -9,7 +9,7 @@ using ISD.DA;
 using ISD.Util;
 
 
-namespace HealthyClub.Administration.Web.UserControls
+namespace ISD.Administration.Web.UserControls
 {
     public partial class ActivityRegistrationGroup : System.Web.UI.UserControl
     {

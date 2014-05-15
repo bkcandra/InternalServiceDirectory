@@ -14,7 +14,7 @@ using Google.GData.Analytics;
 
 
 
-namespace HealthyClub.Administration.Web.UserControls
+namespace ISD.Administration.Web.UserControls
 {
     public partial class AnalyticsUC : System.Web.UI.UserControl
     {

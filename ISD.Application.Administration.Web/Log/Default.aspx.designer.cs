@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HealthyClub.Administration.Web.Log {
+namespace ISD.Administration.Web.Log {
     
     
     public partial class Default {
@@ -19,7 +19,7 @@ namespace HealthyClub.Administration.Web.Log {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HealthyClub.Administration.Web.UserControls.webLog webLog1;
+        protected global::ISD.Administration.Web.UserControls.webLog webLog1;
         
         /// <summary>
         /// RewardLog1 control.
@@ -28,6 +28,6 @@ namespace HealthyClub.Administration.Web.Log {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HealthyClub.Administration.Web.UserControls.RewardLog RewardLog1;
+        protected global::ISD.Administration.Web.UserControls.RewardLog RewardLog1;
     }
 }

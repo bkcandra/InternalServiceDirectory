@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MenuItemTreeView.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.MenuItemTreeView" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MenuItemTreeView.ascx.cs" Inherits="ISD.Administration.Web.UserControls.MenuItemTreeView" %>
 <asp:TreeView ID="TreeView1" runat="server" 
      ImageSet="Simple" onselectednodechanged="TreeView1_SelectedNodeChanged">
     <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />

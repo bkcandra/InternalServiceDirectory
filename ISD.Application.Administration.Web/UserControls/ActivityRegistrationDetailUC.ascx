@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ActivityRegistrationDetailUC.ascx.cs"
-    Inherits="HealthyClub.Administration.Web.UserControls.ActivityRegistrationDetailUC" %>
+    Inherits="ISD.Administration.Web.UserControls.ActivityRegistrationDetailUC" %>
 <%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
 <script src="../Scripts/controlHelper.js"></script>
 <style type="text/css">

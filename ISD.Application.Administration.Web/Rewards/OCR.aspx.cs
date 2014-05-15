@@ -19,7 +19,7 @@ using System.Linq;
 using System.Reflection;
 
 
-namespace HealthyClub.Administration.Web.Rewards
+namespace ISD.Administration.Web.Rewards
 {
     public partial class OCR : System.Web.UI.Page
     {

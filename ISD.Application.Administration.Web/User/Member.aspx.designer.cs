@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HealthyClub.Administration.Web.User {
+namespace ISD.Administration.Web.User {
     
     
     public partial class Member {
@@ -28,6 +28,6 @@ namespace HealthyClub.Administration.Web.User {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HealthyClub.Administration.Web.UserControls.CustomerAccount CustomerAccount1;
+        protected global::ISD.Administration.Web.UserControls.CustomerAccount CustomerAccount1;
     }
 }

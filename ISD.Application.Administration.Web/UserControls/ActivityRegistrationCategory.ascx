@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ActivityRegistrationCategory.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.ActivityRegistrationCategory" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ActivityRegistrationCategory.ascx.cs" Inherits="ISD.Administration.Web.UserControls.ActivityRegistrationCategory" %>
 <style>
      ul { padding: 0px; margin: 0 0 0 18px; }
 </style>

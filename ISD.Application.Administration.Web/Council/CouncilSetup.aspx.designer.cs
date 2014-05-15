@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HealthyClub.Administration.Web.Council {
+namespace ISD.Administration.Web.Council {
     
     
     public partial class CouncilSetup {
@@ -19,6 +19,6 @@ namespace HealthyClub.Administration.Web.Council {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HealthyClub.Administration.Web.UserControls.CouncilSetupUC CouncilSetupUC;
+        protected global::ISD.Administration.Web.UserControls.CouncilSetupUC CouncilSetupUC;
     }
 }

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HealthyClub.Administration.Web.Suburb {
+namespace ISD.Administration.Web.Suburb {
     
     
     public partial class SuburbSetup {
@@ -19,6 +19,6 @@ namespace HealthyClub.Administration.Web.Suburb {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HealthyClub.Administration.Web.UserControls.SuburbSetup SuburbSetupUC1;
+        protected global::ISD.Administration.Web.UserControls.SuburbSetup SuburbSetupUC1;
     }
 }

@@ -1,34 +1,27 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="HealthyClub.Administration.Web.Keyword.Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="ISD.Administration.Web.Keyword.Default" %>
 
 <%@ Register Src="../UserControls/KeywordManagementUC.ascx" TagName="KeywordManagementUC" TagPrefix="uc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="grid_2">
-        <div class="box sidemenu" style="height: 800px">
-            <div class="block" id="section-menu">
-                <ul class="section menu">
-                    <li><a class="menuitem">Keywords</a>
-                        <ul class="submenu">
-                            <li>
-                                <asp:LinkButton ID="lnkNewKeyword" runat="server" OnClick="lnkNewKeyword_Click">New keyword</asp:LinkButton>
-                            </li>
-                        </ul>
-                    </li>
+   
+               
+             <section class="content-header">
+        <h1>Keyword
+                       
+                    <small>Thesaurus or synonim setting</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
+            <li><a href="#">Content Setting</a></li>
+            <li class="active">Keywords</li>
+        </ol>
+    </section>
 
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="grid_10">
-        <div class="box sidebox">
-            <h2>Keywords</h2>
-            Manage activities's synonim and Thesaurus term
-            <div class="block">
-                <uc1:KeywordManagementUC ID="KeywordManagementUC1" runat="server" />
-            </div>
-        </div>
-    </div>
-
-
+    <!-- Main content -->
+    <section class="content">
+       <uc1:KeywordManagementUC ID="KeywordManagementUC1" runat="server" />
+    </section>
 </asp:Content>
+
+

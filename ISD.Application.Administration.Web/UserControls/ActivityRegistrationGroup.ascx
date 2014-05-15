@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ActivityRegistrationGroup.ascx.cs"
-    Inherits="HealthyClub.Administration.Web.UserControls.ActivityRegistrationGroup" %>
+    Inherits="ISD.Administration.Web.UserControls.ActivityRegistrationGroup" %>
 <style type="text/css">
     .style10
     {

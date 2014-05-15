@@ -10,7 +10,7 @@ using ISD.BF;
 using ISD.Util;
 using Microsoft.AspNet.Identity;
 
-namespace HealthyClub.Administration.Web.UserControls
+namespace ISD.Administration.Web.UserControls
 {
     public partial class webLog : System.Web.UI.UserControl
     {

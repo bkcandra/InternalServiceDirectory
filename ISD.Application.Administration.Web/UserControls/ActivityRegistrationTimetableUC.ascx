@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ActivityRegistrationTimetableUC.ascx.cs"
-    Inherits="HealthyClub.Administration.Web.UserControls.ActivityRegistrationTimetableUC" %>
+    Inherits="ISD.Administration.Web.UserControls.ActivityRegistrationTimetableUC" %>
 
 <%@ Register Src="~/UserControls/ScheduleViewerUC.ascx" TagName="ScheduleViewerUC"
     TagPrefix="uc1" %>

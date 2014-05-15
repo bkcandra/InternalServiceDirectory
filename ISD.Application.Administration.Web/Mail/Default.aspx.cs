@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 
-namespace HealthyClub.Administration.Web.Mail
+namespace ISD.Administration.Web.Mail
 {
     public partial class Default : System.Web.UI.Page
     {

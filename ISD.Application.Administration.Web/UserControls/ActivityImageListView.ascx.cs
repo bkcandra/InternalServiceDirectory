@@ -10,7 +10,7 @@ using ISD.BF;
 using ISD.Util;
 using System.IO;
 
-namespace HealthyClub.Administration.Web.UserControls
+namespace ISD.Administration.Web.UserControls
 {
     public partial class ActivityImageListView : System.Web.UI.UserControl
     {

@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ActivityImageUC.ascx.cs"
-    Inherits="HealthyClub.Administration.Web.UserControls.ActivityImageUC" %>
+    Inherits="ISD.Administration.Web.UserControls.ActivityImageUC" %>
 <%@ Register Src="ActivityImageListView.ascx" TagName="ActivityImageListView" TagPrefix="uc1" %>
 <link href="../Content/prettyPhoto.css" rel="stylesheet" />
 <script src="../Scripts/pretty-photo/jquery.prettyPhoto.js"></script>

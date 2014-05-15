@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="WebAssetsUC.ascx.cs"
-    Inherits="HealthyClub.Administration.Web.UserControls.WebAssetsUC" %>
+    Inherits="ISD.Administration.Web.UserControls.WebAssetsUC" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <style>
     .asset_box

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HealthyClub.Administration.Web.Activities
+namespace ISD.Administration.Web.Activities
 {
     public partial class Default : System.Web.UI.Page
     {

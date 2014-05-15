@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using ISD.DA;
 using ISD.EDS;
 
-namespace HealthyClub.Administration.Web.UserControls
+namespace ISD.Administration.Web.UserControls
 {
     public partial class ScheduleViewerUC : System.Web.UI.UserControl
     {

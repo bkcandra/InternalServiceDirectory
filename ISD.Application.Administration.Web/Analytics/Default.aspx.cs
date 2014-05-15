@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace HealthyClub.Administration.Web.Analytics
+namespace ISD.Administration.Web.Analytics
 {
     public partial class Default : System.Web.UI.Page
     {

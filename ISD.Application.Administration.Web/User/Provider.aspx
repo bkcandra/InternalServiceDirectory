@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Provider.aspx.cs" Inherits="HealthyClub.Administration.Web.User.Provider" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Provider.aspx.cs" Inherits="ISD.Administration.Web.User.Provider" %>
 
 <%@ Register Src="../UserControls/ProviderAccount.ascx" TagName="ProviderAccount" TagPrefix="uc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">

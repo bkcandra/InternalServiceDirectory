@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HealthyClub.Administration.Web.UserControls {
+namespace ISD.Administration.Web.UserControls {
     
     
     public partial class AccountManagerUC {
@@ -37,7 +37,7 @@ namespace HealthyClub.Administration.Web.UserControls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HealthyClub.Administration.Web.UserControls.AdminList AdminList2;
+        protected global::ISD.Administration.Web.UserControls.AdminList AdminList2;
         
         /// <summary>
         /// ProviderList2 control.
@@ -46,7 +46,7 @@ namespace HealthyClub.Administration.Web.UserControls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HealthyClub.Administration.Web.UserControls.ProviderList ProviderList2;
+        protected global::ISD.Administration.Web.UserControls.ProviderList ProviderList2;
         
         /// <summary>
         /// UserListUC2 control.
@@ -55,6 +55,6 @@ namespace HealthyClub.Administration.Web.UserControls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HealthyClub.Administration.Web.UserControls.UserListUC UserListUC2;
+        protected global::ISD.Administration.Web.UserControls.UserListUC UserListUC2;
     }
 }

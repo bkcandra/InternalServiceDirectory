@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HealthyClub.Administration.Web.Activities {
+namespace ISD.Administration.Web.Activities {
     
     
     public partial class Default {
@@ -19,6 +19,6 @@ namespace HealthyClub.Administration.Web.Activities {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HealthyClub.Administration.Web.UserControls.ActivitiesManagerListViewUC1 ActivitiesManagerListViewUC;
+        protected global::ISD.Administration.Web.UserControls.ActivitiesManagerListViewUC1 ActivitiesManagerListViewUC;
     }
 }

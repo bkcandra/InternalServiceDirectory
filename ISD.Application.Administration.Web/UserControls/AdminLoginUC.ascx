@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AdminLoginUC.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.AdminLoginUC" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AdminLoginUC.ascx.cs" Inherits="ISD.Administration.Web.UserControls.AdminLoginUC" %>
 <h2>Login</h2>
 <p>
     Please sign in here. After signing in you will have access to <strong>Website , 

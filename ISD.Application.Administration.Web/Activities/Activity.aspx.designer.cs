@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HealthyClub.Administration.Web.Activities {
+namespace ISD.Administration.Web.Activities {
     
     
     public partial class Activity {
@@ -91,7 +91,7 @@ namespace HealthyClub.Administration.Web.Activities {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HealthyClub.Administration.Web.UserControls.ActivityRegistrationDetailUC ActivityRegistrationDetailUC;
+        protected global::ISD.Administration.Web.UserControls.ActivityRegistrationDetailUC ActivityRegistrationDetailUC;
         
         /// <summary>
         /// ActivityRegistrationDescriptionUC control.
@@ -100,7 +100,7 @@ namespace HealthyClub.Administration.Web.Activities {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HealthyClub.Administration.Web.UserControls.ActivityRegistrationDescription ActivityRegistrationDescriptionUC;
+        protected global::ISD.Administration.Web.UserControls.ActivityRegistrationDescription ActivityRegistrationDescriptionUC;
         
         /// <summary>
         /// ActivityRegistrationTimetableUC control.
@@ -109,7 +109,7 @@ namespace HealthyClub.Administration.Web.Activities {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HealthyClub.Administration.Web.UserControls.ActivityRegistrationTimetableUC ActivityRegistrationTimetableUC;
+        protected global::ISD.Administration.Web.UserControls.ActivityRegistrationTimetableUC ActivityRegistrationTimetableUC;
         
         /// <summary>
         /// ActivityRegistrationGroup control.
@@ -118,7 +118,7 @@ namespace HealthyClub.Administration.Web.Activities {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HealthyClub.Administration.Web.UserControls.ActivityRegistrationGroup ActivityRegistrationGroup;
+        protected global::ISD.Administration.Web.UserControls.ActivityRegistrationGroup ActivityRegistrationGroup;
         
         /// <summary>
         /// ActivityImageUC control.
@@ -127,7 +127,7 @@ namespace HealthyClub.Administration.Web.Activities {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HealthyClub.Administration.Web.UserControls.ActivityImageUC ActivityImageUC;
+        protected global::ISD.Administration.Web.UserControls.ActivityImageUC ActivityImageUC;
         
         /// <summary>
         /// hdnProviderID control.

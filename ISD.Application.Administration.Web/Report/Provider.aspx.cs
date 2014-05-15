@@ -9,7 +9,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace HealthyClub.Administration.Web.Report
+namespace ISD.Administration.Web.Report
 {
     public partial class Provider : System.Web.UI.Page
     {

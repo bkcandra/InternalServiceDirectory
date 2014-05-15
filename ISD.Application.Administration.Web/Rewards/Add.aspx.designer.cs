@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HealthyClub.Administration.Web.Rewards {
+namespace ISD.Administration.Web.Rewards {
     
     
     public partial class Add {
@@ -19,6 +19,6 @@ namespace HealthyClub.Administration.Web.Rewards {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HealthyClub.Administration.Web.UserControls.RewardsAddition RewardsAddition;
+        protected global::ISD.Administration.Web.UserControls.RewardsAddition RewardsAddition;
     }
 }

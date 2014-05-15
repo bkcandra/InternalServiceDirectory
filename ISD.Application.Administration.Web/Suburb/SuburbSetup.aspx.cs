@@ -9,7 +9,7 @@ using ISD.DA;
 using ISD.EDS;
 
 
-namespace HealthyClub.Administration.Web.Suburb
+namespace ISD.Administration.Web.Suburb
 {
     public partial class SuburbSetup : System.Web.UI.Page
     {
@@ -42,7 +42,7 @@ namespace HealthyClub.Administration.Web.Suburb
 
         private void CheckSignIn()
         {
-            if (Context.User.Identity.IsAuthenticated)
+            if (!Context.User.Identity.IsAuthenticated)
             {
                 Response.Redirect("~/Account/login.aspx");
             }

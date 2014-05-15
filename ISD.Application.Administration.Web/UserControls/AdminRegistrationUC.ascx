@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AdminRegistrationUC.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.AdminRegistrationUC" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AdminRegistrationUC.ascx.cs" Inherits="ISD.Administration.Web.UserControls.AdminRegistrationUC" %>
 <style type="text/css">
     .barIndicatorBorder {
         border: solid 1px #c0c0c0;

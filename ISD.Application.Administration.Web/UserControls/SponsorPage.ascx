@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SponsorPage.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.SponsorPage" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SponsorPage.ascx.cs" Inherits="ISD.Administration.Web.UserControls.SponsorPage" %>
 
 
 

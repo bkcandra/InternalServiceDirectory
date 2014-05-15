@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="HealthyClub.Administration.Web.Log.Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="ISD.Administration.Web.Log.Default" %>
 
 <%@ Register Src="~/UserControls/webLog.ascx" TagName="webLog" TagPrefix="uc1" %>
 <%@ Register Src="~/UserControls/RewardLog.ascx" TagPrefix="uc1" TagName="RewardLog" %>

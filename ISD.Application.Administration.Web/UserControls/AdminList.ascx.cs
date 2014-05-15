@@ -16,7 +16,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 
 
-namespace HealthyClub.Administration.Web.UserControls
+namespace ISD.Administration.Web.UserControls
 {
     public partial class AdminList : System.Web.UI.UserControl
     {
@@ -37,10 +37,11 @@ namespace HealthyClub.Administration.Web.UserControls
         private void SetDataSource()
         {
 
-            //var um = Context.GetOwinContext().GetUserManager<ApplicationUserManager>().Users;
-            var rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ISDEntities())).FindByName(SystemConstants.AdministratorRole).Users;
-            var dt = rm;
+            IEnumerable<ApplicationUser> um = Context.GetOwinContext().GetUserManager<ApplicationUserManager>().Users.AsEnumerable();
+            var rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext())).FindByName(SystemConstants.AdministratorRole).Users;
 
+            var dt = um.Where(x=>rm.Select(y=>y.UserId).Contains(x.Id)).ToList();
+            
             GridView1.DataSource = dt;
             GridView1.DataBind();
         }

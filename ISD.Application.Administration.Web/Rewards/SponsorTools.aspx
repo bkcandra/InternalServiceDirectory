@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Sponsor - Edit" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SponsorTools.aspx.cs" Inherits="HealthyClub.Administration.Web.Rewards.SponsorTools" %>
+﻿<%@ Page Title="Sponsor - Edit" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SponsorTools.aspx.cs" Inherits="ISD.Administration.Web.Rewards.SponsorTools" %>
 <%@ Register Src="~/UserControls/SponsorManage.ascx" TagPrefix="uc1" TagName="SponsorManage" %>
 
 

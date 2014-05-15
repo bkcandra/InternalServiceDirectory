@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ActivitiesManagerListViewUC.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.ActivitiesManagerListViewUC1" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ActivitiesManagerListViewUC.ascx.cs" Inherits="ISD.Administration.Web.UserControls.ActivitiesManagerListViewUC1" %>
 <script src="../Scripts/DataTables-1.9.4/media/js/jquery.js"></script>
 <script src="../Scripts/DataTables-1.9.4/media/js/jquery.dataTables.js"></script>
 <style type="text/css" title="currentStyle">

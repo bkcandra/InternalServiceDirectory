@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CouncilUC.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.CouncilUC" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CouncilUC.ascx.cs" Inherits="ISD.Administration.Web.UserControls.CouncilUC" %>
 <div id="suburbGridview">
     <div id="divSuccess" runat="server" visible="false" class="message success">
         <h5>Success</h5>

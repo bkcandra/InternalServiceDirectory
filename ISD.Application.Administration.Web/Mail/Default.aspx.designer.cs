@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HealthyClub.Administration.Web.Mail {
+namespace ISD.Administration.Web.Mail {
     
     
     public partial class Default {
@@ -55,7 +55,7 @@ namespace HealthyClub.Administration.Web.Mail {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HealthyClub.Administration.Web.UserControls.MailTemplateSettingUC MailTemplateSettingUC1;
+        protected global::ISD.Administration.Web.UserControls.MailTemplateSettingUC MailTemplateSettingUC1;
         
         /// <summary>
         /// MailTemplateListUC1 control.
@@ -64,6 +64,6 @@ namespace HealthyClub.Administration.Web.Mail {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HealthyClub.Administration.Web.UserControls.MailTemplateListUC MailTemplateListUC1;
+        protected global::ISD.Administration.Web.UserControls.MailTemplateListUC MailTemplateListUC1;
     }
 }

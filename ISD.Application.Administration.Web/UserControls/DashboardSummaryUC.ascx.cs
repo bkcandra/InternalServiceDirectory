@@ -1,4 +1,6 @@
 ﻿using Google.GData.Analytics;
+using ISD.Administration.Web;
+using ISD.Administration.Web.Models;
 using ISD.DA;
 using ISD.Util;
 using System;
@@ -7,18 +9,18 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 
 
-namespace HealthyClub.Administration.Web.UserControls
+namespace ISD.Administration.Web.UserControls
 {
     public partial class DashboardSummaryUC : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                Refresh();
-            }
+            
         }
         public string VisitsNumber()
         {
@@ -56,41 +58,32 @@ namespace HealthyClub.Administration.Web.UserControls
             return visits;
         }
 
-        private void Refresh()
-        {
-            if (Context.User.Identity.IsAuthenticated)
-            {
-                initDash();
-            }
-            else
-            {
-                Response.Redirect("~/Account/Login.aspx");
-            }
-        }
 
-        private void initDash()
+        public void initDash()
         {
+            var rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+            lblAdmin.Text = rm.FindByName(SystemConstants.AdministratorRole).Users.Count.ToString();
+            lblProviders.Text = rm.FindByName(SystemConstants.ProviderRole).Users.Count.ToString();
+            lblMember.Text = rm.FindByName(SystemConstants.CustomerRole).Users.Count.ToString();
+            lblUser.Text = Context.GetOwinContext().GetUserManager<ApplicationUserManager>().Users.Count().ToString();
             DataAccessComponent dac = new DataAccessComponent();
 
             int actCount = dac.RetrieveActivitiesCount((int)SystemConstants.ActivityStatus.Active, true) + dac.RetrieveActivitiesCount((int)SystemConstants.ActivityStatus.WillExpire2, true);
             lblApprovedActivity.Text = actCount.ToString();
             lblDeletedAct.Text = dac.RetrieveActivitiesCount((int)SystemConstants.ActivityStatus.Deleting, true).ToString();
-            lblTotalActivity.Text = dac.RetrieveActivitiesCount().ToString();
-            //lblApprovedActivity.Text = dac.RetrieveApprovedActivitiesCount().ToString();
+            lblTotalActivity.Text = lblActivity.Text = dac.RetrieveActivitiesCount().ToString();
             lblCat.Text = dac.RetrieveCategoriesCount().ToString();
-            lblMember.Text = dac.RetrieveCustomerListCount().ToString();
-            lblProviders.Text = dac.RetrieveProviderListCount().ToString();
             lblWaitingActivity.Text = dac.RetrievePendingActivitiesCount().ToString();
             lblExpiredAct.Text = dac.RetrieveActivitiesCount((int)SystemConstants.ActivityStatus.Expired, true).ToString();
-
+            lblReward.Text = dac.RetrieveRewardsExplorer().Count.ToString();
             try
             {
-                lblstat.Text = VisitsNumber();
+                lblVisitor.Text = VisitsNumber();
             }
             catch (Exception ex)
             {
-                lblstat.Text = "ERR";
-                lblerror.Text = ex.Message;
+                lblVisitor.Text = "ERR";
+                lblError.Text = ex.Message;
             }
         }
     }

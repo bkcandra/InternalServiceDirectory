@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MailTemplateListUC.ascx.cs"
-    Inherits="HealthyClub.Administration.Web.UserControls.MailTemplateListUC" %>
+    Inherits="ISD.Administration.Web.UserControls.MailTemplateListUC" %>
 <style>
     .left {
         float: left;

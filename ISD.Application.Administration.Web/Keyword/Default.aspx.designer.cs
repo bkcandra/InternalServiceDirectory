@@ -7,19 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HealthyClub.Administration.Web.Keyword {
+namespace ISD.Administration.Web.Keyword {
     
     
     public partial class Default {
-        
-        /// <summary>
-        /// lnkNewKeyword control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkNewKeyword;
         
         /// <summary>
         /// KeywordManagementUC1 control.
@@ -28,6 +19,6 @@ namespace HealthyClub.Administration.Web.Keyword {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HealthyClub.Administration.Web.UserControls.KeywordManagementUC KeywordManagementUC1;
+        protected global::ISD.Administration.Web.UserControls.KeywordManagementUC KeywordManagementUC1;
     }
 }

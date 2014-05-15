@@ -1,25 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SuburbSetupUC.ascx.cs"
-    Inherits="HealthyClub.Administration.Web.UserControls.SuburbSetup" %>
+    Inherits="ISD.Administration.Web.UserControls.SuburbSetup" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
-<div class="grid_2">
-    <div class="box sidemenu" style="height: 800px">
-        <div class="block" id="section-menu">
-            <ul class="section menu">
-                <li><a class="menuitem">Suburb Setup</a>
-                    <ul class="submenu">
-                        <li><a href="javascript:history.back()">Back </a></li>
-                    </ul>
-                </li>
 
-            </ul>
-        </div>
-    </div>
-</div>
-<div class="grid_10">
-    <div class="box sidebox">
-        <h2>
-            <asp:Label ID="lblAddEditTitle" runat="server"></asp:Label></h2>
-        <div class="block">
+<asp:Label ID="lblAddEditTitle" runat="server"></asp:Label>
+      
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
                     <div id="AddEditContent">
@@ -62,8 +46,7 @@
                                 </td>
                                 <td>:
                                 </td>
-                                <td align="left">
-                                    &nbsp;
+                                <td align="left">&nbsp;
                                     <asp:HiddenField ID="hdnStateID" runat="server" />
                                     <asp:Label ID="lblState" runat="server" Visible="false"></asp:Label>
                                 </td>
@@ -96,9 +79,5 @@
                     </div>
                 </ContentTemplate>
             </asp:UpdatePanel>
-
-        </div>
-    </div>
-</div>
 
 

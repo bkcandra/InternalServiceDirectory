@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="RewardsManager.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.RewardsManager" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="RewardsManager.ascx.cs" Inherits="ISD.Administration.Web.UserControls.RewardsManager" %>
 
 
 <p>Perform variety of operations on the Rewards as per your requirement.Below shows a list of Rewards available. Click on any reward for its modification. Also perform the Deletion and addition of the Rewards on the go</p>

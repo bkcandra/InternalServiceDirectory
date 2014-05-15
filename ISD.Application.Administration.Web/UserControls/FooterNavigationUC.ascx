@@ -1,1 +1,1 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="FooterNavigationUC.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.FooterNavigationUC" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="FooterNavigationUC.ascx.cs" Inherits="ISD.Administration.Web.UserControls.FooterNavigationUC" %>

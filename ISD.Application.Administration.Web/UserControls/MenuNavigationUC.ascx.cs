@@ -10,7 +10,7 @@ using ISD.BF;
 using ISD.Util;
 
 
-namespace HealthyClub.Administration.Web.UserControls
+namespace ISD.Administration.Web.UserControls
 {
     public partial class MenuNavigationUC : System.Web.UI.UserControl
     {

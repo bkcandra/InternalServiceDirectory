@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AdminList.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.AdminList" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AdminList.ascx.cs" Inherits="ISD.Administration.Web.UserControls.AdminList" %>
 <div>
     <a href="../Account/Registration.aspx">Register New User</a>&nbsp;&nbsp;&nbsp;&nbsp;
     <a href="../Account/ChangePassword.aspx">Change Password</a>
@@ -8,7 +8,7 @@
         <Columns>
             <asp:TemplateField>
                 <ItemTemplate>
-                    <asp:LinkButton ID="lnkDelete" runat="server" CommandName="DeleteUser" OnClientClick='<%# String.Format("return confirm(\"Are you sure want to delete  {0}?\")", Eval("Username")) %>'>Delete</asp:LinkButton>
+                    <asp:LinkButton ID="lnkDelete" runat="server" CommandName="DeleteUser" OnClientClick='<%# String.Format("return confirm(\"Are you sure want to delete  {0}?\")", Eval("UserName")) %>'>Delete</asp:LinkButton>
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />
                 <HeaderStyle HorizontalAlign="Left" />
@@ -17,25 +17,19 @@
             <asp:TemplateField HeaderText="ID">
                 <ItemTemplate>
                     
-                    <asp:Label ID="lblID" runat="server" Text='<%#Eval("ID") %>'></asp:Label>
+                    <asp:Label ID="lblID" runat="server" Text='<%#Eval("Id") %>'></asp:Label>
                 </ItemTemplate>
                 <HeaderStyle HorizontalAlign="Left" />
                 <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
             <asp:TemplateField HeaderText="UserName">
                 <ItemTemplate>
-                    <asp:Label ID="lblUserName" runat="server" Text='<%#Eval("Username") %>'></asp:Label>
+                    <asp:Label ID="lblUserName" runat="server" Text='<%#Eval("UserName") %>'></asp:Label>
                 </ItemTemplate>
                 <HeaderStyle HorizontalAlign="Left" />
                 <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Last Active">
-                <ItemTemplate>
-                    <asp:Label ID="lblCreatedDate" runat="server" Text='<%#Eval("LastActivityDate") %>'></asp:Label>
-                </ItemTemplate>
-                <HeaderStyle HorizontalAlign="Left" />
-                <ItemStyle HorizontalAlign="Center" />
-            </asp:TemplateField>
+            
         </Columns>
         <EditRowStyle BackColor="#2461BF" />
         <EmptyDataTemplate>

@@ -12,10 +12,10 @@ using ISD.DA;
 using System.Net;
 using System.Xml.Linq;
 
-using HealthyClub.Administration.Web.UserControls;
+using ISD.Administration.Web.UserControls;
 
 
-namespace HealthyClub.Administration.Web.Rewards
+namespace ISD.Administration.Web.Rewards
 {
     public partial class Modify : System.Web.UI.Page
     {

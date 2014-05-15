@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Sponsor" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Sponsor.aspx.cs" Inherits="HealthyClub.Administration.Web.Rewards.Sponsor" %>
+﻿<%@ Page Title="Sponsor" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Sponsor.aspx.cs" Inherits="ISD.Administration.Web.Rewards.Sponsor" %>
 <%@ Register Src="~/UserControls/SponsorPage.ascx" TagPrefix="uc1" TagName="SponsorPage" %>
 
     <asp:Content ID="Content1" ContentPlaceHolderID="FeaturedContent" runat="server">

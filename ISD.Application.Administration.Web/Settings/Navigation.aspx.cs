@@ -10,7 +10,7 @@ using ISD.DA;
 using ISD.Util;
 
 
-namespace HealthyClub.Administration.Web.Settings
+namespace ISD.Administration.Web.Settings
 {
     public partial class Navigation : System.Web.UI.Page
     {

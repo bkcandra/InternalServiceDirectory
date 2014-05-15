@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Add Reward" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Add.aspx.cs" Inherits="HealthyClub.Administration.Web.Rewards.Add" %>
+﻿<%@ Page Title="Add Reward" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Add.aspx.cs" Inherits="ISD.Administration.Web.Rewards.Add" %>
 
 <%@ Register Src="~/UserControls/RewardsAddition.ascx" TagPrefix="uc1" TagName="RewardsAddition" %>
 

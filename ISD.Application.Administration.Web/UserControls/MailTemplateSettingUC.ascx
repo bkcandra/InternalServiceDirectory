@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MailTemplateSettingUC.ascx.cs"
-    Inherits="HealthyClub.Administration.Web.UserControls.MailTemplateSettingUC" %>
+    Inherits="ISD.Administration.Web.UserControls.MailTemplateSettingUC" %>
 <style>
     .limitOptions {
         padding: 5px;

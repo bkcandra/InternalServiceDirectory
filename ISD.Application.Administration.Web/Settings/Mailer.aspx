@@ -1,40 +1,24 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Mailer.aspx.cs" Inherits="HealthyClub.Administration.Web.Settings.Mailer" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Mailer.aspx.cs" Inherits="ISD.Administration.Web.Settings.Mailer" %>
 <%@ Register src="../UserControls/WebMailConfigUC.ascx" tagname="WebMailConfigUC" tagprefix="uc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-     <div class="grid_2">
-        <div class="box sidemenu" style="height: 800px">
-            <div class="block" id="section-menu">
-                <ul class="section menu">
-                    <li><a class="menuitem">Management</a>
-                        <ul class="submenu">
-                    <li>
-                        <asp:HyperLink ID="hlnkSiteSetting" runat="server" class="menuitem" NavigateUrl="~/Settings/">Site Setting</asp:HyperLink>
-                    </li>
-                    <li>
-                        <asp:HyperLink ID="hlnkNavigation" runat="server" class="menuitem" NavigateUrl="~/Settings/Navigation.aspx">Navigation</asp:HyperLink>
-                    </li>
-                    <li>
-                        <asp:HyperLink ID="hlnkMailTemplate" runat="server" class="menuitem" NavigateUrl="~/Mail/">Mail Template</asp:HyperLink>
-                    </li>
-                    <li>
-                        <asp:HyperLink ID="hlnkSmtpSetting" runat="server" class="menuitem" NavigateUrl="~/Settings/Mailer.aspx">SMTP Setting</asp:HyperLink>
-                    </li>
-                </ul>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="grid_10">
-        <div class="box sidebar">
-            <h2>Mailer Setting</h2>
-            <div class="block">
-               <uc1:WebMailConfigUC ID="WebMailConfigUC1" runat="server" />
-            </div>
-        </div>
-    </div>
     
+           
+              
+        <section class="content-header">
+        <h1> Mailer Setting
+                    <small></small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
+
+            <li class="active"> Mailer Setting</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+         <uc1:WebMailConfigUC ID="WebMailConfigUC1" runat="server" />
+    </section>
 </asp:Content>

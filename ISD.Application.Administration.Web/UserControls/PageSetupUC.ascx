@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PageSetupUC.ascx.cs"
-    Inherits="HealthyClub.Administration.Web.UserControls.PageSetupUC" %>
+    Inherits="ISD.Administration.Web.UserControls.PageSetupUC" %>
 <%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
 
 

@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MailTemplateDetailUC.ascx.cs"
-    Inherits="HealthyClub.Administration.Web.UserControls.MailTemplateDetailUC" %>
+    Inherits="ISD.Administration.Web.UserControls.MailTemplateDetailUC" %>
 <%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
 <style>
     .style4 {

@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 
-namespace HealthyClub.Administration.Web.Pages
+namespace ISD.Administration.Web.Pages
 {
     public partial class PageSetup : System.Web.UI.Page
     {
@@ -21,7 +21,7 @@ namespace HealthyClub.Administration.Web.Pages
 
         private void CheckSignIn()
         {
-            if (Context.User.Identity.IsAuthenticated)
+            if (!Context.User.Identity.IsAuthenticated)
             {
                 Response.Redirect("~/Account/login.aspx");
             }

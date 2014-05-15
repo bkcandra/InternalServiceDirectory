@@ -11,7 +11,7 @@ using ISD.Util;
 using ISD.BF;
 using ISD.DA;
 
-namespace HealthyClub.Administration.Web.UserControls
+namespace ISD.Administration.Web.UserControls
 {
     public partial class ActivityRegistrationTimetableUC : System.Web.UI.UserControl
     {

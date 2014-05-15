@@ -1,24 +1,6 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CouncilSetupUC.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.CouncilSetupUC" %>
-<div class="grid_2">
-    <div class="box sidemenu" style="height: 800px">
-        <div class="block" id="section-menu">
-            <ul class="section menu">
-                <li><a class="menuitem">Council Setup</a>
-                    <ul class="submenu">
-                        <li><a>Back</a></li>
-
-                    </ul>
-                </li>
-
-            </ul>
-        </div>
-    </div>
-</div>
-<div class="grid_10">
-    <div class="box sidebox">
-        <h2>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CouncilSetupUC.ascx.cs" Inherits="ISD.Administration.Web.UserControls.CouncilSetupUC" %>
             <asp:Label ID="lblAddEditTitle" runat="server"></asp:Label></h2>
-        <div class="block">
+     
             <div id="AddEditContent">
                 <table>
                     <tr>
@@ -73,7 +55,3 @@
                 </table>
                 <asp:LinkButton ID="lnkBackToList" runat="server" Visible="false" OnClick="lnkBackToList_Click">Back to council list</asp:LinkButton>
             </div>
-
-        </div>
-    </div>
-</div>

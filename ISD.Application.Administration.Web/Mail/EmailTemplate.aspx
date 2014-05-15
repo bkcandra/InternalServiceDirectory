@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EmailTemplate.aspx.cs" Inherits="HealthyClub.Administration.Web.Mail.MeailTemplate" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EmailTemplate.aspx.cs" Inherits="ISD.Administration.Web.Mail.MeailTemplate" %>
 
 <%@ Register Src="../UserControls/MailTemplateDetailUC.ascx" TagName="MailTemplateDetailUC" TagPrefix="uc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">

@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 
-namespace HealthyClub.Administration.Web.Suburb
+namespace ISD.Administration.Web.Suburb
 {
     public partial class Default : System.Web.UI.Page
     {
@@ -21,7 +21,7 @@ namespace HealthyClub.Administration.Web.Suburb
 
         private void CheckSignIn()
         {
-            if (Context.User.Identity.IsAuthenticated)
+            if (!Context.User.Identity.IsAuthenticated)
             {
                 Response.Redirect("~/Account/login.aspx");
             }

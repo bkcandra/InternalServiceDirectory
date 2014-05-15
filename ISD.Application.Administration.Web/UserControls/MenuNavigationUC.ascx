@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MenuNavigationUC.ascx.cs"
-    Inherits="HealthyClub.Administration.Web.UserControls.MenuNavigationUC" %>
+    Inherits="ISD.Administration.Web.UserControls.MenuNavigationUC" %>
 <%@ Register Src="~/UserControls/MenuItemTreeView.ascx" TagPrefix="uc2" TagName="MenuItemTreeView" %>
 <style type="text/css">
     .style1 {

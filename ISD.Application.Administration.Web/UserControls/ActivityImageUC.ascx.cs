@@ -11,7 +11,7 @@ using ISD.DA;
  
 using System.IO;
 
-namespace HealthyClub.Administration.Web.UserControls
+namespace ISD.Administration.Web.UserControls
 {
     public partial class ActivityImageUC : System.Web.UI.UserControl
     {

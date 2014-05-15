@@ -9,7 +9,7 @@ using ISD.Util;
 using ISD.BF;
 using ISD.DA;
 
-namespace HealthyClub.Administration.Web.UserControls
+namespace ISD.Administration.Web.UserControls
 {
     public partial class MailTemplateDetailUC : System.Web.UI.UserControl
     {

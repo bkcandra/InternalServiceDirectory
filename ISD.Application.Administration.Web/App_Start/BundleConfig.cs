@@ -20,7 +20,17 @@ namespace ISD.Administration.Web
                             "~/Scripts/WebForms/GridView.js",
                             "~/Scripts/WebForms/DetailsView.js",
                             "~/Scripts/WebForms/TreeView.js",
-                            "~/Scripts/WebForms/WebParts.js"));
+                            "~/Scripts/WebForms/WebParts.js",
+                            "~/Scripts/morris/morris.min.js",
+                            "~/Scripts/sparkline/jquery.sparkline.min.js",
+                            "~/Scripts/jvectormap/jquery-jvectormap-1.2.2.min.js",
+                            "~/Scripts/jvectormap/jquery-jvectormap-world-mill-en.js",
+                            "~/Scripts/fullcalendar/fullcalendar.min.js",
+                            "~/Scripts/jqueryKnob/jquery.knob.js",
+                            "~/Scripts/daterangepicker/daterangepicker.js",
+                            "~/Scripts/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js",
+                            "~/Scripts/iCheck/icheck.min.js",
+                             "~/Scripts/AdminLTE/app.js"));
 
             // Order is very important for these files to work, they have explicit dependencies
             bundles.Add(new ScriptBundle("~/bundles/MsAjaxJs").Include(

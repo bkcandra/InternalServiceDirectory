@@ -11,7 +11,7 @@ using ISD.EDS;
 using ISD.Util;
 using ISD.Util;
 
-namespace HealthyClub.Administration.Web.UserControls
+namespace ISD.Administration.Web.UserControls
 {
     public partial class WebMailConfigUC : System.Web.UI.UserControl
     {

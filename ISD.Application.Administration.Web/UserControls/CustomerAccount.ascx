@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CustomerAccount.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.CustomerAccount" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CustomerAccount.ascx.cs" Inherits="ISD.Administration.Web.UserControls.CustomerAccount" %>
 <style type="text/css">
     .style4 {
         width: 175px;

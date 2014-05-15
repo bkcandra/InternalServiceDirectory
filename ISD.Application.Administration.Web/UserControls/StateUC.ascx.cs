@@ -8,7 +8,7 @@ using ISD.EDS;
 using ISD.DA;
 using ISD.Util;
 
-namespace HealthyClub.Administration.Web.UserControls
+namespace ISD.Administration.Web.UserControls
 {
     public partial class StateUC : System.Web.UI.UserControl
     {

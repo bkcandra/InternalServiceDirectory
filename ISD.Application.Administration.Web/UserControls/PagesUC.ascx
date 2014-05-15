@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PagesUC.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.PagesUC" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PagesUC.ascx.cs" Inherits="ISD.Administration.Web.UserControls.PagesUC" %>
 
 <asp:GridView ID="gridView1" runat="server" AutoGenerateColumns="False" OnRowCommand="gridView1_RowCommand"
     Width="100%" OnRowDataBound="gridView1_RowDataBound" CellPadding="4" ForeColor="#333333" GridLines="None">

@@ -1,4 +1,7 @@
-﻿using ISD.BF;
+﻿using ISD.Administration.Web.Report;
+using ISD.Administration.Web;
+using ISD.Administration.Web.Models;
+using ISD.BF;
 using ISD.DA;
 using ISD.EDS;
 using System;
@@ -7,8 +10,12 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using ISD.Util;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 
-namespace HealthyClub.Administration.Web.UserControls
+namespace ISD.Administration.Web.UserControls
 {
     public partial class AccountManagerUC : System.Web.UI.UserControl
     {
@@ -30,6 +37,22 @@ namespace HealthyClub.Administration.Web.UserControls
             var userRefHash = new HashSet<String>(dac.RetrieveUserReferences().Select(x => x.UserId));
             var providers = dac.RetrieveAllproviders();
             var users = dac.RetrieveUserProfiles();
+
+            var identityUsers = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            //RoleManager<IdentityRole> rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+            //var identityProviders = identityUsers.Where(x => providers.Select(y => y.UserID).Contains(x.Id));
+            //var identityCustomer = identityUsers.Where(x => users.Select(y => y.UserID).Contains(x.Id));
+
+            foreach (var user in providers)
+            {
+                identityUsers.AddToRole(user.UserID, SystemConstants.ProviderRole);
+            }
+            foreach (var user in users)
+            {
+                identityUsers.AddToRole(user.UserID, SystemConstants.CustomerRole);
+            }
+
+           
 
             int providerNotValidCount = 0;
             int userNotValidCount = 0;

@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SponsorManage.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.SponsorManage" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SponsorManage.ascx.cs" Inherits="ISD.Administration.Web.UserControls.SponsorManage" %>
 
 <style>
     td {

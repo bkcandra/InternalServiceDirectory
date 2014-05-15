@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="HealthyClub.Administration.Web.Activities.Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="ISD.Administration.Web.Activities.Default" %>
 
 <%@ Register Src="~/UserControls/ActivitiesManagerUC.ascx" TagPrefix="uc1" TagName="ActivitiesManagerUC" %>
 <%@ Register Src="~/UserControls/ActivitiesManagerListViewUC.ascx" TagPrefix="uc1" TagName="ActivitiesManagerListViewUC" %>
@@ -9,30 +9,25 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="FeaturedContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
-      <div class="grid_2">
-        <div class="box sidemenu" style="height: 800px">
-            <div class="block" id="section-menu">
-                <ul class="section menu">
-                    <li><a class="menuitem">Activity Setting</a>
-                        <ul class="submenu">
-                            <li><a href="../Categories/">Categories</a> </li>
-                            <li><a href="../Suburb/">Suburb </a></li>
-                            <li><a href="../State/">State </a></li>
-                            <li><a href="../Keyword/">Keyword </a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="grid_10">
-        <div class="box sidebox">
-            <h2>Activities</h2>
-            <div class="block">
-                <uc1:ActivitiesManagerListViewUC runat="server" id="ActivitiesManagerListViewUC" />
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>Activities
+                       
+                    <small>List of activity in HAC Site</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
+            <li><a href="#">Content</a></li>
+            <li class="active">Activities</li>
+        </ol>
+    </section>
 
-            </div>
-        </div>
-    </div>
-    
+    <!-- Main content -->
+    <section class="content">
+        <uc1:ActivitiesManagerListViewUC runat="server" ID="ActivitiesManagerListViewUC" />
+    </section>
+
+
+
+
 </asp:Content>

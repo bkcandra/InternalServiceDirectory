@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="RewardsAddition.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.RewardsAddition" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="RewardsAddition.ascx.cs" Inherits="ISD.Administration.Web.UserControls.RewardsAddition" %>
 <link href="../Content/themes/base/jquery-ui.css" rel="stylesheet" />
 <script language="javascript">
     function isNumberKey(evt) {

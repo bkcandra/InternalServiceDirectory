@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HealthyClub.Administration.Web.UserControls {
+namespace ISD.Administration.Web.UserControls {
     
     
     public partial class MenuNavigationUC {
@@ -28,7 +28,7 @@ namespace HealthyClub.Administration.Web.UserControls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HealthyClub.Administration.Web.UserControls.MenuItemTreeView TreeViewCustomer;
+        protected global::ISD.Administration.Web.UserControls.MenuItemTreeView TreeViewCustomer;
         
         /// <summary>
         /// divAddEditpopUp control.
@@ -217,7 +217,7 @@ namespace HealthyClub.Administration.Web.UserControls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HealthyClub.Administration.Web.UserControls.MenuItemTreeView TreeViewProvider;
+        protected global::ISD.Administration.Web.UserControls.MenuItemTreeView TreeViewProvider;
         
         /// <summary>
         /// div1 control.

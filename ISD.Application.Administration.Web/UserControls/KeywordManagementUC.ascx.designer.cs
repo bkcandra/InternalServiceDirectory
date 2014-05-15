@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HealthyClub.Administration.Web.UserControls {
+namespace ISD.Administration.Web.UserControls {
     
     
     public partial class KeywordManagementUC {

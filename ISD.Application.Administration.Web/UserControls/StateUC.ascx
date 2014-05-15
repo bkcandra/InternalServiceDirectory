@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="StateUC.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.StateUC" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="StateUC.ascx.cs" Inherits="ISD.Administration.Web.UserControls.StateUC" %>
 <div id="suburbGridview">
     <div id="divLnkMenu">
         <asp:LinkButton ID="lnkNew" runat="server" onclick="lnkNew_Click1" >New</asp:LinkButton>

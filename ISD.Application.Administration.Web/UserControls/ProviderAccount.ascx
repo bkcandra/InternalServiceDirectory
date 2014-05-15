@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ProviderAccount.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.ProviderAccount" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ProviderAccount.ascx.cs" Inherits="ISD.Administration.Web.UserControls.ProviderAccount" %>
 
 <style type="text/css">
     .style3 {

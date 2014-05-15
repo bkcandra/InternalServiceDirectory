@@ -1,44 +1,27 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="HealthyClub.Administration.Web.Suburb.Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="ISD.Administration.Web.Suburb.Default" %>
 
 <%@ Register Src="../UserControls/SuburbUC.ascx" TagName="SuburbUC" TagPrefix="uc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="grid_2">
-        <div class="box sidemenu" style="height: 800px">
-            <div class="block" id="section-menu">
-                <ul class="section menu">
-                    <li><a class="menuitem">Management</a>
-                        <ul class="submenu">
-                            <li>
-                                <asp:HyperLink ID="HyperLink1" NavigateUrl="~/Categories" runat="server">Categories</asp:HyperLink>
-                            </li>
-                            <li>
-                                <asp:HyperLink ID="HyperLink3" NavigateUrl="~/Keyword" runat="server">Keyword</asp:HyperLink>
-                            </li>
-                            <li>
-                                <asp:HyperLink ID="HyperLink4" NavigateUrl="~/Suburb" runat="server">Suburb</asp:HyperLink>
-                            </li>
-                            <li>
-                                <asp:HyperLink ID="HyperLink2" NavigateUrl="~/State" runat="server">State</asp:HyperLink>
-                            </li>
+     <section class="content-header">
+        <h1>Suburb
+                       
+                    <small>HAC Suburb</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
+            <li><a href="#">Content Setting</a></li>
+            <li class="active">Suburb</li>
+        </ol>
+    </section>
 
+    <!-- Main content -->
+    <section class="content">
+       <uc1:SuburbUC ID="SuburbUC1" runat="server" />
+    </section>
 
-                        </ul>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="grid_10">
-        <div class="box sidebox">
-            <h2>Suburb</h2>
-            <div class="block">
-                <uc1:SuburbUC ID="SuburbUC1" runat="server" />
-            </div>
-        </div>
-    </div>
+       
 
 
 

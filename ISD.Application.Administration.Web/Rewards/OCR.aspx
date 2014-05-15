@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Add Attendance" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="OCR.aspx.cs" Inherits="HealthyClub.Administration.Web.Rewards.OCR" %>
+﻿<%@ Page Title="Add Attendance" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="OCR.aspx.cs" Inherits="ISD.Administration.Web.Rewards.OCR" %>
 
 <%@ Register Src="../UserControls/AttendanceCSVReader.ascx" TagName="AttendanceCSVReader" TagPrefix="uc1" %>
 

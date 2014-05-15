@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="WebConfigUC.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.WebConfigUC" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="WebConfigUC.ascx.cs" Inherits="ISD.Administration.Web.UserControls.WebConfigUC" %>
 <link href="../Content/themes/redmond/jquery-ui.css" rel="stylesheet" />
 <script>
     $(function () {

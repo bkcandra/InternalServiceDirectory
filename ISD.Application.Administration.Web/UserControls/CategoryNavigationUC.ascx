@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CategoryNavigationUC.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.CategoryNavigationUC" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CategoryNavigationUC.ascx.cs" Inherits="ISD.Administration.Web.UserControls.CategoryNavigationUC" %>
 
 <div style="background-color: #FFFBD6">
     <asp:HiddenField ID="hdnCategoryID" runat="server" Value='<%#Eval("ID") %>' />

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using ISD.Data.EDM;
@@ -22,8 +23,8 @@ namespace ISD.Administration.Web.Account
             if (result.Succeeded)
             {
                 IdentityHelper.SignIn(manager, user, isPersistent: false);
-                
-                RoleManager<IdentityRole> rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ISDEntities()));
+
+                RoleManager<IdentityRole> rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
                 if (!rm.RoleExists(SystemConstants.AdministratorRole))
                     rm.Create(new IdentityRole(SystemConstants.AdministratorRole));
                 manager.AddToRole(user.Id, SystemConstants.AdministratorRole);

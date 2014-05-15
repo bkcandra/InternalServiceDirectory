@@ -7,46 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HealthyClub.Administration.Web.Settings {
+namespace ISD.Administration.Web.Settings {
     
     
     public partial class Navigation {
-        
-        /// <summary>
-        /// hlnkSiteSetting control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hlnkSiteSetting;
-        
-        /// <summary>
-        /// hlnkNavigation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hlnkNavigation;
-        
-        /// <summary>
-        /// hlnkMailTemplate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hlnkMailTemplate;
-        
-        /// <summary>
-        /// hlnkSmtpSetting control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hlnkSmtpSetting;
         
         /// <summary>
         /// MenuNavigationUC1 control.
@@ -55,6 +19,6 @@ namespace HealthyClub.Administration.Web.Settings {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HealthyClub.Administration.Web.UserControls.MenuNavigationUC MenuNavigationUC1;
+        protected global::ISD.Administration.Web.UserControls.MenuNavigationUC MenuNavigationUC1;
     }
 }

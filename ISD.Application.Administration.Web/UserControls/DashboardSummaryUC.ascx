@@ -1,75 +1,229 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DashboardSummaryUC.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.DashboardSummaryUC" %>
-<div class="box sidebox">
-    <h2>Latest Accounts</h2>
-    <div class="block">
-        <div class="stat-col" style="width: 150px; text-align: center">
-            <span>Members</span>
-            <p class="blue">
-                <asp:Label ID="lblMember" runat="server"></asp:Label>
-            </p>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DashboardSummaryUC.ascx.cs" Inherits="ISD.Administration.Web.UserControls.DashboardSummaryUC" %>
+                    
+    <div class="row">
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h3>
+                        <asp:Label ID="lblReward" runat="server" Text="0"></asp:Label>
+                    </h3>
+                    <p>
+                        Rewards listed
+                                   
+                    </p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-bag"></i>
+                </div>
+                <asp:HyperLink ID="hlnkReward" runat="server" class="small-box-footer" NavigateUrl="~/Rewards/">More info <i class="fa fa-arrow-circle-right"></i></asp:HyperLink>
+
+            </div>
         </div>
-        <div class="stat-col" style="width: 150px; text-align: center">
-            <span>Providers</span>
-            <p class="blue">
-                <asp:Label ID="lblProviders" runat="server"></asp:Label>
-            </p>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3>
+                        <asp:Label ID="lblActivity" runat="server" Text="0"></asp:Label>
+                    </h3>
+                    <p>
+                        Activity Listed
+                                   
+                    </p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+                <asp:HyperLink ID="hlnkActivities" runat="server" class="small-box-footer" NavigateUrl="~/Activities/">More info <i class="fa fa-arrow-circle-right"></i></asp:HyperLink>
+
+
+            </div>
         </div>
-        <div class="stat-col last" style="width: 150px; text-align: center">
-            <span>Visitor this month</span>
-            <p class="blue">
-                <img src="img/icon-direction.png" alt="" />&nbsp;
-        <asp:Label ID="lblstat" runat="server">-</asp:Label>
-            </p>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3>
+                        <asp:Label ID="lblUser" runat="server" Text="0"></asp:Label>
+                    </h3>
+                    <p>
+                        User Registered
+                                   
+                    </p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+                <asp:HyperLink ID="hlnkUser" runat="server" class="small-box-footer" NavigateUrl="~/Account/">More info <i class="fa fa-arrow-circle-right"></i></asp:HyperLink>
+            </div>
         </div>
-        <br />
-        <asp:Label ID="lblerror" runat="server" Text="" ForeColor="Red"></asp:Label>
-        <div class="clear">
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h3>
+                        <asp:Label ID="lblVisitor" runat="server" Text="0"></asp:Label>
+                    </h3>
+                    <p>
+
+                        <asp:Label ID="lblError" runat="server" Text="Unique Visitors"></asp:Label>
+                    </p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
         </div>
+        <!-- ./col -->
     </div>
-</div>
-<br />
-<div class="box sidebox">
-    <h2>Activities Stats</h2>
-    <div class="block">
-        <div class="stat-col" style="width: 150px; text-align: center">
-            <span>Total  Activities</span>
-            <p class="blue">
-                <asp:Label ID="lblTotalActivity" runat="server"></asp:Label>
-            </p>
+    <h4 class="page-header">Activity Stats
+                       
+        <small>General information on activity stats</small>
+    </h4>
+
+    <div class="row">
+        <div class="col-lg-2 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3>
+                        <asp:Label ID="lblTotalActivity" runat="server" Text="0"></asp:Label>
+                    </h3>
+                    <p>
+                        Total Activity
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="stat-col" style="width: 150px; text-align: center">
-            <span>Approved Activities</span>
-            <p class="blue">
-                <asp:Label ID="lblApprovedActivity" runat="server"></asp:Label>
-            </p>
+        <div class="col-lg-2 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3>
+                        <asp:Label ID="lblCat" runat="server" Text="0"></asp:Label>
+                    </h3>
+                    <p>
+                        Categories                                  
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="stat-col" style="width: 150px; text-align: center">
-            <span>Expired Activities</span>
-            <p class="blue">
-                <asp:Label ID="lblExpiredAct" runat="server"></asp:Label>
-            </p>
+        <div class="col-lg-2 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3>
+                        <asp:Label ID="lblApprovedActivity" runat="server" Text="0"></asp:Label>
+                    </h3>
+                    <p>
+                        Approved activity                                   
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="stat-col" style="width: 150px; text-align: center">
-            <span>Delete queue</span>
-            <p class="blue">
-                <asp:Label ID="lblDeletedAct" runat="server"></asp:Label>
-            </p>
+        <div class="col-lg-2 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3>
+                        <asp:Label ID="lblWaitingActivity" runat="server" Text="0"></asp:Label>
+                    </h3>
+                    <p>
+                        Waiting for approval
+                    </p>
+                </div>
+            </div>
         </div>
 
-        <div class="stat-col" style="width: 150px; text-align: center">
-            <span>Waiting for approval</span>
-            <p class="blue">
-                <asp:Label ID="lblWaitingActivity" runat="server"></asp:Label>
-            </p>
+        <div class="col-lg-2 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3>
+                        <asp:Label ID="lblDeletedAct" runat="server" Text="0"></asp:Label>
+                    </h3>
+                    <p>
+                        Deleted activity
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="stat-col last" style="width: 150px; text-align: center">
-            <span>Categories</span>
-            <p class="blue">
-                <asp:Label ID="lblCat" runat="server"></asp:Label>
-            </p>
-        </div>
-
-        <div class="clear">
+        <div class="col-lg-2 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3>
+                        <asp:Label ID="lblExpiredAct" runat="server" Text="0"></asp:Label>
+                    </h3>
+                    <p>
+                        Expired activity                                   
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+     <h4 class="page-header">User Stats
+                       
+        <small>General information on User stats</small>
+    </h4>
+    <div class="row">
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3>
+                        <asp:Label ID="lblAdmin" runat="server" Text="0"></asp:Label>
+                    </h3>
+                    <p>
+                        Administrator
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3>
+                        <asp:Label ID="lblProviders" runat="server" Text="0"></asp:Label>
+                    </h3>
+                    <p>
+                        Provider                                  
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3>
+                        <asp:Label ID="lblSponsor" runat="server" Text="0"></asp:Label>
+                    </h3>
+                    <p>
+                        Sponsor                                
+                    </p>
+                </div>
+            </div>
+        </div>
+       <div class="col-lg-3 col-xs-6">
+
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3>
+                        <asp:Label ID="lblMember" runat="server" Text="0"></asp:Label>
+                    </h3>
+                    <p>
+                        Club Member                                
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>

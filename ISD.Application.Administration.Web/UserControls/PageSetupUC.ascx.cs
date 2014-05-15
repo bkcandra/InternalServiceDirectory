@@ -10,7 +10,7 @@ using ISD.EDS;
 using ISD.BF;
 using System.Text;
 
-namespace HealthyClub.Administration.Web.UserControls
+namespace ISD.Administration.Web.UserControls
 {
     public partial class PageSetupUC : System.Web.UI.UserControl
     {

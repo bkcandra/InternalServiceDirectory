@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="WebMailConfigUC.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.WebMailConfigUC" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="WebMailConfigUC.ascx.cs" Inherits="ISD.Administration.Web.UserControls.WebMailConfigUC" %>
 <style type="text/css">
     .auto-style1 {
         width: 131px;

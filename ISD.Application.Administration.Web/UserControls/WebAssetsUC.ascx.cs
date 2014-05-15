@@ -10,7 +10,7 @@ using ISD.EDS;
 using ISD.DA;
 using System.IO;
 
-namespace HealthyClub.Administration.Web.UserControls
+namespace ISD.Administration.Web.UserControls
 {
     public partial class WebAssetsUC : System.Web.UI.UserControl
     {

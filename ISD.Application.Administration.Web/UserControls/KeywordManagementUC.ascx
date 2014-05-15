@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="KeywordManagementUC.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.KeywordManagementUC" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="KeywordManagementUC.ascx.cs" Inherits="ISD.Administration.Web.UserControls.KeywordManagementUC" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <script type="text/javascript">
     function Ok() {

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HealthyClub.Administration.Web.UserControls {
+namespace ISD.Administration.Web.UserControls {
     
     
     public partial class ActivityImageUC {
@@ -82,7 +82,7 @@ namespace HealthyClub.Administration.Web.UserControls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HealthyClub.Administration.Web.UserControls.ActivityImageListView ActivityImageListView1;
+        protected global::ISD.Administration.Web.UserControls.ActivityImageListView ActivityImageListView1;
         
         /// <summary>
         /// hdnImgUploaded control.

@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ActivityRegistrationDescriptionUC.ascx.cs"
-    Inherits="HealthyClub.Administration.Web.UserControls.ActivityRegistrationDescription" %>
+    Inherits="ISD.Administration.Web.UserControls.ActivityRegistrationDescription" %>
 <%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
 <%@ Register Src="ActivityRegistrationCategory.ascx" TagName="ActivityRegistrationCategory" TagPrefix="uc1" %>
 <script src="../Scripts/controlHelper.js" type="text/javascript"></script>

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using ISD.Util;
 using ISD.DA;
 
-namespace HealthyClub.Administration.Web.UserControls
+namespace ISD.Administration.Web.UserControls
 {
     public partial class PagesUC : System.Web.UI.UserControl
     {

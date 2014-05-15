@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HealthyClub.Administration.Web.Analytics {
+namespace ISD.Administration.Web.Analytics {
     
     
     public partial class Default {
@@ -37,6 +37,6 @@ namespace HealthyClub.Administration.Web.Analytics {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HealthyClub.Administration.Web.UserControls.AnalyticsUC AnalyticsUC1;
+        protected global::ISD.Administration.Web.UserControls.AnalyticsUC AnalyticsUC1;
     }
 }

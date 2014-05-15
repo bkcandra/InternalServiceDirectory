@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ScheduleDetailViewerUC.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.ScheduleDetailViewerUC" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ScheduleDetailViewerUC.ascx.cs" Inherits="ISD.Administration.Web.UserControls.ScheduleDetailViewerUC" %>
 <asp:ListView ID="ListView1" runat="server" OnItemDataBound="ListView1_ItemDataBound">
     <LayoutTemplate>
         <div id="ItemPlaceHolder" runat="server">

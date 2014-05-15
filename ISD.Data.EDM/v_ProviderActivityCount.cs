@@ -14,7 +14,7 @@ namespace ISD.Data.EDM
     
     public partial class v_ProviderActivityCount
     {
-        public System.Guid UserID { get; set; }
+        public string UserID { get; set; }
         public Nullable<int> ActivityCount { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="webLog.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.webLog" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="webLog.ascx.cs" Inherits="ISD.Administration.Web.UserControls.webLog" %>
 
 <%--<script type="text/javascript">
     function initdatatable() {

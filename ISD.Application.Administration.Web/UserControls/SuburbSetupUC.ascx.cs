@@ -8,7 +8,7 @@ using ISD.Util;
 using ISD.DA;
 using ISD.EDS;
 
-namespace HealthyClub.Administration.Web.UserControls
+namespace ISD.Administration.Web.UserControls
 {
     public partial class SuburbSetup : System.Web.UI.UserControl
     {

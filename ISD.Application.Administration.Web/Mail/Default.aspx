@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="Default.aspx.cs" Inherits="HealthyClub.Administration.Web.Mail.Default" %>
+    CodeBehind="Default.aspx.cs" Inherits="ISD.Administration.Web.Mail.Default" %>
 
 <%@ Register Src="~/UserControls/MailTemplateListUC.ascx" TagName="MailTemplateListUC"
     TagPrefix="uc1" %>

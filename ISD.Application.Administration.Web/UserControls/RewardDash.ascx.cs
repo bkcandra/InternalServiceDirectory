@@ -15,7 +15,7 @@ using System.Xml.Linq;
 using Google.GData.Analytics;
 using System.Configuration;
 using System.Data;
-namespace HealthyClub.Administration.Web.UserControls
+namespace ISD.Administration.Web.UserControls
 {
     public partial class RewardDash : System.Web.UI.UserControl
     {

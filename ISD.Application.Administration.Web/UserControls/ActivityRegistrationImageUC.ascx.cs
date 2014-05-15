@@ -14,7 +14,7 @@ using System.Data;
 using ISD.BF;
 
 
-namespace HealthyClub.Administration.Web.UserControls
+namespace ISD.Administration.Web.UserControls
 {
     public partial class ActivityRegistrationImageUC : System.Web.UI.UserControl
     {

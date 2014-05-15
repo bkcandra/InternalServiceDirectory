@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HealthyClub.Administration.Web.Pages {
+namespace ISD.Administration.Web.Pages {
     
     
     public partial class Default {
@@ -28,6 +28,6 @@ namespace HealthyClub.Administration.Web.Pages {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HealthyClub.Administration.Web.UserControls.PagesUC PagesUC1;
+        protected global::ISD.Administration.Web.UserControls.PagesUC PagesUC1;
     }
 }

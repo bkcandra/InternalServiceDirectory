@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="RewardDash.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.RewardDash" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="RewardDash.ascx.cs" Inherits="ISD.Administration.Web.UserControls.RewardDash" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
  <div class="grid_10">
         <div class="box sidebox">

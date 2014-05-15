@@ -1,23 +1,7 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="StateSetupUC.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.StateSetupUC" %>
-<div class="grid_2">
-    <div class="box sidemenu" style="height: 800px">
-        <div class="block" id="section-menu">
-            <ul class="section menu">
-                <li><a class="menuitem">State Setup</a>
-                    <ul class="submenu">
-                        <li><a>Back</a> </li>
-                    </ul>
-                </li>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="StateSetupUC.ascx.cs" Inherits="ISD.Administration.Web.UserControls.StateSetupUC" %>
 
-            </ul>
-        </div>
-    </div>
-</div>
-<div class="grid_10">
-    <div class="box sidebox">
-        <h2>
             <asp:Label ID="lblAddEditTitle" runat="server"></asp:Label></h2>
-        <div class="block">
+       
 
             <div id="AddEditContent">
           
@@ -59,7 +43,4 @@
                 <asp:LinkButton ID="lnkBackToList" runat="server" Visible="false" OnClick="lnkBackToList_Click">Back to category list</asp:LinkButton>
             </div>
 
-        </div>
-    </div>
-</div>
-
+  

@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CategoriesUC.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.CategoriesUC" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CategoriesUC.ascx.cs" Inherits="ISD.Administration.Web.UserControls.CategoriesUC" %>
 <%@ Register Src="~/UserControls/CategoryNavigationUC.ascx" TagPrefix="uc1" TagName="CategoryNavigationUC" %>
 
 

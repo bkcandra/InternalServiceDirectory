@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace HealthyClub.Administration.Web.User
+namespace ISD.Administration.Web.User
 {
     public partial class Provider : System.Web.UI.Page
     {

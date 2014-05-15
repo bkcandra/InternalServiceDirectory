@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HealthyClub.Administration.Web.Category {
+namespace ISD.Administration.Web.Category {
     
     
     public partial class Default {
@@ -19,6 +19,6 @@ namespace HealthyClub.Administration.Web.Category {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HealthyClub.Administration.Web.UserControls.CategoriesUC CategoriesUC1;
+        protected global::ISD.Administration.Web.UserControls.CategoriesUC CategoriesUC1;
     }
 }

@@ -16,7 +16,7 @@ namespace ISD.Data.EDM
     {
         public string Id { get; set; }
         public string UserName { get; set; }
-        public bool EmailConfirmed { get; set; }
+        public Nullable<bool> EmailConfirmed { get; set; }
         public string Email { get; set; }
         public string ReferenceID { get; set; }
         public string LastName { get; set; }

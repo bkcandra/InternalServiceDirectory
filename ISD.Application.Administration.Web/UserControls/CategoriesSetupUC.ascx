@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CategoriesSetupUC.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.CategoriesSetupUC" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CategoriesSetupUC.ascx.cs" Inherits="ISD.Administration.Web.UserControls.CategoriesSetupUC" %>
 
 <h2>
     <asp:Label ID="lblAddEditTitle" runat="server"></asp:Label></h2>

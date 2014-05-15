@@ -7,46 +7,82 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HealthyClub.Administration.Web.UserControls {
+namespace ISD.Administration.Web.UserControls {
     
     
     public partial class DashboardSummaryUC {
         
         /// <summary>
-        /// lblMember control.
+        /// lblReward control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMember;
+        protected global::System.Web.UI.WebControls.Label lblReward;
         
         /// <summary>
-        /// lblProviders control.
+        /// hlnkReward control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblProviders;
+        protected global::System.Web.UI.WebControls.HyperLink hlnkReward;
         
         /// <summary>
-        /// lblstat control.
+        /// lblActivity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblstat;
+        protected global::System.Web.UI.WebControls.Label lblActivity;
         
         /// <summary>
-        /// lblerror control.
+        /// hlnkActivities control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblerror;
+        protected global::System.Web.UI.WebControls.HyperLink hlnkActivities;
+        
+        /// <summary>
+        /// lblUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblUser;
+        
+        /// <summary>
+        /// hlnkUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hlnkUser;
+        
+        /// <summary>
+        /// lblVisitor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblVisitor;
+        
+        /// <summary>
+        /// lblError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblError;
         
         /// <summary>
         /// lblTotalActivity control.
@@ -58,6 +94,15 @@ namespace HealthyClub.Administration.Web.UserControls {
         protected global::System.Web.UI.WebControls.Label lblTotalActivity;
         
         /// <summary>
+        /// lblCat control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCat;
+        
+        /// <summary>
         /// lblApprovedActivity control.
         /// </summary>
         /// <remarks>
@@ -65,24 +110,6 @@ namespace HealthyClub.Administration.Web.UserControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblApprovedActivity;
-        
-        /// <summary>
-        /// lblExpiredAct control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblExpiredAct;
-        
-        /// <summary>
-        /// lblDeletedAct control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDeletedAct;
         
         /// <summary>
         /// lblWaitingActivity control.
@@ -94,12 +121,57 @@ namespace HealthyClub.Administration.Web.UserControls {
         protected global::System.Web.UI.WebControls.Label lblWaitingActivity;
         
         /// <summary>
-        /// lblCat control.
+        /// lblDeletedAct control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCat;
+        protected global::System.Web.UI.WebControls.Label lblDeletedAct;
+        
+        /// <summary>
+        /// lblExpiredAct control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblExpiredAct;
+        
+        /// <summary>
+        /// lblAdmin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAdmin;
+        
+        /// <summary>
+        /// lblProviders control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblProviders;
+        
+        /// <summary>
+        /// lblSponsor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSponsor;
+        
+        /// <summary>
+        /// lblMember control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMember;
     }
 }

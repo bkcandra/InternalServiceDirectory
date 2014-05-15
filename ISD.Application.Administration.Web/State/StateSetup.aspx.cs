@@ -9,7 +9,7 @@ using ISD.DA;
 using ISD.EDS;
 
 
-namespace HealthyClub.Administration.Web.State
+namespace ISD.Administration.Web.State
 {
     public partial class StateSetup : System.Web.UI.Page
     {
@@ -17,6 +17,7 @@ namespace HealthyClub.Administration.Web.State
         {
             if (!IsPostBack)
             {
+                CheckSignIn();
                 if (Request.QueryString[SystemConstants.StateID] != null)
                 {
                     int stateID = Convert.ToInt32(Request.QueryString[SystemConstants.StateID]);
@@ -35,14 +36,14 @@ namespace HealthyClub.Administration.Web.State
                         StateSetupUC1.Mode = SystemConstants.FormMode.New;
                     }
                 }
-                CheckSignIn();
+                
             }
 
         }
 
         private void CheckSignIn()
         {
-            if (Context.User.Identity.IsAuthenticated)
+            if (!Context.User.Identity.IsAuthenticated)
             {
                 Response.Redirect("~/Account/login.aspx");
             }

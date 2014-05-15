@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace HealthyClub.Administration.Web.Rewards
+namespace ISD.Administration.Web.Rewards
 {
     public partial class Add : System.Web.UI.Page
     {

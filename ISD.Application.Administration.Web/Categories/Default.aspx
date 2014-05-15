@@ -1,35 +1,26 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="HealthyClub.Administration.Web.Category.Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="ISD.Administration.Web.Category.Default" %>
 
 <%@ Register Src="../UserControls/CategoriesUC.ascx" TagName="CategoriesUC" TagPrefix="uc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="grid_2">
-        <div class="box sidemenu" style="height: 800px">
-            <div class="block" id="section-menu">
-                <ul class="section menu">
-                    <li><a class="menuitem">Management</a>
-                        <ul class="submenu">
-                            <li><a href="../Suburb/">Suburb </a></li>
-                            <li><a href="../State/">State </a></li>
-                            <li><a href="../Keyword/">Keyword </a></li>
-                            <li><a href="../Settings/Navigation.aspx">Navigation </a></li>
-                            <li><a href="../Mail/EmailTemplate.aspx">Mail Template </a></li>
-                            <li><a href="../Mail/">Mailer Setting </a></li>
-                        </ul>
-                    </li>
+    <section class="content-header">
+        <h1>Categories
+                       
+                    <small>Activity categories</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
+            <li><a href="#">Content Setting</a></li>
+            <li class="active">Categories</li>
+        </ol>
+    </section>
 
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="grid_10">
-        <div class="box sidebox">
-            <h2>Categories</h2>
-            <div class="block">
-                <uc1:CategoriesUC ID="CategoriesUC1" runat="server" />
-            </div>
-        </div>
-    </div>
+    <!-- Main content -->
+    <section class="content">
+        <uc1:CategoriesUC ID="CategoriesUC1" runat="server" />
+    </section>
+
+
 
 </asp:Content>

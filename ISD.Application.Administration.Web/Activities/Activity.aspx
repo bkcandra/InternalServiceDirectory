@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Activity.aspx.cs" Inherits="HealthyClub.Administration.Web.Activities.Activity" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Activity.aspx.cs" Inherits="ISD.Administration.Web.Activities.Activity" %>
 
 <%@ Register Src="~/UserControls/ActivityRegistrationDetailUC.ascx" TagPrefix="uc1" TagName="ActivityRegistrationDetailUC" %>
 <%@ Register Src="~/UserControls/ActivityRegistrationDescriptionUC.ascx" TagPrefix="uc1" TagName="ActivityRegistrationDescriptionUC" %>
@@ -9,8 +9,6 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <link href="../Content/themes/redmond/jquery-ui.min.css" rel="stylesheet" />
-
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="FeaturedContent" runat="server">
 </asp:Content>
@@ -57,30 +55,14 @@
             $("#EditActtabs").tabs();
         });
     </script>
-    <div class="grid_2">
-        <div class="box sidemenu" style="height: 800px">
-            <div class="block" id="section-menu">
-                <ul class="section menu">
-                    <li><a class="menuitem">Action</a>
-                        <ul class="submenu">
-                            <li>
-                                <asp:LinkButton ID="btnSubmit" runat="server" Text="Save" OnClick="btnSubmit_Click" CssClass="buttonCreateAct" />
-                            </li>
-                            <li>
-                                <asp:LinkButton ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" CssClass="buttonCreateAct" />
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="grid_10">
-        <div class="box sidebox">
-            <h2>
-                <asp:Label ID="lblPageTitle" runat="server" Text="Edit Activity Information" CssClass="pageTitle"> </asp:Label></h2>
-            <div class="block">
-                <div>
+
+    <asp:LinkButton ID="btnSubmit" runat="server" Text="Save" OnClick="btnSubmit_Click" CssClass="buttonCreateAct" />
+
+    <asp:LinkButton ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" CssClass="buttonCreateAct" />
+
+
+    <asp:Label ID="lblPageTitle" runat="server" Text="Edit Activity Information" CssClass="pageTitle"> </asp:Label></h2>
+            
                     <div id="divActStatus">
                         <fieldset style="width: 250px;">
                             <legend>Status</legend>
@@ -97,48 +79,45 @@
                         </fieldset>
 
                     </div>
-                    <div style="clear: both"></div>
-                    <br />
-                    <div id="divError" runat="server" class="errorBox" visible="false" style="width: 800px">
-                        <span id="Title">Oops! You haven't finished entering in your activity details. </span>
-                        <asp:Label ID="lblError" runat="server" Text="" Visible="false" ForeColor="Red"></asp:Label>
-                    </div>
-                    <div id="EditActtabs">
-                        <ul>
-                            <li><a href="#tabs-1">Activity Details</a></li>
-                            <li><a href="#tabs-2">Category & Description</a></li>
-                            <li><a href="#tabs-3">Timetable</a></li>
-                            <li><a href="#tabs-4">Grouping</a></li>
-                            <li><a href="#tabs-5">Images</a></li>
-                        </ul>
-                        <div id="tabs-1" class="tabs3">
-                            <p>
-                                <uc1:ActivityRegistrationDetailUC runat="server" ID="ActivityRegistrationDetailUC" />
-                        </div>
-                        <div id="tabs-2" class="tabs3">
-                            <p>
-                                <uc1:ActivityRegistrationDescriptionUC runat="server" ID="ActivityRegistrationDescriptionUC" />
-                        </div>
-                        <div id="tabs-3" class="tabs3">
-                            <p>
-                                <uc1:ActivityRegistrationTimetableUC runat="server" ID="ActivityRegistrationTimetableUC" />
-                        </div>
-                        <div id="tabs-4" class="tabs3">
-                            <p>
-                                <uc1:ActivityRegistrationGroup runat="server" ID="ActivityRegistrationGroup" />
-                        </div>
-                        <div id="tabs-5" class="tabs3">
-                            <p>
-                                <uc1:ActivityImageUC runat="server" ID="ActivityImageUC" />
+    <div style="clear: both"></div>
+    <br />
+    <div id="divError" runat="server" class="errorBox" visible="false" style="width: 800px">
+        <span id="Title">Oops! You haven't finished entering in your activity details. </span>
+        <asp:Label ID="lblError" runat="server" Text="" Visible="false" ForeColor="Red"></asp:Label>
+    </div>
+    <div id="EditActtabs">
+        <ul>
+            <li><a href="#tabs-1">Activity Details</a></li>
+            <li><a href="#tabs-2">Category & Description</a></li>
+            <li><a href="#tabs-3">Timetable</a></li>
+            <li><a href="#tabs-4">Grouping</a></li>
+            <li><a href="#tabs-5">Images</a></li>
+        </ul>
+        <div id="tabs-1" class="tabs3">
+            <p>
+                <uc1:ActivityRegistrationDetailUC runat="server" ID="ActivityRegistrationDetailUC" />
+        </div>
+        <div id="tabs-2" class="tabs3">
+            <p>
+                <uc1:ActivityRegistrationDescriptionUC runat="server" ID="ActivityRegistrationDescriptionUC" />
+        </div>
+        <div id="tabs-3" class="tabs3">
+            <p>
+                <uc1:ActivityRegistrationTimetableUC runat="server" ID="ActivityRegistrationTimetableUC" />
+        </div>
+        <div id="tabs-4" class="tabs3">
+            <p>
+                <uc1:ActivityRegistrationGroup runat="server" ID="ActivityRegistrationGroup" />
+        </div>
+        <div id="tabs-5" class="tabs3">
+            <p>
+                <uc1:ActivityImageUC runat="server" ID="ActivityImageUC" />
 
-                        </div>
-                    </div>
-                    <asp:HiddenField ID="hdnProviderID" runat="server" />
-                    <asp:HiddenField ID="hdnReferrer" runat="server" />
-                    <asp:HiddenField ID="hdnActivityID" runat="server" />
-                </div>
-            </div>
         </div>
     </div>
+    <asp:HiddenField ID="hdnProviderID" runat="server" />
+    <asp:HiddenField ID="hdnReferrer" runat="server" />
+    <asp:HiddenField ID="hdnActivityID" runat="server" />
+
 
 </asp:Content>

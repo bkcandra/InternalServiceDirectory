@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="RewardModify.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.RewardModify" EnableTheming="true" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="RewardModify.ascx.cs" Inherits="ISD.Administration.Web.UserControls.RewardModify" EnableTheming="true" %>
 
 <style>
     td {

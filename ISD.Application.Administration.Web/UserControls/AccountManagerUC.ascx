@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AccountManagerUC.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.AccountManagerUC" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AccountManagerUC.ascx.cs" Inherits="ISD.Administration.Web.UserControls.AccountManagerUC" %>
 <%@ Register Src="~/UserControls/AdminList.ascx" TagPrefix="uc1" TagName="AdminList" %>
 <%@ Register Src="~/UserControls/ProviderList.ascx" TagPrefix="uc1" TagName="ProviderList" %>
 <%@ Register Src="~/UserControls/UserListUC.ascx" TagPrefix="uc1" TagName="UserListUC" %>

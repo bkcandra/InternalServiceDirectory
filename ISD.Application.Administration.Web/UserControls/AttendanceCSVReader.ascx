@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AttendanceCSVReader.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.AttendanceCSVReader" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AttendanceCSVReader.ascx.cs" Inherits="ISD.Administration.Web.UserControls.AttendanceCSVReader" %>
 <script src="../Scripts/DataTables-1.9.4/media/js/jquery.js"></script>
 <script src="../Scripts/DataTables-1.9.4/media/js/jquery.dataTables.js"></script>
 <style type="text/css" title="currentStyle">

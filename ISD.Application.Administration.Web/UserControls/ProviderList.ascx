@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ProviderList.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.ProviderList" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ProviderList.ascx.cs" Inherits="ISD.Administration.Web.UserControls.ProviderList" %>
 <script src="../Scripts/DataTables-1.9.4/media/js/jquery.dataTables.js"></script>
 <style type="text/css" title="currentStyle">
     @import "../Content/DataTables-1.9.4/media/css/demo_page.css";
@@ -158,10 +158,10 @@
                         <asp:CheckBox ID="chkSelected" runat="server" />
                     </td>
                     <td>
-                        <asp:Label ID="lblUserID" runat="server" Text='<%#Eval("UserID") %>'></asp:Label>
+                        <asp:Label ID="lblUserID" runat="server" Text='<%#Eval("Id") %>'></asp:Label>
                     </td>
                     <td>
-                       <asp:Label ID="lblID" runat="server" Text='<%#Eval("ID") %>'></asp:Label>
+                       <asp:Label ID="lblID" runat="server" Text='<%#Eval("Id") %>'></asp:Label>
                     </td>
                     <td>
                         <asp:Label ID="lblProviderName" runat="server" Text='<%#Eval("ProviderName") %>'></asp:Label>
@@ -171,7 +171,7 @@
                     </td>
                     <td>
                         <asp:HyperLink ID="hlnkUserName" runat="server" CommandName="Details" Text='<%#Eval("Username") %>'></asp:HyperLink>
-                        <asp:HiddenField ID="hdnUserID" runat="server" Value='<%#Eval("UserID") %>' />
+                        <asp:HiddenField ID="hdnUserID" runat="server" Value='<%#Eval("Id") %>' />
                     </td>
                     <td>
                         <asp:Label ID="lnkName" runat="server" Text='<%#string.Format("{0} {1}",Eval("FirstName"),Eval("LastName"))%>'></asp:Label>

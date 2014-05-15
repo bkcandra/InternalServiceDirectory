@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ScheduleViewerUC.ascx.cs"
-    Inherits="HealthyClub.Administration.Web.UserControls.ScheduleViewerUC" %>
+    Inherits="ISD.Administration.Web.UserControls.ScheduleViewerUC" %>
 <%@ Register Src="ScheduleDetailViewerUC.ascx" TagName="ScheduleDetailViewerUC" TagPrefix="uc1" %>
 <asp:HiddenField ID="hdntimetable" runat="server" />
 <asp:HiddenField ID="hdnActivityID" runat="server" />

@@ -9,7 +9,7 @@ using ISD.EDS;
 using ISD.DA;
 
 
-namespace HealthyClub.Administration.Web.Category
+namespace ISD.Administration.Web.Category
 {
     public partial class CategoriesSetup : System.Web.UI.Page
     {
@@ -48,7 +48,7 @@ namespace HealthyClub.Administration.Web.Category
 
         private void CheckSignIn()
         {
-            if (Context.User.Identity.IsAuthenticated)
+            if (!Context.User.Identity.IsAuthenticated)
             {
                 Response.Redirect("~/Account/login.aspx");
             }

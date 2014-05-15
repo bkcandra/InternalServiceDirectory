@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="RewardLog.ascx.cs" Inherits="HealthyClub.Administration.Web.UserControls.RewardLog" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="RewardLog.ascx.cs" Inherits="ISD.Administration.Web.UserControls.RewardLog" %>
 <div>
     <span style="font-weight: bold">Reward Log</span>
     <hr />

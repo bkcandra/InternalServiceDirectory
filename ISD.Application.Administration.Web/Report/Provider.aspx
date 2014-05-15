@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Provider.aspx.cs" Inherits="HealthyClub.Administration.Web.Report.Provider" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Provider.aspx.cs" Inherits="ISD.Administration.Web.Report.Provider" %>
 
 <!DOCTYPE html>
 

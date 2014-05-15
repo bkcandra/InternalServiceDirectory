@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Dashboard" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="HealthyClub.Administration.Web.Rewards.Dashboard" %>
+﻿<%@ Page Title="Dashboard" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="ISD.Administration.Web.Rewards.Dashboard" %>
 <%@ Register Src="~/UserControls/RewardDash.ascx" TagPrefix="uc1" TagName="RewardDash" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="FeaturedContent" runat="server">
         <!-- Bootstrap core CSS -->

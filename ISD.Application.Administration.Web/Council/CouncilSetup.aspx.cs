@@ -9,7 +9,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace HealthyClub.Administration.Web.Council
+namespace ISD.Administration.Web.Council
 {
     public partial class CouncilSetup : System.Web.UI.Page
     {
@@ -43,7 +43,7 @@ namespace HealthyClub.Administration.Web.Council
 
         private void CheckSignIn()
         {
-            if (Context.User.Identity.IsAuthenticated)
+            if (!Context.User.Identity.IsAuthenticated)
             {
                 Response.Redirect("~/Account/login.aspx");
             }

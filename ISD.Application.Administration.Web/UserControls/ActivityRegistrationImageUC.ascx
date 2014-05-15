@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ActivityRegistrationImageUC.ascx.cs"
-    Inherits="HealthyClub.Administration.Web.UserControls.ActivityRegistrationImageUC" %>
+    Inherits="ISD.Administration.Web.UserControls.ActivityRegistrationImageUC" %>
 <style>
     div.fileinputs {
         position: relative;

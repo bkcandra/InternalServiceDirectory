@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="HealthyClub.Administration.Web.Council.Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="ISD.Administration.Web.Council.Default" %>
 
 <%@ Register Src="~/UserControls/CouncilUC.ascx" TagPrefix="uc1" TagName="CouncilUC" %>
 
@@ -8,27 +8,22 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="FeaturedContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="grid_2">
-        <div class="box sidemenu" style="height: 800px">
-            <div class="block" id="section-menu">
-                <ul class="section menu">
-                    <li><a class="menuitem">Council</a>
-                        <ul class="submenu">
-                            <li><a href="../Council/CouncilSetup?CouncilID=0">New Council</a> </li>
-                        </ul>
-                    </li>
+    
+    
+      <section class="content-header">
+        <h1>Council
+                       
+                    <small>HAC Council</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
+            <li><a href="#">Content Setting</a></li>
+            <li class="active">Council</li>
+        </ol>
+    </section>
 
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="grid_10">
-        <div class="box sidebox">
-            <h2>Council</h2>
-            <div class="block">
-                <uc1:CouncilUC runat="server" id="CouncilUC" />
-            </div>
-        </div>
-    </div>
-
+    <!-- Main content -->
+    <section class="content">
+        <uc1:CouncilUC runat="server" id="CouncilUC" />
+    </section>
 </asp:Content>
