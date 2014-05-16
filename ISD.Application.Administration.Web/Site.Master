@@ -82,7 +82,8 @@
                                                     <!-- start message -->
                                                     <a href="#">
                                                         <div class="pull-left">
-                                                            <img src="Images/avatar3.png" class="img-circle" alt="User Image" />
+                                                            <asp:Image ID="Image1" class="img-circle" runat="server" alt="User Image" ImageUrl="~/Images/avatar5.png" />
+
                                                         </div>
                                                         <h4>Support Team
                                                    
@@ -278,11 +279,11 @@
                                     <ul class="dropdown-menu">
                                         <!-- User image -->
                                         <li class="user-header bg-light-blue">
-                                            <img src="Images/avatar3.png" class="img-circle" alt="User Image" />
+                                            <asp:Image ID="Image2" class="img-circle" runat="server" alt="User Image" ImageUrl="~/Images/avatar5.png" />
                                             <p>
                                                 Administrator
                                        
-                                    <small>Member since Nov. 2012</small>
+                                    <small>Member since <%: DateTime.Now.ToShortDateString() %></small>
                                             </p>
                                         </li>
                                         <!-- Menu Body 
@@ -324,7 +325,7 @@
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
                         <div class="pull-left image">
-                            <img src="Images/avatar3.png" class="img-circle" alt="User Image" />
+                            <asp:Image ID="Image1" class="img-circle" runat="server" alt="User Image" ImageUrl="~/Images/avatar5.png" />
                         </div>
                         <div class="pull-left info">
                             <p>Hello, <%:Context.User.Identity.Name %></p>
@@ -449,7 +450,6 @@
                     </Scripts>
                 </asp:ScriptManager>
                 <asp:ContentPlaceHolder ID="MainContent" runat="server">
-                   
                 </asp:ContentPlaceHolder>
 
                 <asp:ContentPlaceHolder ID="FeaturedContent" runat="server">

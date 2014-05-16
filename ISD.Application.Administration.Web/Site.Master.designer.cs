@@ -31,6 +31,15 @@ namespace ISD.Administration.Web {
         protected global::System.Web.UI.WebControls.HyperLink HyperLink3;
         
         /// <summary>
+        /// Image1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image Image1;
+        
+        /// <summary>
         /// hlnkDash control.
         /// </summary>
         /// <remarks>

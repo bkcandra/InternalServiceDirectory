@@ -1,29 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
-using ISD.Data.EDM;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using ISD.Administration.Web.Models;
 using ISD.Util;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
-using Owin;
-using ISD.Administration.Web.Models;
-using Page = System.Web.UI.Page;
 
 namespace ISD.Administration.Web.Account
 {
-    public partial class Login : Page
+    public partial class Login : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            RegisterHyperLink.NavigateUrl = "Register";
+            //RegisterHyperLink.NavigateUrl = "Register";
             // Enable this once you have account confirmation enabled for password reset functionality
             // ForgotPasswordHyperLink.NavigateUrl = "Forgot";
-            OpenAuthLogin.ReturnUrl = Request.QueryString["ReturnUrl"];
-            var returnUrl = HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
-            if (!String.IsNullOrEmpty(returnUrl))
-            {
-                RegisterHyperLink.NavigateUrl += "?ReturnUrl=" + returnUrl;
-            }
+            //OpenAuthLogin.ReturnUrl = Request.QueryString["ReturnUrl"];
+            //var returnUrl = HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
+            //if (!String.IsNullOrEmpty(returnUrl))
+            //{
+            //    //RegisterHyperLink.NavigateUrl += "?ReturnUrl=" + returnUrl;
+            //}
         }
 
         protected void LogIn(object sender, EventArgs e)
@@ -37,7 +37,7 @@ namespace ISD.Administration.Web.Account
                 {
                     if (manager.IsInRole(user.Id, SystemConstants.AdministratorRole))
                     {
-                        IdentityHelper.SignIn(manager, user, RememberMe.Checked);
+                        IdentityHelper.SignIn(manager, user, remember_me.Checked);
                         IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
                     }
                     else

@@ -119,3 +119,4 @@ E:\Work\Projects\InternalServiceDirectory\ISD.Provider.Web\bin\zh-Hant\System.Sp
 E:\Work\Projects\InternalServiceDirectory\ISD.Provider.Web\obj\Debug\ISD.Application.Provider.Web.csprojResolveAssemblyReference.cache
 E:\Work\Projects\InternalServiceDirectory\ISD.Provider.Web\obj\Debug\ISD.Provider.Web.dll
 E:\Work\Projects\InternalServiceDirectory\ISD.Provider.Web\obj\Debug\ISD.Provider.Web.pdb
+E:\Work\Projects\InternalServiceDirectory\ISD.Application.Provider.Web\obj\Debug\ISD.Application.Provider.Web.csprojResolveAssemblyReference.cache

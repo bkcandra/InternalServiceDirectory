@@ -250,7 +250,6 @@
     <Content Include="Account\ResetPassword.aspx" />
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Activities\Default.aspx" />
-    <Content Include="Activities\gr.jpg" />
     <Content Include="Activities\New.aspx" />
     <Content Include="Activities\NewActivity.aspx" />
     <Content Include="Activity\Default.aspx" />
