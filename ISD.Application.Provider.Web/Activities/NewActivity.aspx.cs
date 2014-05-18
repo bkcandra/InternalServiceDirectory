@@ -9,23 +9,24 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Microsoft.AspNet.Identity;
 
 
 namespace HealthyClub.Provider.Web.Activities
 {
     public partial class NewActivity : System.Web.UI.Page
     {
-        public Guid ProviderID
+        public String ProviderID
         {
             get
             {
                 if (!string.IsNullOrEmpty(hdnProviderID.Value))
-                    return new Guid(hdnProviderID.Value);
-                else return Guid.Empty;
+                    return hdnProviderID.Value;
+                else return Guid.Empty.ToString();
             }
             set
             {
-                hdnProviderID.Value = value.ToString();
+                hdnProviderID.Value = value;
             }
         }
 
@@ -68,7 +69,7 @@ namespace HealthyClub.Provider.Web.Activities
             else
             {
                 ActionKey = ObjectHandler.GetRandomKey(8);
-                ProviderID = IdentityHelper.GetUserIdFromRequest(Request);
+                ProviderID = Context.User.Identity.GetUserId();
                 ActivityRegistrationDetailUC.InitRegistration();
                 ActivityRegistrationTimetableUC.initTimetable();
                 ActivityRegistrationImageUC.initUploader(ProviderID, ActionKey);

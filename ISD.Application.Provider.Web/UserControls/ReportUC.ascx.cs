@@ -20,17 +20,17 @@ namespace HealthyClub.Providers.Web.UserControls
 {
     public partial class ReportUC : System.Web.UI.UserControl
     {
-        public Guid ProviderID
+        public String ProviderID
         {
             get
             {
-                if (hdnProviderID.Value != Guid.Empty.ToString())
-                    return new Guid(hdnProviderID.Value);
-                else return Guid.Empty;
+                if (!string.IsNullOrEmpty(hdnProviderID.Value))
+                    return hdnProviderID.Value;
+                else return Guid.Empty.ToString();
             }
             set
             {
-                hdnProviderID.Value = value.ToString();
+                hdnProviderID.Value = value;
             }
         }
 

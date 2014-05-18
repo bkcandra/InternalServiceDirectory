@@ -29,17 +29,17 @@ namespace HealthyClub.Providers.Web.Activity
             }
         }
 
-        public Guid ProviderID
+        public String ProviderID
         {
             get
             {
                 if (!string.IsNullOrEmpty(hdnProviderID.Value))
-                    return new Guid(hdnProviderID.Value);
-                else return Guid.Empty;
+                    return hdnProviderID.Value;
+                else return Guid.Empty.ToString();
             }
             set
             {
-                hdnProviderID.Value = value.ToString();
+                hdnProviderID.Value = value;
             }
         }
 

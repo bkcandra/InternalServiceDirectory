@@ -9,7 +9,7 @@ using ISD.Util;
 using ISD.DA;
 using ISD.BF;
 using System.IO;
-
+using Microsoft.AspNet.Identity;
 
 
 namespace HealthyClub.Providers.Web.UserControls
@@ -57,14 +57,9 @@ namespace HealthyClub.Providers.Web.UserControls
 
         protected void Page_init(object sender, EventArgs e)
         {
-            int ID = WebSecurity.CurrentUserId;
-            if (ID != 0)
-            {
-                Guid userID = new MembershipHelper().GetProviderUserKey(ID);
-                ProviderID = userID;
-            }
-            else
-                Response.Redirect("~");
+           
+                ProviderID = Context.User.Identity.GetUserId();
+            
         }
 
         protected void Page_Load(object sender, EventArgs e)

@@ -25,7 +25,7 @@ namespace ISD.Provider.Web.API
 
         }
 
-        public dynamic GetProviderMonthlyVisitorCount(Guid ProviderID)
+        public dynamic GetProviderMonthlyVisitorCount(String ProviderID)
         {
             int VisitCount = 0;
             var data = new BusinessFunctionComponent().RetrieveProviderVisitorMontlyCount(ProviderID, out VisitCount);
@@ -35,7 +35,7 @@ namespace ISD.Provider.Web.API
 
 
         }
-        public dynamic GetProviderMonthlyVisitorCount(Guid ProviderID, DateTime From, DateTime To)
+        public dynamic GetProviderMonthlyVisitorCount(String ProviderID, DateTime From, DateTime To)
         {
             int VisitCount = 0;
             var data = new BusinessFunctionComponent().RetrieveProviderVisitorMontlyCount(ProviderID, From, To, out VisitCount);

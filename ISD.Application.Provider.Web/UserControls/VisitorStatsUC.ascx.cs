@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Microsoft.AspNet.Identity;
 
 
 namespace HealthyClub.Provider.Web.UserControls
@@ -16,7 +17,7 @@ namespace HealthyClub.Provider.Web.UserControls
         {
 
             if (Context.User.Identity.IsAuthenticated)
-                hdnProviderGUID.Value = new MembershipHelper().GetProviderUserKey(WebSecurity.CurrentUserId).ToString();
+                hdnProviderGUID.Value = Context.User.Identity.GetUserId();
 
             else
                 Response.Redirect("~/Account/Login.aspx");
@@ -35,7 +36,7 @@ namespace HealthyClub.Provider.Web.UserControls
         {
             DataAccessComponent dac = new DataAccessComponent();
             lblRange.Text = DateTime.Now.AddYears(-1).ToShortDateString() + " - " + DateTime.Now.AddYears(-1).ToShortDateString();
-            lblPageViews.Text = dac.RetrieveProviderVisitorCount(new Guid(hdnProviderGUID.Value), DateTime.Now.AddYears(-1),DateTime.Now).ToString();
+            lblPageViews.Text = dac.RetrieveProviderVisitorCount(hdnProviderGUID.Value, DateTime.Now.AddYears(-1),DateTime.Now).ToString();
         }
 
 

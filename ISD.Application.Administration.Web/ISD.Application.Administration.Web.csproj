@@ -268,6 +268,7 @@
     <Content Include="Categories\CategorySetup.aspx" />
     <Content Include="Categories\Default.aspx" />
     <Content Include="Contact.aspx" />
+    <Content Include="Content\AdminLTE.css" />
     <Content Include="Content\bootstrap-slider\slider.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -548,7 +549,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\AdminLTE\app.js" />
     <Content Include="Scripts\AdminLTE\dashboard.js" />
-    <Content Include="Scripts\AdminLTE\demo.js" />
     <Content Include="Scripts\bootstrap-slider\bootstrap-slider.js" />
     <Content Include="Scripts\bootstrap-wysihtml5\bootstrap3-wysihtml5.all.min.js" />
     <Content Include="Scripts\bootstrap-wysihtml5\bootstrap3-wysihtml5.js" />

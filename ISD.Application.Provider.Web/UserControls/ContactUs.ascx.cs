@@ -9,7 +9,8 @@ using ISD.Util;
 using ISD.DA;
 
 using BCUtility;
- 
+using Microsoft.AspNet.Identity;
+
 
 namespace HealthyClub.Providers.Web.UserControls
 {
@@ -29,7 +30,7 @@ namespace HealthyClub.Providers.Web.UserControls
             }
         }
 
-        public Guid CustomerID { get; set; }
+        public String CustomerID { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -37,7 +38,7 @@ namespace HealthyClub.Providers.Web.UserControls
             {
                 if (Context.User.Identity.IsAuthenticated)
                 {
-                    var dr = new DataAccessComponent().RetrieveUserProfiles(new MembershipHelper().GetProviderUserKey(WebSecurity.CurrentUserId));
+                    var dr = new DataAccessComponent().RetrieveUserProfiles(Context.User.Identity.GetUserId());
                     if (dr != null)
                         SetData(dr);
                 }

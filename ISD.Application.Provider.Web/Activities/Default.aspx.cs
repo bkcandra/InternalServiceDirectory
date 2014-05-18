@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 using ISD.DA;
+using Microsoft.AspNet.Identity;
 
 namespace HealthyClub.Providers.Web.Activities
 {
@@ -23,12 +24,10 @@ namespace HealthyClub.Providers.Web.Activities
         {
             if (Context.User.Identity.IsAuthenticated)
             {
-                int userID = WebSecurity.CurrentUserId;
-                if (userID != -1)
-                {
-                    ActivityManagementUC1.ProviderID = new MembershipHelper().GetProviderUserKey(userID);
-                }
-            }            
+
+                ActivityManagementUC1.ProviderID = Context.User.Identity.GetUserId();
+
+            }
             else
             {
                 Response.Redirect("~/Account/Login.aspx");

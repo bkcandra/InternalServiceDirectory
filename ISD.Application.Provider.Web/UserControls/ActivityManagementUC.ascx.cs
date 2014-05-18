@@ -54,18 +54,15 @@ namespace HealthyClub.Providers.Web.UserControls
             }
         }
 
-        public Guid ProviderID
+        public String ProviderID
         {
             get
             {
                 if (!string.IsNullOrEmpty(hdnProviderID.Value))
-                    return new Guid(hdnProviderID.Value);
-                else return Guid.Empty;
+                    return hdnProviderID.Value;
+                else return Guid.Empty.ToString();
             }
-            set
-            {
-                hdnProviderID.Value = value.ToString();
-            }
+            set { hdnProviderID.Value = value; }
         }
 
         public int StartRow

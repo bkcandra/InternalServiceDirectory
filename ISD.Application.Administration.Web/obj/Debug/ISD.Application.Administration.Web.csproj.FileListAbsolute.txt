@@ -119,8 +119,6 @@ E:\Work\Projects\InternalServiceDirectory\ISD.Administration.Web\bin\zh-Hant\Sys
 E:\Work\Projects\InternalServiceDirectory\ISD.Administration.Web\obj\Debug\ISD.Application.Administration.Web.csprojResolveAssemblyReference.cache
 E:\Work\Projects\InternalServiceDirectory\ISD.Administration.Web\obj\Debug\ISD.Administration.Web.dll
 E:\Work\Projects\InternalServiceDirectory\ISD.Administration.Web\obj\Debug\ISD.Administration.Web.pdb
-E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\obj\Debug\ISD.Application.Administration.Web.csproj.App.config
-E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\obj\Debug\ISD.Application.Administration.Web.csprojResolveAssemblyReference.cache
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin\ISD.Administration.Web.dll.config
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin\ISD.Administration.Web.dll
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin\ISD.Administration.Web.pdb
@@ -280,5 +278,7 @@ E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin\ru\System.Spatial.resources.dll
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin\zh-Hans\System.Spatial.resources.dll
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin\zh-Hant\System.Spatial.resources.dll
+E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\obj\Debug\ISD.Application.Administration.Web.csproj.App.config
+E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\obj\Debug\ISD.Application.Administration.Web.csprojResolveAssemblyReference.cache
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\obj\Debug\ISD.Administration.Web.dll
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\obj\Debug\ISD.Administration.Web.pdb
