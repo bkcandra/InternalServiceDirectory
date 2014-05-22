@@ -13,15 +13,6 @@ namespace ISD.Administration.Web.UserControls {
     public partial class PageSetupUC {
         
         /// <summary>
-        /// lblPageSetup control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPageSetup;
-        
-        /// <summary>
         /// hdnEditMode control.
         /// </summary>
         /// <remarks>
@@ -211,24 +202,6 @@ namespace ISD.Administration.Web.UserControls {
         protected global::System.Web.UI.WebControls.LinkButton lnkCopyFrom;
         
         /// <summary>
-        /// divPageEditor control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPageEditor;
-        
-        /// <summary>
-        /// CKEditorControl1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::CKEditor.NET.CKEditorControl CKEditorControl1;
-        
-        /// <summary>
         /// lnkEdit control.
         /// </summary>
         /// <remarks>
@@ -274,6 +247,15 @@ namespace ISD.Administration.Web.UserControls {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divContentPreviewHead;
         
         /// <summary>
+        /// lblPageSetup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPageSetup;
+        
+        /// <summary>
         /// divContentPreview control.
         /// </summary>
         /// <remarks>
@@ -308,6 +290,33 @@ namespace ISD.Administration.Web.UserControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdnEmailType;
+        
+        /// <summary>
+        /// divPageEditor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPageEditor;
+        
+        /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+        
+        /// <summary>
+        /// CKEditorControl1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::CKEditor.NET.CKEditorControl CKEditorControl1;
         
         /// <summary>
         /// hdnMode control.

@@ -143,10 +143,10 @@ namespace HealthyClub.Providers.Web.UserControls
                 txtEligibility.Text = dr.eligibilityDescription;
             }
 
-            radCommenceYes.Checked = dr.isCommenceAnytime;
-            radCommenceNo.Checked = !dr.isCommenceAnytime;
-            radIsMemberReqYes.Checked = dr.isMembershipRequired;
-            radIsMemberReqNo.Checked = !dr.isMembershipRequired;
+            //radCommenceYes.Checked = dr.isCommenceAnytime;
+            //radCommenceNo.Checked = !dr.isCommenceAnytime;
+            //radIsMemberReqYes.Checked = dr.isMembershipRequired;
+            //radIsMemberReqNo.Checked = !dr.isMembershipRequired;
         }
 
         private void ClearField()
@@ -205,8 +205,8 @@ namespace HealthyClub.Providers.Web.UserControls
             dr.eligibilityDescription = txtEligibility.Text;
             dr.Price = txtFee.Text;
             dr.isApproved = false;
-            dr.isCommenceAnytime = radCommenceYes.Checked;
-            dr.isMembershipRequired = radIsMemberReqYes.Checked;
+            //dr.isCommenceAnytime = radCommenceYes.Checked;
+            //dr.isMembershipRequired = radIsMemberReqYes.Checked;
 
 
             var selectedCat = ActivityRegistrationCategory1.GetSelectedCategory();

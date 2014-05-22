@@ -25,7 +25,7 @@ namespace HealthyClub.Providers.Web
         int timetableFormat = 1;
         int categoryID = 0;
         int column = 1;
-        Guid providerID = Guid.Empty;
+        String providerID = Guid.Empty.ToString();
         string sortValue = "";
         string title = "";
         string searchKey = "";
@@ -129,7 +129,7 @@ namespace HealthyClub.Providers.Web
             }
         }
 
-        public Guid ProviderID
+        public String ProviderID
         {
             get
             {

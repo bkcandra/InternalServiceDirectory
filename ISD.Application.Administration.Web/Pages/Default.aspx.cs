@@ -17,7 +17,7 @@ namespace ISD.Administration.Web.Pages
             {
                 CheckSignIn();
 
-                hlnkNewPage.NavigateUrl = "~/Pages/PageSetup.aspx?" + SystemConstants.PageType + "=1";
+              
             
             }
 

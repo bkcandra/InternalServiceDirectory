@@ -68,8 +68,6 @@ namespace ISD.Data.EDM
         public Nullable<bool> forChildren { get; set; }
         public Nullable<int> IsPaid { get; set; }
         public Nullable<bool> isApproved { get; set; }
-        public Nullable<bool> isCommenceAnytime { get; set; }
-        public Nullable<bool> isMembershipRequired { get; set; }
         public Nullable<int> SecondaryCategoryID1 { get; set; }
         public Nullable<int> SecondaryCategoryID2 { get; set; }
         public Nullable<int> SecondaryCategoryID3 { get; set; }
@@ -79,5 +77,7 @@ namespace ISD.Data.EDM
         public string ReferenceID { get; set; }
         public Nullable<int> Visitor { get; set; }
         public string ProviderID { get; set; }
+        public Nullable<bool> isPrimary { get; set; }
+        public Nullable<int> PrimaryServiceID { get; set; }
     }
 }

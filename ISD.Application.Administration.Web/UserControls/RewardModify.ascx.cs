@@ -297,7 +297,7 @@ namespace ISD.Administration.Web.UserControls
                 lblRewName.Text = txtRewName.Text = dr.RewardsName;
                 lblRewDesc.Text = txtRewDesc.Text = dr.RewardDescription;
                 lblCalendarFrom.Text = txtCalendarFrom.Text = Convert.ToString(dr.RewardExpiryDate.Date);
-                Guid spnid = dr.ProviderID;
+                String spnid = dr.ProviderID;
                 var sr = new DataAccessComponent().RetrieveSponsorDetails(spnid.ToString());
                 lblSponsor.Text = Convert.ToString(sr.Name);
                 ddlSponsor.SelectedValue = Convert.ToString(sr.ID);
@@ -493,7 +493,7 @@ namespace ISD.Administration.Web.UserControls
             var dr = new DataSetComponent.RewardDataTable().NewRewardRow();
 
             dr.ID = RewardID;
-            Guid spnid = new Guid(ddlSponsor.SelectedValue);
+            string spnid =ddlSponsor.SelectedValue;
             dr.ProviderID = spnid;
             //dr.ProviderID = can be taken from sponsor or admin
 

@@ -26,6 +26,199 @@ namespace HealthyClub.Providers.Web.UserControls
                 hdnCategoryID.Value = value.ToString();
             }
         }
+        public string SuburbID
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(hdnSuburbID.Value))
+                    return hdnSuburbID.Value;
+                else return "0";
+            }
+            set
+            {
+                hdnSuburbID.Value = value.ToString();
+            }
+        }
+                public DateTime dtFrom
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(hdnDateFrom.Value))
+                    return Convert.ToDateTime(hdnDateFrom.Value);
+                else return SystemConstants.nodate;
+            }
+            set
+            {
+                hdnDateFrom.Value = value.ToString();
+            }
+        }
+
+        public DateTime dtTo
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(hdnDateTo.Value))
+                    return Convert.ToDateTime(hdnDateTo.Value);
+                else return SystemConstants.nodate;
+            }
+            set
+            {
+                hdnDateTo.Value = value.ToString();
+            }
+        }
+
+        public TimeSpan tmFrom
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(hdnTmFrom.Value))
+                    return Convert.ToDateTime(hdnTmFrom.Value).TimeOfDay;
+                else return SystemConstants.nodate.TimeOfDay;
+            }
+            set
+            {
+                hdnTmFrom.Value = value.ToString();
+            }
+        }
+
+        public TimeSpan tmTo
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(hdnTmTo.Value))
+                    return Convert.ToDateTime(hdnTmTo.Value).TimeOfDay;
+                else return SystemConstants.nodate.TimeOfDay;
+            }
+            set
+            {
+                hdnTmTo.Value = value.ToString();
+            }
+        }
+                public int AgeFrom
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(hdnAgeFrom.Value))
+                    return Convert.ToInt32(hdnAgeFrom.Value);
+                else return 0;
+            }
+            set
+            {
+                hdnAgeFrom.Value = value.ToString();
+            }
+        }
+
+        public int AgeTo
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(hdnAgeTo.Value))
+                    return Convert.ToInt32(hdnAgeTo.Value);
+                else return 99;
+            }
+            set
+            {
+                hdnAgeTo.Value = value.ToString();
+            }
+        }
+
+        public bool MonFilter
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(hdnMonFiltered.Value))
+                    return Convert.ToBoolean(hdnMonFiltered.Value);
+                else return true;
+            }
+            set
+            {
+                hdnMonFiltered.Value = value.ToString();
+            }
+        }
+
+        public bool TueFilter
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(hdnTueFiltered.Value))
+                    return Convert.ToBoolean(hdnTueFiltered.Value);
+                else return true;
+            }
+            set
+            {
+                hdnTueFiltered.Value = value.ToString();
+            }
+        }
+
+        public bool WedFilter
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(hdnWedFiltered.Value))
+                    return Convert.ToBoolean(hdnWedFiltered.Value);
+                else return true;
+            }
+            set
+            {
+                hdnWedFiltered.Value = value.ToString();
+            }
+        }
+
+        public bool ThursFilter
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(hdnThuFiltered.Value))
+                    return Convert.ToBoolean(hdnThuFiltered.Value);
+                else return true;
+            }
+            set
+            {
+                hdnThuFiltered.Value = value.ToString();
+            }
+        }
+
+        public bool FriFilter
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(hdnFriFiltered.Value))
+                    return Convert.ToBoolean(hdnFriFiltered.Value);
+                else return true;
+            }
+            set
+            {
+                hdnFriFiltered.Value = value.ToString();
+            }
+        }
+
+        public bool SatFilter
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(hdnSatFiltered.Value))
+                    return Convert.ToBoolean(hdnSatFiltered.Value);
+                else return true;
+            }
+            set
+            {
+                hdnSatFiltered.Value = value.ToString();
+            }
+        }
+
+        public bool SunFilter
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(hdnSunFiltered.Value))
+                    return Convert.ToBoolean(hdnSunFiltered.Value);
+                else return true;
+            }
+            set
+            {
+                hdnSunFiltered.Value = value.ToString();
+            }
+        }
 
         public String ProviderID
         {
@@ -119,107 +312,214 @@ namespace HealthyClub.Providers.Web.UserControls
         {
             ddSort.SelectedValue = SortValue;
             lblKeyword.Visible = false;
+            String query = "";
 
             if (SearchKey != null)
             {
-                String SearchPhrase = new BusinessFunctionComponent().RefineSearchKey(SearchKey);
-                SetDataSourceFromSearchKey(SearchPhrase);
+                List<String> SearchPhrase = new BusinessFunctionComponent().RefineSearchKey(SearchKey);
 
+                List<String> parameters = new BusinessFunctionComponent().RefineSearchKey(SearchKey);
 
-                lblAmount.Text = new DataAccessComponent().RetrieveProviderActivitiesbySearchPhraseCount(ProviderID, SearchPhrase).ToString();
-
-                if (Convert.ToInt32(lblAmount.Text) <= Convert.ToInt32(PageSize + StartRow))
+                foreach (var parameter in parameters)
                 {
-                    lblEndIndex.Text = lblAmount.Text;
+                    if (!string.IsNullOrEmpty(parameter))
+                    {
+                        if (parameter.StartsWith(SystemConstants.Query))
+                        {
+                            query = parameter.Replace(SystemConstants.Query, string.Empty);
+                        }
+                        else if (parameter.StartsWith(SystemConstants.Location))
+                        {
+                            String[] locs =
+                                parameter.Replace(SystemConstants.Location, string.Empty).ToUpper().Split(';');
+                            var subDT = new DataAccessComponent().RetrieveSuburbs();
+
+                            var suburbs = subDT.Where(x => locs.Contains(x.Name.ToUpper()));
+
+                            foreach (var sub in suburbs)
+                            {
+                                if (String.IsNullOrEmpty(SuburbID))
+                                    SuburbID = sub.ID.ToString();
+                                else
+                                {
+                                    SuburbID += "|" + sub.ID.ToString();
+                                }
+                            }
+                        }
+                        else if (parameter.StartsWith(SystemConstants.Day))
+                        {
+                            MonFilter = TueFilter = WedFilter = ThursFilter = FriFilter = SatFilter = SunFilter = false;
+                            string[] days = parameter.Replace(SystemConstants.Day, string.Empty).Split(';');
+                            foreach (var day in days)
+                            {
+                                if (day.ToUpper().Equals(DayOfWeek.Monday.ToString().ToUpper()))
+                                    MonFilter = true;
+                                if (day.ToUpper().Equals(DayOfWeek.Tuesday.ToString().ToUpper()))
+                                    TueFilter = true;
+                                if (day.ToUpper().Equals(DayOfWeek.Wednesday.ToString().ToUpper()))
+                                    WedFilter = true;
+                                if (day.ToUpper().Equals(DayOfWeek.Thursday.ToString().ToUpper()))
+                                    ThursFilter = true;
+                                if (day.ToUpper().Equals(DayOfWeek.Friday.ToString().ToUpper()))
+                                    FriFilter = true;
+                                if (day.ToUpper().Equals(DayOfWeek.Saturday.ToString().ToUpper()))
+                                    SatFilter = true;
+                                if (day.ToUpper().Equals(DayOfWeek.Sunday.ToString().ToUpper()))
+                                    SunFilter = true;
+                            }
+                        }
+                        else if (parameter.StartsWith(SystemConstants.Time))
+                        {
+                            string[] times = parameter.Replace(SystemConstants.Time, string.Empty).Split('-');
+                            if (times.Length == 2)
+                            {
+                                dtFrom =
+                                    Convert.ToDateTime(SystemConstants.nodate.ToShortDateString() + " " +
+                                                       Convert.ToDateTime(times[0]).ToShortTimeString());
+                                dtTo =
+                                    Convert.ToDateTime(SystemConstants.nodate.ToShortDateString() + " " +
+                                                       Convert.ToDateTime(times[1]).ToShortTimeString());
+                            }
+                            else if (times.Length == 1)
+                            {
+                                dtFrom =
+                                    Convert.ToDateTime(SystemConstants.nodate.ToShortDateString() + " " +
+                                                       Convert.ToDateTime(times[0]).ToShortTimeString());
+                            }
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(query))
+                {
+
+                    SetDataSourcebySearchKey(query);
+                    int amount = new DataAccessComponent().RetrieveProviderActivitiesbySearchPhraseCount(ProviderID,
+                        dtFrom.ToString(), dtTo.ToString(), tmFrom.ToString(), tmTo.ToString(), AgeFrom, AgeTo, SuburbID,
+                        CategoryID, query, MonFilter.ToString(), TueFilter.ToString(), WedFilter.ToString(),
+                        ThursFilter.ToString(), FriFilter.ToString(), SatFilter.ToString(), SunFilter.ToString());
+                    lblAmount.Text = amount.ToString();
+                    if (Convert.ToInt32(lblAmount.Text) <= Convert.ToInt32(PageSize + StartRow))
+                    {
+                        lblEndIndex.Text = lblAmount.Text;
+                    }
+                    else
+                    {
+                        lblEndIndex.Text = (StartRow + PageSize).ToString();
+                    }
+
+                    lblStartIndex.Text = (StartRow + 1).ToString();
+
+                    if (Convert.ToInt32(lblStartIndex.Text) >= Convert.ToInt32(lblEndIndex.Text))
+                    {
+                        lblStartIndex.Text = lblEndIndex.Text;
+                    }
+
+                    lblEndIndex1.Text = lblEndIndex.Text;
+                    lblStartIndex1.Text = lblStartIndex.Text;
+                    lblAmount1.Text = lblAmount.Text;
+
+                    lblKeyword.Visible = true;
                 }
                 else
                 {
-                    lblEndIndex.Text = (StartRow + PageSize).ToString();
+                    SetDataSourcebyProviderCategory();
+                    int amount = new DataAccessComponent().RetrieveProviderActivitiesCount(ProviderID, dtFrom.ToString(),
+                        dtTo.ToString(), tmFrom.ToString(), tmTo.ToString(), AgeFrom, AgeTo, SuburbID, CategoryID,
+                        MonFilter.ToString(), TueFilter.ToString(), WedFilter.ToString(), ThursFilter.ToString(),
+                        FriFilter.ToString()
+                        , SatFilter.ToString(), SunFilter.ToString());
+                    lblAmount.Text = amount.ToString();
+
+                    if (Convert.ToInt32(lblAmount.Text) <= Convert.ToInt32(PageSize + StartRow))
+                    {
+                        lblEndIndex.Text = lblAmount.Text;
+                    }
+                    else
+                    {
+                        lblEndIndex.Text = (StartRow + PageSize).ToString();
+                    }
+
+                    lblStartIndex.Text = (StartRow + 1).ToString();
+
+                    if (Convert.ToInt32(lblStartIndex.Text) >= Convert.ToInt32(lblEndIndex.Text))
+                    {
+                        lblStartIndex.Text = lblEndIndex.Text;
+                    }
+
+                    lblEndIndex1.Text = lblEndIndex.Text;
+                    lblStartIndex1.Text = lblStartIndex.Text;
+                    lblAmount1.Text = lblAmount.Text;
                 }
-
-                lblStartIndex.Text = (StartRow + 1).ToString();
-
-                if (Convert.ToInt32(lblStartIndex.Text) >= Convert.ToInt32(lblEndIndex.Text))
-                {
-                    lblStartIndex.Text = lblEndIndex.Text;
-                }
-
-                lblEndIndex1.Text = lblEndIndex.Text;
-                lblStartIndex1.Text = lblStartIndex.Text;
-                lblAmount1.Text = lblAmount.Text;
-
-                lblKeyword.Visible = true;
-                if (lblAmount.Text != "0")
-
-                    lblKeyword.Text = "Search Found " + lblAmount.Text + " Record  with keyword '" + SearchKey + "'";
-                else
-                    lblKeyword.Text = "there are no records with keyword '" + SearchKey + "'";
-
-            }
-            else
-            {
-                SetDataSourceFromCategoryProvider();
-                lblAmount.Text = new DataAccessComponent().RetrieveProviderActivitiesbyCategoryIDCount(ProviderID, CategoryID).ToString();
-
-                if (Convert.ToInt32(lblAmount.Text) <= Convert.ToInt32(PageSize + StartRow))
-                {
-                    lblEndIndex.Text = lblAmount.Text;
-                }
-                else
-                {
-                    lblEndIndex.Text = (StartRow + PageSize).ToString();
-                }
-
-                lblStartIndex.Text = (StartRow + 1).ToString();
-
-                if (Convert.ToInt32(lblStartIndex.Text) >= Convert.ToInt32(lblEndIndex.Text))
-                {
-                    lblStartIndex.Text = lblEndIndex.Text;
-                }
-
-                lblEndIndex1.Text = lblEndIndex.Text;
-                lblStartIndex1.Text = lblStartIndex.Text;
-                lblAmount1.Text = lblAmount.Text;
-
             }
         }
 
-        private void SetDataSourceFromSearchKey(String SearchPhrase)
+        private void SetDataSourcebySearchKey(String SearchPhrase)
         {
             ods.TypeName = typeof(DataAccessComponent).FullName;
             ods.EnablePaging = true;
             ods.SelectParameters.Clear();
             ods.SelectParameters.Add("searchKey", SearchPhrase);
-            ods.SelectParameters.Add("providerID", ProviderID.ToString());
+            ods.SelectParameters.Add("providerID", ProviderID);
+            ods.SelectParameters.Add("ageFrom", AgeFrom.ToString());
+            ods.SelectParameters.Add("ageTo", AgeTo.ToString());
+            ods.SelectParameters.Add("stFrom", dtFrom.ToString());
+            ods.SelectParameters.Add("stTo", dtTo.ToString());
+            ods.SelectParameters.Add("tmFrom", tmFrom.ToString());
+            ods.SelectParameters.Add("tmTo", tmTo.ToString());
+            ods.SelectParameters.Add("suburbID", SuburbID.ToString());
+            ods.SelectParameters.Add("categoryID", CategoryID.ToString());
+
+            ods.SelectParameters.Add("MonFilter", MonFilter.ToString());
+            ods.SelectParameters.Add("TueFilter", TueFilter.ToString());
+            ods.SelectParameters.Add("WedFilter", WedFilter.ToString());
+            ods.SelectParameters.Add("ThursFilter", ThursFilter.ToString());
+            ods.SelectParameters.Add("FriFilter", FriFilter.ToString());
+            ods.SelectParameters.Add("SatFilter", SatFilter.ToString());
+            ods.SelectParameters.Add("SunFilter", SunFilter.ToString());
+
             ods.SelectMethod = "RetrieveProviderActivitiesbySearchPhrase";
             ods.SelectCountMethod = "RetrieveProviderActivitiesbySearchPhraseCount";
             ods.MaximumRowsParameterName = "amount";
             ods.StartRowIndexParameterName = "startIndex";
             ods.SortParameterName = "sortExpression";
-            GridViewActivities.PageSize = PageSize;
+
             GridViewActivities.DataSourceID = "ods";
 
             SortProducts();
         }
 
-        private void SetDataSourceFromCategoryProvider()
+        private void SetDataSourcebyProviderCategory()
         {
             ods.TypeName = typeof(DataAccessComponent).FullName;
             ods.EnablePaging = true;
             ods.SelectParameters.Clear();
             ods.SelectParameters.Add("categoryID", CategoryID.ToString());
             ods.SelectParameters.Add("providerID", ProviderID.ToString());
+            ods.SelectParameters.Add("ageFrom", AgeFrom.ToString());
+            ods.SelectParameters.Add("ageTo", AgeTo.ToString());
+            ods.SelectParameters.Add("stFrom", dtFrom.ToString());
+            ods.SelectParameters.Add("stTo", dtTo.ToString());
+            ods.SelectParameters.Add("tmFrom", tmFrom.ToString());
+            ods.SelectParameters.Add("tmTo", tmTo.ToString());
+            ods.SelectParameters.Add("suburbID", SuburbID.ToString());
+
+            ods.SelectParameters.Add("MonFilter", MonFilter.ToString());
+            ods.SelectParameters.Add("TueFilter", TueFilter.ToString());
+            ods.SelectParameters.Add("WedFilter", WedFilter.ToString());
+            ods.SelectParameters.Add("ThursFilter", ThursFilter.ToString());
+            ods.SelectParameters.Add("FriFilter", FriFilter.ToString());
+            ods.SelectParameters.Add("SatFilter", SatFilter.ToString());
+            ods.SelectParameters.Add("SunFilter", SunFilter.ToString());
+
             ods.SelectMethod = "RetrieveProviderActivities";
             ods.SelectCountMethod = "RetrieveProviderActivitiesCount";
             ods.MaximumRowsParameterName = "amount";
             ods.StartRowIndexParameterName = "startIndex";
             ods.SortParameterName = "sortExpression";
-            GridViewActivities.PageSize = PageSize;
+
             GridViewActivities.DataSourceID = "ods";
             SortProducts();
-            //DataPager1.SetPageProperties(StartRow, DataPager1.MaximumRows, false);
-            //ListViewProducts.DataBind();              
-
         }
 
         private void SortProducts()

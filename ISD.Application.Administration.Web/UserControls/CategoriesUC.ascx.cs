@@ -85,12 +85,10 @@ namespace ISD.Administration.Web.UserControls
             if (Maxhierarchy())
             {
                 divLnkMenu.Visible = false;
-                divPopMoveDestination.Visible = false;
             }
             else
             {
                 divLnkMenu.Visible = true;
-                divPopMoveDestination.Visible = true;
             }
             //RefreshPopUpPage();
 
@@ -252,30 +250,7 @@ namespace ISD.Administration.Web.UserControls
             // txtAddEditName.Text = "";
         }
 
-        public void btnMove1_Click(object sender, EventArgs e)
-        {
-            //DataSetComponent.CategoryRow dr = new DataSetComponent.CategoryDataTable().NewCategoryRow();
-            //BusinessFunctionComponent bfc = new BusinessFunctionComponent();
-
-            //dr.Name = txtAddEditName.Text;
-            //if (AddEditMode == 0)
-            //{
-            //    bfc.CreateCategory(CurrentCategoryID, Membership.GetUser().UserName, dr);
-            //    Refresh();
-            //    lblSucces.Visible = true;
-            //    lblSucces.Text = "Data Added, " + DateTime.Now;
-            //}
-            //else if (AddEditMode == 1)
-            //{
-            //    int categoryID = Convert.ToInt32(hdnCategoryID.Value);
-            //    bfc.UpdateCategory(categoryID, dr.Name, Membership.GetUser().UserName);
-            //    AddEditMode = 0;
-            //    Refresh();
-            //    lblSucces.Visible = true;
-            //    lblSucces.Text = "Updated, " + DateTime.Now;
-            //}
-        }
-
+   
         public DataSetComponent.CategoryDataTable GetSelected()
         {
             DataSetComponent.CategoryDataTable dt = new DataSetComponent.CategoryDataTable();

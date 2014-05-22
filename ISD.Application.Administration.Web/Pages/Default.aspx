@@ -17,7 +17,6 @@
 
     <!-- Main content -->
     <section class="content">
-        <asp:HyperLink ID="hlnkNewPage" runat="server" Text="New Page"></asp:HyperLink></li>
           <uc1:PagesUC ID="PagesUC1" runat="server" />
     </section>
 

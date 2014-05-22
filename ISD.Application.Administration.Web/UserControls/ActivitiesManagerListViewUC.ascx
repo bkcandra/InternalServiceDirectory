@@ -47,7 +47,7 @@
                                 </button>
 
                                 <asp:Button CssClass="btn btn-default" Style="display: none" ID="btnExtend" runat="server" OnClick="lnkExtendActivities_Click" Text="Extend Expired Activities"></asp:Button>
-                                <asp:Button CssClass="btn btn-default" ID="btnCheckReference" runat="server" Text="Check activities reference codes" OnClick="btnCheckReference_Click"></asp:Button>
+                                <asp:LinkButton CssClass="btn btn-default" ID="btnCheckReference" runat="server"  OnClick="lnkCheckReference_Click">Check activities reference codes</asp:LinkButton>
                             </div>
                         </div>
                         <asp:ListView ID="listviewActivities" runat="server" OnItemDataBound="listviewActivities_ItemDataBound">

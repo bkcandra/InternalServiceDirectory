@@ -370,8 +370,6 @@ namespace ISD.User.Web.UserControls
 
         public void Refresh()
         {
-
-
             if (Context.User.Identity.IsAuthenticated)
             {
                 RetrieveSavedList();

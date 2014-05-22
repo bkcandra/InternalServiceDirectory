@@ -1,0 +1,10 @@
+/* Add here all your css styles (customizations) */
+
+div.custom-menu-right {
+    float: right !important;
+}
+
+.custom-menu-right ul {
+    float:right !important;
+}
+

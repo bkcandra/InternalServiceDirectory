@@ -20,7 +20,18 @@ namespace ISD.Provider.Web
                             "~/Scripts/WebForms/GridView.js",
                             "~/Scripts/WebForms/DetailsView.js",
                             "~/Scripts/WebForms/TreeView.js",
-                            "~/Scripts/WebForms/WebParts.js"));
+                            "~/Scripts/WebForms/WebParts.js",
+                            //JS Global Compulsory
+                             "~/assets/plugins/jquery-1.10.2.min.js",
+                             "~/assets/plugins/jquery-migrate-1.2.1.min.js",
+                             "~/assets/plugins/bootstrap/js/bootstrap.min.js",
+                            //JS Implementing Plugins 
+                             "~/assets/plugins/back-to-top.js",
+                             "~/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js",
+                             "~/assets/plugins/revolution_slider/rs-plugin/js/jquery.themepunch.revolution.min.js",
+                            //JS Page Level 
+                             "~/assets/js/app.js",
+                             "~/assets/js/plugins/owl-carousel.js"));
 
             // Order is very important for these files to work, they have explicit dependencies
             bundles.Add(new ScriptBundle("~/bundles/MsAjaxJs").Include(

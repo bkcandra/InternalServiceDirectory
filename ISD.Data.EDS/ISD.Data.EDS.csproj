@@ -46,10 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataSetComponent.cs">
-      <DependentUpon>DataSetComponent.xsd</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="DataSetComponent.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -69,12 +65,11 @@
     <None Include="DataSetComponent.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSetComponent1.Designer.cs</LastGenOutput>
+      <LastGenOutput>DataSetComponent.Designer.cs</LastGenOutput>
     </None>
     <None Include="DataSetComponent.xss">
       <DependentUpon>DataSetComponent.xsd</DependentUpon>
     </None>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

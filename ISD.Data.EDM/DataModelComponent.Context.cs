@@ -29,6 +29,7 @@ namespace ISD.Data.EDM
         public virtual DbSet<ActivitiesLog> ActivitiesLog { get; set; }
         public virtual DbSet<ActivitiesLogGroup> ActivitiesLogGroup { get; set; }
         public virtual DbSet<Activity> Activity { get; set; }
+        public virtual DbSet<ActivityClinician> ActivityClinician { get; set; }
         public virtual DbSet<ActivityContactDetail> ActivityContactDetail { get; set; }
         public virtual DbSet<ActivityGrouping> ActivityGrouping { get; set; }
         public virtual DbSet<ActivityImage> ActivityImage { get; set; }
@@ -36,7 +37,6 @@ namespace ISD.Data.EDM
         public virtual DbSet<ActivityReferenceCode> ActivityReferenceCode { get; set; }
         public virtual DbSet<ActivityRewards> ActivityRewards { get; set; }
         public virtual DbSet<ActivitySchedule> ActivitySchedule { get; set; }
-        public virtual DbSet<ActivityScheduleDetail> ActivityScheduleDetail { get; set; }
         public virtual DbSet<ActivitySettings> ActivitySettings { get; set; }
         public virtual DbSet<ActivityUserAttendance> ActivityUserAttendance { get; set; }
         public virtual DbSet<ActivityUserLog> ActivityUserLog { get; set; }
@@ -46,6 +46,7 @@ namespace ISD.Data.EDM
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Category> Category { get; set; }
+        public virtual DbSet<Clinicians> Clinicians { get; set; }
         public virtual DbSet<ContactUs> ContactUs { get; set; }
         public virtual DbSet<Council> Council { get; set; }
         public virtual DbSet<CustomerContact> CustomerContact { get; set; }
@@ -80,6 +81,7 @@ namespace ISD.Data.EDM
         public virtual DbSet<WebConfiguration> WebConfiguration { get; set; }
         public virtual DbSet<WeblLogAction> WeblLogAction { get; set; }
         public virtual DbSet<WebLog> WebLog { get; set; }
+        public virtual DbSet<ClinicianTimetable> ClinicianTimetable { get; set; }
         public virtual DbSet<v_ActivitiesLogExplorer> v_ActivitiesLogExplorer { get; set; }
         public virtual DbSet<v_ActivityExpiryView> v_ActivityExpiryView { get; set; }
         public virtual DbSet<v_ActivityExplorer> v_ActivityExplorer { get; set; }
@@ -98,6 +100,7 @@ namespace ISD.Data.EDM
         public virtual DbSet<v_RewardExplorer> v_RewardExplorer { get; set; }
         public virtual DbSet<v_RewardUserExplorer> v_RewardUserExplorer { get; set; }
         public virtual DbSet<v_ScheduleCount> v_ScheduleCount { get; set; }
+        public virtual DbSet<v_SubServiceExplorer> v_SubServiceExplorer { get; set; }
         public virtual DbSet<v_SuburbExplorer> v_SuburbExplorer { get; set; }
         public virtual DbSet<v_UserAttendanceView> v_UserAttendanceView { get; set; }
         public virtual DbSet<v_UserExplorer> v_UserExplorer { get; set; }

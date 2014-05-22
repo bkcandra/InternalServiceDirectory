@@ -248,7 +248,7 @@ namespace ISD.Administration.Web.UserControls
             Attendanceview.DataSource = allactID;
             Attendanceview.DataBind();
         }
-        protected void btnCheckReference_Click(object sender, EventArgs e)
+        protected void lnkCheckReference_Click(object sender, EventArgs e)
         {
             BusinessFunctionComponent bfc = new BusinessFunctionComponent();
             var dt = new DataAccessComponent().RetrieveActivities();

@@ -10,8 +10,8 @@
     div.breaking {
         display: table-cell;
         word-break: break-all;
-        position:relative;
-        left:-2px;
+        position: relative;
+        left: -2px;
     }
 
     .TextIcon {
@@ -67,7 +67,7 @@
 <div id="divproductsListViewContent" runat="server">
     <asp:ListView ID="ListViewActivities" runat="server" DataSourceID="ods" OnItemDataBound="ListViewActivities_ItemDataBound"
         OnItemCommand="ListViewActivities_ItemCommand" OnPagePropertiesChanging="ListViewActivities_PagePropertiesChanging"
-        allowSorting="true" OnItemDeleted="ListViewActivities_ItemDeleted" 
+        allowSorting="true" OnItemDeleted="ListViewActivities_ItemDeleted"
         OnItemDeleting="ListViewActivities_ItemDeleting">
         <LayoutTemplate>
             <div id="ItemPlaceHolder" runat="server">
@@ -98,7 +98,7 @@
                     <tr>
                         <td align="left" style="text-align: justify; padding: 5px">
                             <span style="font-weight: bold">Description</span><br />
-                            <div id="divDescription" runat="server" >
+                            <div id="divDescription" runat="server">
                                 <asp:Label ID="lblShortDescription" runat="server" Text='<%#Eval("FullDescription").ToString().Length > 250 ? Eval("FullDescription").ToString().Substring(0,250) : Eval("FullDescription").ToString()%>'></asp:Label>
                                 <asp:HyperLink
                                     ID="HlnkReadMore" CssClass="hlnkReadMore" NavigateUrl="#" runat="server">&nbsp;&nbsp;[Read more...]</asp:HyperLink>
@@ -116,7 +116,8 @@
                         </td>
                         <td style="width: 30px; vertical-align: top; text-align: center" rowspan="2">
                             <asp:Image ID="imgStatus" runat="server" Style="max-height: 20px; max-width: 20px" />
-                        </td>
+         
+                             </td>
                     </tr>
                     <tr>
                         <td align="left" style="padding: 5px;">
@@ -128,7 +129,7 @@
                             <asp:HiddenField ID="HiddenField3" runat="server" Value='<%#Eval("StateID") %>' />
                             <asp:Label ID="lblPostCode" runat="server" Text='<%#Eval("PostCode") %>'></asp:Label>
                             <asp:HiddenField ID="HiddenField2" runat="server" Value='<%#Eval("PostCode") %>' />
-                             <asp:HiddenField ID="hdnModified" runat="server" Value='<%#Eval("ModifiedDateTime") %>' />
+                            <asp:HiddenField ID="hdnModified" runat="server" Value='<%#Eval("ModifiedDateTime") %>' />
                         </td>
                         <td style="vertical-align: top; padding: 5px;">
                             <asp:Label ID="lblType" runat="server" Text="" CssClass="TextIcon"></asp:Label>
@@ -162,6 +163,15 @@
             </Fields>
         </asp:DataPager>
     </div>
+    <div id="ItemCountBottom" runat="server" style="width: 100%; padding: 0.2em 0.5em;">
+        Showing:
+                <asp:Label ID="lblStartIndexBottom" runat="server"></asp:Label>&nbsp;-&nbsp;<asp:Label ID="lblEndIndexbottom"
+                    runat="server"></asp:Label>
+        &nbsp;of
+                <asp:Label ID="lblAmountBottom" runat="server" Text=""></asp:Label>
+        &nbsp;activities
+          
+    </div>
 </div>
 <div id="divproductsListViewCommand">
     <asp:HiddenField ID="hdnSearchKey" runat="server" />
@@ -169,24 +179,26 @@
     <asp:HiddenField ID="hdnStartRow" runat="server" />
     <asp:HiddenField ID="hdnProviderID" runat="server" />
     <asp:HiddenField ID="hdnCategoryID" runat="server" />
+    <asp:HiddenField ID="hdnSuburbID" runat="server" />
+    <asp:HiddenField ID="hdnAgeFrom" runat="server" />
+    <asp:HiddenField ID="hdnAgeTo" runat="server" />
     <asp:HiddenField ID="hdnPageSize" runat="server" />
+    <asp:HiddenField ID="hdnDateFrom" runat="server" />
+    <asp:HiddenField ID="hdnDateTo" runat="server" />
+    <asp:HiddenField ID="hdnTmTo" runat="server" />
+    <asp:HiddenField ID="hdnTmFrom" runat="server" />
+    <asp:HiddenField ID="hdnFiltered" runat="server" />
+    <asp:HiddenField ID="hdnMonFiltered" runat="server" />
+    <asp:HiddenField ID="hdnTueFiltered" runat="server" />
+    <asp:HiddenField ID="hdnWedFiltered" runat="server" />
+    <asp:HiddenField ID="hdnThuFiltered" runat="server" />
+    <asp:HiddenField ID="hdnFriFiltered" runat="server" />
+    <asp:HiddenField ID="hdnSatFiltered" runat="server" />
+    <asp:HiddenField ID="hdnSavedList" runat="server" />
+    <asp:HiddenField ID="hdnSunFiltered" runat="server" />
+    <asp:HiddenField ID="hdnTimespan" runat="server" />
     <asp:ObjectDataSource ID="ods" runat="server"></asp:ObjectDataSource>
 </div>
-<div style="width: 100%;">
-    <table id="tabShowAct" runat="server" style="width: 100%;">
-        <tr>
-            <td align="left" style="width: 50%;">Showing:
-                <asp:Label ID="lblStartIndex1" runat="server"></asp:Label>&nbsp;-
-                <asp:Label ID="lblEndIndex1"
-                    runat="server"></asp:Label>
-                &nbsp;of
-                <asp:Label ID="lblAmount1" runat="server" Text=""></asp:Label>
-                &nbsp;activities
-            </td>
-            <td id="tdPager2" runat="server" align="right" style="width: 50%;">&nbsp;
-            </td>
-        </tr>
-    </table>
-</div>
+
 
 

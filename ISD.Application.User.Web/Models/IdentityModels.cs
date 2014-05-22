@@ -27,6 +27,7 @@ namespace ISD.User.Web.Models
         }
     }
 
+
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()

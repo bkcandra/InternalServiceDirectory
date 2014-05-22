@@ -228,8 +228,25 @@
             <asp:HiddenField ID="hdnSortValue" runat="server" />
             <asp:HiddenField ID="hdnStartRow" runat="server" />
             <asp:HiddenField ID="hdnProviderID" runat="server" />
+            <asp:HiddenField ID="hdnSuburbID" runat="server" />
             <asp:HiddenField ID="hdnCategoryID" runat="server" />
             <asp:HiddenField ID="hdnPageSize" runat="server" />
+            <asp:HiddenField ID="hdnAgeFrom" runat="server" />
+            <asp:HiddenField ID="hdnTimespan" runat="server" />
+            <asp:HiddenField ID="hdnSunFiltered" runat="server" />
+            <asp:HiddenField ID="hdnTmFrom" runat="server" />
+            <asp:HiddenField ID="hdnTmTo" runat="server" />
+            <asp:HiddenField ID="hdnDateFrom" runat="server" />
+            <asp:HiddenField ID="hdnDateTo" runat="server" />
+
+
+            <asp:HiddenField ID="hdnMonFiltered" runat="server" />
+            <asp:HiddenField ID="hdnTueFiltered" runat="server" />
+            <asp:HiddenField ID="hdnWedFiltered" runat="server" />
+            <asp:HiddenField ID="hdnThuFiltered" runat="server" />
+            <asp:HiddenField ID="hdnFriFiltered" runat="server" />
+            <asp:HiddenField ID="hdnSatFiltered" runat="server" />
+            <asp:HiddenField ID="hdnAgeTo" runat="server" />
             <asp:ObjectDataSource ID="ods" runat="server"></asp:ObjectDataSource>
         </div>
         <div style="width: 100%;">

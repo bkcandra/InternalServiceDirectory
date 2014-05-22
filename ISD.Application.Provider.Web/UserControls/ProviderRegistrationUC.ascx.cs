@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -8,6 +9,8 @@ using System.Web.UI.WebControls;
 using ISD.DA;
 using ISD.EDS;
 using System.Web.Services;
+using ISD.Provider.Web;
+using ISD.Provider.Web.Models;
 using ISD.Util;
 
 using ISD.BF;
@@ -15,6 +18,9 @@ using ISD.BF;
 using System.Data;
 using BCUtility;
 using System.Text.RegularExpressions;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace HealthyClub.Providers.Web.UserControls
 {
@@ -179,7 +185,7 @@ namespace HealthyClub.Providers.Web.UserControls
 
         protected void CreateUser(String userID)
         {
-            
+
             DataSetComponent.ProviderProfilesRow dr = GetRegistrationData();
             dr.UserID = userID;
 
@@ -250,15 +256,15 @@ namespace HealthyClub.Providers.Web.UserControls
                 lblError.Visible = true;
                 error = true;
             }
-            
-            if (WebSecurity.UserExists(Username.Text))
-            {
-                if (!string.IsNullOrEmpty(lblError.Text))
-                    lblError.Text += "</br>";
-                lblError.Text += SystemConstants.ErrorUsernameTaken;
-                error = true;
-                lblError.Visible = true;
-            }
+
+            //if (WebSecurity.UserExists(Username.Text))
+            //{
+            //    if (!string.IsNullOrEmpty(lblError.Text))
+            //        lblError.Text += "</br>";
+            //    lblError.Text += SystemConstants.ErrorUsernameTaken;
+            //    error = true;
+            //    lblError.Visible = true;
+            //}
             if (new DataAccessComponent().ProviderNameExist(txtCompany.Text))
             {
                 if (!string.IsNullOrEmpty(lblError.Text))
@@ -296,15 +302,24 @@ namespace HealthyClub.Providers.Web.UserControls
             ValidateUser(out error);
             if (!error)
             {
-                var token = WebSecurity.CreateUserAndAccount(Username.Text, Password.Text, null, true);
-                // User cannot login as they need to confirm account first..
-                if (!Roles.RoleExists(SystemConstants.ProviderRole))
-                    Roles.CreateRole(SystemConstants.ProviderRole);
+                var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                var user = new ApplicationUser() { UserName = Username.Text, Email = Email.Text };
 
-                Roles.AddUserToRole(Username.Text, SystemConstants.ProviderRole);
-                Guid userID = new DataAccessComponent().RetrieveUserGUID(Username.Text);
 
-                if (userID != Guid.Empty)
+                RoleManager<IdentityRole> rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+                if (!rm.RoleExists(SystemConstants.AdministratorRole))
+                    rm.Create(new IdentityRole(SystemConstants.AdministratorRole));
+                manager.AddToRole(user.Id, SystemConstants.AdministratorRole);
+
+                string token = manager.GenerateEmailConfirmationToken(user.Id);
+                string callbackUrl = IdentityHelper.GetUserConfirmationRedirectUrl(token, user.Id);
+                //manager.SendEmail(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>.");
+
+
+
+                String userID = user.Id;
+
+                if (userID != Guid.Empty.ToString())
                     CreateUser(userID);
 
                 SendConfirmationEmail(userID, token);
@@ -317,7 +332,7 @@ namespace HealthyClub.Providers.Web.UserControls
 
         }
 
-        private void SendConfirmationEmail(Guid userID, string token)
+        private void SendConfirmationEmail(string userID, string token)
         {
             var MailConf = new DataAccessComponent().RetrieveWebConfiguration();
             var emTemp = new DataAccessComponent().RetrieveMailTemplate((int)SystemConstants.EmailTemplateType.ProviderWelcomeEmail);
@@ -413,10 +428,17 @@ namespace HealthyClub.Providers.Web.UserControls
             }
         }
 
-        protected void Username_TextChanged(object sender, EventArgs e)
+        protected async void Username_TextChanged(object sender, EventArgs e)
         {
             if (Username.Text.Length >= 3)
-                lblUsernameError.Visible = WebSecurity.UserExists(Username.Text);
+            {
+                var mgr = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                var user = await mgr.FindByNameAsync(Username.Text);
+                if (user == null)
+                    lblUsernameError.Visible = false;
+                else lblUsernameError.Visible = true;
+            }
+
         }
 
         protected void txtCompany_TextChanged(object sender, EventArgs e)
@@ -506,6 +528,6 @@ namespace HealthyClub.Providers.Web.UserControls
             }
         }
 
-        
+
     }
 }

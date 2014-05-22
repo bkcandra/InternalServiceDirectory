@@ -5,24 +5,21 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <section class="content-header">
-        <h1>User Account   
+      <section class="content-header">
+        <h1>User Accounts     
                     <small></small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
-
-            <li class="active">User Account</li>
+            <li class="active">User accounts</li>
         </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
-        <uc1:AccountManagerUC ID="AccountManagerUC1" runat="server" />
+           <uc1:AccountManagerUC ID="AccountManagerUC1" runat="server" />
     </section>
-
-
-
-
-
+    
+    
+      
 </asp:Content>

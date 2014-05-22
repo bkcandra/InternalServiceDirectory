@@ -199,8 +199,8 @@ namespace ISD.Administration.Web.UserControls
             dr.eligibilityDescription = txtEligibility.Text;
             dr.Price = txtFee.Text;
             dr.isApproved = false;
-            dr.isCommenceAnytime = radCommenceYes.Checked;
-            dr.isMembershipRequired = radIsMemberReqYes.Checked;
+            //dr.isCommenceAnytime = radCommenceYes.Checked;
+            //dr.isMembershipRequired = radIsMemberReqYes.Checked;
 
 
             var selectedCat = ActivityRegistrationCategory1.GetSelectedCategory();

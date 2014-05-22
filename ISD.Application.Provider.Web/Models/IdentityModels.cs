@@ -30,7 +30,7 @@ namespace ISD.Provider.Web.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("IdentityConnection", throwIfV1Schema: false)
         {
         }
 
@@ -51,10 +51,12 @@ namespace ISD.Provider.Web
 
         public static void SignIn(ApplicationUserManager manager, ApplicationUser user, bool isPersistent)
         {
+            
             IAuthenticationManager authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
             authenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             var identity = manager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
             authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
+
         }
 
         public const string ProviderNameKey = "providerName";

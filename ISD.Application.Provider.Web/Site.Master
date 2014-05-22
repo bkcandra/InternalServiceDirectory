@@ -1,71 +1,298 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="ISD.Provider.Web.SiteMaster" %>
 
-<!DOCTYPE html>
-
+<%@ Register TagPrefix="cust" Namespace="ISD.Provider.Web.Models" Assembly="ISD.Provider.Web" %>
 <html lang="en">
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
 <head runat="server">
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - My ASP.NET Application</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IECHS Internal Service Directory">
+    <meta name="author" content="Bina Candra">
+    <title><%: Page.Title %></title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
-    <webopt:bundlereference runat="server" path="~/Content/css" />
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Assets/css/custom.css" />
+    <link href="~/Assets/img/icon_ie.png" rel="shortcut icon" type="image/x-icon" />
 
+
+    <!-- CSS Global Compulsory-->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="shortcut icon" href="~/Assets/img/icon_ie.png">
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css">
+    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/plugins/revolution_slider/rs-plugin/css/settings.css">
+    <link rel="stylesheet" href="assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+
+    <!-- CSS Theme -->
+    <link rel="stylesheet" href="~/assets/css/themes/default.css">
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
 </head>
-<body>
+<body class="header-fixed boxed-layout container">
     <form runat="server">
-        <asp:ScriptManager runat="server">
+        <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
             <Scripts>
-                <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>
                 <%--Framework Scripts--%>
-                <asp:ScriptReference Name="MsAjaxBundle" />
                 <asp:ScriptReference Name="jquery" />
                 <asp:ScriptReference Name="bootstrap" />
                 <asp:ScriptReference Name="respond" />
-                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
-                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
-                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
-                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
-                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
-                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
-                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
-                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebForms.js" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Path="~/Scripts/WebForms/Focus.js" />
                 <asp:ScriptReference Name="WebFormsBundle" />
                 <%--Site Scripts--%>
             </Scripts>
-        </asp:ScriptManager>
+        </ajaxToolkit:ToolkitScriptManager>
+        <asp:ContentPlaceHolder ID="FeaturedContent" runat="server">
+        </asp:ContentPlaceHolder>
+        <div class="wrapper">
+            <!--=== Header ===-->
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" runat="server" href="~/">Application name</a>
+            <div class="header">
+                <!-- Topbar -->
+                <div class="col-md-1">
+                    <a class="navbar-brand" href="index.html">
+                        <asp:Image alt="Logo" ImageUrl="~/Assets/img/Logo_ie.bmp" Style="max-height: 90px; margin-top: 8px" ID="Image1" runat="server" />
+                    </a>
+
                 </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/About">About</a></li>
-                        <li><a runat="server" href="~/Contact">Contact</a></li>
-                    </ul>
-                    
+                <div class="col-md-11">
+
+                    <div class="topbar">
+
+                        <div class="container-fluid">
+                            <!-- Topbar Navigation -->
+                            <ul class="loginbar pull-right">
+                                <li>
+                                    <i class="fa fa-globe"></i>
+                                    <a>Languages</a>
+                                    <ul class="lenguages">
+                                        <li class="active">
+                                            <a href="#">English <i class="fa fa-check"></i></a>
+                                        </li>
+                                        <li><a href="#">Spanish</a></li>
+                                        <li><a href="#">Russian</a></li>
+                                        <li><a href="#">German</a></li>
+                                    </ul>
+                                </li>
+                                <li class="topbar-devider"></li>
+                                <li><a href="page_faq.html">Help</a></li>
+                                <li class="topbar-devider"></li>
+                                <asp:LoginView runat="server" ViewStateMode="Disabled" ID="HeadLoginView">
+                                    <AnonymousTemplate>
+                                        <li><a runat="server" href="~/Account/Register">Register</a></li>
+                                        <li class="topbar-devider"></li>
+                                        <li><a runat="server" href="~/Account/Login">Log in</a></li>
+
+                                    </AnonymousTemplate>
+                                    <LoggedInTemplate>
+                                        <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %> !</a></li>
+                                        <li class="topbar-devider"></li>
+                                        <li>
+                                            <asp:LoginStatus ID="HeadLoginName" runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                                        </li>
+
+                                    </LoggedInTemplate>
+                                </asp:LoginView>
+                            </ul>
+                            <!-- End Topbar Navigation -->
+                        </div>
+
+                    </div>
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="fa fa-bars"></span>
+                        </button>
+                    </div>
+                    <div class="navbar navbar-default" role="navigation">
+                        <div class="container-fluid ">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+
+
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                            <cust:ISDMenu ID="MenuNavigation" runat="server" CssClass="collapse navbar-collapse navbar-responsive-collapse"
+                                IncludeStyleBlock="False">
+                                <DynamicItemTemplate>
+                                    <%# Eval("Text") %>
+                                </DynamicItemTemplate>
+                                <Items>
+                                    <asp:MenuItem NavigateUrl="~" Text="Home" Value="Home"></asp:MenuItem>
+                                    <asp:MenuItem NavigateUrl="~/Activities/" Text="My Services" Value="My Activities"></asp:MenuItem>
+                                    <asp:MenuItem NavigateUrl="~/Report/" Text="My Reports" Value="Report"></asp:MenuItem>
+                                </Items>
+                                <LevelSubMenuStyles>
+                                    <asp:SubMenuStyle CssClass="nav navbar-nav" />
+                                    <asp:SubMenuStyle CssClass="dropdown-menu" />
+                                    <asp:SubMenuStyle CssClass="dropdown-submenu" />
+                                </LevelSubMenuStyles>
+                            </cust:ISDMenu>
+                            <!--/navbar-collapse-->
+                        </div>
+                    </div>
                 </div>
+
+                <!-- End Topbar -->
+
+                <!-- Navbar -->
+
+                <!-- End Navbar -->
             </div>
-        </div>
-        <div class="container body-content">
+            <!--=== End Header ===-->
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
-            <hr />
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
-            </footer>
+            <!--=== Slider ===-->
+
+            <!-- End Content Part -->
+
+            <!--=== Footer ===-->
+            <div class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 md-margin-bottom-40">
+                            <!-- About -->
+                            <div class="headline">
+                                <h2>About</h2>
+                            </div>
+                            <p class="margin-bottom-25 md-margin-bottom-40">Unify is an incredibly beautiful responsive Bootstrap Template for corporate and creative professionals.</p>
+                            <!-- End About -->
+
+                            <!-- Monthly Newsletter -->
+                            <div class="headline">
+                                <h2>Monthly Newsletter</h2>
+                            </div>
+                            <p>Subscribe to our newsletter and stay up to date with the latest news and deals!</p>
+                            <div class="footer-subsribe">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Email Address">
+                                    <span class="input-group-btn">
+                                        <button class="btn-u" type="button">Subscribe</button>
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- End Monthly Newsletter -->
+                        </div>
+                        <!--/col-md-4-->
+
+                        <div class="col-md-4 md-margin-bottom-40">
+                            <!-- Recent Blogs -->
+                            <div class="posts">
+                                <div class="headline">
+                                    <h2>Recent Blog Entries</h2>
+                                </div>
+                                <dl class="dl-horizontal">
+                                    <dt><a href="#">
+                                        <img src="assets/img/sliders/elastislide/6.jpg" alt="" /></a></dt>
+                                    <dd>
+                                        <p><a href="#">Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template</a></p>
+                                    </dd>
+                                </dl>
+                                <dl class="dl-horizontal">
+                                    <dt><a href="#">
+                                        <img src="assets/img/sliders/elastislide/10.jpg" alt="" /></a></dt>
+                                    <dd>
+                                        <p><a href="#">Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template</a></p>
+                                    </dd>
+                                </dl>
+                                <dl class="dl-horizontal">
+                                    <dt><a href="#">
+                                        <img src="assets/img/sliders/elastislide/11.jpg" alt="" /></a></dt>
+                                    <dd>
+                                        <p><a href="#">Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template</a></p>
+                                    </dd>
+                                </dl>
+                            </div>
+                            <!-- End Recent Blogs -->
+                        </div>
+                        <!--/col-md-4-->
+
+                        <div class="col-md-4">
+                            <!-- Contact Us -->
+                            <div class="headline">
+                                <h2>Contact Us</h2>
+                            </div>
+                            <address class="md-margin-bottom-40">
+                                25, Lorem Lis Street, Orange
+                                <br />
+                                California, US
+                                <br />
+                                Phone: 800 123 3456
+                                <br />
+                                Fax: 800 123 3456
+                                <br />
+                                Email: <a href="mailto:info@anybiz.com" class="">info@anybiz.com</a>
+                            </address>
+                            <!-- End Contact Us -->
+
+                            <!-- Social Links -->
+                            <div class="headline">
+                                <h2>Stay Connected</h2>
+                            </div>
+                            <ul class="social-icons">
+                                <li><a href="#" data-original-title="Feed" class="social_rss"></a></li>
+                                <li><a href="#" data-original-title="Facebook" class="social_facebook"></a></li>
+                                <li><a href="#" data-original-title="Twitter" class="social_twitter"></a></li>
+                                <li><a href="#" data-original-title="Goole Plus" class="social_googleplus"></a></li>
+                                <li><a href="#" data-original-title="Pinterest" class="social_pintrest"></a></li>
+                                <li><a href="#" data-original-title="Linkedin" class="social_linkedin"></a></li>
+                                <li><a href="#" data-original-title="Vimeo" class="social_vimeo"></a></li>
+                            </ul>
+                            <!-- End Social Links -->
+                        </div>
+                        <!--/col-md-4-->
+                    </div>
+                </div>
+            </div>
+            <!--/footer-->
+            <!--=== End Footer ===-->
+
+            <!--=== Copyright ===-->
+            <div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>
+                                2014 &copy; Unify. ALL Rights Reserved. 
+                        <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="index.html">
+                                <img class="pull-right" id="logo-footer" src="assets/img/logo2-default.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/copyright-->
+            <!--=== End Copyright ===-->
         </div>
+        <!--/wrapper-->
+        <script type="text/javascript">
+            jQuery(document).ready(function () {
+                App.init();
+                Index.initRevolutionSlider();
+            });
+        </script>
     </form>
+
 </body>
 </html>
+
+
+
+
+

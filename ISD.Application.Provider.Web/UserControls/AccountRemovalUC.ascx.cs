@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 
 namespace HealthyClub.Provider.Web.UserControls
@@ -29,7 +30,7 @@ namespace HealthyClub.Provider.Web.UserControls
         private void CheckUserStatus()
         {
             DataAccessComponent dac = new DataAccessComponent();
-            var drP = dac.RetrieveProviderProfiles( IdentityHelper.GetUserIdFromRequest(Request));
+            var drP = dac.RetrieveProviderProfiles(IdentityHelper.GetUserIdFromRequest(Request));
 
             if (drP != null)
             {
@@ -69,13 +70,14 @@ namespace HealthyClub.Provider.Web.UserControls
         protected void btnDelete_Click(object sender, EventArgs e)
         {
             string usr = Context.User.Identity.Name;
-            
+
             if (!string.IsNullOrEmpty(txtPassword.Text))
             {
-                if (Membership.ValidateUser(usr, txtPassword.Text))
+
+                if (Context.GetOwinContext().GetUserManager<ApplicationUserManager>().Find(usr, txtPassword.Text) != null)
                 {
                     DataAccessComponent dac = new DataAccessComponent();
-                    
+
                     string err = "";
                     if (dac.DeactivateUser(usr, IdentityHelper.GetUserIdFromRequest(Request), out err))
                     {

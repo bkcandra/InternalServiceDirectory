@@ -1,10 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UserListUC.ascx.cs" Inherits="ISD.Administration.Web.UserControls.UserListUC" %>
-<script src="../Scripts/DataTables-1.9.4/media/js/jquery.dataTables.js"></script>
-<style type="text/css" title="currentStyle">
-    @import "../Content/DataTables-1.9.4/media/css/demo_page.css";
-    @import "../Content/DataTables-1.9.4/media/css/demo_table_jui.css";
-    @import "../Content/themes/smoothness/jquery-ui.css";
-</style>
+<link href="../Content/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+
 <script>
     function fnFormatUserDetails(userTable, userTr) {
         var userData = userTable.fnGetData(userTr);
@@ -30,7 +26,7 @@
      */
         var nCloneTh = document.createElement('th');
         var nCloneTd = document.createElement('td');
-        nCloneTd.innerHTML = '<img src="../Content/img/details_open.png">';
+        nCloneTd.innerHTML = '<img src="../Content/images/details_open.png">';
         nCloneTd.className = "center";
 
         $('#tblUser thead tr').each(function () {
@@ -68,12 +64,12 @@
             var userTr = $(this).parents('tr')[0];
             if (userTable.fnIsOpen(userTr)) {
                 /* This row is already open - close it */
-                this.src = "../Content/img/details_open.png";
+                this.src = "../Content/images/details_open.png";
                 userTable.fnClose(userTr);
             }
             else {
                 /* Open this row */
-                this.src = "../Content/img/details_close.png";
+                this.src = "../Content/images/details_close.png";
                 userTable.fnOpen(userTr, fnFormatUserDetails(userTable, userTr), 'details');
             }
         });
@@ -81,25 +77,31 @@
 </script>
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
     <ContentTemplate>
-        <div id="divError" runat="server" class="message error" visible="false">
-            <h5>Error!</h5>
-            <p>
-                <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
-            </p>
+        <div id="divError" runat="server" class="alert alert-danger alert-dismissable" visible="false">
+            <i class="fa fa-warning"></i>
+            <button class="close" aria-hidden="true" type="button" data-dismiss="alert">×</button>
+            <b>Error!</b>
+            <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
         </div>
-        <div id="divSuccess" runat="server" class="message success" visible="false">
-            <h5>Success!</h5>
-            <p>
-                <asp:Label ID="lblStatus" runat="server" Text="Label"></asp:Label>
-            </p>
+        <div id="divSuccess" runat="server" class="alert alert-success alert-dismissable" visible="false">
+            <i class="fa fa-check"></i>
+            <button class="close" aria-hidden="true" type="button" data-dismiss="alert">×</button>
+            <b>Success!</b>
+            <asp:Label ID="lblStatus" runat="server" Text=""></asp:Label>
         </div>
+        
 
-        <asp:LinkButton ID="lnkDelete" runat="server" OnClick="lnkDelete_Click" OnClientClick="return confirm('This action will DELETE SELECTED Provider AND ITS related content, Are You Sure ?');">Delete Selected</asp:LinkButton>
-        &nbsp;&nbsp;&nbsp;
-        <asp:HyperLink ID="lnkExport" runat="server" Target="_blank" NavigateUrl="~/Report/Provider.aspx">Export to csv</asp:HyperLink>
+        <div class="margin">
+                            <div class="btn-group">
+                                 <asp:LinkButton ID="lnkDelete" runat="server" CssClass="btn btn-default" OnClick="lnkDelete_Click" OnClientClick="return confirm('This action will DELETE SELECTED Provider AND ITS related content, Are You Sure ?');">Delete Selected</asp:LinkButton>
+      
+        <asp:HyperLink ID="lnkExport" runat="server" Target="_blank" CssClass="btn btn-default" NavigateUrl="~/Report/Provider.aspx">Export to csv</asp:HyperLink>
+        
+  </div>  </div>
+       
         <asp:ListView ID="listviewActivities" runat="server" OnItemDataBound="listviewActivities_ItemDataBound" OnItemCommand="listviewActivities_ItemCommand">
             <LayoutTemplate>
-                <table id="tblUser" cellpadding="0" cellspacing="0" border="0" class="display">
+                <table id="tblUser" cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>&nbsp;</th>
@@ -202,3 +204,8 @@
         <asp:ObjectDataSource ID="ods" runat="server"></asp:ObjectDataSource>
     </ContentTemplate>
 </asp:UpdatePanel>
+<!-- DATA TABES SCRIPT -->
+<script src="../Scripts/datatables/jquery.dataTables.js" type="text/javascript"></script>
+<script src="../Scripts/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
+<!-- AdminLTE App -->
+<script src="../Scripts/AdminLTE/app.js" type="text/javascript"></script>

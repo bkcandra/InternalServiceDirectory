@@ -74,17 +74,17 @@ namespace HealthyClub.Providers.Web.UserControls
             }
         }
 
-        public Guid ProviderID
+        public string ProviderID
         {
             get
             {
                 if (!string.IsNullOrEmpty(hdnProviderID.Value))
-                    return new Guid(hdnProviderID.Value);
-                else return Guid.Empty;
+                    return hdnProviderID.Value;
+                else return Guid.Empty.ToString();
             }
             set
             {
-                hdnProviderID.Value = value.ToString();
+                hdnProviderID.Value = value;
             }
         }
 
@@ -165,7 +165,7 @@ namespace HealthyClub.Providers.Web.UserControls
 
         }
 
-        internal void initUploader(Guid providerID, string key)
+        internal void initUploader(string providerID, string key)
         {
             ActionKey = key;
             ProviderID = providerID;

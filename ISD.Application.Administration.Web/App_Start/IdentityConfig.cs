@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using ISD.Administration.Web.Models;
 using Microsoft.Owin.Security;
+using System.Web.Helpers;
 
 namespace ISD.Administration.Web
 {
@@ -16,11 +17,14 @@ namespace ISD.Administration.Web
         public ApplicationUserManager(IUserStore<ApplicationUser> store)
             : base(store)
         {
-        }
+           }
+
+
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
+            manager.PasswordHasher = new SimplePasswordHasher();
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {
@@ -62,6 +66,23 @@ namespace ISD.Administration.Web
                 manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("Healthy Australia Club"));
             }
             return manager;
+        }
+    }
+
+
+
+    public class SimplePasswordHasher : IPasswordHasher
+    {
+        public string HashPassword(string password)
+        {
+            return Crypto.HashPassword(password);
+        }
+
+        public PasswordVerificationResult VerifyHashedPassword(string hashedPassword, string providedPassword)
+        {
+            if (Crypto.VerifyHashedPassword(hashedPassword, providedPassword))
+                return PasswordVerificationResult.Success;
+            else return PasswordVerificationResult.Failed;
         }
     }
 

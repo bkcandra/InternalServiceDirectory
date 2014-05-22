@@ -117,7 +117,7 @@ namespace HealthyClub.Provider.Web.Activities
                 var drImageDetail = ActivityRegistrationImageUC.GetImageDetail();
                 var dtImages = ActivityRegistrationImageUC.GetImages();
 
-                BusinessFunctionComponent.SaveActivity(drDetail, contactDetails, drActGrouping, dtActSchedule, drImageDetail, dtImages, out actID);
+                new BusinessFunctionComponent().SaveActivity(drDetail, contactDetails, drActGrouping, dtActSchedule, drImageDetail, dtImages, out actID);
 
 
                 Response.Redirect("~/Activities/");

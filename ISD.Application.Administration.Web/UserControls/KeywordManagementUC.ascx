@@ -1,29 +1,12 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="KeywordManagementUC.ascx.cs" Inherits="ISD.Administration.Web.UserControls.KeywordManagementUC" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <script type="text/javascript">
-    function Ok() {
-        var btnSave = document.getElementById('<%= btnSave.ClientID %>');
-
-        if (btnSave != null) {
-            btnSave.click();
-        }
-
-    }
-    function Cancel() {
-        var btnCancel = document.getElementById('<%= btnCancel.ClientID %>');
-
-        if (btnCancel != null) {
-            btnCancel.click();
-        }
-
+    function openModal() {
+        $('#myModal').modal('show');
     }
 </script>
 <style type="text/css">
-    .modalBackground {
-        background-color: #DBDBDB;
-        opacity: 0.8;
-    }
-
+   
     .style1 {
         width: 4px;
         vertical-align: top;
@@ -120,60 +103,64 @@
 </div>
 <asp:ObjectDataSource ID="ods" runat="server"></asp:ObjectDataSource>
 <asp:HiddenField ID="hdnSortParameter" runat="server" />
-<div id="divThesaurusPopUp" runat="server" style="border-style: solid; border-width: thin; background-color: white"
-    class="ModalWindow">
-    <table width="600px">
-        <tr>
-            <td class="style4">Collection Name
-            </td>
-            <td class="style1">:
-            </td>
-            <td>
-                <asp:TextBox ID="txtName" runat="server" Width="250px"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtName"
-                    ErrorMessage="Password is required." ToolTip="Password is required." ValidationGroup="CreateNewProvider"><label class="required">* Required</label></asp:RequiredFieldValidator>
-            </td>
-        </tr>
-        <tr>
-            <td class="style4">Description
-            </td>
-            <td class="style1">:
-            </td>
-            <td>
-                <asp:TextBox ID="txtDescription" runat="server" Width="250px"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td class="style5">
-                <b>Synonym(s)<br />
-                </b><strong><span class="style3">Separate with semicolon(;)</span></strong>
-                <asp:HiddenField ID="hdnThesaurusID" runat="server" />
-                <asp:HiddenField ID="hdnThesaurusKeyID" runat="server" />
-            </td>
-            <td class="style1">:
-            </td>
-            <td class="style6">
-                <asp:TextBox ID="txtSynonims" runat="server" TextMode="MultiLine" Rows="3" Width="300px"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtSynonims"
-                    ErrorMessage="Synonym(s) is required." ToolTip="Synonym(s) is required." ValidationGroup="CreateNewProvider"><label Class="required">* Required</label></asp:RequiredFieldValidator>
-            </td>
-        </tr>
-        <tr>
-            <td class="style2">&nbsp;
-            </td>
-            <td class="style1">&nbsp;
-            </td>
-            <td>
-                <asp:Button ID="btnOk" runat="server" Text="Save" />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
-            </td>
-        </tr>
-    </table>
-</div>
-<asp:ModalPopupExtender ID="ModalPopupExtender1" runat="server" CancelControlID="btnCancel"
-    OkControlID="btnOk" OnOkScript="Ok()" PopupControlID="divThesaurusPopUp" TargetControlID="lnkNew"
-    BackgroundCssClass="modalBackground">
-</asp:ModalPopupExtender>
-<asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Style="display: none" />
+
+
+<asp:Button ID="btnSave" runat="server" Style="display: none" />
 <asp:HiddenField ID="hdnType" runat="server" />
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title" id="myModalLabel">Extend Expiry date</h4>
+            </div>
+            <div class="modal-body">
+                <table width="600px">
+                    <tr>
+                        <td class="style4">Collection Name
+                        </td>
+                        <td class="style1">:
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtName" runat="server" Width="250px"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtName"
+                                ErrorMessage="Password is required." ToolTip="Password is required." ValidationGroup="CreateNewProvider"><label class="required">* Required</label></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="style4">Description
+                        </td>
+                        <td class="style1">:
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtDescription" runat="server" Width="250px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="style5">
+                            <b>Synonym(s)<br />
+                            </b><strong><span class="style3">Separate with semicolon(;)</span></strong>
+                            <asp:HiddenField ID="hdnThesaurusID" runat="server" />
+                            <asp:HiddenField ID="hdnThesaurusKeyID" runat="server" />
+                        </td>
+                        <td class="style1">:
+                        </td>
+                        <td class="style6">
+                            <asp:TextBox ID="txtSynonims" runat="server" TextMode="MultiLine" Rows="3" Width="300px"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtSynonims"
+                                ErrorMessage="Synonym(s) is required." ToolTip="Synonym(s) is required." ValidationGroup="CreateNewProvider"><label Class="required">* Required</label></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <asp:Button CssClass="btn btn-default" ID="Button1" runat="server" OnClick="btnSave_Click" Text="Save"></asp:Button>
+
+
+            </div>
+        </div>
+    </div>
+</div>

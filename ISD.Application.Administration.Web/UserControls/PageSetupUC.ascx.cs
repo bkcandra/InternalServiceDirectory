@@ -152,7 +152,7 @@ namespace ISD.Administration.Web.UserControls
             {
                 hdnPageType.Value = value.ToString();
                 if (PageType == (int)SystemConstants.ItemType.Standard)
-                    lblPageSetup.Text = "Page Setup";
+                    lblPageSetup.Text = "Page Preview";
                 /*else if (PageType == (int)SystemConstants.ItemType.Tab)
                     lblPageSetup.Text = "Tabbed Page Setup";
                 else if (PageType == (int)SystemConstants.ItemType.Sidebar)

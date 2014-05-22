@@ -195,7 +195,7 @@ namespace ISD.Administration.Web.UserControls
             var dr = new DataSetComponent.RewardDataTable().NewRewardRow();
 
             dr.ID = 0;
-            Guid spnid = new Guid(ddlsponsors.SelectedValue);
+            String spnid = ddlsponsors.SelectedValue;
             dr.ProviderID = spnid;
 
 

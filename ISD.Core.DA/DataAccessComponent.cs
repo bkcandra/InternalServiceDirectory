@@ -305,7 +305,7 @@ namespace ISD.DA
             return dt;
         }
 
-      
+
 
         public int RetrieveCategoriesCount()
         {
@@ -8154,7 +8154,26 @@ namespace ISD.DA
 
 
 
+
+
+
+        public object RetrieveProviderClinicians(string providerID)
+        {
+            ISDEntities ent = new ISDEntities();
+
+            var query = from c in ent.Clinicians
+                        where c.ProviderID == providerID
+                        select c;
+            if (query.AsEnumerable() != null)
+            {
+                var dt = new DataSetComponent.CliniciansDataTable();
+                ObjectHandler.CopyEnumerableToDataTable(query.AsEnumerable(), dt, LoadOption.PreserveChanges);
+                return dt;
+            }
+            else return null;
+
+        }
     }
 
-    
+
 }

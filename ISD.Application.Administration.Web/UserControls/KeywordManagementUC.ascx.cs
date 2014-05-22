@@ -90,7 +90,7 @@ namespace ISD.Administration.Web.UserControls
                     hdnThesaurusID.Value = dr.ID.ToString();
                     hdnThesaurusKeyID.Value = dr.KeywordID.ToString();
                     UIMode = SystemConstants.FormMode.Edit.ToString();
-                    ModalPopupExtender1.Show();
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
                 }
             }
         }
@@ -187,7 +187,9 @@ namespace ISD.Administration.Web.UserControls
         {
             DataSetComponent.KeyCollectionRow dr = new DataSetComponent.KeyCollectionDataTable().NewKeyCollectionRow();
             dr.Name = txtName.Text;
-            dr.Description = txtDescription.Text;
+            if (string.IsNullOrEmpty(txtDescription.Text))
+                txtDescription.Text = string.Empty;
+            else dr.Description = txtDescription.Text;
             if (hdnThesaurusID.Value != "")
                 dr.ID = Convert.ToInt32(hdnThesaurusID.Value);
             else dr.ID = 0;
@@ -203,7 +205,7 @@ namespace ISD.Administration.Web.UserControls
         {
             txtName.Text = txtDescription.Text = txtSynonims.Text = hdnThesaurusID.Value = hdnThesaurusKeyID.Value = string.Empty;
             UIMode = SystemConstants.FormMode.New.ToString();
-            ModalPopupExtender1.Show();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
         }
 
     }

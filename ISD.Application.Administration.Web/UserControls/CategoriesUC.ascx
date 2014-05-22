@@ -3,36 +3,7 @@
 
 
 
-<script type="text/javascript">
-    function Ok() {
-        //alert('Move all item in this folder to ----------------');
-        var btnMove = document.getElementById('<%= btnMove.ClientID %>');
 
-        if (btnMove != null) {
-            btnMove.click();
-        }
-
-    }
-
-    function Ok1() {
-        //alert('Move all item in this folder to ----------------');
-        var btnMove1 = document.getElementById('<%= btnMove1.ClientID %>');
-
-        if (btnMove1 != null) {
-            btnMove1.click();
-        }
-
-    }
-    function Cancel() {
-        //alert('Move all item in this folder to ----------------');
-        var btnCancelPopUp = document.getElementById('<%= btnCancelPopUp.ClientID %>');
-
-        if (btnCancelPopUp != null) {
-            btnCancelPopUp.click();
-        }
-
-    }
-</script>
 <style type="text/css">
     .style1 {
         width: 75px;
@@ -96,47 +67,11 @@
 <div id="divLnkMenu" runat="server">
     <asp:LinkButton ID="lnkNew" runat="server" OnClick="lnkNew_Click">New</asp:LinkButton>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <asp:LinkButton ID="lnkMove" runat="server">Move</asp:LinkButton>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:LinkButton ID="lnkMove" runat="server" data-toggle="modal" data-target="#myModal">Move</asp:LinkButton>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:LinkButton ID="lnkDelete" runat="server" OnClick="lnkDelete_Click" OnClientClick="return confirm('This action will DELETE ALL PRODUCT AND CATEGORY under selected Category, Are you sure ?')">Delete</asp:LinkButton>
 </div>
-<ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="lnkMove"
-    PopupControlID="divPopMoveDestination" CancelControlID="lnkCancel" OkControlID="lnkOk"
-    OnOkScript="Ok()">
-</ajaxToolkit:ModalPopupExtender>
-<asp:Button ID="btnMove" runat="server" Style="display: none" OnClick="btnMove_Click"></asp:Button>
-<div id="divPopMoveDestination" runat="server" style="border: medium ridge #000000; background-color: #FFFFFF; width: 450px;">
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-        <ContentTemplate>
-            <div id="divMoveDestinationTitle" style="border-color: #000000; width: 100%; border-bottom-style: solid; border-bottom-width: thin; font-size: 14px; font-weight: bold;">
-                <asp:Label ID="lblMoveDestinationTitle" runat="server" Text=" Move Data"></asp:Label>
-            </div>
-            <div id="divMoveDestinationContent">
-                <table width="100%">
-                    <tr>
-                        <td class="style1">Destination
-                        </td>
-                        <td class="style2">:
-                        </td>
-                        <td>
-                            <asp:DropDownList ID="DropDownList1" runat="server">
-                                <asp:ListItem Selected="True" Value="0">=Choose Destination=</asp:ListItem>
-                            </asp:DropDownList>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="style1"></td>
-                        <td class="style2"></td>
-                        <td align="left">
-                            <asp:LinkButton ID="lnkOk" runat="server">Ok</asp:LinkButton>
-                            &nbsp;&nbsp;
-                            <asp:LinkButton ID="lnkCancel" runat="server">Cancel</asp:LinkButton>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </ContentTemplate>
-    </asp:UpdatePanel>
-</div>
+
+
 <div id="BrandsGridView">
     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" Width="90%"
         AllowSorting="True" OnRowCommand="GridView1_RowCommand" OnRowDataBound="GridView1_RowDataBound"
@@ -221,10 +156,37 @@
         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
     </asp:GridView>
 </div>
-<asp:Button ID="btnMove1" runat="server" Style="display: none" OnClick="btnMove1_Click"></asp:Button>
-<asp:Button ID="btnCancelPopUp" runat="server" Style="display: none" OnClick="btnCancelPopUp_Click"></asp:Button>
 <asp:ObjectDataSource ID="ods" runat="server"></asp:ObjectDataSource>
 <asp:HiddenField ID="hdnCurrentCategoryID" runat="server" />
 <div>
     <asp:HiddenField ID="hdnSortParameter" runat="server" />
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h4 class="modal-title" id="myModalLabel">Extend Expiry date</h4>
+                    </div>
+                    <div class="modal-body">
+                        <asp:DropDownList ID="DropDownList1" runat="server">
+                            <asp:ListItem Selected="True" Value="0">=Choose Destination=</asp:ListItem>
+                        </asp:DropDownList>
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <asp:Button CssClass="btn btn-default" ID="Button1" runat="server" OnClick="btnMove_Click" Text="Move category"></asp:Button>
+
+
+                    </div>
+                </div>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
 </div>

@@ -29,6 +29,8 @@ namespace ISD.Administration.Web.UserControls
         {
             if (!IsPostBack)
                 Refresh();
+            gridView1.HeaderRow.TableSection = TableRowSection.TableHeader;
+            gridView1.FooterRow.TableSection = TableRowSection.TableFooter;
         }
 
         private void Refresh()

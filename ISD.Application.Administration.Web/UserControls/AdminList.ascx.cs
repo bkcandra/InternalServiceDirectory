@@ -27,6 +27,7 @@ namespace ISD.Administration.Web.UserControls
             {
                 Refresh();
             }
+           
         }
 
         private void Refresh()

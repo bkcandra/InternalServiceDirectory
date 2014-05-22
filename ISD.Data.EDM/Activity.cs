@@ -18,12 +18,12 @@ namespace ISD.Data.EDM
         {
             this.ActivitiesLogGroup = new HashSet<ActivitiesLogGroup>();
             this.ActivityUserAttendance = new HashSet<ActivityUserAttendance>();
+            this.ActivityClinician = new HashSet<ActivityClinician>();
             this.ActivityContactDetail = new HashSet<ActivityContactDetail>();
             this.ActivityGrouping = new HashSet<ActivityGrouping>();
             this.ActivityImage = new HashSet<ActivityImage>();
             this.ActivityReferenceCode = new HashSet<ActivityReferenceCode>();
             this.ActivityRewards = new HashSet<ActivityRewards>();
-            this.ActivityScheduleDetail = new HashSet<ActivityScheduleDetail>();
             this.ActivitySchedule = new HashSet<ActivitySchedule>();
             this.ActivitySettings = new HashSet<ActivitySettings>();
             this.ActivityVisitor = new HashSet<ActivityVisitor>();
@@ -53,18 +53,18 @@ namespace ISD.Data.EDM
         public string Keywords { get; set; }
         public Nullable<int> TimetableType { get; set; }
         public Nullable<bool> isApproved { get; set; }
-        public Nullable<bool> isCommenceAnytime { get; set; }
-        public Nullable<bool> isMembershipRequired { get; set; }
+        public Nullable<bool> isPrimary { get; set; }
+        public Nullable<int> PrimaryServiceID { get; set; }
     
         public virtual ICollection<ActivitiesLogGroup> ActivitiesLogGroup { get; set; }
         public virtual ProviderProfiles ProviderProfiles { get; set; }
         public virtual ICollection<ActivityUserAttendance> ActivityUserAttendance { get; set; }
+        public virtual ICollection<ActivityClinician> ActivityClinician { get; set; }
         public virtual ICollection<ActivityContactDetail> ActivityContactDetail { get; set; }
         public virtual ICollection<ActivityGrouping> ActivityGrouping { get; set; }
         public virtual ICollection<ActivityImage> ActivityImage { get; set; }
         public virtual ICollection<ActivityReferenceCode> ActivityReferenceCode { get; set; }
         public virtual ICollection<ActivityRewards> ActivityRewards { get; set; }
-        public virtual ICollection<ActivityScheduleDetail> ActivityScheduleDetail { get; set; }
         public virtual ICollection<ActivitySchedule> ActivitySchedule { get; set; }
         public virtual ICollection<ActivitySettings> ActivitySettings { get; set; }
         public virtual ICollection<ActivityVisitor> ActivityVisitor { get; set; }

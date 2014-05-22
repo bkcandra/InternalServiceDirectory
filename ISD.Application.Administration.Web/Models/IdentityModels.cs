@@ -13,6 +13,7 @@ namespace ISD.Administration.Web.Models
     // You can add User data for the user by adding more properties to your User class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+       
         public Task<ClaimsIdentity> GenerateUserIdentityAsync(ApplicationUserManager manager)
         {
             return Task.FromResult(GenerateUserIdentity(manager));
@@ -25,6 +26,7 @@ namespace ISD.Administration.Web.Models
             // Add custom user claims here
             return userIdentity;
         }
+       
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
