@@ -60,7 +60,6 @@
         </asp:ContentPlaceHolder>
         <div class="wrapper">
             <!--=== Header ===-->
-
             <div class="header">
                 <!-- Topbar -->
                 <div class="col-md-1">
@@ -284,7 +283,6 @@
         <script type="text/javascript">
             jQuery(document).ready(function () {
                 App.init();
-                Index.initRevolutionSlider();
             });
         </script>
     </form>

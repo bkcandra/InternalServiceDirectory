@@ -128,8 +128,6 @@ namespace ISD.Provider.Web
             int x = 0;
             foreach (DataSetComponent.v_MenuRow drParent in dt)
             {
-
-
                 if (drParent.LinkType == 1)
                 {
                     x++;

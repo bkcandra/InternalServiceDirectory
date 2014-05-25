@@ -16,7 +16,7 @@
                         data-speed="300"
                         data-start="800"
                         data-easing="easeOutExpo">
-                        OVER 
+                        OVER
                          <span style="color: #ffcc00;">7000</span>
                         SATISFIED CUSTOMERS
                     </div>-->
@@ -83,7 +83,7 @@
                         <img alt="" src="assets/img/main/6.jpg" class="img-responsive margin-bottom-20">
                     </div>
                     <div class="col-sm-8">
-                        <p>This page is for organisations who are interested in being part of the service directory  or are already registered as a Service Provider.</p>
+                        <p>This page is for organisations who are interested in being part of the service directory or are already registered as a Service Provider.</p>
                         <ul class="list-unstyled margin-bottom-20">
                             <li><i class="fa fa-check color-green"></i>List services provider by your organisation</li>
                             <li><i class="fa fa-check color-green"></i>Manage clinicians for your services</li>
@@ -100,19 +100,19 @@
                 <dl class="dl-horizontal">
                     <dt><a href="#"><img src="assets/img/sliders/elastislide/6.jpg" alt=""></a></dt>
                     <dd>
-                        <p><a href="#">Service #1</a></p> 
+                        <p><a href="#">Service #1</a></p>
                     </dd>
                 </dl>
                 <dl class="dl-horizontal">
                     <dt><a href="#"><img src="assets/img/sliders/elastislide/10.jpg" alt=""></a></dt>
                     <dd>
-                        <p><a href="#">Service #2</a></p> 
+                        <p><a href="#">Service #2</a></p>
                     </dd>
                 </dl>
                 <dl class="dl-horizontal">
                     <dt><a href="#"><img src="assets/img/sliders/elastislide/11.jpg" alt=""></a></dt>
                     <dd>
-                        <p><a href="#">Service #3</a></p> 
+                        <p><a href="#">Service #3</a></p>
                     </dd>
                 </dl>
             </div>
@@ -125,7 +125,7 @@
               
                 <p>
                         Currently we're a pilot scheme in Boroondara and are aiming to go national in the future. The Club's philosophy is that good health can be achieved by participating in activities that look after our physical, mental and social health and well-being.
-We want organisations who run healthy activities in Boroondara to list them with with on our website.  It is free to be part of the Club and you can promote your activity, increase your member enrolments and produced customised reports and timetables.
+We want organisations who run healthy activities in Boroondara to list them with with on our website. It is free to be part of the Club and you can promote your activity, increase your member enrolments and produced customised reports and timetables.
                     </p>
             </div>
         </div>

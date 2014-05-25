@@ -1,0 +1,74 @@
+﻿@using System.Web.UI.WebControls
+@using ISD.Application.provider.MVC.Models
+@model LoginViewModel
+
+@{
+    ViewBag.Title = "ISD Log in";
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<div class="breadcrumbs">
+    <div class="container">
+        <h1 class="pull-left">Login</h1>
+        <ul class="pull-right breadcrumb">
+            <li>
+                <a href="@Url.Content("~")">content</a>
+            </li>
+
+            <li><a href="">Account</a></li>
+            <li class="active">Login</li>
+        </ul>
+    </div>
+    <!--/container-->
+</div>
+
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="container content">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                <div class="reg-page">
+                    <div class="reg-header">
+                        <h2>Login to your account</h2>
+                    </div>
+                    <div class="input-group">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @PlaceHolder = "Email" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    <div class="margin-bottom-20"></div><div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control",@PlaceHolder ="Password" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    <div class="margin-bottom-20"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)
+                        </div>
+                        <div class="col-md-6">
+                            <input type="submit" value="Log in" class="btn-u pull-right" />
+                        </div>
+                    </div>
+                    <hr>
+                    <h4>Forget your Password ?</h4>
+                    <p>
+                        no worries,
+                        @Html.ActionLink("click here", "ForgotPassword")
+                        to reset your password.
+                    </p>
+                    @Html.ActionLink("Register as a new user", "Register")
+                </div>
+            </div>
+        </div>
+        <!--/row-->
+    </div>
+
+
+}

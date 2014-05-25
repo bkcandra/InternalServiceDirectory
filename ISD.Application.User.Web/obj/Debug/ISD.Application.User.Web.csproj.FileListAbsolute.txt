@@ -140,3 +140,4 @@ E:\Work\Projects\InternalServiceDirectory\ISD.Application.User.Web\bin\zh-Hant\S
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.User.Web\obj\Debug\ISD.Application.User.Web.csprojResolveAssemblyReference.cache
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.User.Web\obj\Debug\ISD.User.Web.dll
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.User.Web\obj\Debug\ISD.User.Web.pdb
+E:\Work\Projects\InternalServiceDirectory\ISD.Application.User.Web\bin\Microsoft.WindowsAzure.Configuration.xml

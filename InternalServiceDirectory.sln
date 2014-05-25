@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISD.Data.EDS", "ISD.Data.ED
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISD.Application.Provider.Web", "ISD.Application.Provider.Web\ISD.Application.Provider.Web.csproj", "{40CCEDC7-31D6-473E-8032-0A24A92660FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISD.Application.provider.MVC", "ISD.Application.provider.MVC\ISD.Application.provider.MVC.csproj", "{63E7DCB7-EC89-4879-AB61-A1A68FED953C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{40CCEDC7-31D6-473E-8032-0A24A92660FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40CCEDC7-31D6-473E-8032-0A24A92660FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40CCEDC7-31D6-473E-8032-0A24A92660FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63E7DCB7-EC89-4879-AB61-A1A68FED953C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63E7DCB7-EC89-4879-AB61-A1A68FED953C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63E7DCB7-EC89-4879-AB61-A1A68FED953C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63E7DCB7-EC89-4879-AB61-A1A68FED953C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,5 +90,6 @@ Global
 		{5AFCB6A0-A8B9-4A2A-B8A6-E8437ED354BD} = {00906F7A-EB38-4082-B8F3-40D49D0BDF9A}
 		{16C24B4B-9B36-40B9-A6B4-44900298E5CE} = {17F3D7FD-7F4C-4B03-AA4B-3E552702DECD}
 		{40CCEDC7-31D6-473E-8032-0A24A92660FA} = {1C79A341-7C13-4C43-8065-A93F9347DCEB}
+		{63E7DCB7-EC89-4879-AB61-A1A68FED953C} = {1C79A341-7C13-4C43-8065-A93F9347DCEB}
 	EndGlobalSection
 EndGlobal

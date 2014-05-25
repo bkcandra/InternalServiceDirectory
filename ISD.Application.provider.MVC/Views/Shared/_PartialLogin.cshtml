@@ -1,0 +1,53 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="topbar">
+            <div class="container">
+                <!-- Topbar Navigation -->
+                <ul class="loginbar pull-right">
+                    <li>
+                        <i class="fa fa-globe"></i>
+                        <a>Languages</a>
+                        <ul class="lenguages">
+                            <li class="active">
+                                <a href="#">English <i class="fa fa-check"></i></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="topbar-devider"></li>
+                    <li>@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+                    <li class="topbar-devider"></li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                </ul>
+                <!-- End Topbar Navigation -->
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="topbar">
+        <div class="container">
+            <!-- Topbar Navigation -->
+            <ul class="loginbar pull-right">
+                <li>
+                    <i class="fa fa-globe"></i>
+                    <a>Languages</a>
+                    <ul class="lenguages">
+                        <li class="active">
+                            <a href="#">English <i class="fa fa-check"></i></a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="topbar-devider"></li>
+                <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                <li class="topbar-devider"></li>
+                <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            </ul>
+            <!-- End Topbar Navigation -->
+        </div>
+    </div>
+}

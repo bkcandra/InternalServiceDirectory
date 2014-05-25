@@ -1422,6 +1422,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="Default.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="packages.config" />
     <Content Include="Account\Web.config" />
@@ -1997,7 +1998,6 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Services\Default.aspx" />
     <Content Include="Service\Default.aspx" />
@@ -2048,6 +2048,21 @@
     <Content Include="Site.Mobile.Master" />
     <Content Include="Views\web.config" />
     <Content Include="Scripts\jquery-2.1.0.min.map" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Clinicians\Create.cshtml" />
+    <Content Include="Views\Clinicians\Delete.cshtml" />
+    <Content Include="Views\Clinicians\Details.cshtml" />
+    <Content Include="Views\Clinicians\Edit.cshtml" />
+    <Content Include="Views\Clinicians\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialLogin.cshtml" />
+    <Content Include="Views\Shared\_PartialMenu.cshtml" />
+    <Content Include="Views\Home\index.cshtml" />
+    <Content Include="Views\Service\Create.cshtml" />
+    <Content Include="Views\Service\Delete.cshtml" />
+    <Content Include="Views\Service\Details.cshtml" />
+    <Content Include="Views\Service\Edit.cshtml" />
+    <Content Include="Views\Service\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2180,6 +2195,9 @@
     <Compile Include="ContactUs\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\CliniciansController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Service.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2528,7 +2546,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ISD.Core.BF\ISD.Core.BF.csproj">
