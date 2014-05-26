@@ -180,8 +180,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ImageHandler.ashx.cs">
+      <DependentUpon>ImageHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ServiceDetailModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -1533,6 +1537,7 @@
     <Content Include="assets\plugins\vector-map\converter\simplifier.py" />
     <Content Include="assets\plugins\vector-map\jvectormap.jquery.json" />
     <Content Include="assets\plugins\vector-map\README.md" />
+    <Content Include="ImageHandler.ashx" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1593,6 +1598,8 @@
     <Content Include="Views\Clinicians\Index.cshtml" />
     <Content Include="Views\Clinician\index.cshtml" />
     <Content Include="Views\Clinician\create.cshtml" />
+    <Content Include="Views\Shared\_PartialImageService.cshtml" />
+    <Content Include="Views\Shared\_PartialServiceClinicians.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

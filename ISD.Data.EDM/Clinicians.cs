@@ -22,7 +22,7 @@ namespace ISD.Data.EDM
         public int ID { get; set; }
         public string ProviderID { get; set; }
         public string Name { get; set; }
-        public Nullable<int> LocationID { get; set; }
+        public string Location { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
         public Nullable<int> Type { get; set; }

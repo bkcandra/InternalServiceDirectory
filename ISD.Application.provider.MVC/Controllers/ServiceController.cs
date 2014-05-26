@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using BCUtility;
+using ISD.Application.provider.MVC.Models;
 using ISD.Data.EDM;
 
 namespace ISD.Application.provider.MVC.Controllers
@@ -22,12 +24,17 @@ namespace ISD.Application.provider.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var activity =await db.v_ActivityExplorer.Where(x=>x.ID == id).FirstOrDefaultAsync();
-            if (activity == null)
+            var dbService = await db.v_ActivityExplorer.Where(x => x.ID == id && x.isPrimary == true).FirstOrDefaultAsync();
+            if (dbService == null)
             {
                 return HttpNotFound();
             }
-            return View(activity);
+            ServiceDetailModel model = new ServiceDetailModel();
+            ObjectHandler.CopyPropertyValues(dbService, model);
+            model.Images = await db.ActivityImageDetail.Where(x => x.ActivityID == id).ToListAsync();
+            model.Services = await db.v_ActivityExplorer.Where(x => x.PrimaryServiceID == id).ToListAsync();
+            model.Clinicians = await db.v_ActivityClinicianExplorer.Where(x => x.ActivityID == id).ToListAsync();
+            return View(model);
         }
 
         // GET: Service/Create

@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ISD.Data.EDM;
+using Microsoft.AspNet.Identity;
 
 namespace ISD.Application.provider.MVC.Controllers
 {
@@ -18,8 +19,9 @@ namespace ISD.Application.provider.MVC.Controllers
         // GET: Clinicians
         public async Task<ActionResult> Index()
         {
-            var clinicians = db.Clinicians.Include(c => c.ProviderProfiles);
-            return View(await clinicians.ToListAsync());
+            var provID = User.Identity.GetUserId();
+            var clinicians = await db.v_ActivityClinicianExplorer.Where(c => c.ProviderID == provID).ToListAsync();
+            return View(clinicians);
         }
 
         // GET: Clinicians/Details/5

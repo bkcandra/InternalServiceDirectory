@@ -17,7 +17,7 @@ namespace ISD.Data.EDM
         public int ID { get; set; }
         public Nullable<int> ActivityID { get; set; }
         public Nullable<int> ClinicianID { get; set; }
-        public Nullable<int> Description { get; set; }
+        public string Description { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDatetime { get; set; }
     

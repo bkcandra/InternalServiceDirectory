@@ -1,399 +1,45 @@
 ﻿@model IEnumerable<ISD.Data.EDM.v_ActivityExplorer>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SuburbID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StateID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Suburb)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ShortDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StateName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryLevel1ParentID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryLevel1ParentName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryLevel2ParentID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryLevel2ParentName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PostCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ExpiryDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ActivityType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Keywords)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Website)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MiddleName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MobileNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AltTitle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AltFirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AltMiddleName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AltLastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AltEmail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AltAddress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AltSuburbID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AltStateID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AltPostCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AltPhoneNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AltMobileNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.eligibilityDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FullDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModifiedDateTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TimetableSize)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TimetableType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Personalised)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProviderName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProviderBranch)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AgeTo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AgeFrom)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.forMale)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.forFemale)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.forChildren)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsPaid)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isApproved)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SecondaryCategoryID1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SecondaryCategoryID2)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SecondaryCategoryID3)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SecondaryCategoryID4)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Council)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CouncilID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ReferenceID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Visitor)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProviderID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isPrimary)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PrimaryServiceID)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhoneNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SuburbID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StateID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Suburb)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShortDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StateName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryLevel1ParentID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryLevel1ParentName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryLevel2ParentID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryLevel2ParentName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PostCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExpiryDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ActivityType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Keywords)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Website)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MiddleName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MobileNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AltTitle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AltFirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AltMiddleName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AltLastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AltEmail)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AltAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AltSuburbID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AltStateID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AltPostCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AltPhoneNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AltMobileNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.eligibilityDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FullDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModifiedDateTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TimetableSize)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TimetableType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Personalised)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProviderName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProviderBranch)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AgeTo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AgeFrom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.forMale)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.forFemale)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.forChildren)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsPaid)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isApproved)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SecondaryCategoryID1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SecondaryCategoryID2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SecondaryCategoryID3)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SecondaryCategoryID4)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Council)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CouncilID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReferenceID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Visitor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProviderID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isPrimary)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PrimaryServiceID)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+@foreach (var item in Model)
+{
+    <div class="tag-box tag-box-v2  ">
+        <div class="row">
+            <div class="col-md-12 margin-bottom-20">
+                <h2>@item.Name</h2>
+                <p>@item.FullDescription</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class=" col-md-6">
+                <dl>
+                    <dt>Category</dt>
+                    <dd class="margin-bottom-5">@item.CategoryName)</dd>
+                    @{if (!string.IsNullOrEmpty(@item.eligibilityDescription))
+                      {
+                    <dt>Eligibility</dt>
+                    <dd class="margin-bottom-5">@item.eligibilityDescription</dd>
+                      }
+                    }
+                    <dt>Service ref</dt>
+                    <dd class="margin-bottom-5">@item.ReferenceID</dd>
+                </dl>
+            </div>
+            <div class=" col-md-6">
+                <dl>
+                    @{if (!string.IsNullOrEmpty(@item.ShortDescription))
+                    {
+                        <dt>Location</dt>
+                        <dd class="margin-bottom-5">@item.ShortDescription</dd>
+                    }
+                    }
+                    @{if (!string.IsNullOrEmpty(@item.Price))
+                      {
+                    <dt>Pricing</dt>
+                    <dd class="margin-bottom-5">@item.Price</dd>
+                      }
+                    }
+                   
+                </dl>
+            </div>
+        </div>
+    </div>
 }
-
-</table>
