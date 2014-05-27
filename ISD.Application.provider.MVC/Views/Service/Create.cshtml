@@ -1,17 +1,114 @@
-﻿@model ISD.Data.EDM.Activity
+﻿@model ISD.Application.provider.MVC.Models.ServiceDetailModel
 
-@{
-    ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+    @{
+        ViewBag.Title = "Create new Service";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    @Styles.Render("~/assets/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css")
 
-<h2>Create</h2>
+    <div class="breadcrumbs">
+        <div class="container">
+            <h1 class="pull-left">Services manager</h1>
+            <ul class="pull-right breadcrumb">
+                <li>
+                    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~">Home</asp:HyperLink>
+                </li>
+                <li>Service</li>
+                <li class="active">Create</li>
+            </ul>
+        </div>
+    </div>
+    <div class="container content">
+        <div class="row">
+            <div class="col-md-12">
+                @using (Html.BeginForm("Create", "Service", FormMethod.Post, new { @Class = "sky-form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <fieldset>
+                        <div class="row">
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-md-6">
+                                        <label class="input">
+                                            <i class="icon-prepend fa fa-user"></i>
+                                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @placeholder = "Service name" } })
+                                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                        </label>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-md-6">
+                                        <label class="input">
+                                        </label>
+                                    </section>
+                                    <section class="col col-md-6">
+                                        <label class="input select">
+                                            <i></i>
+                                        </label>
+                                    </section>
+                                </div>
 
+                            </fieldset>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
+                        </div>
+                        <div class="row">
+                            <section class="col col-md-12">
+                                <label class="textarea">
+                                    <i class="icon-prepend fa fa-envelope"></i>
+                                    @Html.EditorFor(m => m.FullDescription, new { @placeholder = "Full Description" })
+                                </label>
+                            </section>
+                            <section class="col col-md-12">
+                                <label class="input">
+                                    <i class="icon-prepend fa fa-phone"></i>
+                                    <input type="tel" name="phone" placeholder="Phone">
+                                </label>
+                            </section>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div class="row">
+                            <section class="col col-5">
+                                <label class="select">
+                                    @Html.DropDownListFor(model => model.ActivityContactDetails.StateID,
+     new SelectList(Model.States,
+                               "Value", "Text",
+                    Model.States.First().ID))
+                                    @Html.ValidationMessageFor(model => model.ActivityContactDetails.StateID, "", new { @class = "text-danger" })
+                                    <i></i>
+                                </label>
+                            </section>
+
+                            <section class="col col-4">
+                                <label class="input">
+                                    <input type="text" name="city" placeholder="City">
+                                </label>
+                            </section>
+
+                            <section class="col col-3">
+                                <label class="input">
+                                    <input type="text" name="code" placeholder="Post code">
+                                </label>
+                            </section>
+                        </div>
+
+                        <section>
+                            <label for="file" class="input">
+                                <input type="text" name="address" placeholder="Address">
+                            </label>
+                        </section>
+
+                        <section>
+                            <label class="textarea">
+                                <textarea rows="3" name="info" placeholder="Additional info"></textarea>
+                            </label>
+                        </section>
+                    </fieldset>
+                }
+            </div>
+        </div>
+    </div>
+
     <div class="form-horizontal">
         <h4>Activity</h4>
         <hr />
@@ -226,12 +323,12 @@
             </div>
         </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

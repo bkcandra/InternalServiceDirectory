@@ -1,5 +1,5 @@
 ﻿@using ISD.Util
-@model IEnumerable<ISD.Data.EDM.v_ActivityClinicianExplorer>
+@model IEnumerable<ISD.Data.EDM.v_ProviderClinicians>
 
 @{
     ViewBag.Title = "Index";
@@ -38,8 +38,8 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>@Html.DisplayFor(modelItem => item.ClinicianName)</td>
-                            <td>@item.LocationID</td>
+                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                            <td>@item.Location</td>
                             <td>@item.Phone</td>
                             <td>@item.Email</td>
                             @if (item.Type == (int)SystemConstants.CliniciansType.Private)
@@ -50,8 +50,12 @@
                             {
                                 <td>No</td>
                             }
+
                             @{
-                            string days = "";
+                        string days = "";
+                        if (item.TimetableType == 1)
+                        {
+
                             if (item.OnMonday ?? false)
                             {
                                 days += "Monday,";
@@ -88,11 +92,14 @@
                                 days = days.Remove(index, 1);
                                 days = days.Insert(index, " and");
                             }
+                        }
                             }
+                           
                             <td>@days</td>
+
                             <td>
                                 <a class="btn btn-warning btn-xs" href="@Url.Action("Edit", "Clinician", new { id = item.ID })"><i class="fa fa-pencil"></i>Edit</a>
-                                <a class="btn btn-danger btn-xs" href="@Url.Action("Delete", "Clinician", new { id = item.ID })"><i class="fa fa-trash-o"></i>Delete</a>                            
+                                <a class="btn btn-danger btn-xs" href="@Url.Action("Delete", "Clinician", new { id = item.ID })"><i class="fa fa-trash-o"></i>Delete</a>
                             </td>
                         </tr>
                     }

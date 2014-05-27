@@ -816,7 +816,6 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_ActivityClinicianExplorer' does no
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="ClinicianID" Type="int" />
           <Property Name="ClinicianName" Type="nvarchar" MaxLength="250" />
-          <Property Name="LocationID" Type="int" />
           <Property Name="Phone" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="Type" Type="int" />
@@ -833,6 +832,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_ActivityClinicianExplorer' does no
           <Property Name="OnFriday" Type="bit" />
           <Property Name="OnSunday" Type="bit" />
           <Property Name="OnSaturday" Type="bit" />
+          <Property Name="Location" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'IECHS_ISD.dbo.v_ActivityExpiryView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1119,6 +1119,30 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_ProviderActivityCount' does not ha
           </Key>
           <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="ActivityCount" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IECHS_ISD.dbo.v_ProviderClinicians' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_ProviderClinicians">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="ProviderID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ProviderID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="Location" Type="nvarchar" MaxLength="250" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type" Type="int" />
+          <Property Name="TimetableType" Type="int" />
+          <Property Name="RecurEvery" Type="int" />
+          <Property Name="OnMonday" Type="bit" />
+          <Property Name="OnTuesday" Type="bit" />
+          <Property Name="OnWednesday" Type="bit" />
+          <Property Name="OnThursday" Type="bit" />
+          <Property Name="OnFriday" Type="bit" />
+          <Property Name="OnSaturday" Type="bit" />
+          <Property Name="OnSunday" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'IECHS_ISD.dbo.v_ProviderExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -2032,7 +2056,6 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
     [v_ActivityClinicianExplorer].[Name] AS [Name], 
     [v_ActivityClinicianExplorer].[ClinicianID] AS [ClinicianID], 
     [v_ActivityClinicianExplorer].[ClinicianName] AS [ClinicianName], 
-    [v_ActivityClinicianExplorer].[LocationID] AS [LocationID], 
     [v_ActivityClinicianExplorer].[Phone] AS [Phone], 
     [v_ActivityClinicianExplorer].[Email] AS [Email], 
     [v_ActivityClinicianExplorer].[Type] AS [Type], 
@@ -2048,7 +2071,8 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
     [v_ActivityClinicianExplorer].[OnThursday] AS [OnThursday], 
     [v_ActivityClinicianExplorer].[OnFriday] AS [OnFriday], 
     [v_ActivityClinicianExplorer].[OnSunday] AS [OnSunday], 
-    [v_ActivityClinicianExplorer].[OnSaturday] AS [OnSaturday]
+    [v_ActivityClinicianExplorer].[OnSaturday] AS [OnSaturday], 
+    [v_ActivityClinicianExplorer].[Location] AS [Location]
     FROM [dbo].[v_ActivityClinicianExplorer] AS [v_ActivityClinicianExplorer]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="v_ActivityExpiryView" EntityType="Self.v_ActivityExpiryView" store:Type="Views" store:Schema="dbo">
@@ -2291,6 +2315,26 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
     [v_ProviderActivityCount].[UserID] AS [UserID], 
     [v_ProviderActivityCount].[ActivityCount] AS [ActivityCount]
     FROM [dbo].[v_ProviderActivityCount] AS [v_ProviderActivityCount]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_ProviderClinicians" EntityType="Self.v_ProviderClinicians" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_ProviderClinicians].[ID] AS [ID], 
+    [v_ProviderClinicians].[ProviderID] AS [ProviderID], 
+    [v_ProviderClinicians].[Name] AS [Name], 
+    [v_ProviderClinicians].[Location] AS [Location], 
+    [v_ProviderClinicians].[Phone] AS [Phone], 
+    [v_ProviderClinicians].[Email] AS [Email], 
+    [v_ProviderClinicians].[Type] AS [Type], 
+    [v_ProviderClinicians].[TimetableType] AS [TimetableType], 
+    [v_ProviderClinicians].[RecurEvery] AS [RecurEvery], 
+    [v_ProviderClinicians].[OnMonday] AS [OnMonday], 
+    [v_ProviderClinicians].[OnTuesday] AS [OnTuesday], 
+    [v_ProviderClinicians].[OnWednesday] AS [OnWednesday], 
+    [v_ProviderClinicians].[OnThursday] AS [OnThursday], 
+    [v_ProviderClinicians].[OnFriday] AS [OnFriday], 
+    [v_ProviderClinicians].[OnSaturday] AS [OnSaturday], 
+    [v_ProviderClinicians].[OnSunday] AS [OnSunday]
+    FROM [dbo].[v_ProviderClinicians] AS [v_ProviderClinicians]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="v_ProviderExplorer" EntityType="Self.v_ProviderExplorer" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -2907,6 +2951,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="v_ProviderClinicians" EntityType="IECHS_ISDModel.v_ProviderClinicians" />
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -3793,7 +3838,6 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ClinicianID" Type="Int32" />
           <Property Name="ClinicianName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="LocationID" Type="Int32" />
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="Int32" />
@@ -3810,6 +3854,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <Property Name="OnFriday" Type="Boolean" />
           <Property Name="OnSunday" Type="Boolean" />
           <Property Name="OnSaturday" Type="Boolean" />
+          <Property Name="Location" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="v_ActivityExpiryView">
           <Key>
@@ -4854,6 +4899,28 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <End Type="IECHS_ISDModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="IECHS_ISDModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
         </Association>
+        <EntityType Name="v_ProviderClinicians">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="ProviderID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ProviderID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="TimetableType" Type="Int32" />
+          <Property Name="RecurEvery" Type="Int32" />
+          <Property Name="OnMonday" Type="Boolean" />
+          <Property Name="OnTuesday" Type="Boolean" />
+          <Property Name="OnWednesday" Type="Boolean" />
+          <Property Name="OnThursday" Type="Boolean" />
+          <Property Name="OnFriday" Type="Boolean" />
+          <Property Name="OnSaturday" Type="Boolean" />
+          <Property Name="OnSunday" Type="Boolean" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5707,6 +5774,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <EntitySetMapping Name="v_ActivityClinicianExplorer">
             <EntityTypeMapping TypeName="IECHS_ISDModel.v_ActivityClinicianExplorer">
               <MappingFragment StoreEntitySet="v_ActivityClinicianExplorer">
+                <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="OnSaturday" ColumnName="OnSaturday" />
                 <ScalarProperty Name="OnSunday" ColumnName="OnSunday" />
                 <ScalarProperty Name="OnFriday" ColumnName="OnFriday" />
@@ -5723,7 +5791,6 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="ClinicianName" ColumnName="ClinicianName" />
                 <ScalarProperty Name="ClinicianID" ColumnName="ClinicianID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -6207,6 +6274,28 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="v_ProviderClinicians">
+            <EntityTypeMapping TypeName="IECHS_ISDModel.v_ProviderClinicians">
+              <MappingFragment StoreEntitySet="v_ProviderClinicians">
+                <ScalarProperty Name="OnSunday" ColumnName="OnSunday" />
+                <ScalarProperty Name="OnSaturday" ColumnName="OnSaturday" />
+                <ScalarProperty Name="OnFriday" ColumnName="OnFriday" />
+                <ScalarProperty Name="OnThursday" ColumnName="OnThursday" />
+                <ScalarProperty Name="OnWednesday" ColumnName="OnWednesday" />
+                <ScalarProperty Name="OnTuesday" ColumnName="OnTuesday" />
+                <ScalarProperty Name="OnMonday" ColumnName="OnMonday" />
+                <ScalarProperty Name="RecurEvery" ColumnName="RecurEvery" />
+                <ScalarProperty Name="TimetableType" ColumnName="TimetableType" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -1,90 +1,167 @@
-﻿@model ISD.Data.EDM.Clinicians
+﻿@using ISD.Util
+@using Microsoft.AspNet.Identity
+@model ISD.Application.provider.MVC.Models.CliniciansModels
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit clinian";
 }
+@Styles.Render("~/assets/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css")
+<div class="breadcrumbs">
+    <div class="container">
+        <h1 class="pull-left">Create clinician</h1>
+        <ul class="pull-right breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="@Url.Content("~/Clinicians/")">Clinician</a></li>
+            <li class="active">Create</li>
+        </ul>
+    </div>
+</div>
+<div class="content container">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("Edit", "Clinician", FormMethod.Post, new { @class = "sky-form" }))
+            {
+                @Html.AntiForgeryToken()
+                <fieldset>
+                    <div class="row">
+                        <section class="col col-md-6">
+                            <label class="input">
+                                <i class="icon-prepend fa fa-user"></i>
+                                @Html.EditorFor(model => model.ClinicianName, new { htmlAttributes = new { @placeholder = "Full name"} })
+                                @Html.ValidationMessageFor(model => model.ClinicianName, "", new { @class = "text-danger" })
+                            </label>
+                        </section>
+                    </div>
 
-<h2>Edit</h2>
+                    <div class="row">
+                        <section class="col col-6">
+                            <label class="input">
+                                <i class="icon-prepend fa fa-envelope"></i>
+                                @Html.EditorFor(model => model.ClinicianEmail, new { htmlAttributes = new { @placeholder = "E-mail", @type = "email" } })
+                                @Html.ValidationMessageFor(model => model.ClinicianEmail, "", new { @class = "text-danger" })
+                            </label>
+                        </section>
+                        <section class="col col-6">
+                            <label class="input">
+                                <i class="icon-prepend fa fa-phone"></i>
+                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @placeholder = "Phone" } })
+                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                            </label>
+                        </section>
+                    </div>
+                    <div class="row">
+                        <section class="col col-md-6">
+                            <label class="input">
+                                @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @placeholder = "Clinic" } })
+                                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                            </label>
+                        </section>
+                        <section class="col col-md-6">
+                            <label class="input select">
+                                @Html.DropDownListFor(model => model.ClinicianType,
+                new SelectList(Model.clinicianTypes,
+                               "Value", "Text",
+                               Model.clinicianTypes.First().Value))
+                                @Html.ValidationMessageFor(model => model.ClinicianType, "", new { @class = "text-danger" })
+                                <i></i>
+                            </label>
+                        </section>
+                    </div>
+                    <div class="row">
+                        <label class="label">Timetable</label>
+                        <section class="col col-md-6">
+                            <div class="row">
+                                <div class="col col-6">
+                                    <label class="radio state-success"> @Html.RadioButtonFor(m => m.TimetableType, "1", new { @checked = "checked" })<i class="rounded-x"></i> Yes</label>
+                                </div>
+                                <div class="col col-6">
+                                    <label class="radio state-success">@Html.RadioButtonFor(m => m.TimetableType, "0", new { @Class = "radio" })<i class="rounded-x"></i> No   </label>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.TimetableType, "", new { @class = "text-danger" })
+                            </div>
+                        </section>
+                    </div>
+                </fieldset>
+                <fieldset id="fldttlb" class="desc">
+                    <div class="row">
+                        <section class="col col-md-6">
+                            <label class="label">Recurrence</label>
+                            <div class="row">
+                                <div class="col col-6">
+                                    <label class="radio state-success"> @Html.RadioButtonFor(m => m.RecurEvery, (int)SystemConstants.RecurrenceSchedule.Weekly, new { @checked = "checked" })<i class="rounded-x"></i> Weekly</label>
+                                    <label class="radio state-success"> @Html.RadioButtonFor(m => m.RecurEvery, (int)SystemConstants.RecurrenceSchedule.Fortnightly)<i class="rounded-x"></i> Fortnightly</label>
+                                </div>
+                                <div class="col col-6">
+                                    <label class="radio state-success"> @Html.RadioButtonFor(m => m.RecurEvery, (int)SystemConstants.RecurrenceSchedule.Monthly)<i class="rounded-x"></i> Montly</label>
+                                    <label class="radio state-success"> @Html.RadioButtonFor(m => m.RecurEvery, (int)SystemConstants.RecurrenceSchedule.NotRecurring)<i class="rounded-x"></i> No Recurrence</label>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Timetable.RecurrenceType, "", new { @class = "text-danger" })
+                        </section>
+                        <section class="col col-md-6">
+                            <label class="label">Day of week</label>
+                            <div class="row">
+                                <div class="col col-3">
+                                    @Html.CheckBoxFor(m => m.OnMonday)<i></i>Monday
 
+                                </div>
+                                <div class="col col-3">
+                                    @Html.CheckBoxFor(m => m.OnTuesday)<i></i>Tuesday
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Clinicians</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
+                                </div>
+                                <div class="col col-3">
+                                    @Html.CheckBoxFor(m => m.OnWednesday)<i></i>Wednesday
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProviderID, "ProviderID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ProviderID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ProviderID, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                </div>
+                                <div class="col col-3">
+                                    @Html.CheckBoxFor(m => m.OnThursday)<i></i>Thursday
+                                </div>
+                            </div>
+                            <div class="row">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                <div class="col col-3">
+                                    @Html.CheckBoxFor(m => m.OnFriday)<i></i>Friday
+                                </div>
+                                <div class="col col-3">
+                                    @Html.CheckBoxFor(m => m.OnSaturday)<i></i>Saturday
+                                </div>
+                                <div class="col col-3">
+                                    @Html.CheckBoxFor(m => m.OnSunday)<i></i>Sunday
+                                </div>
+                                <div class="col col-3">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.LocationID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LocationID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LocationID, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-offset-9 col-md-3">
+                                <input type="submit" value="Save" class="btn-u" />&nbsp;&nbsp;
+                                @Html.ActionLink("Cancel", "", "Clinicians", null, new { @class = "btn-u btn-u-red" })
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TimetableType, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TimetableType, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TimetableType, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            }  <div>
+                @Html.ActionLink("Back to List", "Index")
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+<script>
+    $(document).ready(function () {
+        $("input[name$='TimetableType']").change(function () {
+            $("#fldttlb").toggle();
+        });
+    });
+</script>

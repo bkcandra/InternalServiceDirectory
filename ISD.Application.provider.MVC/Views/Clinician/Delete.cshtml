@@ -1,80 +1,148 @@
-﻿@model ISD.Data.EDM.Clinicians
-
+﻿@using ISD.Util
+@model ISD.Data.EDM.v_ProviderClinicians
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Delete a clinian";
 }
-
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Clinicians</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LocationID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LocationID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Type)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Type)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TimetableType)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TimetableType)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProviderProfiles.Username)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProviderProfiles.Username)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+@Styles.Render("~/assets/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css")
+<div class="breadcrumbs">
+    <div class="container">
+        <h1 class="pull-left">Create clinician</h1>
+        <ul class="pull-right breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="@Url.Content("~/Clinicians/")">Clinician</a></li>
+            <li class="active">Create</li>
+        </ul>
+    </div>
 </div>
+<div class="content container">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("Delete", "Clinician", FormMethod.Post, new { @class = "sky-form" }))
+            {
+                @Html.AntiForgeryToken()
+                <fieldset>
+                    <div class="row">
+                        <section class="col col-md-6">
+                            <label class="input">
+                                <i class="icon-prepend fa fa-user"></i>
+                                @Html.DisplayFor(model => model.Name, new { htmlAttributes = new { @placeholder = "Full name" } })
+
+                            </label>
+                        </section>
+                    </div>
+
+                    <div class="row">
+                        <section class="col col-6">
+                            <label class="input">
+                                <i class="icon-prepend fa fa-envelope"></i>
+                                @Html.DisplayFor(model => model.Email, new { htmlAttributes = new { @placeholder = "E-mail", @type = "email" } })
+
+                            </label>
+                        </section>
+                        <section class="col col-6">
+                            <label class="input">
+                                <i class="icon-prepend fa fa-phone"></i>
+                                @Html.DisplayFor(model => model.Phone, new { htmlAttributes = new { @placeholder = "Phone" } })
+
+                            </label>
+                        </section>
+                    </div>
+                    <div class="row">
+                        <section class="col col-md-6">
+                            <label class="input">
+                                @Html.DisplayFor(model => model.Location, new { htmlAttributes = new { @placeholder = "Clinic" } })
+
+                            </label>
+                        </section>
+                        <section class="col col-md-6">
+                            <label class="input select">
+                                @Html.DisplayFor(model => model.Type, new { @class = "text-danger" })
+                                <i></i>
+                            </label>
+                        </section>
+                    </div>
+                    <div class="row">
+                        <label class="label">Timetable</label>
+                        <section class="col col-md-6">
+                            <div class="row">
+                                <div class="col col-6">
+                                    <label class="radio state-success"> @Html.RadioButtonFor(m => m.TimetableType, "1", new { @checked = "checked" })<i class="rounded-x"></i> Yes</label>
+                                </div>
+                                <div class="col col-6">
+                                    <label class="radio state-success">@Html.RadioButtonFor(m => m.TimetableType, "0", new { @Class = "radio" })<i class="rounded-x"></i> No   </label>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.TimetableType, "", new { @class = "text-danger" })
+                            </div>
+                        </section>
+                    </div>
+                </fieldset>
+                <fieldset id="fldttlb" class="desc">
+                    <div class="row">
+                        <section class="col col-md-6">
+                            <label class="label">Recurrence</label>
+                            <div class="row">
+                                <div class="col col-6">
+                                    <label class="radio state-success"> @Html.RadioButtonFor(m => m.RecurEvery, (int)SystemConstants.RecurrenceSchedule.Weekly, new { @checked = "checked" })<i class="rounded-x"></i> Weekly</label>
+                                    <label class="radio state-success"> @Html.RadioButtonFor(m => m.RecurEvery, (int)SystemConstants.RecurrenceSchedule.Fortnightly)<i class="rounded-x"></i> Fortnightly</label>
+                                </div>
+                                <div class="col col-6">
+                                    <label class="radio state-success"> @Html.RadioButtonFor(m => m.RecurEvery, (int)SystemConstants.RecurrenceSchedule.Monthly)<i class="rounded-x"></i> Montly</label>
+                                    <label class="radio state-success"> @Html.RadioButtonFor(m => m.RecurEvery, (int)SystemConstants.RecurrenceSchedule.NotRecurring)<i class="rounded-x"></i> No Recurrence</label>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="col col-md-6">
+                            <label class="label">Day of week</label>
+                            <div class="row">
+
+                                <div class="col col-3">
+
+                                    <label class="checkbox state-success">@Html.CheckBox("Monday", Model.OnMonday)<i></i>Monday</label>
+                                    <label class="checkbox state-success">@Html.CheckBox("Friday", Model.OnFriday)<i></i>Friday</label>
+                                </div>
+                                <div class="col col-3">
+                                    <label class="checkbox state-success">@Html.CheckBox("Tuesday", Model.OnTuesday)<i></i>Tuesday</label>
+                                    <label class="checkbox state-success">@Html.CheckBox("Saturday", Model.OnSaturday)<i></i>Saturday</label>
+                                </div>
+                                <div class="col col-3">
+                                    <label class="checkbox state-success">@Html.CheckBox("Wednesday", Model.OnWednesday)<i></i>Wednesday</label>
+                                    <label class="checkbox state-success">@Html.CheckBox("Sunday", Model.OnSunday)<i></i>Sunday</label>
+                                </div>
+                                <div class="col col-3">
+                                    <label class="checkbox state-success">@Html.CheckBox("Thursday", Model.OnThursday)<i></i>Thursday</label>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-offset-9 col-md-3">
+                                <input type="submit" value="Delete" class="btn-u" />&nbsp;&nbsp;
+                                @Html.ActionLink("Cancel", "", "Clinicians", null, new { @class = "btn-u btn-u-red" })
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+            }  <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    $(document).ready(function () {
+        $("input[name$='TimetableType']").change(function () {
+            $("#fldttlb").toggle();
+        });
+    });
+</script>
+
