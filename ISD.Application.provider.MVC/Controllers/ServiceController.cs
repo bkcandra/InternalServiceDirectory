@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Backload.Controllers;
 using BCUtility;
 using ISD.Application.provider.MVC.Models;
 using ISD.Data.EDM;
@@ -38,10 +39,30 @@ namespace ISD.Application.provider.MVC.Controllers
         }
 
         // GET: Service/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
             ViewBag.ProviderID = new SelectList(db.ProviderProfiles, "UserID", "Username");
-            return View();
+            ServiceDetailModel model = new ServiceDetailModel();
+
+            State st = new State();
+        
+            st.StateName = "Select State";
+            model.States.Add(st);
+            foreach (var state in await db.State.ToListAsync())
+            {
+                model.States.Add(state);
+            }
+            Suburb sub = new Suburb();
+           
+            sub.Name = "Select Suburb";
+            model.Suburbs.Add(sub);
+            foreach (var suburb in await db.Suburb.ToListAsync())
+            {
+                model.Suburbs.Add(suburb);
+            }
+            model.CliniciansList = await db.v_ProviderClinicians.ToListAsync();
+            model.Categories = await db.v_CategoryExplorer.ToListAsync();
+            return View(model);
         }
 
         // POST: Service/Create
@@ -129,5 +150,7 @@ namespace ISD.Application.provider.MVC.Controllers
             }
             base.Dispose(disposing);
         }
+
+        
     }
 }
