@@ -61,12 +61,10 @@ namespace ISD.Application.provider.MVC.Models
         public List<ListItem> clinicianTypes =
            new List<ListItem>
             {
-                 new ListItem {Value = "", Text = "Select Type"},
+                new ListItem {Value = "", Text = "Select Type"},
                 new ListItem {Value = ((int)SystemConstants.CliniciansType.Public).ToString(), Text = "Public"},
                 new ListItem {Value = ((int)SystemConstants.CliniciansType.Private).ToString(), Text = "Private"}
             };
-
-        
     }
 }
 

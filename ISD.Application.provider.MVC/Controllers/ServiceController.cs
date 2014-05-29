@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using Backload.Controllers;
 using BCUtility;
 using ISD.Application.provider.MVC.Models;
 using ISD.Data.EDM;
+using ISD.Util;
+using Microsoft.AspNet.Identity;
 
 namespace ISD.Application.provider.MVC.Controllers
 {
@@ -44,21 +47,14 @@ namespace ISD.Application.provider.MVC.Controllers
             ViewBag.ProviderID = new SelectList(db.ProviderProfiles, "UserID", "Username");
             ServiceDetailModel model = new ServiceDetailModel();
 
-            State st = new State();
-        
-            st.StateName = "Select State";
-            model.States.Add(st);
             foreach (var state in await db.State.ToListAsync())
             {
-                model.States.Add(state);
+                model.StatesList.Add(new ListItem(state.StateName,state.ID.ToString()));
             }
-            Suburb sub = new Suburb();
-           
-            sub.Name = "Select Suburb";
-            model.Suburbs.Add(sub);
+
             foreach (var suburb in await db.Suburb.ToListAsync())
             {
-                model.Suburbs.Add(suburb);
+                model.SuburbList.Add(new ListItem(suburb.Name, suburb.ID.ToString()));
             }
             model.CliniciansList = await db.v_ProviderClinicians.ToListAsync();
             model.Categories = await db.v_CategoryExplorer.ToListAsync();
@@ -70,19 +66,15 @@ namespace ISD.Application.provider.MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,ProviderID,ActivityCode,Name,ShortDescription,FullDescription,CategoryID,SecondaryCategoryID1,SecondaryCategoryID2,SecondaryCategoryID3,SecondaryCategoryID4,Price,CreatedDateTime,ModifiedDateTime,ModifiedBy,CreatedBy,ExpiryDate,ActivityType,eligibilityDescription,Status,Website,Keywords,TimetableType,isApproved,isPrimary,PrimaryServiceID")] Activity activity)
+        public async Task<ActionResult> Create(ServiceDetailModel model)
         {
+
             if (ModelState.IsValid)
             {
-                db.Activity.Add(activity);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                  
             }
-
-            ViewBag.ProviderID = new SelectList(db.ProviderProfiles, "UserID", "Username", activity.ProviderID);
-            return View(activity);
+            return View(model);
         }
-
         // GET: Service/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
@@ -151,6 +143,6 @@ namespace ISD.Application.provider.MVC.Controllers
             base.Dispose(disposing);
         }
 
-        
+
     }
 }

@@ -1645,6 +1645,7 @@
     <Content Include="assets\plugins\vector-map\README.md" />
     <Content Include="ImageHandler.ashx" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\bcHandler.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\FileUpload\angularjs\angular.debug.js" />
@@ -1731,6 +1732,7 @@
     <Content Include="Views\Shared\_PartialImageService.cshtml" />
     <Content Include="Views\Shared\_PartialServiceClinicians.cshtml" />
     <Content Include="Views\BackloadDemo\Index.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
     <None Include="Web.Backload.Default.config" />
     <None Include="Web.Backload.xsd">
       <SubType>Designer</SubType>
@@ -1741,7 +1743,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ISD.Core.BF\ISD.Core.BF.csproj">

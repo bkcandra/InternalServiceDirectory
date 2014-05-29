@@ -15,10 +15,10 @@ namespace ISD.Data.EDM
     public partial class v_ActivityExplorer
     {
         public int ID { get; set; }
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
         public string PhoneNumber { get; set; }
-        public Nullable<int> SuburbID { get; set; }
-        public Nullable<int> StateID { get; set; }
+        public virtual Nullable<int> SuburbID { get; set; }
+        public virtual Nullable<int> StateID { get; set; }
         public string Suburb { get; set; }
         public string ShortDescription { get; set; }
         public string StateName { get; set; }
@@ -28,18 +28,18 @@ namespace ISD.Data.EDM
         public string CategoryLevel1ParentName { get; set; }
         public Nullable<int> CategoryLevel2ParentID { get; set; }
         public string CategoryLevel2ParentName { get; set; }
-        public string Address { get; set; }
-        public Nullable<int> PostCode { get; set; }
+        public virtual string Address { get; set; }
+        public virtual Nullable<int> PostCode { get; set; }
         public int Status { get; set; }
         public Nullable<System.DateTime> ExpiryDate { get; set; }
         public Nullable<int> ActivityType { get; set; }
         public string Keywords { get; set; }
         public string Website { get; set; }
-        public string Price { get; set; }
+        public virtual string Price { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
-        public string Email { get; set; }
+        public virtual string Email { get; set; }
         public string MobileNumber { get; set; }
         public Nullable<int> Title { get; set; }
         public Nullable<int> AltTitle { get; set; }
@@ -53,8 +53,8 @@ namespace ISD.Data.EDM
         public Nullable<int> AltPostCode { get; set; }
         public string AltPhoneNumber { get; set; }
         public string AltMobileNumber { get; set; }
-        public string eligibilityDescription { get; set; }
-        public string FullDescription { get; set; }
+        public virtual string eligibilityDescription { get; set; }
+        public virtual string FullDescription { get; set; }
         public Nullable<System.DateTime> ModifiedDateTime { get; set; }
         public Nullable<int> TimetableSize { get; set; }
         public Nullable<int> TimetableType { get; set; }

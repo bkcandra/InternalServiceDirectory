@@ -126,7 +126,6 @@ E:\Work\Projects\InternalServiceDirectory\ISD.Application.Provider.Web\bin\AjaxC
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Provider.Web\bin\AjaxMin.dll
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Provider.Web\bin\Antlr3.Runtime.dll
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Provider.Web\bin\AspNet.ScriptManager.bootstrap.dll
-E:\Work\Projects\InternalServiceDirectory\ISD.Application.Provider.Web\bin\AspNet.ScriptManager.jQuery.dll
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Provider.Web\bin\AspNet.ScriptManager.jQuery.UI.Combined.dll
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Provider.Web\bin\BCUtility.dll
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Provider.Web\bin\CKEditor.NET.dll

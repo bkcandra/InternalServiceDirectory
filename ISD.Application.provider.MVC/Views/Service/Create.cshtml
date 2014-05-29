@@ -1,4 +1,5 @@
 ﻿@using Microsoft.Ajax.Utilities
+@using ISD.Util
 @model ISD.Application.provider.MVC.Models.ServiceDetailModel
 
 @{
@@ -6,6 +7,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Styles.Render("~/assets/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css")
+@Styles.Render("~/assets/plugins/fancybox/source/jquery.fancybox.css")
 
 <div class="breadcrumbs">
     <div class="container">
@@ -22,9 +24,11 @@
 <div class="container content">
     <div class="row">
         <div class="col-md-12">
-            @using (Html.BeginForm("Create", "Service", FormMethod.Post, new { @Class = "sky-form" }))
+            @using (Html.BeginForm("Create", "Service", FormMethod.Post, new { @Class = "sky-form", @enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
                 <fieldset>
                     <h4>Activity Detail</h4>
                     <div class="row">
@@ -56,11 +60,21 @@
                         </section>
                     </div>
                     <div class="row">
+                        <div class="col-md-12">
+                            <label class="input">
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @placeholder = "Service Address" } })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
                         <section class="col col-md-5">
                             <label class="select">
                                 @Html.DropDownListFor(model => model.SuburbID,
-                                    new SelectList(Model.Suburbs,
-                                        "ID", "Name"))
+                                    new SelectList(Model.SuburbList,
+                  "Value", "Text",
+                  Model.StatesList.First().Value))
                                 @Html.ValidationMessageFor(model => model.SuburbID, "", new { @class = "text-danger" })
                                 <i></i>
                             </label>
@@ -68,9 +82,9 @@
                         <section class="col col-md-4">
                             <label class="select">
                                 @Html.DropDownListFor(model => model.StateID,
-                                    new SelectList(Model.States,
-                                        "ID", "StateName",
-                                        Model.States.First().ID))
+                         new SelectList(Model.StatesList,
+                             "Value", "Text",
+                             Model.StatesList.First().Value))
                                 @Html.ValidationMessageFor(model => model.StateID, "", new { @class = "text-danger" })
                                 <i></i>
                             </label>
@@ -83,130 +97,214 @@
                         </section>
                     </div>
                 </fieldset>
-    <fieldset>
-        <div class="row">
-            <div class="col-md-12">
-                <h5>How would you describe your service</h5>
-                <label class="textarea">
-                    @Html.EditorFor(model => model.FullDescription, new { htmlAttributes = new { @placeholder = "Service description", @rows = "4" } })
-                    @Html.ValidationMessageFor(model => model.FullDescription, "", new { @class = "text-danger" })
-                </label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h5>What is the cost of your activity.</h5>
-                <label class="textarea">
-                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @placeholder = "Pricing", @rows = "4" } })
-                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
-                </label>
-            </div>
-            <div class="col-md-6">
-                <h5>Who is eligible for this activity</h5>
-                <label class="textarea">
-                    @Html.EditorFor(model => model.eligibilityDescription, new { htmlAttributes = new { @placeholder = "Eligibility", @rows = "4" } })
-                    @Html.ValidationMessageFor(model => model.eligibilityDescription, "", new { @class = "text-danger" })
-                </label>
-            </div>
-        </div>
-    </fieldset>
+                <fieldset>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5>How would you describe your service</h5>
+                            <label class="textarea">
+                                @Html.EditorFor(model => model.FullDescription, new { htmlAttributes = new { @placeholder = "Service description", @rows = "4" } })
+                                @Html.ValidationMessageFor(model => model.FullDescription, "", new { @class = "text-danger" })
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>What is the cost of your activity.</h5>
+                            <label class="textarea">
+                                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @placeholder = "Pricing", @rows = "4" } })
+                                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                            </label>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Who is eligible for this activity</h5>
+                            <label class="textarea">
+                                @Html.EditorFor(model => model.eligibilityDescription, new { htmlAttributes = new { @placeholder = "Eligibility", @rows = "4" } })
+                                @Html.ValidationMessageFor(model => model.eligibilityDescription, "", new { @class = "text-danger" })
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
                 <fieldset>
                     <div class="row">
                         <div class="col col-md-12">
                             <h5>Select your service category</h5>
-                            <div class="panel-group acc-v1" id="accordion-1">
-                                @foreach (var cat in Model.Categories.Where((x => x.Level == 0)))
-                                {
-                                    <div class="col col-md-6">
+                            @Html.ValidationMessageFor(model => model.SelectedCategory, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="panel-group acc-v1" id="accordion-1">
+                            @foreach (var cat in Model.Categories.Where((x => x.Level == 0)))
+                            {
+                                <div class="col col-md-6">
 
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-@cat.ID">
-                                                        @cat.Name
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapse-@cat.ID" class="panel-collapse collapse">
-                                                <div class="panel-body">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            @foreach (var subCat in Model.Categories.Where((x => x.Level == 1)))
-                                                            {
-                                                                if (subCat.Level1ParentID == cat.ID && subCat.Name != "Other")
-                                                                { <div class="col col-md-6">
-                                                                    <label>
-                                                                        <input type="checkbox"
-                                                                               name="SelectedCategory"
-                                                                               value="@subCat.ID" />
-                                                                        <span>@subCat.Name</span>
-                                                                    </label>
-                                                                </div>
-                                                                }
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-@cat.ID">
+                                                    @cat.Name
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapse-@cat.ID" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        @foreach (var subCat in Model.Categories.Where((x => x.Level == 1)))
+                                                        {
+                                                            if (subCat.Level1ParentID == cat.ID && subCat.Name != "Other")
+                                                            { <div class="col col-md-6">
+                                                                <label>
+                                                                    <input type="checkbox"
+                                                                           name="SelectedCategory"
+                                                                           value="@subCat.ID" />
+                                                                    <span>@subCat.Name</span>
+                                                                </label>
+                                                            </div>
                                                             }
-                                                            @{
-                                                            var subOther = Model.Categories.Where((x => x.Level1ParentID == cat.ID && x.Name == "Other")).FirstOrDefault();
-                                                            if (subOther != null)
-                                                            {
-                                                                <div class="col col-md-6">
-                                                                    <label>
-                                                                        <input type="checkbox"
-                                                                               name="SelectedCategory"
-                                                                               value="@subOther.ID" />
-                                                                        <span>@subOther.Name</span>
-                                                                    </label>
-                                                                </div>
-                                                            }
-                                                            }
-                                                        </div>
+                                                        }
+                                                        @{
+                                                        var subOther = Model.Categories.Where((x => x.Level1ParentID == cat.ID && x.Name == "Other")).FirstOrDefault();
+                                                        if (subOther != null)
+                                                        {
+                                                            <div class="col col-md-6">
+                                                                <label>
+                                                                    <input type="checkbox"
+                                                                           name="SelectedCategory"
+                                                                           value="@subOther.ID" />
+                                                                    <span>@subOther.Name</span>
+                                                                </label>
+                                                            </div>
+                                                        }
+                                                        }
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                }
-                            </div>
+                                </div>
+                            }
+                        </div>
 
+
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5>Select clinicians for in this service</h5>
+                            @Html.ValidationMessageFor(model => model.SelectedClinicians, "", new { @class = "text-danger" })
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Name</th>
+                                        <th>Clinic</th>
+                                        <th>Phone</th>
+                                        <th>Email</th>
+                                        <th>Private</th>
+                                        <th>Days</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.CliniciansList)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    <input type="checkbox"
+                                                           name="SelectedClinicians"
+                                                           value="@item.ID" />
+                                                    <span></span>
+                                                </label>
+                                            </td>
+                                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                            <td>@item.Location</td>
+                                            <td>@item.Phone</td>
+                                            <td>@item.Email</td>
+                                            @if (item.Type == (int)SystemConstants.CliniciansType.Private)
+                                            {
+                                                <td>Yes</td>
+                                            }
+                                            @if (item.Type == (int)SystemConstants.CliniciansType.Public)
+                                            {
+                                                <td>No</td>
+                                            }
+
+                                            @{
+                                            string days = "";
+                                            if (item.TimetableType == 1)
+                                            {
+
+                                                if (item.OnMonday ?? false)
+                                                {
+                                                    days += "Monday,";
+                                                }
+                                                if (item.OnTuesday ?? false)
+                                                {
+                                                    days += " Tuesday,";
+                                                }
+                                                if (item.OnWednesday ?? false)
+                                                {
+                                                    days += " Wednesday,";
+                                                }
+                                                if (item.OnThursday ?? false)
+                                                {
+                                                    days += " Thursday,";
+                                                }
+                                                if (item.OnFriday ?? false)
+                                                {
+                                                    days += " Friday,";
+                                                }
+                                                if (item.OnSaturday ?? false)
+                                                {
+                                                    days += " Saturday,";
+                                                }
+                                                if (item.OnSunday ?? false)
+                                                {
+                                                    days += " Sunday,";
+                                                }
+
+                                                days = days.Remove(days.Length - 1, 1);
+                                                int index = days.LastIndexOf(",");
+                                                if (index != null)
+                                                {
+                                                    days = days.Remove(index, 1);
+                                                    days = days.Insert(index, " and");
+                                                }
+                                            }
+                                            }
+
+                                            <td>@days</td>
+
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-</fieldset>
-    <fieldset>
-        <div class="row">
-            <div class="col-md-12">
-                <h5>How would you describe your service</h5>
-                <label class="textarea">
-                    @Html.EditorFor(model => model.FullDescription, new { htmlAttributes = new { @placeholder = "Service description", @rows = "4" } })
-                    @Html.ValidationMessageFor(model => model.FullDescription, "", new { @class = "text-danger" })
-                </label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h5>What is the cost of your activity.</h5>
-                <label class="textarea">
-                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @placeholder = "Pricing", @rows = "4" } })
-                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
-                </label>
-            </div>
-            <div class="col-md-6">
-                <h5>Who is eligible for this activity</h5>
-                <label class="textarea">
-                    @Html.EditorFor(model => model.eligibilityDescription, new { htmlAttributes = new { @placeholder = "Eligibility", @rows = "4" } })
-                    @Html.ValidationMessageFor(model => model.eligibilityDescription, "", new { @class = "text-danger" })
-                </label>
-            </div>
-        </div>
-    </fieldset>
+                </fieldset>
+                <fieldset><div class="col-md-offset-9 col-md-3">
+    <input type="submit" value="create" class="btn-u" />&nbsp;&nbsp;
+    @Html.ActionLink("Cancel", "", "Services", null, new { @class = "btn-u btn-u-red" })
+</div></fieldset>
             }
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+        <div>
+           
         </div>
     </div>
 </div>
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
+
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/Scripts/bcHandler.js")
+@Scripts.Render("~/assets/plugins/fancybox/source/jquery.fancybox.pack.js")
+
 }
 <script>
     $("input[type=checkbox][name=SelectedCategory]").click(function () {
@@ -215,12 +313,10 @@
         $("input[type=checkbox][name=SelectedCategory]").not(":checked").attr("disabled", bol);
 
     });
-    function CheckNumber(evt) {
-        evt = (evt) ? evt : window.event;
-        var charCode = (evt.which) ? evt.which : evt.keyCode;
-        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-            return false;
-        }
-        return true;
-    }
+
+    jQuery(document).ready(function () {
+        App.initFancybox();
+    });
+    fileList = document.getElementById("fileList");
+
 </script>
