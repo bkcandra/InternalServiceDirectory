@@ -30,7 +30,6 @@ namespace ISD.Data.EDM
         public virtual DbSet<ActivitiesLogGroup> ActivitiesLogGroup { get; set; }
         public virtual DbSet<Activity> Activity { get; set; }
         public virtual DbSet<ActivityClinician> ActivityClinician { get; set; }
-        public virtual DbSet<ActivityContactDetail> ActivityContactDetail { get; set; }
         public virtual DbSet<ActivityGrouping> ActivityGrouping { get; set; }
         public virtual DbSet<ActivityImage> ActivityImage { get; set; }
         public virtual DbSet<ActivityImageDetail> ActivityImageDetail { get; set; }
@@ -108,5 +107,6 @@ namespace ISD.Data.EDM
         public virtual DbSet<v_VoucherExplorer> v_VoucherExplorer { get; set; }
         public virtual DbSet<v_WebLogExplorer> v_WebLogExplorer { get; set; }
         public virtual DbSet<v_ProviderClinicians> v_ProviderClinicians { get; set; }
+        public virtual DbSet<ActivityContactDetail> ActivityContactDetail { get; set; }
     }
 }

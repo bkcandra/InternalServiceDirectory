@@ -19,7 +19,6 @@ namespace ISD.Data.EDM
             this.ActivitiesLogGroup = new HashSet<ActivitiesLogGroup>();
             this.ActivityUserAttendance = new HashSet<ActivityUserAttendance>();
             this.ActivityClinician = new HashSet<ActivityClinician>();
-            this.ActivityContactDetail = new HashSet<ActivityContactDetail>();
             this.ActivityGrouping = new HashSet<ActivityGrouping>();
             this.ActivityImage = new HashSet<ActivityImage>();
             this.ActivityReferenceCode = new HashSet<ActivityReferenceCode>();
@@ -27,6 +26,7 @@ namespace ISD.Data.EDM
             this.ActivitySchedule = new HashSet<ActivitySchedule>();
             this.ActivitySettings = new HashSet<ActivitySettings>();
             this.ActivityVisitor = new HashSet<ActivityVisitor>();
+            this.ActivityContactDetail = new HashSet<ActivityContactDetail>();
         }
     
         public int ID { get; set; }
@@ -60,7 +60,6 @@ namespace ISD.Data.EDM
         public virtual ProviderProfiles ProviderProfiles { get; set; }
         public virtual ICollection<ActivityUserAttendance> ActivityUserAttendance { get; set; }
         public virtual ICollection<ActivityClinician> ActivityClinician { get; set; }
-        public virtual ICollection<ActivityContactDetail> ActivityContactDetail { get; set; }
         public virtual ICollection<ActivityGrouping> ActivityGrouping { get; set; }
         public virtual ICollection<ActivityImage> ActivityImage { get; set; }
         public virtual ICollection<ActivityReferenceCode> ActivityReferenceCode { get; set; }
@@ -68,5 +67,6 @@ namespace ISD.Data.EDM
         public virtual ICollection<ActivitySchedule> ActivitySchedule { get; set; }
         public virtual ICollection<ActivitySettings> ActivitySettings { get; set; }
         public virtual ICollection<ActivityVisitor> ActivityVisitor { get; set; }
+        public virtual ICollection<ActivityContactDetail> ActivityContactDetail { get; set; }
     }
 }

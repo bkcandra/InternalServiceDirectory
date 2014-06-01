@@ -59,6 +59,10 @@
       <Project>{5afcb6a0-a8b9-4a2a-b8a6-e8437ed354bd}</Project>
       <Name>ISD.Core.DA</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ISD.Data.EDM\ISD.Data.EDM.csproj">
+      <Project>{0658e264-a14c-4887-bfc7-ae4d37bbfbd5}</Project>
+      <Name>ISD.Data.EDM</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ISD.Data.EDS\ISD.Data.EDS.csproj">
       <Project>{16c24b4b-9b36-40b9-a6b4-44900298e5ce}</Project>
       <Name>ISD.Data.EDS</Name>

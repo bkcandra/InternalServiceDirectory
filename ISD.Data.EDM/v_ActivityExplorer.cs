@@ -16,7 +16,7 @@ namespace ISD.Data.EDM
     {
         public int ID { get; set; }
         public virtual string Name { get; set; }
-        public string PhoneNumber { get; set; }
+        public virtual string PhoneNumber { get; set; }
         public virtual Nullable<int> SuburbID { get; set; }
         public virtual Nullable<int> StateID { get; set; }
         public string Suburb { get; set; }
@@ -33,7 +33,7 @@ namespace ISD.Data.EDM
         public int Status { get; set; }
         public Nullable<System.DateTime> ExpiryDate { get; set; }
         public Nullable<int> ActivityType { get; set; }
-        public string Keywords { get; set; }
+        public virtual string Keywords { get; set; }
         public string Website { get; set; }
         public virtual string Price { get; set; }
         public string FirstName { get; set; }
@@ -49,8 +49,8 @@ namespace ISD.Data.EDM
         public string AltEmail { get; set; }
         public string AltAddress { get; set; }
         public Nullable<int> AltSuburbID { get; set; }
-        public Nullable<int> AltStateID { get; set; }
-        public Nullable<int> AltPostCode { get; set; }
+        public virtual Nullable<int> AltStateID { get; set; }
+        public virtual Nullable<int> AltPostCode { get; set; }
         public string AltPhoneNumber { get; set; }
         public string AltMobileNumber { get; set; }
         public virtual string eligibilityDescription { get; set; }

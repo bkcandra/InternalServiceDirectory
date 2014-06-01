@@ -20,9 +20,9 @@ namespace ISD.Application.provider.MVC.Models
         public List<v_ActivityClinicianExplorer> Clinicians { get; set; }
         public List<v_ProviderClinicians> CliniciansList { get; set; }
         public List<v_CategoryExplorer> Categories { get; set; }
-        [RequiredList]
+        [RequiredList(ErrorMessage = "Select at least 1 category from the list")]
         public ICollection<int> SelectedCategory { get; set; }
-        [RequiredList]
+        [RequiredList(ErrorMessage = "Select at least 1 clinician from the list")]
         public ICollection<int> SelectedClinicians { get; set; }
         [Required]
         public override string Address { get; set; }
@@ -34,12 +34,18 @@ namespace ISD.Application.provider.MVC.Models
         public override Nullable<int> PostCode { get; set; }
         [Required]
         public override string Name { get; set; }
-
+        [Required]
+        public override string PhoneNumber { get; set; }
+        [Required]
+        [EmailAddress]
+        public override string Email { get; set; }
         [DataType(DataType.MultilineText)]
         [Required(ErrorMessage = "Please summarise your service")]
         public override string FullDescription { get; set; }
         [DataType(DataType.MultilineText)]
         public override string Price { get; set; }
+        [DataType(DataType.MultilineText)]
+        public override string Keywords { get; set; }
         [DataType(DataType.MultilineText)]
         public override string eligibilityDescription { get; set; }
 
@@ -59,6 +65,10 @@ namespace ISD.Application.provider.MVC.Models
         public ServiceDetailModel()
         {
             Categories = new List<v_CategoryExplorer>();
+            SelectedCategory = new List<int>();
+            SelectedClinicians = new List<int>();
+            StatesList = new List<ListItem>();
+            SuburbList = new List<ListItem>();
         }
         
     }

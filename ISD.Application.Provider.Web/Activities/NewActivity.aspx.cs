@@ -87,7 +87,7 @@ namespace HealthyClub.Provider.Web.Activities
                 drDetail.Status = (int)SystemConstants.ActivityStatus.Active;
                 string shortDescription = "";
                 string fullDescription = "";
-
+                
                 ActivityRegistrationDescriptionUC.getActivityDetails(out shortDescription, out fullDescription);
                 drDetail = ActivityRegistrationDescriptionUC.getDetails(drDetail);
                 drDetail.ShortDescription = "";

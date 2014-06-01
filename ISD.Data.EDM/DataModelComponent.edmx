@@ -98,7 +98,7 @@
           <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
           <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="Address" Type="nvarchar(max)" />
           <Property Name="SuburbID" Type="int" />
@@ -2702,7 +2702,6 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <EntitySet Name="ActivitiesLogGroup" EntityType="IECHS_ISDModel.ActivitiesLogGroup" />
           <EntitySet Name="Activity" EntityType="IECHS_ISDModel.Activity" />
           <EntitySet Name="ActivityClinician" EntityType="IECHS_ISDModel.ActivityClinician" />
-          <EntitySet Name="ActivityContactDetail" EntityType="IECHS_ISDModel.ActivityContactDetail" />
           <EntitySet Name="ActivityGrouping" EntityType="IECHS_ISDModel.ActivityGrouping" />
           <EntitySet Name="ActivityImage" EntityType="IECHS_ISDModel.ActivityImage" />
           <EntitySet Name="ActivityImageDetail" EntityType="IECHS_ISDModel.ActivityImageDetail" />
@@ -2798,10 +2797,6 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <AssociationSet Name="FK_ActivityClinician_Activity" Association="IECHS_ISDModel.FK_ActivityClinician_Activity">
             <End Role="Activity" EntitySet="Activity" />
             <End Role="ActivityClinician" EntitySet="ActivityClinician" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ActivityContactDetails_Activity" Association="IECHS_ISDModel.FK_ActivityContactDetails_Activity">
-            <End Role="Activity" EntitySet="Activity" />
-            <End Role="ActivityContactDetail" EntitySet="ActivityContactDetail" />
           </AssociationSet>
           <AssociationSet Name="FK_ActivityGrouping_Activity" Association="IECHS_ISDModel.FK_ActivityGrouping_Activity">
             <End Role="Activity" EntitySet="Activity" />
@@ -2952,6 +2947,11 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
           <EntitySet Name="v_ProviderClinicians" EntityType="IECHS_ISDModel.v_ProviderClinicians" />
+          <EntitySet Name="ActivityContactDetail" EntityType="IECHS_ISDModel.ActivityContactDetail" />
+          <AssociationSet Name="FK_ActivityContactDetails_Activity" Association="IECHS_ISDModel.FK_ActivityContactDetails_Activity">
+            <End Role="Activity" EntitySet="Activity" />
+            <End Role="ActivityContactDetail" EntitySet="ActivityContactDetail" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -3031,7 +3031,6 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <NavigationProperty Name="ProviderProfiles" Relationship="IECHS_ISDModel.FK_Activity_ProviderProfiles" FromRole="Activity" ToRole="ProviderProfiles" />
           <NavigationProperty Name="ActivityUserAttendance" Relationship="IECHS_ISDModel.FK_ActivityAttendanceLog_Activity" FromRole="Activity" ToRole="ActivityUserAttendance" />
           <NavigationProperty Name="ActivityClinician" Relationship="IECHS_ISDModel.FK_ActivityClinician_Activity" FromRole="Activity" ToRole="ActivityClinician" />
-          <NavigationProperty Name="ActivityContactDetail" Relationship="IECHS_ISDModel.FK_ActivityContactDetails_Activity" FromRole="Activity" ToRole="ActivityContactDetail" />
           <NavigationProperty Name="ActivityGrouping" Relationship="IECHS_ISDModel.FK_ActivityGrouping_Activity" FromRole="Activity" ToRole="ActivityGrouping" />
           <NavigationProperty Name="ActivityImage" Relationship="IECHS_ISDModel.FK_ActivityImage_Activity" FromRole="Activity" ToRole="ActivityImage" />
           <NavigationProperty Name="ActivityReferenceCode" Relationship="IECHS_ISDModel.FK_ActivityReference_Activity" FromRole="Activity" ToRole="ActivityReferenceCode" />
@@ -3039,6 +3038,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <NavigationProperty Name="ActivitySchedule" Relationship="IECHS_ISDModel.FK_ActivitySchedule_Activity1" FromRole="Activity" ToRole="ActivitySchedule" />
           <NavigationProperty Name="ActivitySettings" Relationship="IECHS_ISDModel.FK_ActivitySettings_Activity" FromRole="Activity" ToRole="ActivitySettings" />
           <NavigationProperty Name="ActivityVisitor" Relationship="IECHS_ISDModel.FK_ActivityVisitorLog_Activity" FromRole="Activity" ToRole="ActivityVisitor" />
+          <NavigationProperty Name="ActivityContactDetail" Relationship="IECHS_ISDModel.FK_ActivityContactDetails_Activity" FromRole="Activity" ToRole="ActivityContactDetail" />
         </EntityType>
         <EntityType Name="ActivityClinician">
           <Key>
@@ -3052,37 +3052,6 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <Property Name="ModifiedDatetime" Type="DateTime" Precision="7" />
           <NavigationProperty Name="Activity" Relationship="IECHS_ISDModel.FK_ActivityClinician_Activity" FromRole="ActivityClinician" ToRole="Activity" />
           <NavigationProperty Name="Clinicians" Relationship="IECHS_ISDModel.FK_ActivityClinician_Clinicians" FromRole="ActivityClinician" ToRole="Clinicians" />
-        </EntityType>
-        <EntityType Name="ActivityContactDetail">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ActivityID" Type="Int32" />
-          <Property Name="Title" Type="Int32" />
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SuburbID" Type="Int32" />
-          <Property Name="StateID" Type="Int32" />
-          <Property Name="PostCode" Type="Int32" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="MobileNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="AltTitle" Type="Int32" />
-          <Property Name="AltFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AltMiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AltLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AltEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AltAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AltSuburbID" Type="Int32" />
-          <Property Name="AltStateID" Type="Int32" />
-          <Property Name="AltPostCode" Type="Int32" />
-          <Property Name="AltPhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="AltMobileNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Activity" Relationship="IECHS_ISDModel.FK_ActivityContactDetails_Activity" FromRole="ActivityContactDetail" ToRole="Activity" />
         </EntityType>
         <EntityType Name="ActivityGrouping">
           <Key>
@@ -4385,20 +4354,6 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ActivityContactDetails_Activity">
-          <End Type="IECHS_ISDModel.Activity" Role="Activity" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="IECHS_ISDModel.ActivityContactDetail" Role="ActivityContactDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Activity">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ActivityContactDetail">
-              <PropertyRef Name="ActivityID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ActivityGrouping_Activity">
           <End Type="IECHS_ISDModel.Activity" Role="Activity" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -4921,6 +4876,51 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <Property Name="OnSaturday" Type="Boolean" />
           <Property Name="OnSunday" Type="Boolean" />
         </EntityType>
+        <EntityType Name="ActivityContactDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActivityID" Type="Int32" />
+          <Property Name="Title" Type="Int32" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SuburbID" Type="Int32" />
+          <Property Name="StateID" Type="Int32" />
+          <Property Name="PostCode" Type="Int32" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="AltTitle" Type="Int32" />
+          <Property Name="AltFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AltMiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AltLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AltEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AltAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AltSuburbID" Type="Int32" />
+          <Property Name="AltStateID" Type="Int32" />
+          <Property Name="AltPostCode" Type="Int32" />
+          <Property Name="AltPhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="AltMobileNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Activity" Relationship="IECHS_ISDModel.FK_ActivityContactDetails_Activity" FromRole="ActivityContactDetail" ToRole="Activity" />
+        </EntityType>
+        <Association Name="FK_ActivityContactDetails_Activity">
+          <End Type="IECHS_ISDModel.Activity" Role="Activity" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="IECHS_ISDModel.ActivityContactDetail" Role="ActivityContactDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ActivityContactDetail">
+              <PropertyRef Name="ActivityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5009,37 +5009,6 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="ClinicianID" ColumnName="ClinicianID" />
-                <ScalarProperty Name="ActivityID" ColumnName="ActivityID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ActivityContactDetail">
-            <EntityTypeMapping TypeName="IECHS_ISDModel.ActivityContactDetail">
-              <MappingFragment StoreEntitySet="ActivityContactDetail">
-                <ScalarProperty Name="AltMobileNumber" ColumnName="AltMobileNumber" />
-                <ScalarProperty Name="AltPhoneNumber" ColumnName="AltPhoneNumber" />
-                <ScalarProperty Name="AltPostCode" ColumnName="AltPostCode" />
-                <ScalarProperty Name="AltStateID" ColumnName="AltStateID" />
-                <ScalarProperty Name="AltSuburbID" ColumnName="AltSuburbID" />
-                <ScalarProperty Name="AltAddress" ColumnName="AltAddress" />
-                <ScalarProperty Name="AltEmail" ColumnName="AltEmail" />
-                <ScalarProperty Name="AltLastName" ColumnName="AltLastName" />
-                <ScalarProperty Name="AltMiddleName" ColumnName="AltMiddleName" />
-                <ScalarProperty Name="AltFirstName" ColumnName="AltFirstName" />
-                <ScalarProperty Name="AltTitle" ColumnName="AltTitle" />
-                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
-                <ScalarProperty Name="StateID" ColumnName="StateID" />
-                <ScalarProperty Name="SuburbID" ColumnName="SuburbID" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="ActivityID" ColumnName="ActivityID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
@@ -6292,6 +6261,37 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
                 <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActivityContactDetail">
+            <EntityTypeMapping TypeName="IECHS_ISDModel.ActivityContactDetail">
+              <MappingFragment StoreEntitySet="ActivityContactDetail">
+                <ScalarProperty Name="AltMobileNumber" ColumnName="AltMobileNumber" />
+                <ScalarProperty Name="AltPhoneNumber" ColumnName="AltPhoneNumber" />
+                <ScalarProperty Name="AltPostCode" ColumnName="AltPostCode" />
+                <ScalarProperty Name="AltStateID" ColumnName="AltStateID" />
+                <ScalarProperty Name="AltSuburbID" ColumnName="AltSuburbID" />
+                <ScalarProperty Name="AltAddress" ColumnName="AltAddress" />
+                <ScalarProperty Name="AltEmail" ColumnName="AltEmail" />
+                <ScalarProperty Name="AltLastName" ColumnName="AltLastName" />
+                <ScalarProperty Name="AltMiddleName" ColumnName="AltMiddleName" />
+                <ScalarProperty Name="AltFirstName" ColumnName="AltFirstName" />
+                <ScalarProperty Name="AltTitle" ColumnName="AltTitle" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="SuburbID" ColumnName="SuburbID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ActivityID" ColumnName="ActivityID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

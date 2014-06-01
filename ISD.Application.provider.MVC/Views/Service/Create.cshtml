@@ -130,60 +130,62 @@
                             <h5>Select your service category</h5>
                             @Html.ValidationMessageFor(model => model.SelectedCategory, "", new { @class = "text-danger" })
                         </div>
-                        <div class="panel-group acc-v1" id="accordion-1">
-                            @foreach (var cat in Model.Categories.Where((x => x.Level == 0)))
-                            {
-                                <div class="col col-md-6">
-
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-@cat.ID">
-                                                    @cat.Name
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapse-@cat.ID" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        @foreach (var subCat in Model.Categories.Where((x => x.Level == 1)))
-                                                        {
-                                                            if (subCat.Level1ParentID == cat.ID && subCat.Name != "Other")
-                                                            { <div class="col col-md-6">
-                                                                <label>
-                                                                    <input type="checkbox"
-                                                                           name="SelectedCategory"
-                                                                           value="@subCat.ID" />
-                                                                    <span>@subCat.Name</span>
-                                                                </label>
-                                                            </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col col-md-12">
+                            <div class="panel-group acc-v1" id="accordion-1">
+                                @foreach (var cat in Model.Categories.Where((x => x.Level == 0)))
+                                {
+                                    <div class="col col-md-6">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-@cat.ID">
+                                                        @cat.Name
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapse-@cat.ID" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            @foreach (var subCat in Model.Categories.Where((x => x.Level == 1)))
+                                                            {
+                                                                if (subCat.Level1ParentID == cat.ID && subCat.Name != "Other")
+                                                                { <div class="col col-md-6">
+                                                                    <label>
+                                                                        <input type="checkbox"
+                                                                               name="SelectedCategory"
+                                                                               value="@subCat.ID" />
+                                                                        <span>@subCat.Name</span>
+                                                                    </label>
+                                                                </div>
+                                                                }
                                                             }
-                                                        }
-                                                        @{
-                                                        var subOther = Model.Categories.Where((x => x.Level1ParentID == cat.ID && x.Name == "Other")).FirstOrDefault();
-                                                        if (subOther != null)
-                                                        {
-                                                            <div class="col col-md-6">
-                                                                <label>
-                                                                    <input type="checkbox"
-                                                                           name="SelectedCategory"
-                                                                           value="@subOther.ID" />
-                                                                    <span>@subOther.Name</span>
-                                                                </label>
-                                                            </div>
-                                                        }
-                                                        }
+                                                            @{
+                                                            var subOther = Model.Categories.Where((x => x.Level1ParentID == cat.ID && x.Name == "Other")).FirstOrDefault();
+                                                            if (subOther != null)
+                                                            {
+                                                                <div class="col col-md-6">
+                                                                    <label>
+                                                                        <input type="checkbox"
+                                                                               name="SelectedCategory"
+                                                                               value="@subOther.ID" />
+                                                                        <span>@subOther.Name</span>
+                                                                    </label>
+                                                                </div>
+                                                            }
+                                                            }
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            }
+                                }
+                            </div>
                         </div>
-
-
                     </div>
                 </fieldset>
                 <fieldset>
@@ -191,6 +193,10 @@
                         <div class="col-md-12">
                             <h5>Select clinicians for in this service</h5>
                             @Html.ValidationMessageFor(model => model.SelectedClinicians, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -230,47 +236,47 @@
                                             }
 
                                             @{
-                                            string days = "";
-                                            if (item.TimetableType == 1)
-                                            {
+                                                string days = "";
+                                                if (item.TimetableType == 1)
+                                                {
 
-                                                if (item.OnMonday ?? false)
-                                                {
-                                                    days += "Monday,";
-                                                }
-                                                if (item.OnTuesday ?? false)
-                                                {
-                                                    days += " Tuesday,";
-                                                }
-                                                if (item.OnWednesday ?? false)
-                                                {
-                                                    days += " Wednesday,";
-                                                }
-                                                if (item.OnThursday ?? false)
-                                                {
-                                                    days += " Thursday,";
-                                                }
-                                                if (item.OnFriday ?? false)
-                                                {
-                                                    days += " Friday,";
-                                                }
-                                                if (item.OnSaturday ?? false)
-                                                {
-                                                    days += " Saturday,";
-                                                }
-                                                if (item.OnSunday ?? false)
-                                                {
-                                                    days += " Sunday,";
-                                                }
+                                                    if (item.OnMonday ?? false)
+                                                    {
+                                                        days += "Monday,";
+                                                    }
+                                                    if (item.OnTuesday ?? false)
+                                                    {
+                                                        days += " Tuesday,";
+                                                    }
+                                                    if (item.OnWednesday ?? false)
+                                                    {
+                                                        days += " Wednesday,";
+                                                    }
+                                                    if (item.OnThursday ?? false)
+                                                    {
+                                                        days += " Thursday,";
+                                                    }
+                                                    if (item.OnFriday ?? false)
+                                                    {
+                                                        days += " Friday,";
+                                                    }
+                                                    if (item.OnSaturday ?? false)
+                                                    {
+                                                        days += " Saturday,";
+                                                    }
+                                                    if (item.OnSunday ?? false)
+                                                    {
+                                                        days += " Sunday,";
+                                                    }
 
-                                                days = days.Remove(days.Length - 1, 1);
-                                                int index = days.LastIndexOf(",");
-                                                if (index != null)
-                                                {
-                                                    days = days.Remove(index, 1);
-                                                    days = days.Insert(index, " and");
+                                                    days = days.Remove(days.Length - 1, 1);
+                                                    int index = days.LastIndexOf(",");
+                                                    if (index != null)
+                                                    {
+                                                        days = days.Remove(index, 1);
+                                                        days = days.Insert(index, " and");
+                                                    }
                                                 }
-                                            }
                                             }
 
                                             <td>@days</td>
@@ -280,6 +286,18 @@
                                     }
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <section class="col col-md-12">
+                                <label class="textarea">
+                                    @Html.EditorFor(model => model.Keywords, new { htmlAttributes = new { @placeholder = "Service Keywords",@row="3" } })
+                                    @Html.ValidationMessageFor(model => model.Keywords, "", new { @class = "text-danger" })
+                                </label>
+                            </section>
                         </div>
                     </div>
                 </fieldset>

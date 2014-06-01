@@ -18,6 +18,11 @@ namespace ISD.Application.provider.MVC
                 url: "Services/q=(page[{page}],pagesize[{pageSize}])",
                 defaults: new { controller = "Services", action = "Index" }
             );
+            routes.MapRoute(
+                name: "ServiceDetail",
+                url: "Service/{name})",
+                defaults: new { controller = "Service", action = "Detail" }
+            );
 
             routes.MapRoute(
                 name: "Default",
@@ -25,11 +30,9 @@ namespace ISD.Application.provider.MVC
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
 
-            routes.MapRoute(
-               name: "IndexDefault",
-               url: "{controller}/{id}",
-               defaults: new { controller = "Home", action = "Index", id = 0 }
-           );
+           
         }
+
+       
     }
 }

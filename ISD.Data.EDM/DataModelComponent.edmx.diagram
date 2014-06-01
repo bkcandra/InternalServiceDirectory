@@ -4,13 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f072a5cbcd974245b60c345042ba7c54" Name="Diagram1">
+      <Diagram DiagramId="f072a5cbcd974245b60c345042ba7c54" Name="Diagram1" ZoomLevel="80">
         <EntityTypeShape EntityType="IECHS_ISDModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="5.75" />
         <EntityTypeShape EntityType="IECHS_ISDModel.ActivitiesLog" Width="1.5" PointX="12" PointY="44.875" />
         <EntityTypeShape EntityType="IECHS_ISDModel.ActivitiesLogGroup" Width="1.5" PointX="9.75" PointY="45" />
         <EntityTypeShape EntityType="IECHS_ISDModel.Activity" Width="1.5" PointX="7.5" PointY="28.375" />
         <EntityTypeShape EntityType="IECHS_ISDModel.ActivityClinician" Width="1.5" PointX="12.75" PointY="40.625" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityContactDetail" Width="1.5" PointX="9.75" PointY="23.125" />
         <EntityTypeShape EntityType="IECHS_ISDModel.ActivityGrouping" Width="1.5" PointX="9.75" PointY="41.5" />
         <EntityTypeShape EntityType="IECHS_ISDModel.ActivityImage" Width="1.5" PointX="9.75" PointY="30.125" />
         <EntityTypeShape EntityType="IECHS_ISDModel.ActivityImageDetail" Width="1.5" PointX="12" PointY="29.875" />
@@ -92,7 +91,6 @@
         <AssociationConnector Association="IECHS_ISDModel.FK_Activity_ProviderProfiles" />
         <AssociationConnector Association="IECHS_ISDModel.FK_ActivityAttendanceLog_Activity" />
         <AssociationConnector Association="IECHS_ISDModel.FK_ActivityClinician_Activity" />
-        <AssociationConnector Association="IECHS_ISDModel.FK_ActivityContactDetails_Activity" />
         <AssociationConnector Association="IECHS_ISDModel.FK_ActivityGrouping_Activity" />
         <AssociationConnector Association="IECHS_ISDModel.FK_ActivityImage_Activity" />
         <AssociationConnector Association="IECHS_ISDModel.FK_ActivityReference_Activity" />
@@ -131,6 +129,8 @@
         <AssociationConnector Association="IECHS_ISDModel.FK_WeblLogAction_WebLog" />
         <AssociationConnector Association="IECHS_ISDModel.AspNetUserRoles" />
         <EntityTypeShape EntityType="IECHS_ISDModel.v_ProviderClinicians" Width="1.5" PointX="3.375" PointY="25.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityContactDetail" Width="1.5" PointX="9.75" PointY="56.5" />
+        <AssociationConnector Association="IECHS_ISDModel.FK_ActivityContactDetails_Activity" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

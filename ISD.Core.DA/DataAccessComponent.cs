@@ -1,4 +1,5 @@
-﻿using BCUtility;
+﻿using System.Data.Entity;
+using BCUtility;
 using ISD.Data.EDM;
 using ISD.EDS;
 using ISD.Util;
@@ -15,6 +16,8 @@ namespace ISD.DA
 {
     public class DataAccessComponent
     {
+        private ISDEntities ent =new ISDEntities();
+
         #region Category
         public DataSetComponent.CategoryDataTable RetrieveCategories()
         {
@@ -3756,22 +3759,7 @@ namespace ISD.DA
         #endregion
 
 
-        public DataSetComponent.ActivityReferenceCodeDataTable RetrieveActivityReferences()
-        {
-            ISDEntities ent = new ISDEntities();
 
-            var query = from a in ent.ActivityReferenceCode
-                        select a;
-
-            if (query.AsEnumerable() != null)
-            {
-                var dt = new DataSetComponent.ActivityReferenceCodeDataTable();
-                ObjectHandler.CopyEnumerableToDataTable(query.AsEnumerable(), dt, LoadOption.PreserveChanges);
-                return dt;
-            }
-            else
-                return null;
-        }
 
         public void insertNewActivityReference(DataSetComponent.ActivityReferenceCodeRow actRefDr)
         {
@@ -8172,6 +8160,11 @@ namespace ISD.DA
             }
             else return null;
 
+        }
+
+        public List<ActivityReferenceCode> RetrieveActivityReferences()
+        {
+           return  ent.ActivityReferenceCode.ToList();
         }
     }
 

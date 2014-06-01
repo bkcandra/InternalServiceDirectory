@@ -1508,9 +1508,9 @@ namespace ISD.BF
 
         public string GenerateActRefID(string Name)
         {
-            var ActRef = new DataAccessComponent().RetrieveActivityReferences();
-            var RefActIDTable = new HashSet<int>(ActRef.Select(x => x.ActivityID));
-            var RefCodeTable = new HashSet<string>(ActRef.Select(x => x.ReferenceID));
+            var actRef = new DataAccessComponent().RetrieveActivityReferences();
+            var RefActIDTable = new HashSet<int>(actRef.Select(x => x.ActivityID));
+            var RefCodeTable = new HashSet<string>(actRef.Select(x => x.ReferenceID));
 
 
             List<string> exclude = (SystemConstants.Prepositions + SystemConstants.Conjunctions).Split(';').Select(x => x.Trim()).OfType<string>().ToList();
