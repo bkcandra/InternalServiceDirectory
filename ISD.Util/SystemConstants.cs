@@ -86,7 +86,7 @@ namespace ISD.Util
         public static string CategoryRoot = "CategoryRoot";
         public static string DevUser = "Developer";
         public static string AdministratorRole = "Administrator";
-        public static string ProviderRole = "Provider";
+        public const string ProviderRole = "Provider";
         public static string CustomerRole = "Customer";
         public static string GuestRole = "Guest";
         public static string SearchKey = "Search";

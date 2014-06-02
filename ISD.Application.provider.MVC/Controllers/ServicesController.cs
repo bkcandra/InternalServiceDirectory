@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Web.Services.Description;
 using ISD.Data.EDM;
 using Microsoft.AspNet.Identity;
+using ISD.Util;
 
 namespace ISD.Application.provider.MVC.Controllers
 {
@@ -16,6 +17,7 @@ namespace ISD.Application.provider.MVC.Controllers
         private ISDEntities db = new ISDEntities();
         // GET: Services
 
+        [Authorize(Roles = SystemConstants.ProviderRole)]
         public async Task<ActionResult> Index(int? page, int? pageSize)
         {
 
