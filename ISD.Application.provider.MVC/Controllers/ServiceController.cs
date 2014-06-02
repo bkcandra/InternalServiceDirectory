@@ -64,6 +64,183 @@ namespace ISD.Application.provider.MVC.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreateSub(ServiceDetailModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Activity act = db.Activity.Create();
+                ActivityContactDetail actCon = db.ActivityContactDetail.Create();
+
+                ObjectHandler.CopyPropertyValues(model, act);
+                ObjectHandler.CopyPropertyValues(model, actCon);
+
+                //Set activity
+                act.CategoryID = act.SecondaryCategoryID1 =
+                    act.SecondaryCategoryID2 = act.SecondaryCategoryID3 =
+                        act.SecondaryCategoryID4 = 0;
+                act.Status = (int)SystemConstants.ActivityStatus.Active;
+                act.isApproved = false;
+                act.isPrimary = true;
+                act.CreatedBy = act.ModifiedBy = User.Identity.Name;
+                act.CreatedDateTime = act.ModifiedDateTime = DateTime.Now;
+                act.ExpiryDate = DateTime.Now.AddDays(180);
+                if (model.ShortDescription == null)
+                    act.ShortDescription = string.Empty;
+                if (model.eligibilityDescription == null)
+                    act.eligibilityDescription = string.Empty;
+                if (model.Price == null)
+                    act.Price = string.Empty;
+
+                act.ActivityCode = Guid.NewGuid().ToString();
+
+                act.ProviderID = User.Identity.GetUserId();
+                actCon.Username = User.Identity.Name;
+                actCon.ActivityID = act.ID;
+
+
+
+                foreach (var cat in model.SelectedCategory)
+                {
+                    int i = 1;
+                    if (i == 1) { act.CategoryID = cat; }
+                    if (i == 2) { act.SecondaryCategoryID1 = cat; }
+                    if (i == 3) { act.SecondaryCategoryID2 = cat; }
+                    if (i == 4) { act.SecondaryCategoryID3 = cat; }
+                    if (i == 5) { act.SecondaryCategoryID4 = cat; }
+                    i++;
+                }
+
+                foreach (var sc in model.SelectedClinicians)
+                {
+                    var ac = db.ActivityClinician.Create();
+                    ac.ActivityID = act.ID;
+                    ac.ClinicianID = sc;
+                    ac.ModifiedBy = User.Identity.Name;
+                    ac.ModifiedDatetime = DateTime.Now;
+                    ac.Description = act.Name;
+                    act.ActivityClinician.Add(ac);
+                }
+
+                act.ActivityContactDetail.Add(actCon);
+
+                var Ref = db.ActivityReferenceCode.Create();
+                Ref.ActivityID = act.ID;
+                Ref.ActivityGUID = Guid.NewGuid();
+                Ref.ReferenceID = new BusinessFunctionComponent().GenerateActRefID(act.Name);
+                act.ActivityReferenceCode.Add(Ref);
+
+                db.Activity.Add(act);
+                db.SaveChanges();
+
+                return RedirectToAction("edit", "service", new { id = act.ID });
+
+            }
+            //failed
+            foreach (var state in await db.State.ToListAsync())
+            {
+                model.StatesList.Add(new ListItem(state.StateName, state.ID.ToString()));
+            }
+
+            foreach (var suburb in await db.Suburb.ToListAsync())
+            {
+                model.SuburbList.Add(new ListItem(suburb.Name, suburb.ID.ToString()));
+            }
+            model.CliniciansList = await db.v_ProviderClinicians.ToListAsync();
+            model.Categories = await db.v_CategoryExplorer.ToListAsync();
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditSub(ServiceDetailModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Activity act = db.Activity.Create();
+                ActivityContactDetail actCon = db.ActivityContactDetail.Create();
+
+                ObjectHandler.CopyPropertyValues(model, act);
+                ObjectHandler.CopyPropertyValues(model, actCon);
+
+                //Set activity
+                act.CategoryID = act.SecondaryCategoryID1 =
+                    act.SecondaryCategoryID2 = act.SecondaryCategoryID3 =
+                        act.SecondaryCategoryID4 = 0;
+                act.Status = (int)SystemConstants.ActivityStatus.Active;
+                act.isApproved = false;
+                act.isPrimary = true;
+                act.CreatedBy = act.ModifiedBy = User.Identity.Name;
+                act.CreatedDateTime = act.ModifiedDateTime = DateTime.Now;
+                act.ExpiryDate = DateTime.Now.AddDays(180);
+                if (model.ShortDescription == null)
+                    act.ShortDescription = string.Empty;
+                if (model.eligibilityDescription == null)
+                    act.eligibilityDescription = string.Empty;
+                if (model.Price == null)
+                    act.Price = string.Empty;
+
+                act.ActivityCode = Guid.NewGuid().ToString();
+
+                act.ProviderID = User.Identity.GetUserId();
+                actCon.Username = User.Identity.Name;
+                actCon.ActivityID = act.ID;
+
+
+
+                foreach (var cat in model.SelectedCategory)
+                {
+                    int i = 1;
+                    if (i == 1) { act.CategoryID = cat; }
+                    if (i == 2) { act.SecondaryCategoryID1 = cat; }
+                    if (i == 3) { act.SecondaryCategoryID2 = cat; }
+                    if (i == 4) { act.SecondaryCategoryID3 = cat; }
+                    if (i == 5) { act.SecondaryCategoryID4 = cat; }
+                    i++;
+                }
+
+                foreach (var sc in model.SelectedClinicians)
+                {
+                    var ac = db.ActivityClinician.Create();
+                    ac.ActivityID = act.ID;
+                    ac.ClinicianID = sc;
+                    ac.ModifiedBy = User.Identity.Name;
+                    ac.ModifiedDatetime = DateTime.Now;
+                    ac.Description = act.Name;
+                    act.ActivityClinician.Add(ac);
+                }
+
+                act.ActivityContactDetail.Add(actCon);
+
+                var Ref = db.ActivityReferenceCode.Create();
+                Ref.ActivityID = act.ID;
+                Ref.ActivityGUID = Guid.NewGuid();
+                Ref.ReferenceID = new BusinessFunctionComponent().GenerateActRefID(act.Name);
+                act.ActivityReferenceCode.Add(Ref);
+
+                db.Activity.Add(act);
+                db.SaveChanges();
+
+                return RedirectToAction("edit", "service", new { id = act.ID });
+
+            }
+            //failed
+            foreach (var state in await db.State.ToListAsync())
+            {
+                model.StatesList.Add(new ListItem(state.StateName, state.ID.ToString()));
+            }
+
+            foreach (var suburb in await db.Suburb.ToListAsync())
+            {
+                model.SuburbList.Add(new ListItem(suburb.Name, suburb.ID.ToString()));
+            }
+            model.CliniciansList = await db.v_ProviderClinicians.ToListAsync();
+            model.Categories = await db.v_CategoryExplorer.ToListAsync();
+            return View(model);
+        }
+        
+
         // GET: Service/Create
         public async Task<ActionResult> Create()
         {
