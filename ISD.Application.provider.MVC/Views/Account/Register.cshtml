@@ -1,41 +1,97 @@
 ﻿@model ISD.Application.provider.MVC.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Service Provider registration";
 }
 
-<h2>@ViewBag.Title.</h2>
+<div class="breadcrumbs">
+    <div class="container">
+        <h1 class="pull-left">Login</h1>
+        <ul class="pull-right breadcrumb">
+            <li>
+                <a href="@Url.Content("~")">content</a>
+            </li>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
+            <li><a href="">Account</a></li>
+            <li class="active">Register</li>
+        </ul>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
-}
+    <!--/container-->
+</div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+
+
+<div class="container content">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @Class = "reg-page", @enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="reg-header">
+                    <h2>Register a new account</h2>
+                    <p>Already Signed Up? Click <a href="page_login.html" class="color-green">Sign In</a> to login your account.</p>
+                </div>
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control margin-bottom-20", @placeholder = "Email Address", @type = "email" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                <div class="row">
+                    <div class="col-sm-6">
+
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control margin-bottom-20", @placeholder = "Confirm Password" })
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+
+
+                    </div>
+                </div>
+                @Html.EditorFor(x => x.profiles.ProviderName, new { htmlAttributes = new { @class = "form-control margin-bottom-20", @placeholder = "Provider name" } })
+                @Html.ValidationMessageFor(x => x.profiles.ProviderName, "", new { @class = "text-danger" })
+
+                @Html.EditorFor(model => model.profiles.Address, new { htmlAttributes = new { @class = "form-control margin-bottom-20", @placeholder = "Provider Address" } })
+                @Html.ValidationMessageFor(model => model.profiles.Address, "", new { @class = "text-danger" })
+
+
+                <div class="row">
+                    <section class="col col-md-5">
+                        <label class="select">
+                            @Html.EditorFor(model => model.profiles.Suburb, new { htmlAttributes = new { @class = "form-control margin-bottom-20", @placeholder = "Suburb" } })
+                            @Html.ValidationMessageFor(model => model.profiles.Suburb, "", new { @class = "text-danger" })
+                            <i></i>
+                        </label>
+                    </section>
+                    <section class="col col-md-4">
+                        <label class="select form-control margin-bottom-20">
+                            @Html.DropDownListFor(model => model.profiles.StateID,
+                         new SelectList(Model.StatesList,
+                             "Value", "Text",
+                             Model.StatesList.First().Value))
+                            @Html.ValidationMessageFor(model => model.profiles.StateID, "", new { @class = "text-danger" })
+                            <i></i>
+                        </label>
+                    </section>
+                    <section class="col col-md-3">
+                        <label class="input">
+                            @Html.EditorFor(model => model.profiles.PostCode, new { htmlAttributes = new { @class = "form-control margin-bottom-20", @placeholder = "Post code", @maxlength = "4", @onkeypress = "return CheckNumber(event)" } })
+                            @Html.ValidationMessageFor(model => model.profiles.PostCode, "", new { @class = "text-danger" })
+                        </label>
+                    </section>
+                </div>
+                <hr>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            I read <a href="page_terms.html" class="color-green">Terms and Conditions</a>
+                        </label>
+                    </div>
+                    <div class="col-lg-6 text-right">
+                        <button class="btn-u" type="submit">Register</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

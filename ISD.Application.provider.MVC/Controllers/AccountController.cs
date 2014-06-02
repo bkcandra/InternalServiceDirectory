@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -12,12 +13,17 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
 using ISD.Application.provider.MVC.Models;
+using ISD.Data.EDM;
+using System.Web.UI.WebControls;
+
 
 namespace ISD.Application.provider.MVC.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        private ISDEntities db = new ISDEntities();
+
         private ApplicationUserManager _userManager;
 
         public AccountController()
@@ -83,9 +89,14 @@ namespace ISD.Application.provider.MVC.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public async Task<ActionResult> Register()
         {
-            return View();
+            RegisterViewModel model = new RegisterViewModel();
+            foreach (var state in await db.State.ToListAsync())
+            {
+                model.StatesList.Add(new ListItem(state.StateName, state.ID.ToString()));
+            }
+            return View(model);
         }
 
         //

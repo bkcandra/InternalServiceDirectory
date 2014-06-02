@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ISD.Data.EDM;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Web.UI.WebControls;
 
 namespace ISD.Application.provider.MVC.Models
 {
@@ -68,6 +71,17 @@ namespace ISD.Application.provider.MVC.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public ProviderProfiles profiles { get; set; }
+        public List<ListItem> StatesList =
+                 new List<ListItem>
+            {
+                new ListItem {Value = "", Text = "Select State"},
+                };
+        public RegisterViewModel()
+        {
+            StatesList = new List<ListItem>();
+        }
     }
 
     public class ResetPasswordViewModel
