@@ -14,3 +14,4 @@ E:\Work\Projects\InternalServiceDirectory\ISD.Data.EDS\bin\Debug\EntityFramework
 E:\Work\Projects\InternalServiceDirectory\ISD.Data.EDS\bin\Debug\EntityFramework.SqlServer.xml
 E:\Work\Projects\InternalServiceDirectory\ISD.Data.EDS\obj\Debug\ISD.EDS.dll
 E:\Work\Projects\InternalServiceDirectory\ISD.Data.EDS\obj\Debug\ISD.EDS.pdb
+E:\Work\Projects\InternalServiceDirectory\ISD.Data.EDS\obj\Debug\ISD.Data.EDS.csprojResolveAssemblyReference.cache

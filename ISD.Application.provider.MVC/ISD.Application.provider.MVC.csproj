@@ -1734,6 +1734,7 @@
     <Content Include="Views\Shared\_PartialServiceClinicians.cshtml" />
     <Content Include="Views\BackloadDemo\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_PartialEditSubService.cshtml" />
     <None Include="Web.Backload.Default.config" />
     <None Include="Web.Backload.xsd">
       <SubType>Designer</SubType>

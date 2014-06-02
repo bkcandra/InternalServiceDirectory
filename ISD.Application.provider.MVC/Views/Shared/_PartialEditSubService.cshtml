@@ -1,0 +1,122 @@
+﻿@model IEnumerable<ISD.Data.EDM.v_ActivityExplorer>
+@Styles.Render("~/assets/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css")
+@Styles.Render("~/assets/plugins/fancybox/source/jquery.fancybox.css")
+<div class="row">
+    <div class="col-md-12">
+        @{
+            foreach (var item in Model)
+            {
+                using (Html.BeginForm("Create", "Service", FormMethod.Post, new { @Class = "sky-form", @enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                    <fieldset>
+                        <h4>Activity Detail</h4>
+                        <div class="row">
+                            <section class="col col-md-12">
+                                <label class="input">
+                                    Html.EditorFor( item.Name, new { htmlAttributes = new { @placeholder = "Service name" } })
+                                    Html.ValidationMessageFor( item.Name, "", new { @class = "text-danger" })
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-md-4">
+                                <label class="input">
+                                    Html.EditorFor( item.Email, new { htmlAttributes = new { @placeholder = "Email", @type = "email" } })
+                                    Html.ValidationMessageFor( item.Email, "", new { @class = "text-danger" })
+                                </label>
+                            </section>
+                            <section class="col col-md-4">
+                                <label class="input">
+                                    Html.EditorFor( item.PhoneNumber, new { htmlAttributes = new { @placeholder = "Phone" } })
+                                    Html.ValidationMessageFor( item.PhoneNumber, "", new { @class = "text-danger" })
+                                </label>
+                            </section>
+                            <section class="col col-md-4">
+                                <label class="input">
+                                    Html.EditorFor( item.Website, new { htmlAttributes = new { @placeholder = "Service Website (Optional)" } })
+                                    Html.ValidationMessageFor( item.Website, "", new { @class = "text-danger" })
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="input">
+                                    Html.EditorFor( item.Address, new { htmlAttributes = new { @placeholder = "Service Address" } })
+                                    Html.ValidationMessageFor( item.Address, "", new { @class = "text-danger" })
+
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <section class="col col-md-5">
+                                <label class="select">
+                                    Html.DropDownListFor( item.SuburbID,
+                                new SelectList(item.SuburbList,
+                                    "Value", "Text",
+                                    item.StatesList.First().Value))
+                                    Html.ValidationMessageFor( item.SuburbID, "", new { @class = "text-danger" })
+                                    <i></i>
+                                </label>
+                            </section>
+                            <section class="col col-md-4">
+                                <label class="select">
+                                    Html.DropDownListFor( item.StateID,
+                                new SelectList(item.StatesList,
+                                    "Value", "Text",
+                                    item.StatesList.First().Value))
+                                    Html.ValidationMessageFor( item.StateID, "", new { @class = "text-danger" })
+                                    <i></i>
+                                </label>
+                            </section>
+                            <section class="col col-md-3">
+                                <label class="input">
+                                    Html.EditorFor( item.PostCode, new { htmlAttributes = new { @placeholder = "Post code", @maxlength = "4", @onkeypress = "return CheckNumber(event)" } })
+                                    Html.ValidationMessageFor( item.PostCode, "", new { @class = "text-danger" })
+                                </label>
+                            </section>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h5>How would you describe your service</h5>
+                                <label class="textarea">
+                                    Html.EditorFor( item.FullDescription, new { htmlAttributes = new { @placeholder = "Service description", @rows = "4" } })
+                                    Html.ValidationMessageFor( item.FullDescription, "", new { @class = "text-danger" })
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>What is the cost of your activity.</h5>
+                                <label class="textarea">
+                                    Html.EditorFor( item.Price, new { htmlAttributes = new { @placeholder = "Pricing", @rows = "4" } })
+                                    Html.ValidationMessageFor( item.Price, "", new { @class = "text-danger" })
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Who is eligible for this activity</h5>
+                                <label class="textarea">
+                                    Html.EditorFor( item.eligibilityDescription, new { htmlAttributes = new { @placeholder = "Eligibility", @rows = "4" } })
+                                    Html.ValidationMessageFor( item.eligibilityDescription, "", new { @class = "text-danger" })
+                                </label>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div class="col-md-offset-9 col-md-3">
+                            <input type="submit" value="Save" class="btn-u" />&nbsp;&nbsp;
+                            Html.ActionLink("Cancel", "", "Services", null, new { @class = "btn-u btn-u-red" })
+                        </div>
+                    </fieldset>
+                }
+            }
+
+
+        }
+    </div>
+</div>
