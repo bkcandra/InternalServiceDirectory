@@ -35,43 +35,46 @@
                             <td>No</td>
                         }
                         @{
-                            string days = "";
-                            if (item.OnMonday ?? false)
+                        string days = "";
+                        if (item.OnMonday ?? false)
+                        {
+                            days += "Monday,";
+                        }
+                        if (item.OnTuesday ?? false)
+                        {
+                            days += " Tuesday,";
+                        }
+                        if (item.OnWednesday ?? false)
+                        {
+                            days += " Wednesday,";
+                        }
+                        if (item.OnThursday ?? false)
+                        {
+                            days += " Thursday,";
+                        }
+                        if (item.OnFriday ?? false)
+                        {
+                            days += " Friday,";
+                        }
+                        if (item.OnSaturday ?? false)
+                        {
+                            days += " Saturday,";
+                        }
+                        if (item.OnSunday ?? false)
+                        {
+                            days += " Sunday,";
+                        }
+                            if (!string.IsNullOrEmpty(days))
                             {
-                                days += "Monday,";
+                                days = days.Remove(days.Length - 1, 1);
+                            
+                                int index = days.LastIndexOf(",");
+                                if (index != null)
+                                {
+                                    days = days.Remove(index, 1);
+                                    days = days.Insert(index, " and");
+                                }
                             }
-                            if (item.OnTuesday ?? false)
-                            {
-                                days += " Tuesday,";
-                            }
-                            if (item.OnWednesday ?? false)
-                            {
-                                days += " Wednesday,";
-                            }
-                            if (item.OnThursday ?? false)
-                            {
-                                days += " Thursday,";
-                            }
-                            if (item.OnFriday ?? false)
-                            {
-                                days += " Friday,";
-                            }
-                            if (item.OnSaturday ?? false)
-                            {
-                                days += " Saturday,";
-                            }
-                            if (item.OnSunday ?? false)
-                            {
-                                days += " Sunday,";
-                            }
-
-                            days = days.Remove(days.Length - 1, 1);
-                            int index = days.LastIndexOf(",");
-                            if (index != null)
-                             {
-                                 days = days.Remove(index, 1);
-                                 days = days.Insert(index, " and");
-                             }
                         }
                         <td>@days</td>
                     </tr>
