@@ -21,18 +21,16 @@
     <div class="tab-v1">
         <ul class="nav nav-tabs">
             <li class="active"><a href="#home" data-toggle="tab">Primary information</a></li>
-            <li><a href="#subservice" data-toggle="tab">Sub-Service</a></li>
             <li><a href="#images" data-toggle="tab">Photos / Images</a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade in active" id="home">
-                <div class="row">
-                    <div class="col-md-12">
-                        @using (Html.BeginForm("Create", "Service", FormMethod.Post, new { @Class = "sky-form", @enctype = "multipart/form-data" }))
-                            {
-                            @Html.AntiForgeryToken()
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
+                @using (Html.BeginForm("EditInfo", "Service", FormMethod.Post, new { @Class = "sky-form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    <div class="row">
+                        <div class="col-md-12">
                             <fieldset>
                                 <h4>Activity Detail</h4>
                                 <div class="row">
@@ -76,7 +74,7 @@
                                     <section class="col col-md-5">
                                         <label class="select">
                                             @Html.DropDownListFor(model => model.SuburbID,
-                                    new SelectList(Model.SuburbList,
+                                        new SelectList(Model.SuburbList,
                                         "Value", "Text",
                                         Model.StatesList.First().Value))
                                             @Html.ValidationMessageFor(model => model.SuburbID, "", new { @class = "text-danger" })
@@ -86,7 +84,7 @@
                                     <section class="col col-md-4">
                                         <label class="select">
                                             @Html.DropDownListFor(model => model.StateID,
-                                    new SelectList(Model.StatesList,
+                                        new SelectList(Model.StatesList,
                                         "Value", "Text",
                                         Model.StatesList.First().Value))
                                             @Html.ValidationMessageFor(model => model.StateID, "", new { @class = "text-danger" })
@@ -140,7 +138,7 @@
                                     <div class="col col-md-12">
                                         <div class="panel-group acc-v1" id="accordion-1">
                                             @foreach (var cat in Model.Categories.Where((x => x.Level == 0)))
-                                                {
+                                            {
                                                 <div class="col col-md-6">
                                                     <div class="panel panel-default">
                                                         <div class="panel-heading">
@@ -155,42 +153,42 @@
                                                                 <div class="row">
                                                                     <div class="col-md-12">
                                                                         @foreach (var subCat in Model.Categories.Where((x => x.Level == 1)))
-                                                                            {
-                                                                                if (subCat.Level1ParentID == cat.ID && subCat.Name != "Other")
-                                                                                { <div class="col col-md-6">
-                                                                                    <label>
+                                                                        {
+                                                                            if (subCat.Level1ParentID == cat.ID && subCat.Name != "Other")
+                                                                            { <div class="col col-md-6">
+                                                                                <label>
 
-                                                                                        @{
-                                                                                    if (Model.SelectedCategory.Contains(subCat.ID))
-                                                                                    {
-                                                                                        <input type="checkbox" checked="true"
-                                                                                               name="SelectedCategory"
-                                                                                               value="@subCat.ID" />
-                                                                                    }
-                                                                                    if (!Model.SelectedCategory.Contains(subCat.ID))
-                                                                                    {<input type="checkbox"
-                                                                                            name="SelectedCategory"
-                                                                                            value="@subCat.ID" />
-                                                                                    }
-                                                                                        }
-                                                                                        <span>@subCat.Name</span>
-                                                                                    </label>
-                                                                                </div>
+                                                                                    @{
+                                                                                if (Model.SelectedCategory.Contains(subCat.ID))
+                                                                                {
+                                                                                    <input type="checkbox" checked="true"
+                                                                                           name="SelectedCategory"
+                                                                                           value="@subCat.ID" />
                                                                                 }
+                                                                                if (!Model.SelectedCategory.Contains(subCat.ID))
+                                                                                {<input type="checkbox"
+                                                                                        name="SelectedCategory"
+                                                                                        value="@subCat.ID" />
+                                                                                }
+                                                                                    }
+                                                                                    <span>@subCat.Name</span>
+                                                                                </label>
+                                                                            </div>
                                                                             }
+                                                                        }
                                                                         @{
-                                                                            var subOther = Model.Categories.Where((x => x.Level1ParentID == cat.ID && x.Name == "Other")).FirstOrDefault();
-                                                                            if (subOther != null)
-                                                                            {
-                                                                                <div class="col col-md-6">
-                                                                                    <label>
-                                                                                        <input type="checkbox"
-                                                                                               name="SelectedCategory"
-                                                                                               value="@subOther.ID" />
-                                                                                        <span>@subOther.Name</span>
-                                                                                    </label>
-                                                                                </div>
-                                                                            }
+                                                                        var subOther = Model.Categories.Where((x => x.Level1ParentID == cat.ID && x.Name == "Other")).FirstOrDefault();
+                                                                        if (subOther != null)
+                                                                        {
+                                                                            <div class="col col-md-6">
+                                                                                <label>
+                                                                                    <input type="checkbox"
+                                                                                           name="SelectedCategory"
+                                                                                           value="@subOther.ID" />
+                                                                                    <span>@subOther.Name</span>
+                                                                                </label>
+                                                                            </div>
+                                                                        }
                                                                         }
                                                                     </div>
                                                                 </div>
@@ -198,7 +196,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                }
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -227,22 +225,22 @@
                                             </thead>
                                             <tbody>
                                                 @foreach (var item in Model.CliniciansList)
-                                                    {
+                                                {
                                                     <tr>
                                                         <td>
                                                             <label>
                                                                 @{
-                                                        if (Model.SelectedClinicians.Contains(item.ID))
-                                                        {   <input type="checkbox" checked="true"
-                                                                   name="SelectedClinicians"
-                                                                   value="@item.ID" />
-                                                        }
-                                                        if (!Model.SelectedClinicians.Contains(item.ID))
-                                                        {
-                                                            <input type="checkbox"
-                                                                   name="SelectedClinicians"
-                                                                   value="@item.ID" />
-                                                        }
+                                                    if (Model.SelectedClinicians.Contains(item.ID))
+                                                    {   <input type="checkbox" checked="true"
+                                                               name="SelectedClinicians"
+                                                               value="@item.ID" />
+                                                    }
+                                                    if (!Model.SelectedClinicians.Contains(item.ID))
+                                                    {
+                                                        <input type="checkbox"
+                                                               name="SelectedClinicians"
+                                                               value="@item.ID" />
+                                                    }
                                                                 }
 
                                                                 <span></span>
@@ -253,63 +251,63 @@
                                                         <td>@item.Phone</td>
                                                         <td>@item.Email</td>
                                                         @if (item.Type == (int)SystemConstants.CliniciansType.Private)
-                                                            {
+                                                        {
                                                             <td>Yes</td>
-                                                            }
+                                                        }
                                                         @if (item.Type == (int)SystemConstants.CliniciansType.Public)
-                                                            {
+                                                        {
                                                             <td>No</td>
-                                                            }
+                                                        }
 
                                                         @{
-                                                            string days = "";
-                                                            if (item.TimetableType == 1)
+                                                        string days = "";
+                                                        if (item.TimetableType == 1)
+                                                        {
+
+                                                            if (item.OnMonday ?? false)
                                                             {
-
-                                                                if (item.OnMonday ?? false)
-                                                                {
-                                                                    days += "Monday,";
-                                                                }
-                                                                if (item.OnTuesday ?? false)
-                                                                {
-                                                                    days += " Tuesday,";
-                                                                }
-                                                                if (item.OnWednesday ?? false)
-                                                                {
-                                                                    days += " Wednesday,";
-                                                                }
-                                                                if (item.OnThursday ?? false)
-                                                                {
-                                                                    days += " Thursday,";
-                                                                }
-                                                                if (item.OnFriday ?? false)
-                                                                {
-                                                                    days += " Friday,";
-                                                                }
-                                                                if (item.OnSaturday ?? false)
-                                                                {
-                                                                    days += " Saturday,";
-                                                                }
-                                                                if (item.OnSunday ?? false)
-                                                                {
-                                                                    days += " Sunday,";
-                                                                }
-
-                                                                days = days.Remove(days.Length - 1, 1);
-                                                                int index = days.LastIndexOf(",");
-                                                                if (index != null)
-                                                                {
-                                                                    days = days.Remove(index, 1);
-                                                                    days = days.Insert(index, " and");
-                                                                }
+                                                                days += "Monday,";
                                                             }
+                                                            if (item.OnTuesday ?? false)
+                                                            {
+                                                                days += " Tuesday,";
+                                                            }
+                                                            if (item.OnWednesday ?? false)
+                                                            {
+                                                                days += " Wednesday,";
+                                                            }
+                                                            if (item.OnThursday ?? false)
+                                                            {
+                                                                days += " Thursday,";
+                                                            }
+                                                            if (item.OnFriday ?? false)
+                                                            {
+                                                                days += " Friday,";
+                                                            }
+                                                            if (item.OnSaturday ?? false)
+                                                            {
+                                                                days += " Saturday,";
+                                                            }
+                                                            if (item.OnSunday ?? false)
+                                                            {
+                                                                days += " Sunday,";
+                                                            }
+
+                                                            days = days.Remove(days.Length - 1, 1);
+                                                            int index = days.LastIndexOf(",");
+                                                            if (index != null)
+                                                            {
+                                                                days = days.Remove(index, 1);
+                                                                days = days.Insert(index, " and");
+                                                            }
+                                                        }
                                                         }
 
                                                         <td>@days</td>
 
 
                                                     </tr>
-                                                    }
+                                                }
                                             </tbody>
                                         </table>
                                     </div>
@@ -333,21 +331,79 @@
                                     @Html.ActionLink("Cancel", "", "Services", null, new { @class = "btn-u btn-u-red" })
                                 </div>
                             </fieldset>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="tab-pane fade in" id="images">
+                <div class="row">
+                    <div class="col-md-12">
+                        <fieldset>
+                            
+                                @using (Html.BeginForm("EditImage", "Service", FormMethod.Post, new { @Class = "sky-form", @enctype = "multipart/form-data" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    <div class="row">
+        <div class="col col-md-4">
+            <div class="headline"><h2>Image Info</h2></div>
+            <ul class="list-unstyled">
+                <li>Image count : @Html.DisplayTextFor(x => x.ImageInfo.ImageAmount)</li>
+                <li>Total size  : @Html.DisplayTextFor(x => x.ImageInfo.StorageUsed) kb</li>
+                <li>Free storage   : @Html.DisplayTextFor(x => x.ImageInfo.FreeStorage) kb</li>
+                @Html.HiddenFor(model => model.ImageInfo.FreeStorage, new { @id = "freeStr" })
+                @Html.HiddenFor(model => model.ImageInfo.ID)
+                @Html.HiddenFor(model => model.ImageInfo.StorageUsed)
+                @Html.HiddenFor(model => model.ImageInfo.ActivityID)
+            </ul>
+        </div>
+        <div class="col col-md-8">
+            <div class="col col-md-10">
+                <label for="file" class="input input-file">
+                    <div class="button"><input type="file" name="files" id="imgInp" onchange="this.parentNode.nextSibling.value = this.value" multiple>Browse</div><input type="text" readonly="">
+                </label>
+                <div id="uploadStatus">only image files are accepted, maximum upload size per activity are @SystemConstants.MaxFileSize kb</div>
+            </div>
+            <div class="col col-md-2">
+                <input type="submit" value="Upload" class="btn-u" />
+            </div>
+            <div id="preview" class="row margin-bottom-15">
+            </div>
+        </div>
+
+    </div>
+
+
+
+                                }
+                           
+</fieldset>
+                        <fieldset>
+                            <h4>Current Image</h4>
+
+                            @foreach (var image in Model.Images)
+                            {
+
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="view view-tenth">
+                                        <img class="img-responsive" src="~/ImageHandler.ashx?PID=@image.ID" alt="">
+                                    </div>
+                                </div>
+
                             }
-                        @Html.ActionLink("Back to List", "Index")
+                        </fieldset>
+                        <fieldset></fieldset>
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade in" id="subservice">               
-                <h4>Sub Service</h4>
-                @Html.Partial("_PartialEditSubService",Model.Services);
-                </div>
-            <div class="tab-pane fade in" id="images">
-                <h4>Images</h4>
-                 </div>
         </div>
+
     </div>
+    @Html.ActionLink("Back to List", "Index")
 </div>
+
+
 <script>
     $("input[type=checkbox][name=SelectedCategory]").click(function () {
 
@@ -359,6 +415,67 @@
     jQuery(document).ready(function () {
         App.initFancybox();
     });
-    fileList = document.getElementById("fileList");
 
+    function readURL(input) {
+
+        var nBytes = 0,
+        oFiles = input.files.length,
+        fileList = document.getElementById("preview");
+        fileList.innerHTML = "";
+
+        for (var i = 0; i < input.files.length; i++) {
+            if (input.files && input.files[i]) {
+                var reader = new FileReader();
+
+                var divList = document.createElement("div");
+                divList.className = "col-md-3 col-sm-6 ";
+                fileList.appendChild(divList);
+
+                var span = document.createElement("span");
+                span.className = "overlay-zoom";
+                divList.appendChild(span);
+
+                var img = document.createElement("img");
+                img.className = "img-responsive";
+                img.src = window.URL.createObjectURL(input.files[i]);
+                img.height = 60;
+                img.onload = function (e) {
+                    window.URL.revokeObjectURL(this.src);
+
+
+                }
+                span.appendChild(img);
+                var info = document.createElement("span");
+                var fileSize = 0;
+                for (var aMultiples = ["KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"], nMultiple = 0, nApprox = input.files[i].size / 1024; nApprox > 1; nApprox /= 1024, nMultiple++) {
+                    fileSize = nApprox.toFixed(3) + " " + aMultiples[nMultiple];
+                }
+                info.innerHTML = input.files[i].name + ": " + fileSize;
+                span.appendChild(info);
+
+                nBytes += input.files[i].size;
+
+                reader.onload = function (e) {
+                    $('#preview').attr('src', e.target.result);
+                    $('#preview').show()
+                }
+            }
+        }
+        var sOutput = nBytes + " bytes";
+        // optional code for multiples approximation
+        for (var aMultiples = ["KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"], nMultiple = 0, nApprox = nBytes / 1024; nApprox > 1; nApprox /= 1024, nMultiple++) {
+            sOutput = nApprox.toFixed(3) + " " + aMultiples[nMultiple] + " (" + nBytes + " bytes)";
+        }
+        var status = document.getElementById("uploadStatus");
+        var freeStr = document.getElementById('freeStr').value;
+        if ((nBytes / 1024) > freeStr) {
+            sOutput = "File size exceeded " + sOutput;
+            status.className = "note note-error text-danger";
+        }
+        status.innerHTML = sOutput;
+    }
+
+    $("#imgInp").change(function () {
+        readURL(this);
+    });
 </script>
