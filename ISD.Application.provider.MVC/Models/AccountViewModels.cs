@@ -1,4 +1,5 @@
 ﻿using ISD.Data.EDM;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.UI.WebControls;
@@ -72,7 +73,26 @@ namespace ISD.Application.provider.MVC.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        public ProviderProfiles profiles { get; set; }
+
+        /*Provider Profiles */
+
+        [Required]
+        public string ProviderName { get; set; }
+
+        [Required]
+        public string Address { get; set; }
+
+        [Required]
+        public string Suburb { get; set; }
+
+        [Required(ErrorMessage = "Postcode must not empty")]
+        public Nullable<int> PostCode { get; set; }
+
+        [Required(ErrorMessage = "State must not empty")]
+        public int StateID { get; set; }
+        [Required]
+        public bool Aggreement { get; set; }
+
         public List<ListItem> StatesList =
                  new List<ListItem>
             {

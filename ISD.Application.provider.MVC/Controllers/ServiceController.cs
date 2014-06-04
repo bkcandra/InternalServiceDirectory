@@ -21,10 +21,11 @@ using System.IO;
 
 namespace ISD.Application.provider.MVC.Controllers
 {
+    
     public class ServiceController : Controller
     {
         private ISDEntities db = new ISDEntities();
-
+        [Authorize(Roles = @SystemConstants.ProviderRole)]
         // GET: Service
         public async Task<ActionResult> Index(int? id)
         {
@@ -46,7 +47,7 @@ namespace ISD.Application.provider.MVC.Controllers
             model.Clinicians = await db.v_ActivityClinicianExplorer.Where(x => x.ActivityID == id).ToListAsync();
             return View(model);
         }
-
+        [Authorize(Roles = @SystemConstants.ProviderRole)]
         public async Task<ActionResult> Detail(string name)
         {
             if (name == null)
@@ -97,7 +98,7 @@ namespace ISD.Application.provider.MVC.Controllers
             var a = Request.Files.Count;
             int SizeUploaded = 0;
             //check if any file
-            if (files.Count != 0)
+            if (files.First() != null && files.Count != 0)
             {
                 foreach (var file in files)
                 {
@@ -145,9 +146,9 @@ namespace ISD.Application.provider.MVC.Controllers
                 actCon.Username = User.Identity.Name;
                 actCon.ActivityID = act.ID;
 
+                int i = 1;
                 foreach (var cat in model.SelectedCategory)
                 {
-                    int i = 1;
                     if (i == 1) { act.CategoryID = cat; }
                     if (i == 2) { act.SecondaryCategoryID1 = cat; }
                     if (i == 3) { act.SecondaryCategoryID2 = cat; }
@@ -179,6 +180,7 @@ namespace ISD.Application.provider.MVC.Controllers
                     imageDetail.Filesize = file.ContentLength / 1024;
                     image.ActivityImageDetail.Add(imageDetail);
                 }
+               
                 image.StorageUsed = SizeUploaded;
                 image.FreeStorage = SystemConstants.MaxActivityImageStorage - SizeUploaded;
                 image.ImageAmount = files.Count;
@@ -194,6 +196,7 @@ namespace ISD.Application.provider.MVC.Controllers
                 act.ActivityReferenceCode.Add(Ref);
 
                 db.Activity.Add(act);
+                //set act ID to images
                 db.SaveChanges();
 
                 return RedirectToAction("edit", "service", new { id = act.ID });
@@ -216,11 +219,14 @@ namespace ISD.Application.provider.MVC.Controllers
         // GET: Service/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
+            if (TempData["ViewData"] != null)
+            {
+                ViewData = (ViewDataDictionary)TempData["ViewData"];
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
             ServiceDetailModel model = new ServiceDetailModel();
             var actExplorer = db.v_ActivityExplorer.Where(x => x.ID == id).FirstOrDefault();
             if (actExplorer == null)
@@ -264,7 +270,6 @@ namespace ISD.Application.provider.MVC.Controllers
             model.ImageInfo = await db.ActivityImage.Where(x => x.ActivityID == id).FirstOrDefaultAsync();
             if (model.ImageInfo != null)
                 model.Images = await db.ActivityImageDetail.Where(x => x.ActivityImageID == model.ImageInfo.ID).ToListAsync();
-            
             //Activity activity = await db.Activity.FindAsync(id);
 
             ViewBag.ProviderID = new SelectList(db.ProviderProfiles, "UserID", "Username", User.Identity.GetUserId());
@@ -276,77 +281,50 @@ namespace ISD.Application.provider.MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,ProviderID,ActivityCode,Name,ShortDescription,FullDescription,CategoryID,SecondaryCategoryID1,SecondaryCategoryID2,SecondaryCategoryID3,SecondaryCategoryID4,Price,CreatedDateTime,ModifiedDateTime,ModifiedBy,CreatedBy,ExpiryDate,ActivityType,eligibilityDescription,Status,Website,Keywords,TimetableType,isApproved,isPrimary,PrimaryServiceID")] Activity activity)
+        public async Task<ActionResult> Edit(ServiceDetailModel model)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(activity).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            ViewBag.ProviderID = new SelectList(db.ProviderProfiles, "UserID", "Username", activity.ProviderID);
-            return View(activity);
-        }
+                Activity act = await db.Activity.Where(x => x.ID == model.ID).FirstOrDefaultAsync();
+                ActivityContactDetail actCon = await db.ActivityContactDetail.Where(x => x.ActivityID == model.ID).FirstOrDefaultAsync();
 
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditImage(ICollection<HttpPostedFileBase> files, ServiceDetailModel model)
-        {
-            var a = Request.Files.Count;
-            int SizeUploaded = 0;
-            //check if any file
-            if (files.Count != 0)
-            {
-                foreach (var file in files)
-                {
-                    SizeUploaded = SizeUploaded + Convert.ToInt32(file.ContentLength / 1024);
-                    //checking file extension
-                    string extension = Path.GetExtension(file.FileName);
-                    if (!System.Text.RegularExpressions.Regex.IsMatch(file.ContentType, "image/\\S+"))
-                    {
-                        ModelState.AddModelError("Upload Error", "Invalid file type, only image files are accepted.");
-                        break;
-                    }
-                }
-                if (SizeUploaded >= SystemConstants.MaxActivityImageStorage)
-                {
-                    ModelState.AddModelError("Upload Error", "Maximum file size exceeded, Maximum Size per activity is" + SystemConstants.MaxActivityImageStorage + " Kb");
-                }
-            }
-            if (ModelState.IsValid)
-            {
-                Activity act = db.Activity.Create();
-                ActivityContactDetail actCon = db.ActivityContactDetail.Create();
-
+                /*Edit Code Here
+                we dont use this code as it will overwrite some record to null
                 ObjectHandler.CopyPropertyValues(model, act);
                 ObjectHandler.CopyPropertyValues(model, actCon);
+                */
+                act.Name = model.Name;
+                actCon.Email = model.Email;
+                actCon.PhoneNumber = model.PhoneNumber;
+                act.Website = model.Website;
+                actCon.Address = model.Address;
+                actCon.SuburbID = model.SuburbID;
+                actCon.StateID = model.StateID;
+                actCon.PostCode = model.PostCode;
+                act.FullDescription = model.FullDescription;
+                act.eligibilityDescription = model.eligibilityDescription;
+                act.Price = model.Price;
+                act.Keywords = model.Keywords;
 
                 //Set activity
                 act.CategoryID = act.SecondaryCategoryID1 =
                     act.SecondaryCategoryID2 = act.SecondaryCategoryID3 =
                         act.SecondaryCategoryID4 = 0;
                 act.Status = (int)SystemConstants.ActivityStatus.Active;
-                act.isApproved = false;
-                act.isPrimary = true;
-                act.CreatedBy = act.ModifiedBy = User.Identity.Name;
-                act.CreatedDateTime = act.ModifiedDateTime = DateTime.Now;
+                act.ModifiedBy = User.Identity.Name;
+                act.ModifiedDateTime = DateTime.Now;
                 act.ExpiryDate = DateTime.Now.AddDays(180);
-                if (model.ShortDescription == null)
-                    act.ShortDescription = string.Empty;
-                if (model.eligibilityDescription == null)
-                    act.eligibilityDescription = string.Empty;
+                if (model.FullDescription == null)
+                    act.FullDescription = string.Empty;
+                else
+                    if (model.eligibilityDescription == null)
+                        act.eligibilityDescription = string.Empty;
                 if (model.Price == null)
                     act.Price = string.Empty;
 
-                act.ActivityCode = Guid.NewGuid().ToString();
-                act.ProviderID = User.Identity.GetUserId();
-                actCon.Username = User.Identity.Name;
-                actCon.ActivityID = act.ID;
-
+                int i = 1;
                 foreach (var cat in model.SelectedCategory)
                 {
-                    int i = 1;
                     if (i == 1) { act.CategoryID = cat; }
                     if (i == 2) { act.SecondaryCategoryID1 = cat; }
                     if (i == 3) { act.SecondaryCategoryID2 = cat; }
@@ -354,7 +332,11 @@ namespace ISD.Application.provider.MVC.Controllers
                     if (i == 5) { act.SecondaryCategoryID4 = cat; }
                     i++;
                 }
-
+                //Recreate Clinician
+                foreach (var osc in await db.ActivityClinician.Where(x => x.ActivityID == model.ID).ToListAsync())
+                {
+                    db.ActivityClinician.Remove(osc);
+                }
                 foreach (var sc in model.SelectedClinicians)
                 {
                     var ac = db.ActivityClinician.Create();
@@ -366,34 +348,7 @@ namespace ISD.Application.provider.MVC.Controllers
                     act.ActivityClinician.Add(ac);
                 }
 
-                var image = db.ActivityImage.Create();
-                foreach (var file in files)
-                {
-                    var imageDetail = db.ActivityImageDetail.Create();
-
-                    imageDetail.ActivityID = act.ID;
-                    imageDetail.ActivityImageID = 0;
-                    imageDetail.ImageStream = new BCUtility.ImageHandler().ReadFully(file.InputStream);
-                    imageDetail.Filename = file.FileName;
-                    imageDetail.Filesize = file.ContentLength / 1024;
-                    image.ActivityImageDetail.Add(imageDetail);
-                }
-                image.StorageUsed = SizeUploaded;
-                image.FreeStorage = SystemConstants.MaxActivityImageStorage - SizeUploaded;
-                image.ImageAmount = files.Count;
-                act.ActivityImage.Add(image);
-                //Image handling
-
-                act.ActivityContactDetail.Add(actCon);
-
-                var Ref = db.ActivityReferenceCode.Create();
-                Ref.ActivityID = act.ID;
-                Ref.ActivityGUID = Guid.NewGuid();
-                Ref.ReferenceID = new BusinessFunctionComponent().GenerateActRefID(act.Name);
-                act.ActivityReferenceCode.Add(Ref);
-
-                db.Activity.Add(act);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
 
                 return RedirectToAction("edit", "service", new { id = act.ID });
 
@@ -410,9 +365,66 @@ namespace ISD.Application.provider.MVC.Controllers
             }
             model.CliniciansList = await db.v_ProviderClinicians.ToListAsync();
             model.Categories = await db.v_CategoryExplorer.ToListAsync();
-            return View("Edit");
+            return View(model);
         }
 
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditImage(ICollection<HttpPostedFileBase> files, ServiceImageDetailModel model)
+        {
+            int SizeUploaded = 0;
+            //check if any file
+            if (files.First() != null && files.Count != 0)
+            {
+                foreach (var file in files)
+                {
+                    SizeUploaded = SizeUploaded + Convert.ToInt32(file.ContentLength / 1024);
+                    //checking file extension
+                    string extension = Path.GetExtension(file.FileName);
+                    if (!System.Text.RegularExpressions.Regex.IsMatch(file.ContentType, "image/\\S+"))
+                    {
+                        ModelState.AddModelError("Upload Error", "Invalid file type, only image files are accepted.");
+                        break;
+                    }
+                }
+                if (SizeUploaded >= model.FreeStorage)
+                {
+                    ModelState.AddModelError("Upload Error", "Maximum file size exceeded, Maximum Size per activity is" + SystemConstants.MaxActivityImageStorage + " Kb");
+                }
+            }
+            if (ModelState.IsValid)
+            {
+                var image = await db.ActivityImage.Where(x => x.ID == model.ImageInfoID).FirstOrDefaultAsync();
+                if (image == null)
+                {
+                    ModelState.AddModelError("Upload Error", "Image Information not found. Please Contact your administrator.");
+                    TempData["ViewData"] = ViewData;
+                    return RedirectToAction("Edit", new { id = model.ActivityID });
+                }
+                foreach (var file in files)
+                {
+                    var imageDetail = db.ActivityImageDetail.Create();
+
+                    imageDetail.ActivityID = model.ActivityID;
+                    imageDetail.ActivityImageID = 0;
+                    imageDetail.ImageStream = new BCUtility.ImageHandler().ReadFully(file.InputStream);
+                    imageDetail.Filename = file.FileName;
+                    imageDetail.Filesize = file.ContentLength / 1024;
+                    image.ActivityImageDetail.Add(imageDetail);
+                }
+                image.StorageUsed = SizeUploaded + model.StorageUsed;
+                image.FreeStorage = SystemConstants.MaxActivityImageStorage - image.StorageUsed;
+                image.ImageAmount = model.ImageAmount + files.Count;
+
+                db.SaveChanges();
+
+                return RedirectToAction("edit", "service", new { id = model.ActivityID });
+            }
+            TempData["ViewData"] = ViewData;
+            return RedirectToAction("Edit", new { id = model.ActivityID });
+        }
 
         // GET: Service/Delete/5
         public async Task<ActionResult> Delete(int? id)

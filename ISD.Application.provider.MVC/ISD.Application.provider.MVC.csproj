@@ -187,6 +187,7 @@
     <Compile Include="Controllers\ClinicianController.cs" />
     <Compile Include="Controllers\CliniciansController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1730,11 +1731,13 @@
     <Content Include="Views\Clinicians\Index.cshtml" />
     <Content Include="Views\Clinician\index.cshtml" />
     <Content Include="Views\Clinician\create.cshtml" />
-    <Content Include="Views\Shared\_PartialImageService.cshtml" />
+    <Content Include="Views\Shared\_PartialServiceImageView.cshtml" />
     <Content Include="Views\Shared\_PartialServiceClinicians.cshtml" />
     <Content Include="Views\BackloadDemo\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_PartialEditSubService.cshtml" />
+    <Content Include="Views\Shared\_PartialServiceImagesUpload.cshtml" />
+    <Content Include="Views\Pages\Index.cshtml" />
     <None Include="Web.Backload.Default.config" />
     <None Include="Web.Backload.xsd">
       <SubType>Designer</SubType>

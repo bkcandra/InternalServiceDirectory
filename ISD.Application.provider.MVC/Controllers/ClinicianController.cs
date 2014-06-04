@@ -9,13 +9,16 @@ using BCUtility;
 using ISD.Application.provider.MVC.Models;
 using ISD.Data.EDM;
 using Microsoft.AspNet.Identity;
+using ISD.Util;
 
 namespace ISD.Application.provider.MVC.Controllers
 {
+
     public class ClinicianController : Controller
     {
         private ISDEntities db = new ISDEntities();
 
+        [Authorize(Roles = @SystemConstants.ProviderRole)]
         // GET: Clinician
         public ActionResult Index(int id)
         {

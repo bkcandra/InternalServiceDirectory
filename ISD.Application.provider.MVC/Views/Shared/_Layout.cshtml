@@ -24,7 +24,6 @@
 
     <!-- CSS Theme -->
     @Styles.Render("~/assets/css/themes/default.css")
-    @Styles.Render("~/assets/css/themes/headers/default.css")
 
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
@@ -71,7 +70,7 @@
                             @{
                                 if (User.Identity.IsAuthenticated)
                                 {@:
-                                <li> @Html.ActionLink("My Service", "", "Services")</li>
+                                <li> @Html.ActionLink("My Content", "", "Services")</li>
                                 <li> @Html.ActionLink("My Report", "", "Report")</li>
                                 }
                                 var dt = new DataAccessComponent().RetrieveMenuExplorers((int)SystemConstants.MenuType.ProviderMenu);

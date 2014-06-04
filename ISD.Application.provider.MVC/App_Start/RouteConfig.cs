@@ -19,6 +19,11 @@ namespace ISD.Application.provider.MVC
                 defaults: new { controller = "Services", action = "Index" }
             );
             routes.MapRoute(
+               name: "ISDPage",
+               url: "{controller}/{name}",
+               defaults: new { controller = "Pages", action = "Index" }
+           );
+            routes.MapRoute(
                 name: "ServiceDetail",
                 url: "Service/{name})",
                 defaults: new { controller = "Service", action = "Detail" }

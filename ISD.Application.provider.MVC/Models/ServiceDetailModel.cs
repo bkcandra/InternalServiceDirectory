@@ -15,7 +15,7 @@ namespace ISD.Application.provider.MVC.Models
     {
         public SystemConstants.FormMode Mode { get; set; }
         public ActivityImage ImageInfo { get; set; }
-        public List<ActivityImageDetail> Images { get; set; }
+        public IEnumerable<ActivityImageDetail> Images { get; set; }
         public List<v_ActivityExplorer> Services { get; set; }
         public List<v_ActivityClinicianExplorer> Clinicians { get; set; }
         public List<v_ProviderClinicians> CliniciansList { get; set; }
@@ -70,7 +70,14 @@ namespace ISD.Application.provider.MVC.Models
             StatesList = new List<ListItem>();
             SuburbList = new List<ListItem>();
         }
-        
+
+    }
+
+    public class ServiceImageDetailModel : ISD.Data.EDM.ActivityImage
+    {
+        public int ImageInfoID { get; set; }
+
+        public IEnumerable<ActivityImageDetail> Images { get; set; }
     }
 
     [AttributeUsage(AttributeTargets.Property)]

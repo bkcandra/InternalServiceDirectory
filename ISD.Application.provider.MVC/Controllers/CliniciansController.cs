@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using ISD.Data.EDM;
 using Microsoft.AspNet.Identity;
+using ISD.Util;
 
 namespace ISD.Application.provider.MVC.Controllers
 {
@@ -16,6 +17,7 @@ namespace ISD.Application.provider.MVC.Controllers
     {
         private ISDEntities db = new ISDEntities();
 
+        [Authorize(Roles = @SystemConstants.ProviderRole)]
         // GET: Clinicians
         public async Task<ActionResult> Index()
         {

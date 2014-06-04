@@ -74,7 +74,7 @@
                                 @Html.DropDownListFor(model => model.SuburbID,
                                     new SelectList(Model.SuburbList,
                   "Value", "Text",
-                  Model.StatesList.First().Value))
+                  Model.SuburbList.First().Value))
                                 @Html.ValidationMessageFor(model => model.SuburbID, "", new { @class = "text-danger" })
                                 <i></i>
                             </label>

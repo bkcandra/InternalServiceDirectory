@@ -14,44 +14,68 @@
     </div><!--/container-->
 </div>
 <div class="container content">
-    <p>
-        @Html.ActionLink("Create New", "Create","clinician",null,new {@class="btn-u"})
-    </p>
-    <div class="panel panel-default margin-bottom-40">
-        <div class="panel-heading">
-            <h3 class="panel-title"><i class="fa fa-user"></i> Clinicians</h3>
-        </div>
-        <div class="panel-body">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Clinic</th>
-                        <th>Phone</th>
-                        <th>Email</th>
-                        <th>Private</th>
-                        <th>Days</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
+    <div class="col-md-3">
+        <ul class="list-group sidebar-nav-v1" id="sidebar-nav">
+            <!-- Service -->
+            <li class="list-group-item list-toggle">
+                <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-service" class="collapsed">Services</a>
+                <ul id="collapse-service" class="collapse" style="height: 0px;">
+                    <li><a href="@Url.Content("~/Services") "><i class="fa fa-bars"></i>Service list</a></li>
+                    <li><a href="@Url.Content("~/Service/create") "><i class="fa fa-chevron-circle-right"></i></i>Create a service</a></li>
+                </ul>
+            </li>
+            <li class="list-group-item list-toggle active">
+                <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-clinicians" class="collapsed">Clinicians</a>
+                <ul id="collapse-clinicians" class="collapse in" style="height: auto;">
+                    <li class="active"><a href="@Url.Content("~/Clinicians") "><i class="fa fa-bars"></i>Clinician list</a></li>
+                    <li><a href="@Url.Content("~/clinician/create") "><i class="fa fa-chevron-circle-right"></i></i>add a clinician</a></li>
+
+
+
+                </ul>
+            </li>
+            <!-- End Service -->
+        </ul>
+    </div>
+    <div class="col-md-9">
+        <p>
+            @Html.ActionLink("Create New", "Create","clinician",null,new {@class="btn-u"})
+        </p>
+        <div class="panel panel-default margin-bottom-40">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-user"></i> Clinicians</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                            <td>@item.Location</td>
-                            <td>@item.Phone</td>
-                            <td>@item.Email</td>
-                            @if (item.Type == (int)SystemConstants.CliniciansType.Private)
+                            <th>Name</th>
+                            <th>Clinic</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Private</th>
+                            <th>Days</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                    {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                <td>@item.Location</td>
+                                <td>@item.Phone</td>
+                                <td>@item.Email</td>
+                                @if (item.Type == (int)SystemConstants.CliniciansType.Private)
                             {
-                                <td>Yes</td>
+                                    <td>Yes</td>
                             }
-                            @if (item.Type == (int)SystemConstants.CliniciansType.Public)
+                                @if (item.Type == (int)SystemConstants.CliniciansType.Public)
                             {
-                                <td>No</td>
+                                    <td>No</td>
                             }
 
-                            @{
+                                @{
                         string days = "";
                         if (item.TimetableType == 1)
                         {
@@ -93,18 +117,19 @@
                                 days = days.Insert(index, " and");
                             }
                         }
-                            }
-                           
-                            <td>@days</td>
+                                }
 
-                            <td>
-                                <a class="btn btn-warning btn-xs" href="@Url.Action("Edit", "Clinician", new { id = item.ID })"><i class="fa fa-pencil"></i>Edit</a>
-                                <a class="btn btn-danger btn-xs" href="@Url.Action("Delete", "Clinician", new { id = item.ID })"><i class="fa fa-trash-o"></i>Delete</a>
-                            </td>
-                        </tr>
+                                <td>@days</td>
+
+                                <td>
+                                    <a class="btn btn-warning btn-xs" href="@Url.Action("Edit", "Clinician", new { id = item.ID })"><i class="fa fa-pencil"></i>Edit</a>
+                                    <a class="btn btn-danger btn-xs" href="@Url.Action("Delete", "Clinician", new { id = item.ID })"><i class="fa fa-trash-o"></i>Delete</a>
+                                </td>
+                            </tr>
                     }
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

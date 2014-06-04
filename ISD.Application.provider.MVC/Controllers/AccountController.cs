@@ -15,6 +15,7 @@ using Owin;
 using ISD.Application.provider.MVC.Models;
 using ISD.Data.EDM;
 using System.Web.UI.WebControls;
+using ISD.BF;
 
 
 namespace ISD.Application.provider.MVC.Controllers
@@ -92,6 +93,9 @@ namespace ISD.Application.provider.MVC.Controllers
         public async Task<ActionResult> Register()
         {
             RegisterViewModel model = new RegisterViewModel();
+
+            model.StatesList.Add(new ListItem("Select state", ""));
+
             foreach (var state in await db.State.ToListAsync())
             {
                 model.StatesList.Add(new ListItem(state.StateName, state.ID.ToString()));
@@ -106,19 +110,28 @@ namespace ISD.Application.provider.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            if (!model.Aggreement)
+            {
+                ModelState.AddModelError("Terms", "You have to agree with our terms and conditions");
+            }
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    CreateUser(user.Id, model);
                     await SignInAsync(user, isPersistent: false);
 
+                    RoleManager<IdentityRole> rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+                    if (!rm.RoleExists(SystemConstants.ProviderRole))
+                        rm.Create(new IdentityRole(SystemConstants.ProviderRole));
+                    UserManager.AddToRole(user.Id, SystemConstants.ProviderRole);
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    string code = UserManager.GenerateEmailConfirmationToken(user.Id);
+                    string callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>.");
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -128,8 +141,41 @@ namespace ISD.Application.provider.MVC.Controllers
                 }
             }
 
-            // If we got this far, something failed, redisplay form
+            model.StatesList.Add(new ListItem("Select state", ""));
+
+            foreach (var state in await db.State.ToListAsync())
+            {
+                model.StatesList.Add(new ListItem(state.StateName, state.ID.ToString()));
+            }
             return View(model);
+        }
+
+        protected async void CreateUser(String userID, RegisterViewModel model)
+        {
+            var profile = db.ProviderProfiles.Create();
+            profile.UserID = userID;
+            profile.Title = 0;
+            profile.Username = profile.Email = model.Email.ToLower();
+            profile.FirstName = profile.MiddleName = profile.LastName = profile.SecondarySuburb =
+                profile.PhoneNumber = profile.MobileNumber = profile.ProviderBranch = string.Empty;
+            profile.Address = model.Address;
+            profile.Suburb = model.Suburb;
+            profile.StateID = model.StateID;
+            profile.PostCode = model.PostCode;
+            profile.Aggreement = model.Aggreement;
+            profile.CreatedBy = profile.ModifiedBy = model.Email;
+            profile.CreatedDatetime = profile.ModifiedDatetime = DateTime.Now;
+            profile.AccountDeletion = false;
+            profile.PreferredContact = 0;
+            profile.ProviderName = model.ProviderName;
+
+            var drRef = db.UserReference.Create();
+            drRef.UserId = userID;
+            drRef.ReferenceID = new BusinessFunctionComponent().GenerateRefID(model.ProviderName);
+
+            db.ProviderProfiles.Add(profile);
+            db.UserReference.Add(drRef);
+            await db.SaveChangesAsync();
         }
 
         //
