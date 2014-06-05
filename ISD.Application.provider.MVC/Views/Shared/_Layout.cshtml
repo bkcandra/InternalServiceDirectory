@@ -63,7 +63,7 @@
                     <div class="collapse navbar-collapse navbar-responsive-collapse">
                         <ul class="nav navbar-nav">
                             <li>
-                                <a class="dropdown-toggle" href="javascript:void(0);" data-toggle="dropdown">
+                                <a class="dropdown-toggle" href="@Url.Content("~")" data-toggle="dropdown">
                                     Home
                                 </a>
                             </li>
@@ -73,7 +73,6 @@
                                 if (User.Identity.IsAuthenticated)
                                 {@:
                                 <li> @Html.ActionLink("My Content", "", "Services")</li>
-                                <li> @Html.ActionLink("My Report", "", "Report")</li>
                                 }
                                 var dt = new DataAccessComponent().RetrieveMenuExplorers((int)SystemConstants.MenuType.ProviderMenu);
                                 var dtPages = new DataAccessComponent().RetrievePages();
@@ -171,47 +170,56 @@
 
                                             if (dt.Where(y => y.LinkType != 0).Count() != 0)
                                             {
-                                                <li class="dropdown">
-                                                    <a href="@Url.Content(drParent.LinkValue)">@drParent.LinkText</a>
+                                                var a = dt.Where(y => y.ParentMenuID == drParent.ID).Count();
+                                                if (a != 0)
+                                                {
+                                                    <li class="dropdown">
+                                                        <a href="@Url.Content(drParent.LinkValue)">@drParent.LinkText</a>
 
-                                                    <ul class="dropdown-menu">
+                                                        <ul class="dropdown-menu">
 
 
-                                                        @foreach (DataSetComponent.v_MenuRow drChild in dt)
-                                                        {
-                                                            if (drChild.ParentMenuID == drParent.ID && drChild.LinkType != 6)
+                                                            @foreach (DataSetComponent.v_MenuRow drChild in dt)
                                                             {
-                                                                var ChildPageName = dtPages
-                                                                    .Where(p => p.ID == Convert.ToInt32(drChild.LinkValue)).FirstOrDefault();
-                                                                if (ChildPageName == null)
-                                                                {
-                                                                    ChildPageName = new DataSetComponent.PageDataTable().NewPageRow();
-                                                                    ChildPageName.Name = "NotFound";
-                                                                }
                                                                 if (drChild.ParentMenuID == drParent.ID && drChild.LinkType != 6)
                                                                 {
-                                                                    <li> @Html.ActionLink(drChild.LinkText, ChildPageName.Name, "Pages")</li>
+                                                                    var ChildPageName = dtPages
+                                                                        .Where(p => p.ID == Convert.ToInt32(drChild.LinkValue)).FirstOrDefault();
+                                                                    if (ChildPageName == null)
+                                                                    {
+                                                                        ChildPageName = new DataSetComponent.PageDataTable().NewPageRow();
+                                                                        ChildPageName.Name = "NotFound";
+                                                                    }
+                                                                    if (drChild.ParentMenuID == drParent.ID && drChild.LinkType != 6)
+                                                                    {
+                                                                        <li> @Html.ActionLink(drChild.LinkText, ChildPageName.Name, "Pages")</li>
+                                                                    }
+                                                                    else if (drChild.ParentMenuID == drParent.ID && drChild.LinkType != 6)
+                                                                    {
+                                                                        <li> @Html.ActionLink(drChild.LinkText, drChild.LinkValue, "Pages")</li>
+                                                                    }
+
                                                                 }
-                                                                else if (drChild.ParentMenuID == drParent.ID && drChild.LinkType != 6)
+                                                                else if (drChild.ParentMenuID == drParent.ID && drChild.LinkType == 6)
                                                                 {
-                                                                    <li> @Html.ActionLink(drChild.LinkText, drChild.LinkValue, "Pages")</li>
+                                                                    <li>
+                                                                        <a href="@Url.Content(drChild.LinkValue)">@drChild.LinkText</a>
+                                                                    </li>
+
                                                                 }
-
                                                             }
-                                                            else if (drChild.ParentMenuID == drParent.ID && drChild.LinkType == 6)
-                                                            {
-                                                                <li>
-                                                                    <a href="@Url.Content(drChild.LinkValue)">@drChild.LinkText</a>
-                                                                </li>
+                                                        </ul>
 
-                                                            }
-                                                        }
-                                                    </ul>
-                                                </li>
+                                                    </li>
+                                                }
+                                                else
+                                            {
+                                                <li><a href="@drParent.LinkValue">@drParent.LinkText</a></li>
+                                            }
                                             }
                                             else
                                             {
-                                                <li> @Html.ActionLink(drParent.LinkText, "", "drParent.LinkValue")</li>
+                                                <li><a href="@drParent.LinkValue">@drParent.LinkText</a></li>
                                             }
                                         }
 

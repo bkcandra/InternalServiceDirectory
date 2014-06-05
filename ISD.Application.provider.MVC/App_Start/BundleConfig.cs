@@ -20,10 +20,7 @@ namespace ISD.Application.provider.MVC
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-
                       "~/Scripts/respond.js"));
-
-         
 
             bundles.Add(new ScriptBundle("~/bundles/unifi").Include(
                 //JS Global Compulsory

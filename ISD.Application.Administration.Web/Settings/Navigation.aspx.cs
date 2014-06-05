@@ -25,7 +25,7 @@ namespace ISD.Administration.Web.Settings
 
         private void CheckSignIn()
         {
-            if (Context.User.Identity.IsAuthenticated)
+            if (!Context.User.Identity.IsAuthenticated)
             {
                 Response.Redirect("~/Account/login.aspx");
             }

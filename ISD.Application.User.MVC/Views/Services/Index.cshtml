@@ -1,0 +1,247 @@
+﻿@using System.Web.UI.WebControls
+@model IEnumerable<ISD.Data.EDM.v_ActivityExplorer>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .sky-form header{      
+          padding: 8px 12px !important;
+    }
+     .sky-form footer{      
+          padding: 8px 12px !important;
+    }
+     .search-block{     
+          padding: 25px 0 28px !important;
+    }
+</style>
+@Styles.Render("~/assets/css/pages/page_search_inner.css")
+@Styles.Render("~/assets/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css")
+<div class="breadcrumbs-v3">
+    <div class="container">
+        <h1 class="pull-left">Our Services</h1>
+        <ul class="pull-right breadcrumb">
+            <li>
+                <a href="@Url.Content("~")">Home</a>
+
+            </li>
+            <li class="active">Services</li>
+        </ul>
+    </div>
+</div>
+<div class="search-block">
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search services">
+                <span class="input-group-btn">
+                    <button class="btn-u" type="button"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container content">
+    <div class="row blog-page">
+        <!-- Left Sidebar -->
+
+        <div class="col-md-3">
+            @using (Html.BeginForm("Search", "Service", FormMethod.Post, new { @class = " sky-form" }))
+            {
+                <header>Filter by</header>
+                <div class="row">
+                    <div class="col col-md-12">
+                        <div class="panel-group acc-v1" id="accordion-1">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-1" href="#Filter-Categories">
+                                            Filter by Categories
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="Filter-Categories" class="panel-collapse collapse" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                       
+                                                @{
+                var categories = new ISD.DA.DataAccessComponent().RetrieveCategories();
+                foreach (var cat in categories.Where((x => x.Level == 0)))
+                {
+                    <div class="col-md-12">
+                        @cat.Name
+                    </div>
+                    foreach (var subCat in categories.Where((x => x.Level == 1)))
+                    {
+                        if (subCat.Level1ParentID == cat.ID && subCat.Name != "Other")
+                        {
+                            <div class="col col-6">
+                                <label class="checkbox"><input type="checkbox" name="SelectedCategory" value="@subCat.ID"><i></i>@subCat.Name</label>
+                            </div>
+                        }
+                        var subOther = categories.Where((x => x.Level1ParentID == cat.ID && x.Name == "Other")).FirstOrDefault();
+                        if (subOther != null)
+                        {
+                            <div class="col col-6">
+                                <label class="checkbox"><input type="checkbox" name="SelectedCategory" value="@subOther.ID"><i></i>@subOther.Name</label>
+                            </div>
+                        }
+                    }
+                }
+                                                }
+                                         
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-1" href="#Filter-Suburb">
+                                            Filter by suburb
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="Filter-Suburb" class="panel-collapse collapse" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="select">
+                                                    <select>
+                                                        <option value="0">Choose name</option>
+                                                        <option value="1">Alexandra</option>
+                                                        <option value="2">Alice</option>
+                                                        <option value="3">Anastasia</option>
+                                                        <option value="4">Avelina</option>
+                                                    </select>
+                                                    <i></i>
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer>
+                    <button type="submit" class="btn-u">Update</button>
+                </footer>
+            }
+
+
+
+
+
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-6 text-left">
+                    Showing: 1 - 5 of 25 services
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 text-left">
+                    <label class="select">
+                        <select name="gender">
+                            <option disabled="" value="0" selected="">Sort By</option>
+                            <option value="1">Newly listed</option>
+                            <option value="2">Expiry date</option>
+                            <option value="3">Title: A - Z</option>
+                            <option value="4">Title: Z - Av</option>
+                            <option value="5">Cost: Free - Paid</option>
+                            <option value="6">Cost: Paid - Free</option>
+                        </select>
+                        <i></i>
+                    </label>
+                </div><div class="col-md-6 text-right">
+                    <label class="select">
+                        <select name="gender">
+                            <option disabled="" value="0" selected="">Show</option>
+                            <option value="1">5</option>
+                            <option value="2">10</option>
+                            <option value="3">25</option>
+                            <option value="4">50</option>
+                        </select>
+                        <i></i>
+                    </label>
+                </div>
+            </div>
+            @foreach (var item in Model)
+            {
+                <div class="funny-boxes funny-boxes-top-sea ">
+
+                    <div class="row">
+                        <div class="col-md-4 funny-boxes-img">
+                            @{
+                int imageinfo = new ISD.Data.EDM.ISDEntities().ActivityImage.Where(x => x.ActivityID == item.ID).Select(x => x.ID).FirstOrDefault();
+                var image = new ISD.Data.EDM.ISDEntities().ActivityImageDetail.Where(x => x.ActivityImageID == imageinfo).FirstOrDefault();
+                if (image == null)
+                {
+                    <img src="@Url.Content("~/Assets/img/demo.jpg")" class="img-responsive" />
+                }
+                if (image != null)
+                {
+                    <img src="~/ImageHandler.ashx?PID=@image.ID" class="img-responsive" />
+                }
+                            }
+
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-briefcase"></i>@item.ProviderName</li>
+                                <li>
+                                    <i class="fa fa-map-marker"></i>
+                                    @item.Address,
+                                    @item.Suburb
+                                    @item.StateName, @item.PostCode
+
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-8">
+                            <h2>
+                                @Html.ActionLink(item.Name, "Index", "Service", new { id = item.ID }, "")
+                            </h2>
+                            <p>
+                                @Html.Label("", item.FullDescription.Length > 250 ? item.FullDescription.Substring(0, 250) : item.FullDescription)
+                                @Html.ActionLink("Read more", item.Name.Replace(" ", string.Empty), "Service")
+                            </p>
+                            <p>
+                                <uc1:ScheduleViewerUC runat="server" ID="ScheduleViewerUC" />
+                            </p>
+                            <p>
+                                <asp:Image ID="imgStatus" runat="server" class="img-responsive right" ImageUrl="~/Assets/img/demo.jpg" />
+                                <asp:Label ID="lblExpiryDate" runat="server" CssClass="right" Text="Expiry on"></asp:Label>
+                                <asp:Label ID="lblStatus" runat="server" Text="" CssClass="right"></asp:Label>
+                                <asp:Label ID="lblType" runat="server" Text="" CssClass="right"></asp:Label>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="row">
+
+                <div class="col-md-6 text-left">
+                    Showing: 1 - 5 of 25 services
+                </div><div class="col-md-6 text-right">
+                    <ul class="pagination">
+                        <li><a href="#">«</a></li>
+                        <li><a href="#">1</a></li>
+                        <li class="active"><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">»</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+
+            <!-- Bordered Funny Boxes -->
+        </div>
+        <!-- End Right Sidebar -->
+    </div>
+</div>

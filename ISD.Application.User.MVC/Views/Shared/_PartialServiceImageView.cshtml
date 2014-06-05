@@ -1,0 +1,51 @@
+﻿@using ISD.Data.EDM
+@using ISD.Util
+@model IEnumerable<ActivityImageDetail>
+
+<div class="col-md-6" style="overflow: hidden">
+    <div class="carousel slide carousel-v1" id="myCarousel">
+        <div class="carousel-inner">
+            @foreach (var item in Model.Take(1))
+            {
+                <div class="item active">
+                    <img src="~/ImageHandler.ashx?PID=@item.ID" style="width: 555px;height: 351px" />
+                    @if (!string.IsNullOrEmpty(item.Description))
+                    {
+                        <div class="carousel-caption">
+                            <p>@item.Description</p>
+                        </div>
+                    }
+                </div>
+            }
+            @foreach (var item in Model.Skip(1))
+            {
+                <div class="item">
+                    <img src="~/ImageHandler.ashx?PID=@item.ID" style="height: 555px;height: 351px" />
+                    @if (!string.IsNullOrEmpty(item.Description))
+                    {
+                        <div class="carousel-caption">
+                            <p>@item.Description</p>
+                        </div>
+                    }
+                </div>
+            }
+
+        </div>
+        <div class="carousel-arrow">
+            <a data-slide="prev" href="#myCarousel" class="left carousel-control">
+                <i class="fa fa-angle-left"></i>
+            </a>
+            <a data-slide="next" href="#myCarousel" class="right carousel-control">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        </div>
+    </div>
+</div>
+@Styles.Render("~/assets/plugins/bxslider/jquery.bxslider.css")
+@Scripts.Render("~/assets/plugins/bxslider/jquery.bxslider.js")
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        App.init();
+        App.initBxSlider();
+    });
+</script>

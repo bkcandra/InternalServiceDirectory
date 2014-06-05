@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ISD.Data.EDM.v_ActivityExplorer>
+@foreach (var item in Model)
+{
+    <div class="tag-box tag-box-v2  ">
+        <div class="row">
+            <div class="col-md-12 margin-bottom-20">
+                <h2>@item.Name</h2>
+                <p>@item.FullDescription</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class=" col-md-6">
+                <dl>
+                    <dt>Category</dt>
+                    <dd class="margin-bottom-5">@item.CategoryName)</dd>
+                    @{if (!string.IsNullOrEmpty(@item.eligibilityDescription))
+                      {
+                    <dt>Eligibility</dt>
+                    <dd class="margin-bottom-5">@item.eligibilityDescription</dd>
+                      }
+                    }
+                    <dt>Service ref</dt>
+                    <dd class="margin-bottom-5">@item.ReferenceID</dd>
+                </dl>
+            </div>
+            <div class=" col-md-6">
+                <dl>
+                    @{if (!string.IsNullOrEmpty(@item.ShortDescription))
+                    {
+                        <dt>Location</dt>
+                        <dd class="margin-bottom-5">@item.ShortDescription</dd>
+                    }
+                    }
+                    @{if (!string.IsNullOrEmpty(@item.Price))
+                      {
+                    <dt>Pricing</dt>
+                    <dd class="margin-bottom-5">@item.Price</dd>
+                      }
+                    }
+                   
+                </dl>
+            </div>
+        </div>
+    </div>
+}

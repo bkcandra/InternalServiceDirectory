@@ -1,0 +1,88 @@
+﻿@model ISD.Application.User.MVC.Models.ServiceDetailModel
+@{
+    ViewBag.Title = @Model.Name + " | Service Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="breadcrumbs">
+    <div class="container">
+        <h1 class="pull-left">@Html.DisplayFor(model => model.Name)</h1>
+        <ul class="pull-right breadcrumb">
+            <li><a href="@Url.Content("~")>Home</a></li>
+            <li><a href="">Service</a></li>
+            <li class="active">@Html.DisplayFor(model => model.Name)</li>
+        </ul>
+    </div><!--/container-->
+</div>
+<div class="container content">
+    <p class="text-right">
+        @Html.ActionLink("Back to List", "", "Services")
+    </p>
+    <div class="row portfolio-item margin-bottom-25">
+        <!-- Content Info -->
+        <div class="col-md-6 md-margin-bottom-40">
+            <p>@Html.DisplayFor(model => model.FullDescription)</p>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="heading-sm">More info</h2>
+                    <dl>
+                        <dt>Category</dt>
+                        <dd class="margin-bottom-5">@Html.DisplayFor(model => model.CategoryName)</dd>
+                                               @{if (!string.IsNullOrEmpty(@Model.eligibilityDescription))
+                          {
+                              <dt>Eligibility</dt>
+                              <dd class="margin-bottom-5">@Model.eligibilityDescription</dd>
+                          }
+                        }
+                        @{if (!string.IsNullOrEmpty(@Model.Price))
+                          {
+                              <dt>Pricing</dt>
+                              <dd class="margin-bottom-5">@Model.Price</dd>
+                          }
+                        }
+                        @*<dt>Service ref</dt>
+                            <dd class="margin-bottom-5">@Model.ReferenceID</dd>*@
+                    </dl>
+                </div>
+                <div class="col-md-6">
+                    <h2 class="heading-sm">Address</h2>
+                    <address>
+                        <strong>@Html.DisplayFor(model => model.ProviderName)</strong><br>
+                        @Html.DisplayFor(model => model.Address)<br>
+                        @Html.DisplayFor(model => model.Suburb), @Model.StateName @Model.PostCode<br>
+                        <abbr title="Phone">P:</abbr> @Html.DisplayFor(model => model.PhoneNumber)
+                    </address>
+                    @{if (!string.IsNullOrEmpty(Model.Website))
+                      {
+                          <address>
+                              <strong>Our site</strong><br>
+                              <a href="http://@Model.Website">@Model.Website</a>
+                          </address>
+                      }
+                    }
+                </div>
+            </div><!--/row-->
+            
+        </div>
+        <!-- End Content Info -->
+        <!--tagbox-->
+        <!-- Carousel -->
+        @Html.Partial("_PartialServiceImageView", Model.Images)
+        
+        <!-- End Carousel -->
+        <div class="col-md-12">
+            @Html.Partial("_PartialServices", Model.Services)
+        </div>
+        <div class="col-md-12">
+            @Html.Partial("_PartialServiceClinicians", Model.Clinicians)
+            
+        </div>
+
+    </div><!--/row-->
+    <p class="text-right">
+        @Html.ActionLink("Edit Primary", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "", "Services")
+    </p>
+    <div class="margin-bottom-20 clearfix"></div>
+</div>
+

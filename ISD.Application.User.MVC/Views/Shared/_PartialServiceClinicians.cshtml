@@ -1,0 +1,85 @@
+﻿@using ISD.Util
+@model IEnumerable<ISD.Data.EDM.v_ActivityClinicianExplorer>
+
+<div class="panel panel-default margin-bottom-40">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-user"></i> Clinicians</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+                <tr>
+
+                    <th>Name</th>
+                    <th>Clinic</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Private</th>
+                    <th>Days</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.ClinicianName)</td>
+                        <td>@item.Location</td>
+                        <td>@item.Phone</td>
+                        <td>@item.Email</td>
+                        @if (item.Type == (int)SystemConstants.CliniciansType.Private)
+                        {
+                            <td>Yes</td>
+                        }
+                        @if (item.Type == (int)SystemConstants.CliniciansType.Public)
+                        {
+                            <td>No</td>
+                        }
+                        @{
+                        string days = "";
+                        if (item.OnMonday ?? false)
+                        {
+                            days += "Monday,";
+                        }
+                        if (item.OnTuesday ?? false)
+                        {
+                            days += " Tuesday,";
+                        }
+                        if (item.OnWednesday ?? false)
+                        {
+                            days += " Wednesday,";
+                        }
+                        if (item.OnThursday ?? false)
+                        {
+                            days += " Thursday,";
+                        }
+                        if (item.OnFriday ?? false)
+                        {
+                            days += " Friday,";
+                        }
+                        if (item.OnSaturday ?? false)
+                        {
+                            days += " Saturday,";
+                        }
+                        if (item.OnSunday ?? false)
+                        {
+                            days += " Sunday,";
+                        }
+                            if (!string.IsNullOrEmpty(days))
+                            {
+                                days = days.Remove(days.Length - 1, 1);
+                            
+                                int index = days.LastIndexOf(",");
+                                if (index != null)
+                                {
+                                    days = days.Remove(index, 1);
+                                    days = days.Insert(index, " and");
+                                }
+                            }
+                        }
+                        <td>@days</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

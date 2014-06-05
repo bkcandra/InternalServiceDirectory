@@ -1,0 +1,407 @@
+﻿@using System.Web.UI.WebControls
+@using ISD.DA
+@using ISD.Data.EDM
+@using ISD.EDS
+@using ISD.Util
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="@ViewBag.Description" />
+    <meta name="title" content="@ViewBag.Title" />
+    <meta name="keywords" content="@ViewBag.Keywords" />
+    <meta name="author" content="Bina Candra">
+    <title>@ViewBag.Title</title>
+    <!-- CSS Global Compulsory-->
+    @Styles.Render("~/assets/plugins/bootstrap/css/bootstrap.css")
+    @Styles.Render("~/assets/css/style.css")
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- CSS Implementing Plugins -->
+    @Styles.Render("~/assets/plugins/line-icons/line-icons.css")
+    @Styles.Render("~/assets/plugins/font-awesome/css/font-awesome.css")
+    @Styles.Render("~/assets/plugins/revolution_slider/rs-plugin/css/settings.css")
+    @Styles.Render("~/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css")
+
+    <!-- CSS Theme -->
+    @Styles.Render("~/assets/css/themes/default.css")
+
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/unifi")
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        $(document).ready(function () {
+            App.init();
+            Index.initRevolutionSlider();
+        });
+    </script>
+</head>
+<body class="header-fixed boxed-layout container">
+    <div class="wrapper">
+        <!--=== Header ===-->
+        <div class="header">
+            <!-- Topbar -->
+            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="topbar">
+                    <div class="container">
+                        <!-- Topbar Navigation -->
+                        <ul class="loginbar pull-right">
+                            <li>
+                                <i class="fa fa-globe"></i>
+                                <a>Languages</a>
+                                <ul class="lenguages">
+                                    <li class="active">
+                                        <a href="#">English <i class="fa fa-check"></i></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="topbar-devider"></li>
+                            <li>@Html.ActionLink("Hello " + User.Identity.Name + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+                            <li class="topbar-devider"></li>
+                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                        </ul>
+                        <!-- End Topbar Navigation -->
+                    </div>
+                </div>
+            }
+            <!-- End Topbar -->
+            <!-- Navbar -->
+            <div class="navbar navbar-default" role="navigation">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="fa fa-bars"></span>
+                        </button>
+                        <a class="navbar-brand" href="@Url.Content("~")">
+                            <img src=@Url.Content("~/Assets/img/Logo_ie.bmp") alt="Internal Service Directory" style="max-height: 60px; margin-top: 8px" />
+                        </a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse navbar-responsive-collapse">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a class="dropdown-toggle" href="@Url.Content("~")" data-toggle="dropdown">
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Content("~/Services")">
+                                    Find a Service
+                                </a>
+                            </li>
+
+                            @{
+
+                                var dt = new DataAccessComponent().RetrieveMenuExplorers((int)SystemConstants.MenuType.MemberMenu);
+                                var dtPages = new DataAccessComponent().RetrievePages();
+
+                                int x = 0;
+                                foreach (var drParent in dt)
+                                {
+                                    if (drParent.LinkType == 1)
+                                    {
+                                        x++;
+                                        if (drParent.ParentMenuID == 0 && drParent.LinkText != null)
+                                        {
+                                            <li> @Html.ActionLink(drParent.LinkText, "", "Activity/Default.aspx?" + SystemConstants.CategoryID + "=" + drParent.LinkValue)</li>
+
+                                            foreach (DataSetComponent.v_MenuRow drChild in dt)
+                                            {
+                                                if (drChild.ParentMenuID == drParent.ID && drChild.LinkText != null)
+                                                {
+                                                    // MenuItem ChildMenu = new MenuItem(drChild.LinkText, "", "", "~/Activity/Default.aspx?" + SystemConstants.CategoryID + "=" + drChild.LinkValue, "");
+
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else if (drParent.LinkType == 2)
+                                    {
+                                        x++;
+                                        if (drParent.ParentMenuID == 0 && drParent.LinkText != null)
+                                        {@:
+                                        <li> @Html.ActionLink(drParent.LinkText, "", "Activity/Default.aspx?" + SystemConstants.ProviderID + "=" + drParent.LinkValue)</li>
+                                            foreach (DataSetComponent.v_MenuRow drChild in dt)
+                                            {
+                                                if (drChild.ParentMenuID == drParent.ID && drChild.LinkText != null)
+                                                {
+                                                    // MenuItem ChildMenu = new MenuItem(drChild.LinkText, "", "", "~/Activity/Default.aspx?" + SystemConstants.ProviderID + "=" + drChild.LinkValue, "");
+
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else if (drParent.LinkType == 3)
+                                    {
+                                        x++;
+                                        if (drParent.ParentMenuID == 0)
+                                        {@:
+                                        <li> @Html.ActionLink(drParent.LinkText, "", "Activity/Default.aspx??" + SystemConstants.ActivityID + "=" + drParent.LinkValue)</li>
+                                            foreach (DataSetComponent.v_MenuRow drChild in dt)
+                                            {
+                                                if (drChild.ParentMenuID == drParent.ID)
+                                                {
+                                                    // MenuItem ChildMenu = new MenuItem(drChild.LinkText, "", "", "~/Activity/Default.aspx?" + SystemConstants.ActivityID + "=" + drChild.LinkValue, " ");
+
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    else if (drParent.LinkType == 4)
+                                    {
+                                        x++;
+                                        if (drParent.ParentMenuID == 0)
+                                        {@:
+                                        <li> @Html.ActionLink(drParent.LinkText, drParent.LinkText, "Pages")</li>
+                                            foreach (DataSetComponent.v_MenuRow drChild in dt)
+                                            {
+                                                if (drChild.ParentMenuID == drParent.ID)
+                                                {
+                                                    // MenuItem ChildMenu = new MenuItem(drChild.LinkText, "", "", "~/Pages/" + drChild.LinkValue, "");
+
+                                                }
+                                            }
+
+                                        }
+                                    }
+                                    else if (drParent.LinkType == 5)
+                                    {
+                                        x++;
+                                        if (drParent.ParentMenuID == 0)
+                                        {@:
+                                        <li> @Html.ActionLink(drParent.LinkText, drParent.LinkText, "Pages")</li>
+                                            foreach (DataSetComponent.v_MenuRow drChild in dt)
+                                            {
+                                                if (drChild.ParentMenuID == drParent.ID)
+                                                {
+                                                    // MenuItem ChildMenu = new MenuItem(drChild.LinkText, "", "", "~/Pages/" + drChild.LinkValue, "");
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else if (drParent.LinkType == 6)
+                                    {
+                                        x++;
+                                        if (drParent.ParentMenuID == 0)
+                                        {
+
+                                            if (dt.Where(y => y.LinkType != 0).Count() != 0)
+                                            {
+                                                var a = dt.Where(y => y.ParentMenuID == drParent.ID).Count();
+                                                if (a != 0)
+                                                {
+                                                    <li class="dropdown">
+                                                        <a href="@Url.Content(drParent.LinkValue)">@drParent.LinkText</a>
+
+                                                        <ul class="dropdown-menu">
+
+
+                                                            @foreach (DataSetComponent.v_MenuRow drChild in dt)
+                                                            {
+                                                                if (drChild.ParentMenuID == drParent.ID && drChild.LinkType != 6)
+                                                                {
+                                                                    var ChildPageName = dtPages
+                                                                        .Where(p => p.ID == Convert.ToInt32(drChild.LinkValue)).FirstOrDefault();
+                                                                    if (ChildPageName == null)
+                                                                    {
+                                                                        ChildPageName = new DataSetComponent.PageDataTable().NewPageRow();
+                                                                        ChildPageName.Name = "NotFound";
+                                                                    }
+                                                                    if (drChild.ParentMenuID == drParent.ID && drChild.LinkType != 6)
+                                                                    {
+                                                                        <li> @Html.ActionLink(drChild.LinkText, ChildPageName.Name, "Pages")</li>
+                                                                    }
+                                                                    else if (drChild.ParentMenuID == drParent.ID && drChild.LinkType != 6)
+                                                                    {
+                                                                        <li> @Html.ActionLink(drChild.LinkText, drChild.LinkValue, "Pages")</li>
+                                                                    }
+
+                                                                }
+                                                                else if (drChild.ParentMenuID == drParent.ID && drChild.LinkType == 6)
+                                                                {
+                                                                    <li>
+                                                                        <a href="@Url.Content(drChild.LinkValue)">@drChild.LinkText</a>
+                                                                    </li>
+
+                                                                }
+                                                            }
+                                                        </ul>
+
+                                                    </li>
+                                                }
+                                                else
+                                                {
+                                                    <li><a href="@drParent.LinkValue">@drParent.LinkText</a></li>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <li><a href="@drParent.LinkValue">@drParent.LinkText</a></li>
+                                            }
+                                        }
+
+                                    }
+
+                                    // MenuItem ContactUs = new MenuItem("Contact Us", x.ToString(), "", "~/ContactUs");
+                                    // MenuNavigation.Items.Add(ContactUs);
+                                }
+                            }
+                            <!-- End Search Block -->
+                        </ul>
+                    </div>
+
+
+
+                    <!--/navbar-collapse-->
+                </div>
+            </div>
+            <!-- End Navbar -->
+        </div>
+        <!-- End Topbar -->
+        <!-- Navbar -->
+        <!-- End Navbar -->
+        <!--=== End Header ===-->
+        @RenderBody()
+        <!--=== Slider ===-->
+        <!-- End Content Part -->
+        <!--=== Footer ===-->
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 md-margin-bottom-40">
+                        <!-- About -->
+                        <div class="headline">
+                            <h2>About</h2>
+                        </div>
+                        <p class="margin-bottom-25 md-margin-bottom-40">Unify is an incredibly beautiful responsive Bootstrap Template for corporate and creative professionals.</p>
+                        <!-- End About -->
+                        <!-- Monthly Newsletter -->
+                        <div class="headline">
+                            <h2>Monthly Newsletter</h2>
+                        </div>
+                        <p>Subscribe to our newsletter and stay up to date with the latest news and deals!</p>
+                        <div class="footer-subsribe">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Email Address">
+                                <span class="input-group-btn">
+                                    <button class="btn-u" type="button">Subscribe</button>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- End Monthly Newsletter -->
+                    </div>
+                    <!--/col-md-4-->
+
+                    <div class="col-md-4 md-margin-bottom-40">
+                        <!-- Recent Blogs -->
+                        <div class="posts">
+                            <div class="headline">
+                                <h2>Recent Blog Entries</h2>
+                            </div>
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    <a href="#">
+                                        <img src="~/assets/img/sliders/elastislide/6.jpg" alt="" />
+                                    </a>
+                                </dt>
+                                <dd>
+                                    <p><a href="#">Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template</a></p>
+                                </dd>
+                            </dl>
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    <a href="#">
+                                        <img src="~/assets/img/sliders/elastislide/10.jpg" alt="" />
+                                    </a>
+                                </dt>
+                                <dd>
+                                    <p><a href="#">Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template</a></p>
+                                </dd>
+                            </dl>
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    <a href="#">
+                                        <img src="~/assets/img/sliders/elastislide/11.jpg" alt="" />
+                                    </a>
+                                </dt>
+                                <dd>
+                                    <p><a href="#">Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template</a></p>
+                                </dd>
+                            </dl>
+                        </div>
+                        <!-- End Recent Blogs -->
+                    </div>
+                    <!--/col-md-4-->
+
+                    <div class="col-md-4">
+                        <!-- Contact Us -->
+                        <div class="headline">
+                            <h2>Contact Us</h2>
+                        </div>
+                        <address class="md-margin-bottom-40">
+                            25, Lorem Lis Street, Orange
+                            <br />
+                            California, US
+                            <br />
+                            Phone: 800 123 3456
+                            <br />
+                            Fax: 800 123 3456
+                            <br />
+                            Email: <a href="mailto:info@anybiz.com" class="">info@anybiz.com</a>
+                        </address>
+                        <!-- End Contact Us -->
+                        <!-- Social Links -->
+                        <div class="headline">
+                            <h2>Stay Connected</h2>
+                        </div>
+                        <ul class="social-icons">
+                            <li><a href="#" data-original-title="Feed" class="social_rss"></a></li>
+                            <li><a href="#" data-original-title="Facebook" class="social_facebook"></a></li>
+                            <li><a href="#" data-original-title="Twitter" class="social_twitter"></a></li>
+                            <li><a href="#" data-original-title="Goole Plus" class="social_googleplus"></a></li>
+                            <li><a href="#" data-original-title="Pinterest" class="social_pintrest"></a></li>
+                            <li><a href="#" data-original-title="Linkedin" class="social_linkedin"></a></li>
+                            <li><a href="#" data-original-title="Vimeo" class="social_vimeo"></a></li>
+                        </ul>
+                        <!-- End Social Links -->
+                    </div>
+                    <!--/col-md-4-->
+                </div>
+            </div>
+        </div>
+        <!--/footer-->
+        <!--=== End Footer ===-->
+        <!--=== Copyright ===-->
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>
+                            2014 &copy; Unify. ALL Rights Reserved.
+                            <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="index.html">
+                            <img class="pull-right" id="logo-footer" src="~/assets/img/logo2-default.png" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/copyright-->
+        <!--=== End Copyright ===-->
+    </div>
+    <!--/wrapper-->
+
+
+</body>
+</html>

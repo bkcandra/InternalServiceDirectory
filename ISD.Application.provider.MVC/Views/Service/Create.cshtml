@@ -334,7 +334,7 @@
 <script>
     $("input[type=checkbox][name=SelectedCategory]").click(function () {
 
-        var bol = $("input[type=checkbox][name=SelectedCategory]:checked").length >= 4;
+        var bol = $("input[type=checkbox][name=SelectedCategory]:checked").length >= 5;
         $("input[type=checkbox][name=SelectedCategory]").not(":checked").attr("disabled", bol);
 
     });

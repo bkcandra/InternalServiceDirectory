@@ -1,0 +1,133 @@
+﻿@using ISD.Data.EDM
+@model ISD.Application.User.MVC.Models.ServiceDetailModel
+
+@Styles.Render("~/assets/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css")
+@Styles.Render("~/assets/plugins/fancybox/source/jquery.fancybox.css")
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("CreateSub", "Service", FormMethod.Post, new { @Class = "sky-form" }))
+        {
+            <fieldset>
+                <h4>Activity Detail</h4>
+                <div class="row">
+                    <section class="col col-md-12">
+                        <label class="input">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @placeholder = "Service name" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </label>
+                    </section>
+                </div>
+                <div class="row">
+                    <section class="col col-md-4">
+                        <label class="input">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @placeholder = "Email", @type = "email" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </label>
+                    </section>
+                    <section class="col col-md-4">
+                        <label class="input">
+                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @placeholder = "Phone" } })
+                            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                        </label>
+                    </section>
+                    <section class="col col-md-4">
+                        <label class="input">
+                            @Html.EditorFor(model => model.Website, new { htmlAttributes = new { @placeholder = "Service Website (Optional)" } })
+                            @Html.ValidationMessageFor(model => model.Website, "", new { @class = "text-danger" })
+                        </label>
+                    </section>
+                </div>
+            </fieldset>
+            <fieldset>
+                            <div class="col-md-offset-9 col-md-3">
+                                <input type="submit" value="Add" class="btn-u" />&nbsp;&nbsp;
+                                
+                            </div>
+                        </fieldset>
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        @{
+            if (Model.Services != null)
+            {
+                foreach (var item in Model.Services)
+                {
+                    using (Html.BeginForm("EditSub", "Service", FormMethod.Post, new { @Class = "sky-form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                        <fieldset>
+                            <h4>Activity Detail</h4>
+                            <div class="row">
+                                <section class="col col-md-12">
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @placeholder = "Service name" } })
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                    </label>
+                                </section>
+                            </div>
+                            <div class="row">
+                                <section class="col col-md-4">
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @placeholder = "Email", @type = "email" } })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </label>
+                                </section>
+                                <section class="col col-md-4">
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @placeholder = "Phone" } })
+                                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                                    </label>
+                                </section>
+                                <section class="col col-md-4">
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.Website, new { htmlAttributes = new { @placeholder = "Service Website (Optional)" } })
+                                        @Html.ValidationMessageFor(model => model.Website, "", new { @class = "text-danger" })
+                                    </label>
+                                </section>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5>How would you describe your service</h5>
+                                    <label class="textarea">
+                                        @Html.EditorFor(model => model.FullDescription, new { htmlAttributes = new { @placeholder = "Service description", @rows = "4" } })
+                                        @Html.ValidationMessageFor(model => model.FullDescription, "", new { @class = "text-danger" })
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>What is the cost of your activity.</h5>
+                                    <label class="textarea">
+                                        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @placeholder = "Pricing", @rows = "4" } })
+                                        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Who is eligible for this activity</h5>
+                                    <label class="textarea">
+                                        @Html.EditorFor(model => model.eligibilityDescription, new { htmlAttributes = new { @placeholder = "Eligibility", @rows = "4" } })
+                                        @Html.ValidationMessageFor(model => model.eligibilityDescription, "", new { @class = "text-danger" })
+                                    </label>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="col-md-offset-9 col-md-3">
+                                <input type="submit" value="Update" class="btn-u" />&nbsp;&nbsp;
+                                
+                            </div>
+                        </fieldset>
+                    }
+                }
+            }
+        }
+    </div>
+</div>
