@@ -21,5 +21,11 @@ namespace ISD.Data.EDM
         public string MetaDescription { get; set; }
         public Nullable<int> PageType { get; set; }
         public string PageContent { get; set; }
+        public Nullable<System.DateTime> CreatedDatetime { get; set; }
+        public Nullable<System.DateTime> ModifiedDatetime { get; set; }
+        public string CreatedBy { get; set; }
+        public string ModifiedBy { get; set; }
+        public string Tag { get; set; }
+        public string Author { get; set; }
     }
 }

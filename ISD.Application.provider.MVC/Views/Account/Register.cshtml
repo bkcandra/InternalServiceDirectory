@@ -5,10 +5,10 @@
 
 <div class="breadcrumbs">
     <div class="container">
-        <h1 class="pull-left">Login</h1>
+        <h1 class="pull-left">Register a new account</h1>
         <ul class="pull-right breadcrumb">
             <li>
-                <a href="@Url.Content("~")">content</a>
+                <a href="@Url.Content("~")">Home</a>
             </li>
 
             <li><a href="">Account</a></li>
@@ -19,11 +19,12 @@
 </div>
 
 <style>
-    .sky-form {
-        border: none !important;
+    .sky-form a{
+     color:#72c02c !important
     }
 </style>
 @Styles.Render("~/assets/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css")
+@Styles.Render("~/assets/css/pages/page_log_reg_v1.css")
 <div class="container content">
     <div class="row">
         <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
@@ -33,7 +34,7 @@
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="reg-header">
                     <h2>Register a new account</h2>
-                    <p>Already Signed Up? Click <a href="page_login.html" class="color-green">Sign In</a> to login your account.</p>
+                    <p>Already Signed Up? Click <a href="login" class="color-green">Sign In</a> to login your account.</p>
                 </div>
                 <div class="margin-bottom-20">
                     @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email Address", @type = "email" } })
@@ -58,7 +59,7 @@
                     @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                 </div>
                 <div class="row">
-                    <section class="col col-md-5 margin-bottom-20">
+                    <section class="col col-md-4 margin-bottom-20">
                         <label class="select">
                             @Html.EditorFor(model => model.Suburb, new { htmlAttributes = new { @class = "form-control", @placeholder = "Suburb" } })
                             <i></i>
@@ -75,7 +76,7 @@
                         </label>
                         @Html.ValidationMessageFor(model => model.StateID, "", new { @class = "text-danger" })
                     </section>
-                    <section class="col col-md-3">
+                    <section class="col col-md-4">
                         <label class="input">
                             @Html.EditorFor(model => model.PostCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Post code", @maxlength = "4", @onkeypress = "return CheckNumber(event)" } })
                         </label>

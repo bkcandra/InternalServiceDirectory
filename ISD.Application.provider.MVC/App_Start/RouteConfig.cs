@@ -20,7 +20,7 @@ namespace ISD.Application.provider.MVC
             );
             routes.MapRoute(
                name: "ISDPage",
-               url: "{controller}/{name}",
+               url: "Pages/{name}",
                defaults: new { controller = "Pages", action = "Index" }
            );
             routes.MapRoute(

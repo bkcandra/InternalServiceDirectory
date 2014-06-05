@@ -1718,7 +1718,6 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Shared\_PartialMenu.cshtml" />
     <Content Include="Views\Shared\_PartialLogin.cshtml" />
     <Content Include="Views\Service\Create.cshtml" />
     <Content Include="Views\Service\Delete.cshtml" />

@@ -22,6 +22,7 @@
     </div>
     <!--/container-->
 </div>
+@Styles.Render("~/assets/css/pages/page_log_reg_v1.css")
 
 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {

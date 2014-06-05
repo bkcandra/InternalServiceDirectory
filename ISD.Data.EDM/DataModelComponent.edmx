@@ -459,6 +459,12 @@
           <Property Name="MetaDescription" Type="nvarchar" MaxLength="1000" />
           <Property Name="PageType" Type="int" />
           <Property Name="PageContent" Type="nvarchar(max)" />
+          <Property Name="CreatedDatetime" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedDatetime" Type="datetime2" Precision="7" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tag" Type="nvarchar" MaxLength="200" />
+          <Property Name="Author" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ProviderLog">
           <Key>
@@ -1422,7 +1428,9 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ActivityClinician_Activity">
-          <End Role="Activity" Type="Self.Activity" Multiplicity="0..1" />
+          <End Role="Activity" Type="Self.Activity" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ActivityClinician" Type="Self.ActivityClinician" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Activity">
@@ -3417,6 +3425,12 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <Property Name="MetaDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="PageType" Type="Int32" />
           <Property Name="PageContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDatetime" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedDatetime" Type="DateTime" Precision="7" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tag" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ProviderLog">
           <Key>
@@ -5364,6 +5378,12 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <EntitySetMapping Name="Page">
             <EntityTypeMapping TypeName="IECHS_ISDModel.Page">
               <MappingFragment StoreEntitySet="Page">
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedDatetime" ColumnName="ModifiedDatetime" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
                 <ScalarProperty Name="PageContent" ColumnName="PageContent" />
                 <ScalarProperty Name="PageType" ColumnName="PageType" />
                 <ScalarProperty Name="MetaDescription" ColumnName="MetaDescription" />

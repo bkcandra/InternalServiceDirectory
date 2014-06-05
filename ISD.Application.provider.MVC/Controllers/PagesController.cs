@@ -29,8 +29,6 @@ namespace ISD.Application.provider.MVC.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Title = page.Title;
-
             return View(page);
         }
 
