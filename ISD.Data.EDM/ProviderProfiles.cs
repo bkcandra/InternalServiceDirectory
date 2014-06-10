@@ -17,8 +17,8 @@ namespace ISD.Data.EDM
         public ProviderProfiles()
         {
             this.Activity = new HashSet<Activity>();
-            this.Clinicians = new HashSet<Clinicians>();
             this.ProviderLog = new HashSet<ProviderLog>();
+            this.Clinicians = new HashSet<Clinicians>();
         }
     
         public string UserID { get; set; }
@@ -47,8 +47,8 @@ namespace ISD.Data.EDM
     
         public virtual ICollection<Activity> Activity { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }
-        public virtual ICollection<Clinicians> Clinicians { get; set; }
         public virtual ICollection<ProviderLog> ProviderLog { get; set; }
         public virtual ProviderSettings ProviderSettings { get; set; }
+        public virtual ICollection<Clinicians> Clinicians { get; set; }
     }
 }

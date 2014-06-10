@@ -83,7 +83,8 @@ namespace ISD.Application.provider.MVC.Controllers
             {
                 model.SuburbList.Add(new ListItem(suburb.Name, suburb.ID.ToString()));
             }
-            model.CliniciansList = await db.v_ProviderClinicians.ToListAsync();
+            var PID = User.Identity.GetUserId();
+            model.CliniciansList = await db.v_ProviderClinicians.Where(x=>x.ProviderID == PID).ToListAsync();
             model.Categories = await db.v_CategoryExplorer.ToListAsync();
             return View(model);
         }

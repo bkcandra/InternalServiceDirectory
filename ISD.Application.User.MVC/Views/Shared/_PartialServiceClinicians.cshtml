@@ -69,7 +69,7 @@
                                 days = days.Remove(days.Length - 1, 1);
                             
                                 int index = days.LastIndexOf(",");
-                                if (index != null)
+                                if (index != -1)
                                 {
                                     days = days.Remove(index, 1);
                                     days = days.Insert(index, " and");

@@ -39,235 +39,264 @@
         });
     </script>
 </head>
-<body class="header-fixed boxed-layout container">
+<body class="header boxed-layout container">
     <div class="wrapper">
         <!--=== Header ===-->
         <div class="header">
-            <!-- Topbar -->
-            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
             {
                 @Html.AntiForgeryToken()
-                <div class="topbar">
-                    <div class="container">
-                        <!-- Topbar Navigation -->
-                        <ul class="loginbar pull-right">
-                            <li>
-                                <i class="fa fa-globe"></i>
-                                <a>Languages</a>
-                                <ul class="lenguages">
-                                    <li class="active">
-                                        <a href="#">English <i class="fa fa-check"></i></a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="topbar-devider"></li>
-                            <li>@Html.ActionLink("Hello " + User.Identity.Name + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
-                            <li class="topbar-devider"></li>
-                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-                        </ul>
-                        <!-- End Topbar Navigation -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <a class="navbar-brand" href="@Url.Content("~")">
+                            <img src=@Url.Content("~/Assets/img/Logo_ie.bmp") alt="Internal Service Directory" style="max-height: 75px; margin-top: 8px" />
+                        </a>
                     </div>
+                    <div class="col-md-9">
+                        <div class="topbar">
+                            <div class="container-fluid">
+                                <!-- Topbar Navigation -->
+                                <ul class="loginbar pull-right">
+                                    <li>
+                                        <i class="fa fa-globe"></i>
+                                        <a>Languages</a>
+                                        <ul class="lenguages">
+                                            <li class="active">
+                                                <a href="#">English <i class="fa fa-check"></i></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="topbar-devider"></li>
+                                    <li>@Html.ActionLink("Hello " + User.Identity.Name + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+                                    <li class="topbar-devider"></li>
+                                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                                </ul>
+                                <!-- End Topbar Navigation -->
+                            </div>
+                        </div><div class="navbar-header">
+                            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="fa fa-bars"></span>
+                            </button>
+                        </div>
+                        <div class="navbar navbar-default" role="navigation">
+                            <div class="container-fluid">
+                                <!-- Brand and toggle get grouped for better mobile display -->
+                                <!-- Collect the nav links, forms, and other content for toggling -->
+                                <div class="collapse navbar-collapse navbar-responsive-collapse">
+                                    <ul class="nav navbar-nav">
+                                        <li>
+                                            <a class="dropdown-toggle" href="@Url.Content("~")" >
+                                                Home
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Content("~/Services")">
+                                                Find a Service
+                                            </a>
+                                        </li>
+
+                                        @{
+
+                var dt = new DataAccessComponent().RetrieveMenuExplorers((int)SystemConstants.MenuType.MemberMenu);
+                var dtPages = new DataAccessComponent().RetrievePages();
+
+                int x = 0;
+                foreach (var drParent in dt)
+                {
+                    if (drParent.LinkType == 1)
+                    {
+                        x++;
+                        if (drParent.ParentMenuID == 0 && drParent.LinkText != null)
+                        {
+                                        <li> @Html.ActionLink(drParent.LinkText, "", "Activity/Default.aspx?" + SystemConstants.CategoryID + "=" + drParent.LinkValue)</li>
+
+                            foreach (DataSetComponent.v_MenuRow drChild in dt)
+                            {
+                                if (drChild.ParentMenuID == drParent.ID && drChild.LinkText != null)
+                                {
+                                    // MenuItem ChildMenu = new MenuItem(drChild.LinkText, "", "", "~/Activity/Default.aspx?" + SystemConstants.CategoryID + "=" + drChild.LinkValue, "");
+
+                                }
+                            }
+                        }
+                    }
+                    else if (drParent.LinkType == 2)
+                    {
+                        x++;
+                        if (drParent.ParentMenuID == 0 && drParent.LinkText != null)
+                        {@:
+                                        <li> @Html.ActionLink(drParent.LinkText, "", "Activity/Default.aspx?" + SystemConstants.ProviderID + "=" + drParent.LinkValue)</li>
+                            foreach (DataSetComponent.v_MenuRow drChild in dt)
+                            {
+                                if (drChild.ParentMenuID == drParent.ID && drChild.LinkText != null)
+                                {
+                                    // MenuItem ChildMenu = new MenuItem(drChild.LinkText, "", "", "~/Activity/Default.aspx?" + SystemConstants.ProviderID + "=" + drChild.LinkValue, "");
+
+                                }
+                            }
+                        }
+                    }
+                    else if (drParent.LinkType == 3)
+                    {
+                        x++;
+                        if (drParent.ParentMenuID == 0)
+                        {@:
+                                        <li> @Html.ActionLink(drParent.LinkText, "", "Activity/Default.aspx??" + SystemConstants.ActivityID + "=" + drParent.LinkValue)</li>
+                            foreach (DataSetComponent.v_MenuRow drChild in dt)
+                            {
+                                if (drChild.ParentMenuID == drParent.ID)
+                                {
+                                    // MenuItem ChildMenu = new MenuItem(drChild.LinkText, "", "", "~/Activity/Default.aspx?" + SystemConstants.ActivityID + "=" + drChild.LinkValue, " ");
+
+                                }
+                            }
+                        }
+                    }
+
+                    else if (drParent.LinkType == 4)
+                    {
+                        x++;
+                        if (drParent.ParentMenuID == 0)
+                        {@:
+                                        <li> @Html.ActionLink(drParent.LinkText, drParent.LinkText, "Pages")</li>
+                            foreach (DataSetComponent.v_MenuRow drChild in dt)
+                            {
+                                if (drChild.ParentMenuID == drParent.ID)
+                                {
+                                    // MenuItem ChildMenu = new MenuItem(drChild.LinkText, "", "", "~/Pages/" + drChild.LinkValue, "");
+
+                                }
+                            }
+
+                        }
+                    }
+                    else if (drParent.LinkType == 5)
+                    {
+                        x++;
+                        if (drParent.ParentMenuID == 0)
+                        {@:
+                                        <li> @Html.ActionLink(drParent.LinkText, drParent.LinkText, "Pages")</li>
+                            foreach (DataSetComponent.v_MenuRow drChild in dt)
+                            {
+                                if (drChild.ParentMenuID == drParent.ID)
+                                {
+                                    // MenuItem ChildMenu = new MenuItem(drChild.LinkText, "", "", "~/Pages/" + drChild.LinkValue, "");
+                                }
+                            }
+                        }
+                    }
+                    else if (drParent.LinkType == 6)
+                    {
+                        x++;
+                        if (drParent.ParentMenuID == 0)
+                        {
+
+                            if (dt.Where(y => y.LinkType != 0).Count() != 0)
+                            {
+                                var a = dt.Where(y => y.ParentMenuID == drParent.ID).Count();
+                                if (a != 0)
+                                {
+                                        <li class="dropdown">
+                                            <a href="@Url.Content(drParent.LinkValue)">@drParent.LinkText</a>
+
+                                            <ul class="dropdown-menu">
+
+
+                                                @foreach (DataSetComponent.v_MenuRow drChild in dt)
+                                            {
+                                                if (drChild.ParentMenuID == drParent.ID && drChild.LinkType != 6)
+                                                {
+                                                    var ChildPageName = dtPages
+                                                        .Where(p => p.ID == Convert.ToInt32(drChild.LinkValue)).FirstOrDefault();
+                                                    if (ChildPageName == null)
+                                                    {
+                                                        ChildPageName = new DataSetComponent.PageDataTable().NewPageRow();
+                                                        ChildPageName.Name = "NotFound";
+                                                    }
+                                                    if (drChild.ParentMenuID == drParent.ID && drChild.LinkType != 6)
+                                                    {
+                            <li> @Html.ActionLink(drChild.LinkText, ChildPageName.Name, "Pages")</li>
+                                                    }
+                                                    else if (drChild.ParentMenuID == drParent.ID && drChild.LinkType != 6)
+                                                    {
+                            <li> @Html.ActionLink(drChild.LinkText, drChild.LinkValue, "Pages")</li>
+                                                    }
+
+                                                }
+                                                else if (drChild.ParentMenuID == drParent.ID && drChild.LinkType == 6)
+                                                {
+                            <li>
+                                <a href="@Url.Content(drChild.LinkValue)">@drChild.LinkText</a>
+                            </li>
+
+                                                }
+                                            }
+                                            </ul>
+
+                                        </li>
+                                }
+                                else
+                                {
+                                        <li><a href="@drParent.LinkValue">@drParent.LinkText</a></li>
+                                }
+                            }
+                            else
+                            {
+                                        <li><a href="@drParent.LinkValue">@drParent.LinkText</a></li>
+                            }
+                        }
+
+                    }
+
+                    // MenuItem ContactUs = new MenuItem("Contact Us", x.ToString(), "", "~/ContactUs");
+                    // MenuNavigation.Items.Add(ContactUs);
+                }
+                                        }
+                                        <!-- End Search Block -->
+                                    </ul>
+                                </div>
+
+
+
+                                <!--/navbar-collapse-->
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
+            <!-- Topbar -->
+
+
             }
             <!-- End Topbar -->
             <!-- Navbar -->
-            <div class="navbar navbar-default" role="navigation">
-                <div class="container">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="fa fa-bars"></span>
-                        </button>
-                        <a class="navbar-brand" href="@Url.Content("~")">
-                            <img src=@Url.Content("~/Assets/img/Logo_ie.bmp") alt="Internal Service Directory" style="max-height: 60px; margin-top: 8px" />
-                        </a>
-                    </div>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse navbar-responsive-collapse">
-                        <ul class="nav navbar-nav">
-                            <li>
-                                <a class="dropdown-toggle" href="@Url.Content("~")" data-toggle="dropdown">
-                                    Home
-                                </a>
-                            </li>
-                            <li>
-                                <a href="@Url.Content("~/Services")">
-                                    Find a Service
-                                </a>
-                            </li>
-
-                            @{
-
-                                var dt = new DataAccessComponent().RetrieveMenuExplorers((int)SystemConstants.MenuType.MemberMenu);
-                                var dtPages = new DataAccessComponent().RetrievePages();
-
-                                int x = 0;
-                                foreach (var drParent in dt)
-                                {
-                                    if (drParent.LinkType == 1)
-                                    {
-                                        x++;
-                                        if (drParent.ParentMenuID == 0 && drParent.LinkText != null)
-                                        {
-                                            <li> @Html.ActionLink(drParent.LinkText, "", "Activity/Default.aspx?" + SystemConstants.CategoryID + "=" + drParent.LinkValue)</li>
-
-                                            foreach (DataSetComponent.v_MenuRow drChild in dt)
-                                            {
-                                                if (drChild.ParentMenuID == drParent.ID && drChild.LinkText != null)
-                                                {
-                                                    // MenuItem ChildMenu = new MenuItem(drChild.LinkText, "", "", "~/Activity/Default.aspx?" + SystemConstants.CategoryID + "=" + drChild.LinkValue, "");
-
-                                                }
-                                            }
-                                        }
-                                    }
-                                    else if (drParent.LinkType == 2)
-                                    {
-                                        x++;
-                                        if (drParent.ParentMenuID == 0 && drParent.LinkText != null)
-                                        {@:
-                                        <li> @Html.ActionLink(drParent.LinkText, "", "Activity/Default.aspx?" + SystemConstants.ProviderID + "=" + drParent.LinkValue)</li>
-                                            foreach (DataSetComponent.v_MenuRow drChild in dt)
-                                            {
-                                                if (drChild.ParentMenuID == drParent.ID && drChild.LinkText != null)
-                                                {
-                                                    // MenuItem ChildMenu = new MenuItem(drChild.LinkText, "", "", "~/Activity/Default.aspx?" + SystemConstants.ProviderID + "=" + drChild.LinkValue, "");
-
-                                                }
-                                            }
-                                        }
-                                    }
-                                    else if (drParent.LinkType == 3)
-                                    {
-                                        x++;
-                                        if (drParent.ParentMenuID == 0)
-                                        {@:
-                                        <li> @Html.ActionLink(drParent.LinkText, "", "Activity/Default.aspx??" + SystemConstants.ActivityID + "=" + drParent.LinkValue)</li>
-                                            foreach (DataSetComponent.v_MenuRow drChild in dt)
-                                            {
-                                                if (drChild.ParentMenuID == drParent.ID)
-                                                {
-                                                    // MenuItem ChildMenu = new MenuItem(drChild.LinkText, "", "", "~/Activity/Default.aspx?" + SystemConstants.ActivityID + "=" + drChild.LinkValue, " ");
-
-                                                }
-                                            }
-                                        }
-                                    }
-
-                                    else if (drParent.LinkType == 4)
-                                    {
-                                        x++;
-                                        if (drParent.ParentMenuID == 0)
-                                        {@:
-                                        <li> @Html.ActionLink(drParent.LinkText, drParent.LinkText, "Pages")</li>
-                                            foreach (DataSetComponent.v_MenuRow drChild in dt)
-                                            {
-                                                if (drChild.ParentMenuID == drParent.ID)
-                                                {
-                                                    // MenuItem ChildMenu = new MenuItem(drChild.LinkText, "", "", "~/Pages/" + drChild.LinkValue, "");
-
-                                                }
-                                            }
-
-                                        }
-                                    }
-                                    else if (drParent.LinkType == 5)
-                                    {
-                                        x++;
-                                        if (drParent.ParentMenuID == 0)
-                                        {@:
-                                        <li> @Html.ActionLink(drParent.LinkText, drParent.LinkText, "Pages")</li>
-                                            foreach (DataSetComponent.v_MenuRow drChild in dt)
-                                            {
-                                                if (drChild.ParentMenuID == drParent.ID)
-                                                {
-                                                    // MenuItem ChildMenu = new MenuItem(drChild.LinkText, "", "", "~/Pages/" + drChild.LinkValue, "");
-                                                }
-                                            }
-                                        }
-                                    }
-                                    else if (drParent.LinkType == 6)
-                                    {
-                                        x++;
-                                        if (drParent.ParentMenuID == 0)
-                                        {
-
-                                            if (dt.Where(y => y.LinkType != 0).Count() != 0)
-                                            {
-                                                var a = dt.Where(y => y.ParentMenuID == drParent.ID).Count();
-                                                if (a != 0)
-                                                {
-                                                    <li class="dropdown">
-                                                        <a href="@Url.Content(drParent.LinkValue)">@drParent.LinkText</a>
-
-                                                        <ul class="dropdown-menu">
-
-
-                                                            @foreach (DataSetComponent.v_MenuRow drChild in dt)
-                                                            {
-                                                                if (drChild.ParentMenuID == drParent.ID && drChild.LinkType != 6)
-                                                                {
-                                                                    var ChildPageName = dtPages
-                                                                        .Where(p => p.ID == Convert.ToInt32(drChild.LinkValue)).FirstOrDefault();
-                                                                    if (ChildPageName == null)
-                                                                    {
-                                                                        ChildPageName = new DataSetComponent.PageDataTable().NewPageRow();
-                                                                        ChildPageName.Name = "NotFound";
-                                                                    }
-                                                                    if (drChild.ParentMenuID == drParent.ID && drChild.LinkType != 6)
-                                                                    {
-                                                                        <li> @Html.ActionLink(drChild.LinkText, ChildPageName.Name, "Pages")</li>
-                                                                    }
-                                                                    else if (drChild.ParentMenuID == drParent.ID && drChild.LinkType != 6)
-                                                                    {
-                                                                        <li> @Html.ActionLink(drChild.LinkText, drChild.LinkValue, "Pages")</li>
-                                                                    }
-
-                                                                }
-                                                                else if (drChild.ParentMenuID == drParent.ID && drChild.LinkType == 6)
-                                                                {
-                                                                    <li>
-                                                                        <a href="@Url.Content(drChild.LinkValue)">@drChild.LinkText</a>
-                                                                    </li>
-
-                                                                }
-                                                            }
-                                                        </ul>
-
-                                                    </li>
-                                                }
-                                                else
-                                                {
-                                                    <li><a href="@drParent.LinkValue">@drParent.LinkText</a></li>
-                                                }
-                                            }
-                                            else
-                                            {
-                                                <li><a href="@drParent.LinkValue">@drParent.LinkText</a></li>
-                                            }
-                                        }
-
-                                    }
-
-                                    // MenuItem ContactUs = new MenuItem("Contact Us", x.ToString(), "", "~/ContactUs");
-                                    // MenuNavigation.Items.Add(ContactUs);
-                                }
-                            }
-                            <!-- End Search Block -->
-                        </ul>
-                    </div>
-
-
-
-                    <!--/navbar-collapse-->
-                </div>
-            </div>
             <!-- End Navbar -->
         </div>
         <!-- End Topbar -->
         <!-- Navbar -->
         <!-- End Navbar -->
+        <div class="breadcrumbs">
+            <div class="container">
+                <h1 class="pull-left">
+                    <img src=@Url.Content("~/Assets/img/Logo_ie-sm.bmp") alt="Internal Service Directory" />
+                </h1>
+                <ul class="pull-right breadcrumb">
+                    <li><a href="@Url.Content("~")">Home</a></li>
+                    @{
+                        if (!string.IsNullOrEmpty(ViewBag.pageSection))
+                        {
+                            <li><a href="">@ViewBag.pageSection</a></li>
+                            if (!string.IsNullOrEmpty(ViewBag.Page))
+                            {
+                                <li class="active">@ViewBag.Page</li>
+                            }
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
         <!--=== End Header ===-->
         @RenderBody()
         <!--=== Slider ===-->

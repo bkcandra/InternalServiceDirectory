@@ -108,6 +108,9 @@
     <Compile Include="Category.cs">
       <DependentUpon>DataModelComponent.tt</DependentUpon>
     </Compile>
+    <Compile Include="Clinic.cs">
+      <DependentUpon>DataModelComponent.tt</DependentUpon>
+    </Compile>
     <Compile Include="Clinicians.cs">
       <DependentUpon>DataModelComponent.tt</DependentUpon>
     </Compile>

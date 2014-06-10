@@ -270,7 +270,7 @@ namespace ISD.Util
         public enum ListingNavigationType { search = 1, filter = 2, category = 3 }
         public enum UserRole { Provider = 1, Customer = 2, Guest = 3 }
 
-        public enum CliniciansType { Public = 1, Private = 2, Other = 3 }
+        public enum CliniciansType { Public = 1, Private = 2, Both = 3}
         #endregion
 
         #region ErrorMessage

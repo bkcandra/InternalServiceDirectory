@@ -20,11 +20,44 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="row">
         <div class="col-md-12">
+
+            @using (Html.BeginForm("CopyClinician", "Clinician", FormMethod.Get, new { @class = "sky-form" }))
+            {
+                <fieldset>
+                    <div class="row">
+                        <section class="col col-md-5">
+                            <label class="input select">
+                                @Html.DropDownListFor(x => x.CopyClinician,
+                                 new SelectList(Model.CliniciansList,
+                                "Value", "Text",
+                                Model.CliniciansList.First().Value))
+                                @Html.ValidationMessageFor(model => model.CliniciansList, "", new { @class = "text-danger" })
+                                <i></i>
+                            </label>
+
+                        </section>
+                        <section class="col col-md-7">
+                            <input type="submit" value="Copy" class="btn-u" />
+                        </section>
+                    </div>
+                </fieldset>
+            }
+
             @using (Html.BeginForm("Create", "Clinician", FormMethod.Post, new { @class = "sky-form" }))
             {
                 @Html.AntiForgeryToken()
                 <fieldset>
                     <div class="row">
+                        <section class="col col-md-6">
+                            <label class="input">
+                                <i class="icon-prepend fa fa-file"></i>
+                                @Html.EditorFor(model => model.SavedName, new { htmlAttributes = new { @placeholder = "Saved title. ex: StaffName_Dietitian_Richmond" } })
+                                @Html.ValidationMessageFor(model => model.ClinicianName, "", new { @class = "text-danger" })
+                            </label>
+                        </section>
+
+
+
                         <section class="col col-md-6">
                             <label class="input">
                                 <i class="icon-prepend fa fa-user"></i>
@@ -33,7 +66,6 @@
                             </label>
                         </section>
                     </div>
-
                     <div class="row">
                         <section class="col col-6">
                             <label class="input">
@@ -52,10 +84,14 @@
                     </div>
                     <div class="row">
                         <section class="col col-md-6">
-                            <label class="input">
-                                @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @placeholder = "Clinic" } })
+                            <label class="select select-multiple">
+                                @{
+                var clinics = new ISD.Data.EDM.ISDEntities().Clinic.ToList();
+                                }
+
+                                @Html.DropDownListFor(model => model.Location, new SelectList(@clinics, "ID", "Name"), new { @class = "multiselect", @multiple = "multiple" })
                                 @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
-                            </label>
+                            </label><div class="note"><strong>Note:</strong> hold down the ctrl/cmd button to select multiple options.</div>
                         </section>
                         <section class="col col-md-6">
                             <label class="input select">
@@ -69,73 +105,63 @@
                         </section>
                     </div>
                     <div class="row">
+                        <section class="col col-md-12">
+                            <label class="textarea">
+                                @Html.EditorFor(model => model.StaffSpecialties, new { htmlAttributes = new { @placeholder = "Specialties", @rows = "4", maxlength = 500 } })
+                                @Html.ValidationMessageFor(model => model.StaffSpecialties, "", new { @class = "text-danger" })
+                            </label>
+                        </section>
+                    </div>
+                    <div class="row">
                         <label class="label">Timetable</label>
                         <section class="col col-md-6">
                             <div class="row">
-                                <div class="col col-6">
-                                    <label class="radio state-success"> @Html.RadioButtonFor(m => m.TimetableType, "1", new { @checked = "checked" })<i class="rounded-x"></i> Yes</label>
-                                </div>
-                                <div class="col col-6">
-                                    <label class="radio state-success">@Html.RadioButtonFor(m => m.TimetableType, "0", new { @Class = "radio" })<i class="rounded-x"></i> No   </label>
-                                </div>
+
+                                @{
+                if (Model.TimetableType == 0)
+                {
+                    <div class="col col-6">
+                        <label class="radio state-success"><input type="radio" name="TimetableType" value="1" id="enableTT" class="radio" /><i class="rounded-x"></i> Yes</label>
+                    </div>
+                                    <div class="col col-6">
+                                        <label class="radio state-success"><input type="radio" name="TimetableType" value="0" id="DisableTT" class="radio" checked="checked" /><i class="rounded-x"></i> No   </label>
+                                    </div>
+                }
+                else
+                {
+                    <div class="col col-6">
+                        <label class="radio state-success"><input type="radio" name="TimetableType" value="1" id="enableTT" class="radio" checked="checked" /><i class="rounded-x"></i> Yes</label>
+                    </div>
+                                    <div class="col col-6">
+                                        <label class="radio state-success"><input type="radio" name="TimetableType" value="0" id="DisableTT" class="radio" /><i class="rounded-x"></i> No   </label>
+                                    </div>
+                }
+
+
+                                }
                                 @Html.ValidationMessageFor(model => model.TimetableType, "", new { @class = "text-danger" })
+
                             </div>
                         </section>
+
+
+
+
+
+
+
                     </div>
+
                 </fieldset>
-                <fieldset id="fldttlb" class="desc">
-                    <div class="row">
-                        <section class="col col-md-6">
-                            <label class="label">Recurrence</label>
-                            <div class="row">
-                                <div class="col col-6">
-                                    <label class="radio state-success"> @Html.RadioButtonFor(m => m.RecurEvery, (int)SystemConstants.RecurrenceSchedule.Weekly, new { @checked = "checked" })<i class="rounded-x"></i> Weekly</label>
-                                    <label class="radio state-success"> @Html.RadioButtonFor(m => m.RecurEvery, (int)SystemConstants.RecurrenceSchedule.Fortnightly)<i class="rounded-x"></i> Fortnightly</label>
-                                </div>
-                                <div class="col col-6">
-                                    <label class="radio state-success"> @Html.RadioButtonFor(m => m.RecurEvery, (int)SystemConstants.RecurrenceSchedule.Monthly)<i class="rounded-x"></i> Montly</label>
-                                    <label class="radio state-success"> @Html.RadioButtonFor(m => m.RecurEvery, (int)SystemConstants.RecurrenceSchedule.NotRecurring)<i class="rounded-x"></i> No Recurrence</label>
-                                </div>
-                            </div>
-                            @Html.ValidationMessageFor(model => model.Timetable.RecurrenceType, "", new { @class = "text-danger" })
-                        </section>
-                        <section class="col col-md-6">
-                            <label class="label">Day of week</label>
-                            <div class="row">
-                                <div class="col col-3">
-                                    @Html.CheckBoxFor(m => m.OnMonday)<i></i>Monday
+    <fieldset id="fldttlb" class="desc">
+        <div id="partial">
 
-                                </div>
-                                <div class="col col-3">
-                                    @Html.CheckBoxFor(m => m.OnTuesday)<i></i>Tuesday
+        </div>
+        <div class="footer">
+            <input type="button" id="mybutton" value="Add new Item" />
+        </div>
 
-                                </div>
-                                <div class="col col-3">
-                                    @Html.CheckBoxFor(m => m.OnWednesday)<i></i>Wednesday
-
-                                </div>
-                                <div class="col col-3">
-                                    @Html.CheckBoxFor(m => m.OnThursday)<i></i>Thursday
-                                </div>
-                            </div>
-                            <div class="row">
-
-                                <div class="col col-3">
-                                    @Html.CheckBoxFor(m => m.OnFriday)<i></i>Friday
-                                </div>
-                                <div class="col col-3">
-                                    @Html.CheckBoxFor(m => m.OnSaturday)<i></i>Saturday
-                                </div>
-                                <div class="col col-3">
-                                    @Html.CheckBoxFor(m => m.OnSunday)<i></i>Sunday
-                                </div>
-                                <div class="col col-3">
-
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </fieldset>
+    </fieldset>
                 <fieldset>
                     <div class="form-horizontal">
                         <div class="form-group">
@@ -146,11 +172,13 @@
                         </div>
                     </div>
                 </fieldset>
-
             }  <div>
                 @Html.ActionLink("Back to List", "Index")
             </div>
         </div>
+
+
+
     </div>
 </div>
 
@@ -159,9 +187,48 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 <script>
+
+
+    $("input[name$='TimetableType']").change(
+function (e) {
+    if ($("#enableTT").is(':checked')) {
+        $("#fldttlb").show();
+    }
+    else {
+        $("#fldttlb").hide();
+    }
+});
+
     $(document).ready(function () {
-        $("input[name$='TimetableType']").change(function () {
-            $("#fldttlb").toggle();
-        });
+        if ($("#enableTT").is(':checked')) {
+            $("#fldttlb").show();
+        }
+        else {
+            $("#fldttlb").hide();
+        }
     });
+
+    $("#mybutton").click(function () {
+
+        var url = "/Clinician/Timetable";
+
+        $.ajax({
+            url: url,
+            cache: false,
+            type: "POST",
+            success: function (data) {
+
+
+                $('#partial').append(data);
+                /* little fade in effect */
+                $('#partial').fadeIn('fast');
+
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+
+    });
+
 </script>

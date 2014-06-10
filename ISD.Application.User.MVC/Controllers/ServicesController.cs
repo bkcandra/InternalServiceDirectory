@@ -19,7 +19,7 @@ namespace ISD.Application.User.MVC.Controllers
         public async Task<ActionResult> Index(int? page, int? pageSize)
         {
 
-            var services = db.v_ActivityExplorer.OrderByDescending(x => x.ModifiedDateTime).Skip((page ?? 0) * (pageSize ?? 50)).Take((pageSize ?? 50)).ToListAsync();
+            var services = db.v_ActivityExplorer.OrderBy(x => x.Name).Skip((page ?? 0) * (pageSize ?? 50)).Take((pageSize ?? 50)).ToListAsync();
 
             return View(await services);
         }

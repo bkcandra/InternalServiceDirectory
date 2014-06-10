@@ -74,13 +74,13 @@
         <!-- Welcome Block -->
         <div class="col-md-8 md-margin-bottom-40">
             <div class="headline">
-                <h2>Welcome To Internal Service Directory</h2>
+                <h2>Welcome to the Internal Service Directory</h2>
             </div>
             <div class="row">
                 <div class="col-sm-4">
-                    <img alt="" src="assets/img/main/6.jpg" class="img-responsive margin-bottom-20">
+                    <img alt="" src="assets/img/new/img11.jpg" class="img-responsive margin-bottom-20">
                 </div>
-                <div class="col-sm-8">  
+                <div class="col-sm-8">
                     <p>We aspire to be an integrated health service. This internal service provider allows clinicians to find services for clients or patients. </p>
                     <p>To begin click <a href="@Url.Content("~/Services")">Find a Service</a></p>
                 </div>
@@ -90,38 +90,54 @@
         <!-- Latest Shots -->
         <div class="col-md-4 posts">
             <div class="headline"><h3>Recent Entries</h3></div>
-            <dl class="dl-horizontal">
-                <dt><a href="#"><img src="assets/img/sliders/elastislide/6.jpg" alt=""></a></dt>
-                <dd>
-                    <p><a href="#">Service #1</a></p>
-                </dd>
-            </dl>
-            <dl class="dl-horizontal">
-                <dt><a href="#"><img src="assets/img/sliders/elastislide/10.jpg" alt=""></a></dt>
-                <dd>
-                    <p><a href="#">Service #2</a></p>
-                </dd>
-            </dl>
-            <dl class="dl-horizontal">
-                <dt><a href="#"><img src="assets/img/sliders/elastislide/11.jpg" alt=""></a></dt>
-                <dd>
-                    <p><a href="#">Service #3</a></p>
-                </dd>
-            </dl>
+
+            @{
+                var services = new ISD.Data.EDM.ISDEntities().v_ActivityExplorer.OrderByDescending(x => x.ModifiedDateTime).Take((3)).ToList();
+                foreach (var service in services)
+                {
+                    <dl class="dl-horizontal">
+                        <dt>
+                            <a href="#">
+
+                                @{
+                    int imageinfo = new ISD.Data.EDM.ISDEntities().ActivityImage.Where(x => x.ActivityID == service.ID).Select(x => x.ID).FirstOrDefault();
+                    var image = new ISD.Data.EDM.ISDEntities().ActivityImageDetail.Where(x => x.ActivityImageID == imageinfo).FirstOrDefault();
+                    if (image == null)
+                    {
+                        <img src="@Url.Content("~/Assets/img/demo.jpg")" class="img-responsive" />
+                    }
+                    if (image != null)
+                    {
+                        <img src="~/ImageHandler.ashx?PID=@image.ID" class="img-responsive" />
+                    }
+                                }
+                            </a>
+                        </dt>
+                        <dd>
+                            <p>
+                                @Html.ActionLink(@service.Name, "Index", "Service", new { id = service.ID }, "")
+                            </p>
+                            <p>
+                                @Html.Label("", service.FullDescription.Length > 50 ? service.FullDescription.Substring(0, 50) : service.FullDescription)
+                            </p>
+                        </dd>
+                    </dl>
+                }
+            }
         </div>
         <!--/col-md-4-->
     </div>
 
     <div class="clearfix margin-bottom-30"></div>
-    <div class="shadow-wrapper">
-        <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
+    @*<div class="shadow-wrapper">
+            <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
 
-            <p>
-                Currently we're a pilot scheme in Boroondara and are aiming to go national in the future. The Club's philosophy is that good health can be achieved by participating in activities that look after our physical, mental and social health and well-being.
-                We want organisations who run healthy activities in Boroondara to list them with with on our website. It is free to be part of the Club and you can promote your activity, increase your member enrolments and produced customised reports and timetables.
-            </p>
-        </div>
-    </div>
+                <p>
+                    Currently we're a pilot scheme in Boroondara and are aiming to go national in the future. The Club's philosophy is that good health can be achieved by participating in activities that look after our physical, mental and social health and well-being.
+                    We want organisations who run healthy activities in Boroondara to list them with with on our website. It is free to be part of the Club and you can promote your activity, increase your member enrolments and produced customised reports and timetables.
+                </p>
+            </div>
+        </div>*@
 </div>
 <!--/container-->
 <!-- End Our Clients -->

@@ -1,18 +1,11 @@
 ﻿@model ISD.Application.User.MVC.Models.ServiceDetailModel
 @{
     ViewBag.Title = @Model.Name + " | Service Details";
+    ViewBag.PageSection = "Service";
+    ViewBag.Page = @Model.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="breadcrumbs">
-    <div class="container">
-        <h1 class="pull-left">@Html.DisplayFor(model => model.Name)</h1>
-        <ul class="pull-right breadcrumb">
-            <li><a href="@Url.Content("~")>Home</a></li>
-            <li><a href="">Service</a></li>
-            <li class="active">@Html.DisplayFor(model => model.Name)</li>
-        </ul>
-    </div><!--/container-->
-</div>
+
 <div class="container content">
     <p class="text-right">
         @Html.ActionLink("Back to List", "", "Services")
@@ -20,6 +13,7 @@
     <div class="row portfolio-item margin-bottom-25">
         <!-- Content Info -->
         <div class="col-md-6 md-margin-bottom-40">
+            <h2>@Model.Name</h2>
             <p>@Html.DisplayFor(model => model.FullDescription)</p>
             
             <div class="row">

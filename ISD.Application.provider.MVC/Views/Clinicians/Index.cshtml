@@ -108,13 +108,15 @@
                             {
                                 days += " Sunday,";
                             }
-
-                            days = days.Remove(days.Length - 1, 1);
-                            int index = days.LastIndexOf(",");
-                            if (index != null)
+                            if (!string.IsNullOrEmpty(days))
                             {
-                                days = days.Remove(index, 1);
-                                days = days.Insert(index, " and");
+                                days = days.Remove(days.Length - 1, 1);
+                                int index = days.LastIndexOf(",");
+                                if (index != -1)
+                                {
+                                    days = days.Remove(index, 1);
+                                    days = days.Insert(index, " and");
+                                }
                             }
                         }
                                 }

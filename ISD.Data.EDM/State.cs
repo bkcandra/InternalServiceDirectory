@@ -16,6 +16,7 @@ namespace ISD.Data.EDM
     {
         public State()
         {
+            this.Clinic = new HashSet<Clinic>();
             this.Council = new HashSet<Council>();
         }
     
@@ -23,6 +24,7 @@ namespace ISD.Data.EDM
         public string StateName { get; set; }
         public string StateDetail { get; set; }
     
+        public virtual ICollection<Clinic> Clinic { get; set; }
         public virtual ICollection<Council> Council { get; set; }
     }
 }

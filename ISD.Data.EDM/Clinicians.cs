@@ -21,7 +21,9 @@ namespace ISD.Data.EDM
     
         public int ID { get; set; }
         public string ProviderID { get; set; }
+        public string SavedName { get; set; }
         public string Name { get; set; }
+        public string Specialties { get; set; }
         public string Location { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }

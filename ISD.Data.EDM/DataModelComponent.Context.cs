@@ -30,6 +30,7 @@ namespace ISD.Data.EDM
         public virtual DbSet<ActivitiesLogGroup> ActivitiesLogGroup { get; set; }
         public virtual DbSet<Activity> Activity { get; set; }
         public virtual DbSet<ActivityClinician> ActivityClinician { get; set; }
+        public virtual DbSet<ActivityContactDetail> ActivityContactDetail { get; set; }
         public virtual DbSet<ActivityGrouping> ActivityGrouping { get; set; }
         public virtual DbSet<ActivityImage> ActivityImage { get; set; }
         public virtual DbSet<ActivityImageDetail> ActivityImageDetail { get; set; }
@@ -45,7 +46,7 @@ namespace ISD.Data.EDM
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Category> Category { get; set; }
-        public virtual DbSet<Clinicians> Clinicians { get; set; }
+        public virtual DbSet<Clinic> Clinic { get; set; }
         public virtual DbSet<ClinicianTimetable> ClinicianTimetable { get; set; }
         public virtual DbSet<ContactUs> ContactUs { get; set; }
         public virtual DbSet<Council> Council { get; set; }
@@ -96,6 +97,7 @@ namespace ISD.Data.EDM
         public virtual DbSet<v_KeyCollectionView> v_KeyCollectionView { get; set; }
         public virtual DbSet<v_Menu> v_Menu { get; set; }
         public virtual DbSet<v_ProviderActivityCount> v_ProviderActivityCount { get; set; }
+        public virtual DbSet<v_ProviderClinicians> v_ProviderClinicians { get; set; }
         public virtual DbSet<v_ProviderExplorer> v_ProviderExplorer { get; set; }
         public virtual DbSet<v_RewardExplorer> v_RewardExplorer { get; set; }
         public virtual DbSet<v_RewardUserExplorer> v_RewardUserExplorer { get; set; }
@@ -106,7 +108,6 @@ namespace ISD.Data.EDM
         public virtual DbSet<v_UserExplorer> v_UserExplorer { get; set; }
         public virtual DbSet<v_VoucherExplorer> v_VoucherExplorer { get; set; }
         public virtual DbSet<v_WebLogExplorer> v_WebLogExplorer { get; set; }
-        public virtual DbSet<v_ProviderClinicians> v_ProviderClinicians { get; set; }
-        public virtual DbSet<ActivityContactDetail> ActivityContactDetail { get; set; }
+        public virtual DbSet<Clinicians> Clinicians { get; set; }
     }
 }
