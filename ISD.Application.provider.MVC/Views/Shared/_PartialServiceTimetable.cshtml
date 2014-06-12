@@ -1,65 +1,85 @@
 ﻿@using ISD.Util;
-@model ISD.Application.provider.MVC.Models.CliniciansModels
-    <div class="row">
-        <section class="col col-md-6">
-            <label class="label">Recurrence</label>
-            <div class="row">
-                <div class="col col-6">
-                    <label class="radio state-success"> @Html.RadioButtonFor(m => m.RecurEvery, (int)SystemConstants.RecurrenceSchedule.Weekly, new { @checked = "checked" })<i class="rounded-x"></i> Weekly</label>
-                    <label class="radio state-success"> @Html.RadioButtonFor(m => m.RecurEvery, (int)SystemConstants.RecurrenceSchedule.Fortnightly)<i class="rounded-x"></i> Fortnightly</label>
-                </div>
-                <div class="col col-6">
-                    <label class="radio state-success"> @Html.RadioButtonFor(m => m.RecurEvery, (int)SystemConstants.RecurrenceSchedule.Monthly)<i class="rounded-x"></i> Montly</label>
-                    <label class="radio state-success"> @Html.RadioButtonFor(m => m.RecurEvery, (int)SystemConstants.RecurrenceSchedule.NotRecurring)<i class="rounded-x"></i> No Recurrence</label>
-                </div>
-            </div>
-            @Html.ValidationMessageFor(model => model.Timetable.RecurrenceType, "", new { @class = "text-danger" })
-        </section>
-        <section class="col col-md-6">
-            <label class="label">Day of week</label>
-            <div class="row">
-                <div class="col col-3">
-                    <label class="checkbox">
-                        <input type="checkbox" name="OnMonday" value="true" id="OnMonday"><i></i>Monday
-                    </label>
-                </div>
 
-                <div class="col col-3">
-                    <label class="checkbox">
-                        <input type="checkbox" name="OnTuesday" value="true" id="OnTuesday"><i></i>Tuesday
-                    </label>
-                </div>
-                <div class="col col-3">
-                    <label class="checkbox">
-                        <input type="checkbox" name="OnWednesday" value="true" id="OnWednesday"><i></i>Wednesday
-                    </label>
-                </div>
-                <div class="col col-3">
-                    <label class="checkbox">
-                        <input type="checkbox" name="OnThursday" value="true" id="OnThursday"><i></i>Thursday
-                    </label>
-                </div>
+@{
+    var index = Guid.NewGuid();
+    }
+    <div class="alert">
+        <button data-dismiss="alert" class="close" type="button">×</button>
+        <input type="hidden" name="Timetables.Index" value="@index" />
+        <div class="row">
+            <div class="col-md-6">
+                <label class="input select">
+                    @{
+                    var clinics = new ISD.Data.EDM.ISDEntities().Clinic.ToList();
+                    }
+                    @Html.DropDownList("Timetables[" + @index + "].LocationID", new SelectList(clinics, "ID", "Name", clinics.First()))
+                    <i></i>
+                </label>
             </div>
-            <div class="row">
+        </div>
+        <div class="row">
+            <section class="col col-md-6">
+                <label class="label">Recurrence</label>
+                <div class="row">
+                    <div class="col col-6">
+                        <label class="radio"><input type="radio" name="Timetables[@index].RecurEvery" checked="checked" value="@((int)SystemConstants.RecurrenceSchedule.Weekly)"><i class="rounded-x"></i>Weekly</label>
+                        <label class="radio"><input type="radio" name="Timetables[@index].RecurEvery" checked="" value="@((int)SystemConstants.RecurrenceSchedule.Fortnightly)"><i class="rounded-x"></i>Fortnightly</label>
+                    </div>
+                    <div class="col col-6">
+                        <label class="radio"><input type="radio" name="Timetables[@index].RecurEvery" checked="" value="@((int)SystemConstants.RecurrenceSchedule.Monthly)"><i class="rounded-x"></i>Monthly</label>
+                        <label class="radio"><input type="radio" name="Timetables[@index].RecurEvery" checked="" value="@((int)SystemConstants.RecurrenceSchedule.NotRecurring)"><i class="rounded-x"></i>NotRecurring</label>
+                    </div>
+                </div>
+            </section>
+            <section class="col col-md-6">
+                <label class="label">Day of week</label>
+                <div class="row">
+                    <div class="col col-3">
+                        <label class="checkbox">
+                            <input type="checkbox" name="Timetables[@index].OnMonday" value="true" id="OnMonday"><i></i>Monday
+                        </label>
+                    </div>
 
-                <div class="col col-3">
-                    <label class="checkbox">
-                        <input type="checkbox" name="OnFriday" value="true" id="OnFriday"><i></i>Friday
-                    </label>
+                    <div class="col col-3">
+                        <label class="checkbox">
+                            <input type="checkbox" name="Timetables[@index].OnTuesday" value="true" id="OnTuesday"><i></i>Tuesday
+                        </label>
+                    </div>
+                    <div class="col col-3">
+                        <label class="checkbox">
+                            <input type="checkbox" name="Timetables[@index].OnWednesday" value="true" id="OnWednesday"><i></i>Wednesday
+                        </label>
+                    </div>
+                    <div class="col col-3">
+                        <label class="checkbox">
+                            <input type="checkbox" name="Timetables[@index].OnThursday" value="true" id="OnThursday"><i></i>Thursday
+                        </label>
+                    </div>
                 </div>
-                <div class="col col-3">
-                    <label class="checkbox">
-                        <input type="checkbox" name="OnSaturday" value="true" id="OnSaturday"><i></i>Saturday
-                    </label>
-                </div>
-                <div class="col col-3">
-                    <label class="checkbox">
-                        <input type="checkbox" name="OnSunday" value="true" id="OnSunday"><i></i>Sunday
-                    </label>
-                </div>
-                <div class="col col-3">
+                <div class="row">
 
+                    <div class="col col-3">
+                        <label class="checkbox">
+                            <input type="checkbox" name="Timetables[@index].Timetable.OnFriday" value="true" id="OnFriday"><i></i>Friday
+                        </label>
+                    </div>
+                    <div class="col col-3">
+                        <label class="checkbox">
+                            <input type="checkbox" name="Timetables[@index].Timetable.OnSaturday" value="true" id="OnSaturday"><i></i>Saturday
+                        </label>
+                    </div>
+                    <div class="col col-3">
+                        <label class="checkbox">
+                            <input type="checkbox" name="Timetables[@index].Timetable.OnSunday" value="true" id="OnSunday"><i></i>Sunday
+                        </label>
+                    </div>
+                    <div class="col col-3">
+
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
+        <hr />
+
+
     </div>

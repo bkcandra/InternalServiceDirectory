@@ -17,6 +17,7 @@ namespace ISD.Data.EDM
         public Clinicians()
         {
             this.ActivityClinician = new HashSet<ActivityClinician>();
+            this.ClinicianTimetable = new HashSet<ClinicianTimetable>();
         }
     
         public int ID { get; set; }
@@ -32,5 +33,6 @@ namespace ISD.Data.EDM
     
         public virtual ICollection<ActivityClinician> ActivityClinician { get; set; }
         public virtual ProviderProfiles ProviderProfiles { get; set; }
+        public virtual ICollection<ClinicianTimetable> ClinicianTimetable { get; set; }
     }
 }

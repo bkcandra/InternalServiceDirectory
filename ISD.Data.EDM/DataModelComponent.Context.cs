@@ -47,6 +47,7 @@ namespace ISD.Data.EDM
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Clinic> Clinic { get; set; }
+        public virtual DbSet<Clinicians> Clinicians { get; set; }
         public virtual DbSet<ClinicianTimetable> ClinicianTimetable { get; set; }
         public virtual DbSet<ContactUs> ContactUs { get; set; }
         public virtual DbSet<Council> Council { get; set; }
@@ -108,6 +109,5 @@ namespace ISD.Data.EDM
         public virtual DbSet<v_UserExplorer> v_UserExplorer { get; set; }
         public virtual DbSet<v_VoucherExplorer> v_VoucherExplorer { get; set; }
         public virtual DbSet<v_WebLogExplorer> v_WebLogExplorer { get; set; }
-        public virtual DbSet<Clinicians> Clinicians { get; set; }
     }
 }

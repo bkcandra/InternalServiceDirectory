@@ -32,43 +32,56 @@ namespace ISD.Application.provider.MVC.Controllers
         {
             var model = new CliniciansModels();
             var pid = User.Identity.GetUserId();
-            foreach (var c in await db.v_ProviderClinicians.Where(x => x.ProviderID == pid).ToListAsync())
+            foreach (var c in await db.Clinicians.Where(x => x.ProviderID == pid).ToListAsync())
             {
-                model.CliniciansList.Add(new ListItem(c.Name, c.ID.ToString()));
+                model.CliniciansList.Add(new ListItem(c.SavedName, c.ID.ToString()));
             }
             return View(model);
         }
-        [HttpGet]
+        [HttpPost]
         public async Task<ActionResult> CopyClinician(CliniciansModels clinicians)
         {
             if (clinicians.CopyClinician == 0 && clinicians.CopyClinician == -1)
             {
                 ModelState.AddModelError("Invalid Clinician ID", "Cannot read clinician information, please select a clinician to copy from.");
-                return View(clinicians);
+                return View(clinicians.actionReferrer, clinicians);
             }
             ModelState.Clear();
             var srcClinician = await db.Clinicians.FindAsync(clinicians.CopyClinician);
+            if (srcClinician ==null)
+            {
+                ModelState.AddModelError("Invalid Clinician ID", "Cannot read clinician information, please select a clinician to copy from.");
+                return View(clinicians.actionReferrer, clinicians);
+            }
             //start copy
             ObjectHandler.CopyPropertyValues(srcClinician, clinicians);
-            clinicians.ClinicianName = srcClinician.Name;
-            clinicians.ClinicianEmail = clinicians.Email;
-            clinicians.ClinicianType = clinicians.Type.Value;
             clinicians.SavedName = "Copy_of_" + clinicians.ClinicianName;
+            clinicians.ClinicianName = srcClinician.Name;
+            clinicians.ClinicianEmail = srcClinician.Email;
+            clinicians.ClinicianType = srcClinician.Type.Value;
+
+            var locs = srcClinician.Location.Split('|');
+            foreach(var loc in locs)
+            {
+                clinicians.SelectedLocation.Add(Convert.ToInt32(loc));
+            }
+            
+
             //end copy
 
-            var timetable = await db.ClinicianTimetable.Where(x => x.ClinicianID == clinicians.CopyClinician).ToListAsync();
+            clinicians.Timetables = await db.ClinicianTimetable.Where(x => x.ClinicianID == clinicians.CopyClinician).ToListAsync();
+            
             clinicians.ID = 0;
             clinicians.ProviderID = User.Identity.GetUserId();
-            clinicians.Timetable.StartDatetime =
-                clinicians.Timetable.EndDatetime = clinicians.Timetable.ExpiryDate = DateTime.Now;
+            //clinicians.Timetable.StartDatetime =                clinicians.Timetable.EndDatetime = clinicians.Timetable.ExpiryDate = DateTime.Now;
 
             var pid = User.Identity.GetUserId();
-            foreach (var c in await db.v_ProviderClinicians.Where(x => x.ProviderID == pid).ToListAsync())
+            foreach (var c in await db.Clinicians.Where(x => x.ProviderID == pid).ToListAsync())
             {
-                clinicians.CliniciansList.Add(new ListItem(c.Name, c.ID.ToString()));
+                clinicians.CliniciansList.Add(new ListItem(c.SavedName, c.ID.ToString()));
             }
             ViewBag.ProviderID = new SelectList(db.ProviderProfiles, "UserID", "Username", clinicians.ProviderID);
-            return View("Create", clinicians);
+            return View(clinicians.actionReferrer, clinicians);
         }
 
 
@@ -79,29 +92,69 @@ namespace ISD.Application.provider.MVC.Controllers
         {
             clinicians.ID = 0;
             clinicians.ProviderID = User.Identity.GetUserId();
-            clinicians.Timetable.StartDatetime =
-                clinicians.Timetable.EndDatetime = clinicians.Timetable.ExpiryDate = DateTime.Now;
+
+            //fixing posted data
             if (string.IsNullOrEmpty(clinicians.SavedName))
             {
                 clinicians.SavedName = clinicians.Name + "_" + DateTime.Now;
                 clinicians.SavedName = clinicians.SavedName.Replace(" ", "_");
             }
+            //fix timetables as we manually rendered timetables and unchecked checked will post null
+            foreach (var tt in clinicians.Timetables)
+            {
+                if (tt.OnMonday == null)
+                    tt.OnMonday = false;
+                if (tt.OnTuesday == null)
+                    tt.OnTuesday = false;
+                if (tt.OnWednesday == null)
+                    tt.OnWednesday = false;
+                if (tt.OnThursday == null)
+                    tt.OnThursday = false;
+                if (tt.OnFriday == null)
+                    tt.OnFriday = false;
+                if (tt.OnSaturday == null)
+                    tt.OnSaturday = false;
+                if (tt.OnSunday == null)
+                    tt.OnSunday = false;
+            }
+
+            if (clinicians.TimetableType == 1)
+                if (clinicians.Timetables.Count() == 0)
+                    ModelState.AddModelError("Invalid Timetable", "Please add a timetable for this clinician, select 'No' if this clinician does not have any timetable.");
+            if (clinicians.SelectedLocation.Count == 0)
+                ModelState.AddModelError("Invalid Location", "Please select a location for this service .");
+
             if (ModelState.IsValid)
             {
-                Clinicians dbClinicians = new Clinicians();
+                Clinicians dbClinicians = db.Clinicians.Create();
                 ObjectHandler.CopyPropertyValues(clinicians, dbClinicians);
                 dbClinicians.Name = clinicians.ClinicianName;
                 dbClinicians.Email = clinicians.ClinicianEmail;
                 dbClinicians.Type = clinicians.ClinicianType;
+                dbClinicians.Location = "";
+                foreach (var loc in clinicians.SelectedLocation)
+                {
+                    dbClinicians.Location += loc + "|";
+                }
+                dbClinicians.Location = dbClinicians.Location.Remove(dbClinicians.Location.Length - 1, 1);
 
-                db.Clinicians.Add(dbClinicians);
                 if (clinicians.TimetableType == 1)
                 {
-                    ClinicianTimetable dbClinicianTimetable = new ClinicianTimetable();
-                    ObjectHandler.CopyPropertyValues(clinicians.Timetable, dbClinicianTimetable);
-                    dbClinicianTimetable.ID = dbClinicians.ID;
-                    db.ClinicianTimetable.Add(dbClinicianTimetable);
+                    foreach (var tt in clinicians.Timetables)
+                    {
+                        ClinicianTimetable dbClinicianTimetable = db.ClinicianTimetable.Create();
+
+
+                        ObjectHandler.CopyPropertyValues(tt, dbClinicianTimetable);
+                        dbClinicianTimetable.StartDatetime = dbClinicianTimetable.EndDatetime = dbClinicianTimetable.ExpiryDate = DateTime.Now;
+                        dbClinicianTimetable.ID = dbClinicians.ID;
+                        dbClinicianTimetable.LocationID = tt.LocationID;
+                        dbClinicians.ClinicianTimetable.Add(dbClinicianTimetable);
+
+                    }
                 }
+                db.Clinicians.Add(dbClinicians);
+
                 await db.SaveChangesAsync();
                 return RedirectToAction("", "Clinicians");
             }
@@ -113,55 +166,96 @@ namespace ISD.Application.provider.MVC.Controllers
         // GET: Clinician/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
-            var model = new CliniciansModels();
-            var dbClinician = await db.v_ProviderClinicians.Where(x => x.ID == id).FirstOrDefaultAsync();
-            ObjectHandler.CopyPropertyValues(dbClinician, model);
-            model.ClinicianEmail = dbClinician.Email;
-            model.ClinicianName = dbClinician.Name;
-            if (dbClinician.Type == 1)
-                model.ClinicianType = 1;
-            else
-                model.ClinicianType = 2;
-            if (dbClinician.TimetableType == 0)
+            var clinicians = new CliniciansModels();
+            var srcClinician = await db.Clinicians.Where(x => x.ID == id).FirstOrDefaultAsync();
+            ObjectHandler.CopyPropertyValues(srcClinician, clinicians);
+            clinicians.ClinicianName = srcClinician.Name;
+            clinicians.ClinicianEmail = srcClinician.Email;
+            clinicians.ClinicianType = srcClinician.Type.Value;
+            var locs = srcClinician.Location.Split('|');
+            foreach (var loc in locs)
             {
-                dbClinician.OnMonday =
-                    dbClinician.OnTuesday =
-                        dbClinician.OnWednesday =
-                            dbClinician.OnThursday =
-                                dbClinician.OnFriday = dbClinician.OnSaturday = dbClinician.OnSunday = false;
+                clinicians.SelectedLocation.Add(Convert.ToInt32(loc));
             }
-            else
+            clinicians.Timetables = await db.ClinicianTimetable.Where(x => x.ClinicianID == id).ToListAsync();
+
+            clinicians.ID = 0;
+            clinicians.ProviderID = User.Identity.GetUserId();
+            //clinicians.Timetable.StartDatetime =                clinicians.Timetable.EndDatetime = clinicians.Timetable.ExpiryDate = DateTime.Now;
+
+            var pid = User.Identity.GetUserId();
+            foreach (var c in await db.Clinicians.Where(x => x.ProviderID == pid).ToListAsync())
             {
-                ObjectHandler.CopyPropertyValues(dbClinician, model.Timetable);
+                clinicians.CliniciansList.Add(new ListItem(c.SavedName, c.ID.ToString()));
             }
-            return View(model);
+            return View(clinicians);
         }
 
         // POST: Clinician/Edit/5
         [HttpPost]
-        public async Task<ActionResult> Edit(int id, FormCollection collection, [Bind(Include = "ID,ClinicianName,Location,Phone,ClinicianEmail,ClinicianType,TimetableType,OnMonday,OnTuesday,OnWednesday,OnThursday,OnFriday,OnSaturday,OnSunday,RecurEvery")] CliniciansModels clinicians)
+        public async Task<ActionResult> Edit(CliniciansModels clinicians)
         {
             try
             {
-                clinicians.ID = id;
+                foreach (var tt in clinicians.Timetables)
+                {
+                    if (tt.OnMonday == null)
+                        tt.OnMonday = false;
+                    if (tt.OnTuesday == null)
+                        tt.OnTuesday = false;
+                    if (tt.OnWednesday == null)
+                        tt.OnWednesday = false;
+                    if (tt.OnThursday == null)
+                        tt.OnThursday = false;
+                    if (tt.OnFriday == null)
+                        tt.OnFriday = false;
+                    if (tt.OnSaturday == null)
+                        tt.OnSaturday = false;
+                    if (tt.OnSunday == null)
+                        tt.OnSunday = false;
+                }
+                if (clinicians.TimetableType == 1)
+                    if (clinicians.Timetables.Count() == 0)
+                        ModelState.AddModelError("Invalid Timetable", "Please add a timetable for this clinician, select 'No' if this clinician does not have any timetable.");
+                if (clinicians.SelectedLocation.Count == 0)
+                    ModelState.AddModelError("Invalid Location", "Please select a location for this service .");
+
                 clinicians.ProviderID = User.Identity.GetUserId();
                 if (ModelState.IsValid)
                 {
-                    Clinicians dbClinicians = await db.Clinicians.Where(x => x.ID == id).FirstOrDefaultAsync();
+                    Clinicians dbClinicians = await db.Clinicians.Where(x => x.ID == clinicians.ID).FirstOrDefaultAsync();
+                    
                     ObjectHandler.CopyPropertyValues(clinicians, dbClinicians);
                     dbClinicians.Name = clinicians.ClinicianName;
                     dbClinicians.Email = clinicians.ClinicianEmail;
                     dbClinicians.Type = clinicians.ClinicianType;
+                    dbClinicians.Location = "";
+                    foreach (var loc in clinicians.SelectedLocation)
+                    {
+                        dbClinicians.Location += loc + "|";
+                    }
+                    dbClinicians.Location = dbClinicians.Location.Remove(dbClinicians.Location.Length - 1, 1);
+
+                    var oldTTs = await db.ClinicianTimetable.Where(x => x.ClinicianID == dbClinicians.ID).ToListAsync();
+                    foreach (var oldTT in oldTTs)
+                    {
+                        db.ClinicianTimetable.Remove(oldTT);
+                    }
+
+
                     if (clinicians.TimetableType == 1)
                     {
+                        foreach (var tt in clinicians.Timetables)
+                        {
+                            ClinicianTimetable dbClinicianTimetable = db.ClinicianTimetable.Create();
 
-                        ClinicianTimetable dbClinicianTimetable =
-                            await db.ClinicianTimetable.Where(x => x.ID == id).FirstOrDefaultAsync();
-                        dbClinicianTimetable.StartDatetime =
-                   dbClinicianTimetable.EndDatetime = dbClinicianTimetable.ExpiryDate = DateTime.Now;
+                            ObjectHandler.CopyPropertyValues(tt, dbClinicianTimetable);
+                            dbClinicianTimetable.StartDatetime = dbClinicianTimetable.EndDatetime = dbClinicianTimetable.ExpiryDate = DateTime.Now;
+                            dbClinicianTimetable.ID = dbClinicians.ID;
+                            dbClinicianTimetable.LocationID = tt.LocationID;
+                            dbClinicians.ClinicianTimetable.Add(dbClinicianTimetable);
 
-                        ObjectHandler.CopyPropertyValues(clinicians, dbClinicianTimetable);
-                        dbClinicianTimetable.ID = id;
+                        }
                     }
                     await db.SaveChangesAsync();
                     return RedirectToAction("", "Clinicians");
@@ -174,7 +268,7 @@ namespace ISD.Application.provider.MVC.Controllers
             }
             catch
             {
-                return View();
+                return View(clinicians);
             }
         }
 
@@ -210,7 +304,6 @@ namespace ISD.Application.provider.MVC.Controllers
 
         public ActionResult Timetable()
         {
-
             return PartialView("_PartialServiceTimetable");
         }
     }

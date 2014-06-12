@@ -27,6 +27,7 @@ namespace ISD.Application.provider.MVC
                              "~/assets/plugins/jquery-1.10.2.min.js",
                              "~/assets/plugins/jquery-migrate-1.2.1.min.js",
                 "~/assets/plugins/bootstrap/js/bootstrap.min.js",
+
                 //JS Implementing Plugins 
                              "~/assets/plugins/back-to-top.js",
                              "~/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js",

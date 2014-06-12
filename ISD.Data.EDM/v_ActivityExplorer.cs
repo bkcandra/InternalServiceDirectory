@@ -11,10 +11,10 @@ namespace ISD.Data.EDM
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class v_ActivityExplorer
     {
-        public virtual int ID { get; set; }
+        public int ID { get; set; }
         public virtual string Name { get; set; }
         public virtual string PhoneNumber { get; set; }
         public virtual Nullable<int> SuburbID { get; set; }
@@ -30,7 +30,7 @@ namespace ISD.Data.EDM
         public virtual string CategoryLevel2ParentName { get; set; }
         public virtual string Address { get; set; }
         public virtual Nullable<int> PostCode { get; set; }
-        public virtual int Status { get; set; }
+        public int Status { get; set; }
         public Nullable<System.DateTime> ExpiryDate { get; set; }
         public virtual Nullable<int> ActivityType { get; set; }
         public virtual string Keywords { get; set; }

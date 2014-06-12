@@ -22,7 +22,7 @@ namespace ISD.Application.provider.MVC.Controllers
         public async Task<ActionResult> Index()
         {
             var provID = User.Identity.GetUserId();
-            var clinicians = await db.v_ProviderClinicians.Where(c => c.ProviderID == provID).ToListAsync();
+            var clinicians = await db.Clinicians.Where(c => c.ProviderID == provID).ToListAsync();
             return View(clinicians);
         }
     }

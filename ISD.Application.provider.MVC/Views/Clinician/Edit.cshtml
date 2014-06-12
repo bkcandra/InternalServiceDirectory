@@ -8,32 +8,42 @@
 @Styles.Render("~/assets/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css")
 <div class="breadcrumbs">
     <div class="container">
-        <h1 class="pull-left">Create clinician</h1>
+        <h1 class="pull-left">Edit clinician</h1>
         <ul class="pull-right breadcrumb">
             <li><a href="index.html">Home</a></li>
             <li><a href="@Url.Content("~/Clinicians/")">Clinician</a></li>
-            <li class="active">Create</li>
+            <li class="active">@Model.Name</li>
         </ul>
     </div>
 </div>
 <div class="content container">
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="row">
         <div class="col-md-12">
             @using (Html.BeginForm("Edit", "Clinician", FormMethod.Post, new { @class = "sky-form" }))
             {
                 @Html.AntiForgeryToken()
+                @Html.HiddenFor(x => x.ID);
                 <fieldset>
                     <div class="row">
                         <section class="col col-md-6">
                             <label class="input">
+                                <i class="icon-prepend fa fa-file"></i>
+                                @Html.EditorFor(model => model.SavedName, new { htmlAttributes = new { @placeholder = "Saved title. ex: StaffName_Dietitian_Richmond" } })
+                                @Html.ValidationMessageFor(model => model.ClinicianName, "", new { @class = "text-danger" })
+                            </label>
+                        </section>
+
+
+
+                        <section class="col col-md-6">
+                            <label class="input">
                                 <i class="icon-prepend fa fa-user"></i>
-                                @Html.EditorFor(model => model.ClinicianName, new { htmlAttributes = new { @placeholder = "Full name"} })
+                                @Html.EditorFor(model => model.ClinicianName, new { htmlAttributes = new { @placeholder = "Full name" } })
                                 @Html.ValidationMessageFor(model => model.ClinicianName, "", new { @class = "text-danger" })
                             </label>
                         </section>
                     </div>
-
                     <div class="row">
                         <section class="col col-6">
                             <label class="input">
@@ -52,10 +62,13 @@
                     </div>
                     <div class="row">
                         <section class="col col-md-6">
-                            <label class="input">
-                                @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @placeholder = "Clinic" } })
-                                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
-                            </label>
+                            <label class="select select-multiple">
+                                @{
+                var clinics = new ISD.Data.EDM.ISDEntities().Clinic.ToList();
+                                }
+                                @Html.ListBox("SelectedLocation", new MultiSelectList(clinics, "ID", "Name",Model.SelectedLocation))
+                                @Html.ValidationMessageFor(model => model.SelectedLocation, "", new { @class = "text-danger" })
+                            </label><div class="note"><strong>Note:</strong> hold down the ctrl/cmd button to select multiple options.</div>
                         </section>
                         <section class="col col-md-6">
                             <label class="input select">
@@ -69,88 +82,289 @@
                         </section>
                     </div>
                     <div class="row">
+                        <section class="col col-md-12">
+                            <label class="textarea">
+                                @Html.EditorFor(model => model.StaffSpecialties, new { htmlAttributes = new { @placeholder = "Specialties", @rows = "4", maxlength = 500 } })
+                                @Html.ValidationMessageFor(model => model.StaffSpecialties, "", new { @class = "text-danger" })
+                            </label>
+                        </section>
+                    </div>
+                    <div class="row">
                         <label class="label">Timetable</label>
                         <section class="col col-md-6">
                             <div class="row">
-                                <div class="col col-6">
-                                    <label class="radio state-success"> @Html.RadioButtonFor(m => m.TimetableType, "1", new { @checked = "checked" })<i class="rounded-x"></i> Yes</label>
-                                </div>
-                                <div class="col col-6">
-                                    <label class="radio state-success">@Html.RadioButtonFor(m => m.TimetableType, "0", new { @Class = "radio" })<i class="rounded-x"></i> No   </label>
-                                </div>
+
+                                @{
+                if (Model.TimetableType == 0)
+                {
+                    <div class="col col-6">
+                        <label class="radio state-success"><input type="radio" name="TimetableType" value="1" id="enableTT" class="radio" /><i class="rounded-x"></i> Yes</label>
+                    </div>
+                                    <div class="col col-6">
+                                        <label class="radio state-success"><input type="radio" name="TimetableType" value="0" id="DisableTT" class="radio" checked="checked" /><i class="rounded-x"></i> No   </label>
+                                    </div>
+                }
+                else
+                {
+                    <div class="col col-6">
+                        <label class="radio state-success"><input type="radio" name="TimetableType" value="1" id="enableTT" class="radio" checked="checked" /><i class="rounded-x"></i> Yes</label>
+                    </div>
+                                    <div class="col col-6">
+                                        <label class="radio state-success"><input type="radio" name="TimetableType" value="0" id="DisableTT" class="radio" /><i class="rounded-x"></i> No   </label>
+                                    </div>
+                }
+                                }
                                 @Html.ValidationMessageFor(model => model.TimetableType, "", new { @class = "text-danger" })
+
                             </div>
-                        </section>
-                    </div>
-                </fieldset>
-                <fieldset id="fldttlb" class="desc">
-                    <div class="row">
-                        <section class="col col-md-6">
-                            <label class="label">Recurrence</label>
-                            <div class="row">
-                                <div class="col col-6">
-                                    <label class="radio state-success"> @Html.RadioButtonFor(m => m.RecurEvery, (int)SystemConstants.RecurrenceSchedule.Weekly, new { @checked = "checked" })<i class="rounded-x"></i> Weekly</label>
-                                    <label class="radio state-success"> @Html.RadioButtonFor(m => m.RecurEvery, (int)SystemConstants.RecurrenceSchedule.Fortnightly)<i class="rounded-x"></i> Fortnightly</label>
-                                </div>
-                                <div class="col col-6">
-                                    <label class="radio state-success"> @Html.RadioButtonFor(m => m.RecurEvery, (int)SystemConstants.RecurrenceSchedule.Monthly)<i class="rounded-x"></i> Montly</label>
-                                    <label class="radio state-success"> @Html.RadioButtonFor(m => m.RecurEvery, (int)SystemConstants.RecurrenceSchedule.NotRecurring)<i class="rounded-x"></i> No Recurrence</label>
-                                </div>
-                            </div>
-                            @Html.ValidationMessageFor(model => model.Timetable.RecurrenceType, "", new { @class = "text-danger" })
                         </section>
                         <section class="col col-md-6">
-                            <label class="label">Day of week</label>
-                            <div class="row">
-                                <div class="col col-3">
-                                    @Html.CheckBoxFor(m => m.OnMonday)<i></i>Monday
 
-                                </div>
-                                <div class="col col-3">
-                                    @Html.CheckBoxFor(m => m.OnTuesday)<i></i>Tuesday
-
-                                </div>
-                                <div class="col col-3">
-                                    @Html.CheckBoxFor(m => m.OnWednesday)<i></i>Wednesday
-
-                                </div>
-                                <div class="col col-3">
-                                    @Html.CheckBoxFor(m => m.OnThursday)<i></i>Thursday
-                                </div>
-                            </div>
-                            <div class="row">
-
-                                <div class="col col-3">
-                                    @Html.CheckBoxFor(m => m.OnFriday)<i></i>Friday
-                                </div>
-                                <div class="col col-3">
-                                    @Html.CheckBoxFor(m => m.OnSaturday)<i></i>Saturday
-                                </div>
-                                <div class="col col-3">
-                                    @Html.CheckBoxFor(m => m.OnSunday)<i></i>Sunday
-                                </div>
-                                <div class="col col-3">
-
-                                </div>
-                            </div>
+                            <input type="button" id="ttButton" value="Add new timetable Information" class="btn-u" />
                         </section>
                     </div>
+
                 </fieldset>
+                <footer id="fldttlb" class="desc">
+                    @using (Html.BeginCollectionItem("newTimetables"))
+                    {
+                        <div id="partial">
+                            @{
+                        if (Model.Timetables.Count() != 0)
+                        {
+                            foreach (var tt in Model.Timetables)
+                            {
+                                var index = Guid.NewGuid();
+                                <div class="alert">
+                                    <button data-dismiss="alert" class="close" type="button">×</button>
+                                    <input type="hidden" name="Timetables.Index" value="@index" />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="input select">
+                                                <select data-val="true" data-val-number="The field LocationID must be a number." id="newTimetables_ea6791dc-fc52-4d93-acbf-9303eab3867a__Timetables_0__LocationID" name="Timetables[@index].LocationID" class="valid">
+                                                    @{
+                                foreach (var clinic in clinics)
+                                {
+                                    if (tt.LocationID == clinic.ID)
+                                    {
+                                        <option selected="selected" value="@clinic.ID">@clinic.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@clinic.ID">@clinic.Name</option>
+                                    }
+                                }
+                                                    }
+                                                </select>
+
+
+                                                <i></i>
+
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <section class="col col-md-6">
+                                            <label class="label">Recurrence</label>
+                                            <div class="row">
+                                                <div class="col col-6">
+                                                    @{
+                                if (tt.RecurEvery.Value == (int)SystemConstants.RecurrenceSchedule.Weekly)
+                                {
+                                    <label class="radio"><input type="radio" name="Timetables[@index].RecurEvery" checked="checked" value="@((int)SystemConstants.RecurrenceSchedule.Weekly)"><i class="rounded-x"></i>Weekly</label>
+                                }
+                                else
+                                {
+                                    <label class="radio"><input type="radio" name="Timetables[@index].RecurEvery" value="@((int)SystemConstants.RecurrenceSchedule.Weekly)"><i class="rounded-x"></i>Weekly</label>
+                                }
+                                if (tt.RecurEvery.Value == (int)SystemConstants.RecurrenceSchedule.Fortnightly)
+                                {
+                                    <label class="radio"><input type="radio" name="Timetables[@index].RecurEvery" checked="checked" value="@((int)SystemConstants.RecurrenceSchedule.Fortnightly)"><i class="rounded-x"></i>Fortnightly</label>
+                                }
+                                else
+                                {
+                                    <label class="radio"><input type="radio" name="Timetables[@index].RecurEvery" value="@((int)SystemConstants.RecurrenceSchedule.Fortnightly)"><i class="rounded-x"></i>Fortnightly</label>
+                                }
+                                                    }
+                                                </div>
+                                                <div class="col col-6">
+                                                    @{
+                                if (tt.RecurEvery.Value == (int)SystemConstants.RecurrenceSchedule.Monthly)
+                                {
+                                    <label class="radio"><input type="radio" name="Timetables[@index].RecurEvery" checked="checked" value="@((int)SystemConstants.RecurrenceSchedule.Monthly)"><i class="rounded-x"></i>Monthly</label>
+                                }
+                                else
+                                {
+                                    <label class="radio"><input type="radio" name="Timetables[@index].RecurEvery" value="@((int)SystemConstants.RecurrenceSchedule.Monthly)"><i class="rounded-x"></i>Monthly</label>
+                                }
+                                if (tt.RecurEvery.Value == (int)SystemConstants.RecurrenceSchedule.NotRecurring)
+                                {
+                                    <label class="radio"><input type="radio" name="Timetables[@index].RecurEvery" checked="checked" value="@((int)SystemConstants.RecurrenceSchedule.NotRecurring)"><i class="rounded-x"></i>NotRecurring</label>
+                                }
+                                else
+                                {
+                                    <label class="radio"><input type="radio" name="Timetables[@index].RecurEvery" value="@((int)SystemConstants.RecurrenceSchedule.NotRecurring)"><i class="rounded-x"></i>NotRecurring</label>
+                                }
+                                                    }
+
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section class="col col-md-6">
+                                            <label class="label">Day of week</label>
+                                            <div class="row">
+                                                <div class="col col-3">
+                                                    <label class="checkbox">
+                                                        @{
+                                if (tt.OnMonday.Value)
+                                {
+                                    <input type="checkbox" name="Timetables[@index].OnMonday" value="true" checked="checked" id="OnMonday"><i></i>
+                                }
+                                else
+                                {
+                                    <input type="checkbox" name="Timetables[@index].OnMonday" value="true" id="OnMonday"><i></i>
+                                }
+                                                        }
+                                                        Monday
+                                                    </label>
+                                                </div>
+
+                                                <div class="col col-3">
+                                                    <label class="checkbox">
+                                                        @{
+                                if (tt.OnTuesday.Value)
+                                {
+                                    <input type="checkbox" name="Timetables[@index].OnTuesday" value="true" checked="checked" id="OnTuesday"><i></i>
+                                }
+                                else
+                                {
+                                    <input type="checkbox" name="Timetables[@index].OnTuesday" value="true" id="OnTuesday"><i></i>
+                                }
+                                                        }
+                                                        Tuesday
+                                                    </label>
+                                                </div>
+                                                <div class="col col-3">
+                                                    <label class="checkbox">
+                                                        @{
+                                if (tt.OnWednesday.Value)
+                                {
+                                    <input type="checkbox" name="Timetables[@index].OnWednesday" value="true" checked="checked" id="OnWednesday"><i></i>
+                                }
+                                else
+                                {
+                                    <input type="checkbox" name="Timetables[@index].OnWednesday" value="true" id="OnWednesday"><i></i>
+                                }
+                                                        }
+                                                        Wednesday
+                                                    </label>
+                                                </div>
+                                                <div class="col col-3">
+                                                    <label class="checkbox">
+                                                        @{
+                                if (tt.OnThursday.Value)
+                                {
+                                    <input type="checkbox" name="Timetables[@index].OnThursday" value="true" checked="checked" id="OnWednesday"><i></i>
+                                }
+                                else
+                                {
+                                    <input type="checkbox" name="Timetables[@index].OnThursday" value="true" id="OnWednesday"><i></i>
+                                }
+                                                        }Thursday
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+
+                                                <div class="col col-3">
+                                                    <label class="checkbox">
+                                                        @{
+                                if (tt.OnFriday.Value)
+                                {
+                                    <input type="checkbox" name="Timetables[@index].OnFriday" value="true" checked="checked" id="OnWednesday"><i></i>
+                                }
+                                else
+                                {
+                                    <input type="checkbox" name="Timetables[@index].OnFriday" value="true" id="OnWednesday"><i></i>
+                                }
+                                                        }Friday
+                                                    </label>
+                                                </div>
+                                                <div class="col col-3">
+                                                    <label class="checkbox">
+                                                        @{
+                                if (tt.OnSaturday.Value)
+                                {
+                                    <input type="checkbox" name="Timetables[@index].OnSaturday" value="true" checked="checked" id="OnWednesday"><i></i>
+                                }
+                                else
+                                {
+                                    <input type="checkbox" name="Timetables[@index].OnSaturday" value="true" id="OnWednesday"><i></i>
+                                }
+                                                        }Saturday
+                                                    </label>
+                                                </div>
+                                                <div class="col col-3">
+                                                    <label class="checkbox">
+                                                        @{
+                                if (tt.OnSunday.Value)
+                                {
+                                    <input type="checkbox" name="Timetables[@index].OnSunday" value="true" checked="checked" id="OnWednesday"><i></i>
+                                }
+                                else
+                                {
+                                    <input type="checkbox" name="Timetables[@index].OnSunday" value="true" id="OnWednesday"><i></i>
+                                }
+                                                        }Sunday
+                                                    </label>
+                                                </div>
+                                                <div class="col col-3">
+
+                                                </div>
+                                            </div>
+                                        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    </div>
+                                    <hr />
+                                </div>
+                            }
+                        }
+                            }
+                        </div>
+                    }
+                </footer>
                 <fieldset>
                     <div class="form-horizontal">
                         <div class="form-group">
                             <div class="col-md-offset-9 col-md-3">
-                                <input type="submit" value="Save" class="btn-u" />&nbsp;&nbsp;
+                                <input type="submit" value="Update" class="btn-u" />&nbsp;&nbsp;
                                 @Html.ActionLink("Cancel", "", "Clinicians", null, new { @class = "btn-u btn-u-red" })
                             </div>
                         </div>
                     </div>
                 </fieldset>
-
-            }  <div>
+            }
+            <div>
                 @Html.ActionLink("Back to List", "Index")
             </div>
         </div>
+
+
+
     </div>
 </div>
 
@@ -159,9 +373,53 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 <script>
+
+
+    $("input[name$='TimetableType']").change(
+function (e) {
+    if ($("#enableTT").is(':checked')) {
+        $("#fldttlb").show();
+        $("#ttButton").show();
+
+    }
+    else {
+        $("#fldttlb").hide();
+        $("#ttButton").hide();
+    }
+});
+
     $(document).ready(function () {
-        $("input[name$='TimetableType']").change(function () {
-            $("#fldttlb").toggle();
-        });
+        if ($("#enableTT").is(':checked')) {
+            $("#fldttlb").show();
+            $("#ttButton").show();
+        }
+        else {
+            $("#fldttlb").hide();
+            $("#ttButton").hide();
+        }
     });
+
+    $("#ttButton").click(function () {
+
+        var url = "/Clinician/Timetable";
+
+        $.ajax({
+            url: url,
+            cache: false,
+            type: "POST",
+            success: function (data) {
+
+
+                $('#partial').append(data);
+                /* little fade in effect */
+                $('#partial').fadeIn('fast');
+
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+
+    });
+
 </script>

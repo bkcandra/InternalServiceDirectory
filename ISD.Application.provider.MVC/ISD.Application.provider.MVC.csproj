@@ -52,6 +52,9 @@
     <Reference Include="BCUtility">
       <HintPath>..\ISD.Util\Dlls\BCUtility.dll</HintPath>
     </Reference>
+    <Reference Include="BeginCollectionItem">
+      <HintPath>..\packages\BeginCollectionItem.1.2.1.0\lib\net35\BeginCollectionItem.dll</HintPath>
+    </Reference>
     <Reference Include="Metaphone.NET">
       <HintPath>..\ISD.Util\Dlls\Metaphone.NET.dll</HintPath>
     </Reference>
@@ -1739,6 +1742,7 @@
     <Content Include="Views\Shared\_PartialServiceImagesUpload.cshtml" />
     <Content Include="Views\Pages\Index.cshtml" />
     <Content Include="Views\Shared\_PartialServiceTimetable.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Collection.cshtml" />
     <None Include="Web.Backload.Default.config" />
     <None Include="Web.Backload.xsd">
       <SubType>Designer</SubType>

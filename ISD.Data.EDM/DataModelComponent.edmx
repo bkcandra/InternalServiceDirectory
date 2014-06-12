@@ -355,6 +355,7 @@
           <Property Name="OnFriday" Type="bit" />
           <Property Name="OnSaturday" Type="bit" />
           <Property Name="OnSunday" Type="bit" />
+          <Property Name="LocationID" Type="int" />
         </EntityType>
         <EntityType Name="ContactUs">
           <Key>
@@ -1663,6 +1664,20 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ClinicianTimetable_Clinicians">
+          <End Role="Clinicians" Type="Self.Clinicians" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ClinicianTimetable" Type="Self.ClinicianTimetable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clinicians">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClinicianTimetable">
+              <PropertyRef Name="ClinicianID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Council_State">
           <End Role="State" Type="Self.State" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -2634,6 +2649,10 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
             <End Role="ProviderProfiles" EntitySet="ProviderProfiles" />
             <End Role="Clinicians" EntitySet="Clinicians" />
           </AssociationSet>
+          <AssociationSet Name="FK_ClinicianTimetable_Clinicians" Association="Self.FK_ClinicianTimetable_Clinicians">
+            <End Role="Clinicians" EntitySet="Clinicians" />
+            <End Role="ClinicianTimetable" EntitySet="ClinicianTimetable" />
+          </AssociationSet>
           <AssociationSet Name="FK_Council_State" Association="Self.FK_Council_State">
             <End Role="State" EntitySet="State" />
             <End Role="Council" EntitySet="Council" />
@@ -2762,6 +2781,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <EntitySet Name="AspNetUsers" EntityType="IECHS_ISDModel.AspNetUsers" />
           <EntitySet Name="Category" EntityType="IECHS_ISDModel.Category" />
           <EntitySet Name="Clinic" EntityType="IECHS_ISDModel.Clinic" />
+          <EntitySet Name="Clinicians" EntityType="IECHS_ISDModel.Clinicians" />
           <EntitySet Name="ClinicianTimetable" EntityType="IECHS_ISDModel.ClinicianTimetable" />
           <EntitySet Name="ContactUs" EntityType="IECHS_ISDModel.ContactUs" />
           <EntitySet Name="Council" EntityType="IECHS_ISDModel.Council" />
@@ -2875,6 +2895,10 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
             <End Role="Activity" EntitySet="Activity" />
             <End Role="ActivityVisitor" EntitySet="ActivityVisitor" />
           </AssociationSet>
+          <AssociationSet Name="FK_ActivityClinician_Clinicians" Association="IECHS_ISDModel.FK_ActivityClinician_Clinicians">
+            <End Role="Clinicians" EntitySet="Clinicians" />
+            <End Role="ActivityClinician" EntitySet="ActivityClinician" />
+          </AssociationSet>
           <AssociationSet Name="FK_ActivityImageDetail_ActivityImageDetail" Association="IECHS_ISDModel.FK_ActivityImageDetail_ActivityImageDetail">
             <End Role="ActivityImage" EntitySet="ActivityImage" />
             <End Role="ActivityImageDetail" EntitySet="ActivityImageDetail" />
@@ -2906,6 +2930,14 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <AssociationSet Name="FK_Clinic_State" Association="IECHS_ISDModel.FK_Clinic_State">
             <End Role="State" EntitySet="State" />
             <End Role="Clinic" EntitySet="Clinic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clinicians_ProviderProfiles" Association="IECHS_ISDModel.FK_Clinicians_ProviderProfiles">
+            <End Role="ProviderProfiles" EntitySet="ProviderProfiles" />
+            <End Role="Clinicians" EntitySet="Clinicians" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClinicianTimetable_Clinicians" Association="IECHS_ISDModel.FK_ClinicianTimetable_Clinicians">
+            <End Role="Clinicians" EntitySet="Clinicians" />
+            <End Role="ClinicianTimetable" EntitySet="ClinicianTimetable" />
           </AssociationSet>
           <AssociationSet Name="FK_Council_State" Association="IECHS_ISDModel.FK_Council_State">
             <End Role="State" EntitySet="State" />
@@ -2990,15 +3022,6 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <AssociationSet Name="AspNetUserRoles" Association="IECHS_ISDModel.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-          <EntitySet Name="Clinicians" EntityType="IECHS_ISDModel.Clinicians" />
-          <AssociationSet Name="FK_ActivityClinician_Clinicians" Association="IECHS_ISDModel.FK_ActivityClinician_Clinicians">
-            <End Role="Clinicians" EntitySet="Clinicians" />
-            <End Role="ActivityClinician" EntitySet="ActivityClinician" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Clinicians_ProviderProfiles" Association="IECHS_ISDModel.FK_Clinicians_ProviderProfiles">
-            <End Role="ProviderProfiles" EntitySet="ProviderProfiles" />
-            <End Role="Clinicians" EntitySet="Clinicians" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
@@ -3350,6 +3373,24 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <Property Name="ModifiedDatetime" Type="DateTime" Nullable="false" Precision="7" />
           <NavigationProperty Name="State" Relationship="IECHS_ISDModel.FK_Clinic_State" FromRole="Clinic" ToRole="State" />
         </EntityType>
+        <EntityType Name="Clinicians">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProviderID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SavedName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Specialties" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="TimetableType" Type="Int32" />
+          <NavigationProperty Name="ActivityClinician" Relationship="IECHS_ISDModel.FK_ActivityClinician_Clinicians" FromRole="Clinicians" ToRole="ActivityClinician" />
+          <NavigationProperty Name="ProviderProfiles" Relationship="IECHS_ISDModel.FK_Clinicians_ProviderProfiles" FromRole="Clinicians" ToRole="ProviderProfiles" />
+          <NavigationProperty Name="ClinicianTimetable" Relationship="IECHS_ISDModel.FK_ClinicianTimetable_Clinicians" FromRole="Clinicians" ToRole="ClinicianTimetable" />
+        </EntityType>
         <EntityType Name="ClinicianTimetable">
           <Key>
             <PropertyRef Name="ID" />
@@ -3368,6 +3409,8 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <Property Name="OnFriday" Type="Boolean" />
           <Property Name="OnSaturday" Type="Boolean" />
           <Property Name="OnSunday" Type="Boolean" />
+          <Property Name="LocationID" Type="Int32" />
+          <NavigationProperty Name="Clinicians" Relationship="IECHS_ISDModel.FK_ClinicianTimetable_Clinicians" FromRole="ClinicianTimetable" ToRole="Clinicians" />
         </EntityType>
         <EntityType Name="ContactUs">
           <Key>
@@ -3549,9 +3592,9 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <Property Name="AccountDeletion" Type="Boolean" />
           <NavigationProperty Name="Activity" Relationship="IECHS_ISDModel.FK_Activity_ProviderProfiles" FromRole="ProviderProfiles" ToRole="Activity" />
           <NavigationProperty Name="AspNetUsers" Relationship="IECHS_ISDModel.FK_ProviderProfiles_AspNetUsers" FromRole="ProviderProfiles" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Clinicians" Relationship="IECHS_ISDModel.FK_Clinicians_ProviderProfiles" FromRole="ProviderProfiles" ToRole="Clinicians" />
           <NavigationProperty Name="ProviderLog" Relationship="IECHS_ISDModel.FK_ProviderLog_ProviderProfiles" FromRole="ProviderProfiles" ToRole="ProviderLog" />
           <NavigationProperty Name="ProviderSettings" Relationship="IECHS_ISDModel.FK_ProviderSettings_ProviderProfiles" FromRole="ProviderProfiles" ToRole="ProviderSettings" />
-          <NavigationProperty Name="Clinicians" Relationship="IECHS_ISDModel.FK_Clinicians_ProviderProfiles" FromRole="ProviderProfiles" ToRole="Clinicians" />
         </EntityType>
         <EntityType Name="ProviderSettings">
           <Key>
@@ -4578,6 +4621,18 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ActivityClinician_Clinicians">
+          <End Type="IECHS_ISDModel.Clinicians" Role="Clinicians" Multiplicity="0..1" />
+          <End Type="IECHS_ISDModel.ActivityClinician" Role="ActivityClinician" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clinicians">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ActivityClinician">
+              <PropertyRef Name="ClinicianID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ActivityImageDetail_ActivityImageDetail">
           <End Type="IECHS_ISDModel.ActivityImage" Role="ActivityImage" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -4683,6 +4738,34 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
             </Principal>
             <Dependent Role="Clinic">
               <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clinicians_ProviderProfiles">
+          <End Type="IECHS_ISDModel.ProviderProfiles" Role="ProviderProfiles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="IECHS_ISDModel.Clinicians" Role="Clinicians" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProviderProfiles">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Clinicians">
+              <PropertyRef Name="ProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClinicianTimetable_Clinicians">
+          <End Type="IECHS_ISDModel.Clinicians" Role="Clinicians" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="IECHS_ISDModel.ClinicianTimetable" Role="ClinicianTimetable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clinicians">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClinicianTimetable">
+              <PropertyRef Name="ClinicianID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4965,49 +5048,6 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
         <Association Name="AspNetUserRoles">
           <End Type="IECHS_ISDModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="IECHS_ISDModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
-        </Association>
-        <EntityType Name="Clinicians">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProviderID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="SavedName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Specialties" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Location" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="Int32" />
-          <Property Name="TimetableType" Type="Int32" />
-          <NavigationProperty Name="ActivityClinician" Relationship="IECHS_ISDModel.FK_ActivityClinician_Clinicians" FromRole="Clinicians" ToRole="ActivityClinician" />
-          <NavigationProperty Name="ProviderProfiles" Relationship="IECHS_ISDModel.FK_Clinicians_ProviderProfiles" FromRole="Clinicians" ToRole="ProviderProfiles" />
-        </EntityType>
-        <Association Name="FK_ActivityClinician_Clinicians">
-          <End Type="IECHS_ISDModel.Clinicians" Role="Clinicians" Multiplicity="0..1" />
-          <End Type="IECHS_ISDModel.ActivityClinician" Role="ActivityClinician" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clinicians">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ActivityClinician">
-              <PropertyRef Name="ClinicianID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Clinicians_ProviderProfiles">
-          <End Type="IECHS_ISDModel.ProviderProfiles" Role="ProviderProfiles" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="IECHS_ISDModel.Clinicians" Role="Clinicians" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProviderProfiles">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Clinicians">
-              <PropertyRef Name="ProviderID" />
-            </Dependent>
-          </ReferentialConstraint>
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -5343,9 +5383,26 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Clinicians">
+            <EntityTypeMapping TypeName="IECHS_ISDModel.Clinicians">
+              <MappingFragment StoreEntitySet="Clinicians">
+                <ScalarProperty Name="TimetableType" ColumnName="TimetableType" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Specialties" ColumnName="Specialties" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SavedName" ColumnName="SavedName" />
+                <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ClinicianTimetable">
             <EntityTypeMapping TypeName="IECHS_ISDModel.ClinicianTimetable">
               <MappingFragment StoreEntitySet="ClinicianTimetable">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="OnSunday" ColumnName="OnSunday" />
                 <ScalarProperty Name="OnSaturday" ColumnName="OnSaturday" />
                 <ScalarProperty Name="OnFriday" ColumnName="OnFriday" />
@@ -6393,22 +6450,6 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Clinicians">
-            <EntityTypeMapping TypeName="IECHS_ISDModel.Clinicians">
-              <MappingFragment StoreEntitySet="Clinicians">
-                <ScalarProperty Name="TimetableType" ColumnName="TimetableType" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="Specialties" ColumnName="Specialties" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="SavedName" ColumnName="SavedName" />
-                <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

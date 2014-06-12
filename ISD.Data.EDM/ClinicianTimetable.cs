@@ -28,5 +28,8 @@ namespace ISD.Data.EDM
         public Nullable<bool> OnFriday { get; set; }
         public Nullable<bool> OnSaturday { get; set; }
         public Nullable<bool> OnSunday { get; set; }
+        public Nullable<int> LocationID { get; set; }
+    
+        public virtual Clinicians Clinicians { get; set; }
     }
 }

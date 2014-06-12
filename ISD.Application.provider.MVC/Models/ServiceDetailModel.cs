@@ -18,7 +18,7 @@ namespace ISD.Application.provider.MVC.Models
         public IEnumerable<ActivityImageDetail> Images { get; set; }
         public List<v_ActivityExplorer> Services { get; set; }
         public List<v_ActivityClinicianExplorer> Clinicians { get; set; }
-        public List<v_ProviderClinicians> CliniciansList { get; set; }
+        public List<Clinicians> CliniciansList { get; set; }
         public List<v_CategoryExplorer> Categories { get; set; }
         [RequiredList(ErrorMessage = "Select at least 1 category from the list")]
         public ICollection<int> SelectedCategory { get; set; }

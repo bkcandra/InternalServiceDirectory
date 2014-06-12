@@ -21,8 +21,8 @@ namespace ISD.Application.provider.MVC.Models
         [Required]
         public int ClinicianType { get; set; }
 
-        public List<ClinicianTimetable> Timetable { get; set; }
-
+        public List<ClinicianTimetable> Timetables { get; set; }
+        public ClinicianTimetable Timetable { get; set; }
         public int RecurEvery { get; set; }
         public bool OnMonday { get; set; }
         public bool OnTuesday { get; set; }
@@ -33,9 +33,10 @@ namespace ISD.Application.provider.MVC.Models
         public bool OnSunday { get; set; }
         [DataType(DataType.MultilineText)]
         public string StaffSpecialties { get; set; }
-
+         public ICollection<int> SelectedLocation { get; set; }
         public int CopyClinician { get; set; }
 
+        public string actionReferrer { get; set; }
         public List<ListItem> CliniciansList =
          new List<ListItem>
             {
@@ -43,17 +44,8 @@ namespace ISD.Application.provider.MVC.Models
                 };
         public CliniciansModels()
         {
-            Timetable = new ClinicianTimetable();
-
-            Timetable.RecurEvery = RecurEvery;
-            Timetable.OnMonday = OnMonday;
-            Timetable.OnTuesday = OnTuesday;
-            Timetable.OnWednesday = OnWednesday;
-            Timetable.OnThursday = OnThursday;
-            Timetable.OnFriday = OnFriday;
-            Timetable.OnSaturday = OnSaturday;
-            Timetable.OnSunday = OnSunday;
-
+            SelectedLocation = new List<int>();
+            Timetables = new List<ClinicianTimetable>();
             Name = ClinicianName = "";
             Email = ClinicianEmail = "";
             Type = ClinicianType;

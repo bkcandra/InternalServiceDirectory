@@ -84,7 +84,7 @@ namespace ISD.Application.provider.MVC.Controllers
                 model.SuburbList.Add(new ListItem(suburb.Name, suburb.ID.ToString()));
             }
             var PID = User.Identity.GetUserId();
-            model.CliniciansList = await db.v_ProviderClinicians.Where(x=>x.ProviderID == PID).ToListAsync();
+            model.CliniciansList = await db.Clinicians.Where(x=>x.ProviderID == PID).ToListAsync();
             model.Categories = await db.v_CategoryExplorer.ToListAsync();
             return View(model);
         }
@@ -213,7 +213,8 @@ namespace ISD.Application.provider.MVC.Controllers
             {
                 model.SuburbList.Add(new ListItem(suburb.Name, suburb.ID.ToString()));
             }
-            model.CliniciansList = await db.v_ProviderClinicians.ToListAsync();
+            var PID = User.Identity.GetUserId();
+            model.CliniciansList = await db.Clinicians.Where(x => x.ProviderID == PID).ToListAsync();
             model.Categories = await db.v_CategoryExplorer.ToListAsync();
             return View(model);
         }
@@ -266,7 +267,9 @@ namespace ISD.Application.provider.MVC.Controllers
             {
                 model.SuburbList.Add(new ListItem(suburb.Name, suburb.ID.ToString()));
             }
-            model.CliniciansList = await db.v_ProviderClinicians.ToListAsync();
+           
+            var PID = User.Identity.GetUserId();
+            model.CliniciansList = await db.Clinicians.Where(x => x.ProviderID == PID).ToListAsync();
             model.Categories = await db.v_CategoryExplorer.ToListAsync();
             model.ImageInfo = await db.ActivityImage.Where(x => x.ActivityID == id).FirstOrDefaultAsync();
             if (model.ImageInfo != null)
@@ -364,7 +367,8 @@ namespace ISD.Application.provider.MVC.Controllers
             {
                 model.SuburbList.Add(new ListItem(suburb.Name, suburb.ID.ToString()));
             }
-            model.CliniciansList = await db.v_ProviderClinicians.ToListAsync();
+            var PID = User.Identity.GetUserId();
+            model.CliniciansList = await db.Clinicians.Where(x => x.ProviderID == PID).ToListAsync();
             model.Categories = await db.v_CategoryExplorer.ToListAsync();
             return View(model);
         }
