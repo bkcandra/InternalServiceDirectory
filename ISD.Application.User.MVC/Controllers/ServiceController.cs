@@ -61,8 +61,6 @@ namespace ISD.Application.User.MVC.Controllers
             model.Clinicians = await db.v_ActivityClinicianExplorer.Where(x => x.ActivityID == dbService.ID).ToListAsync();
             return View(model);
         }
-
-       
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -71,7 +69,23 @@ namespace ISD.Application.User.MVC.Controllers
             }
             base.Dispose(disposing);
         }
-
-
+        public async Task<ActionResult> Search(string name)
+        {
+            if (name == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var dbService = await db.v_ActivityExplorer.Where(x => x.Name == name && x.isPrimary == true).FirstOrDefaultAsync();
+            if (dbService == null)
+            {
+                return HttpNotFound();
+            }
+            ServiceDetailModel model = new ServiceDetailModel();
+            ObjectHandler.CopyPropertyValues(dbService, model);
+            model.Images = await db.ActivityImageDetail.Where(x => x.ActivityID == dbService.ID).ToListAsync();
+            model.Services = await db.v_ActivityExplorer.Where(x => x.PrimaryServiceID == dbService.ID).ToListAsync();
+            model.Clinicians = await db.v_ActivityClinicianExplorer.Where(x => x.ActivityID == dbService.ID).ToListAsync();
+            return View(model);
+        }
     }
 }

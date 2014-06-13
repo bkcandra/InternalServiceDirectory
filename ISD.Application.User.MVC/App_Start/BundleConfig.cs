@@ -29,8 +29,8 @@ namespace ISD.Application.User.MVC
 
             bundles.Add(new ScriptBundle("~/bundles/unifi").Include(
                 //JS Global Compulsory
-                            "~/assets/plugins/jquery-1.10.2.min.js",
-                            "~/assets/plugins/jquery-migrate-1.2.1.min.js",
+                            "~/assets/plugins/jquery-1.10.2.js",
+                            "~/assets/plugins/jquery-migrate-1.2.1.js",
                "~/assets/plugins/bootstrap/js/bootstrap.min.js",
                 //JS Implementing Plugins 
                             "~/assets/plugins/back-to-top.js",
