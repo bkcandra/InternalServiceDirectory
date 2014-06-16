@@ -14,7 +14,8 @@ namespace ISD.Data.EDM
     
     public partial class v_ActivityClinicianExplorer
     {
-        public int ID { get; set; }
+        public long ID { get; set; }
+        public int ACID { get; set; }
         public Nullable<int> ActivityID { get; set; }
         public string ProviderID { get; set; }
         public string Name { get; set; }
@@ -24,18 +25,17 @@ namespace ISD.Data.EDM
         public string Email { get; set; }
         public Nullable<int> Type { get; set; }
         public Nullable<int> TimetableType { get; set; }
-        public Nullable<System.DateTime> StartDatetime { get; set; }
-        public Nullable<System.DateTime> EndDatetime { get; set; }
-        public Nullable<System.DateTime> ExpiryDate { get; set; }
-        public Nullable<int> RecurrenceType { get; set; }
-        public Nullable<int> RecurEvery { get; set; }
+        public string Location { get; set; }
+        public string Specialties { get; set; }
         public Nullable<bool> OnMonday { get; set; }
         public Nullable<bool> OnTuesday { get; set; }
         public Nullable<bool> OnWednesday { get; set; }
         public Nullable<bool> OnThursday { get; set; }
         public Nullable<bool> OnFriday { get; set; }
-        public Nullable<bool> OnSunday { get; set; }
         public Nullable<bool> OnSaturday { get; set; }
-        public string Location { get; set; }
+        public Nullable<bool> OnSunday { get; set; }
+        public Nullable<int> RecurEvery { get; set; }
+        public string SavedName { get; set; }
+        public Nullable<int> LocationID { get; set; }
     }
 }

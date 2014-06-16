@@ -4,91 +4,90 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f072a5cbcd974245b60c345042ba7c54" Name="Diagram1" ZoomLevel="80">
+      <Diagram DiagramId="f072a5cbcd974245b60c345042ba7c54" Name="Diagram1" ZoomLevel="73">
         <EntityTypeShape EntityType="IECHS_ISDModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="5.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.ActivitiesLog" Width="1.5" PointX="12" PointY="55.125" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.ActivitiesLogGroup" Width="1.5" PointX="9.75" PointY="55.375" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.Activity" Width="1.5" PointX="7.5" PointY="32.125" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityClinician" Width="1.5" PointX="12.75" PointY="47.625" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityContactDetail" Width="1.5" PointX="9.75" PointY="48.375" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityGrouping" Width="1.5" PointX="9.75" PointY="31.625" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityImage" Width="1.5" PointX="9.75" PointY="23.625" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityImageDetail" Width="1.5" PointX="12" PointY="23.375" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityReferenceCode" Width="1.5" PointX="9.75" PointY="17.25" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityRewards" Width="1.5" PointX="9.75" PointY="38.5" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.ActivitySchedule" Width="1.5" PointX="9.75" PointY="27" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.ActivitySettings" Width="1.5" PointX="9.75" PointY="42.375" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityUserAttendance" Width="1.5" PointX="9.75" PointY="35" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityUserLog" Width="1.5" PointX="0.75" PointY="8.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityVisitor" Width="1.5" PointX="9.75" PointY="20" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivitiesLog" Width="1.5" PointX="12" PointY="24.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivitiesLogGroup" Width="1.5" PointX="9.75" PointY="24.875" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.Activity" Width="1.5" PointX="7.5" PointY="23.625" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityClinician" Width="1.5" PointX="12.75" PointY="37" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityContactDetail" Width="1.5" PointX="9.75" PointY="44.125" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityGrouping" Width="1.5" PointX="9.75" PointY="8.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityImage" Width="1.5" PointX="9.75" PointY="40.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityImageDetail" Width="1.5" PointX="12" PointY="40.375" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityReferenceCode" Width="1.5" PointX="9.75" PointY="12" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityRewards" Width="1.5" PointX="9.75" PointY="14.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivitySchedule" Width="1.5" PointX="9.75" PointY="32.5" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivitySettings" Width="1.5" PointX="9.75" PointY="18.625" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityUserAttendance" Width="1.5" PointX="9.75" PointY="29" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityUserLog" Width="1.5" PointX="7.75" PointY="4.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ActivityVisitor" Width="1.5" PointX="9.75" PointY="21.375" />
         <EntityTypeShape EntityType="IECHS_ISDModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="38.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="8.5" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="6" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="6" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="69" />
         <EntityTypeShape EntityType="IECHS_ISDModel.AspNetUsers" Width="1.5" PointX="3" PointY="36.875" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.Category" Width="1.5" PointX="7.75" PointY="9.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.Clinic" Width="1.5" PointX="14" PointY="18.125" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.Clinicians" Width="1.5" PointX="7.5" PointY="60.125" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.ClinicianTimetable" Width="1.5" PointX="9.75" PointY="59.875" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.ContactUs" Width="1.5" PointX="17.75" PointY="4.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.Council" Width="1.5" PointX="14" PointY="14.125" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.CustomerContact" Width="1.5" PointX="5.75" PointY="17.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.EmailSetting" Width="1.5" PointX="16.75" PointY="17.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.EmailTemplate" Width="1.5" PointX="18.75" PointY="11.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.FooterMenu" Width="1.5" PointX="3" PointY="17" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.KeyCollection" Width="1.5" PointX="14.75" PointY="8.875" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.Keyword" Width="1.5" PointX="17" PointY="8.875" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.Link" Width="1.5" PointX="0.75" PointY="15.375" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.Menu" Width="1.5" PointX="3" PointY="14" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.Page" Width="1.5" PointX="18.75" PointY="15.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.ProviderLog" Width="1.5" PointX="7.5" PointY="13.625" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.ProviderProfiles" Width="1.5" PointX="5.25" PointY="35.125" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.Category" Width="1.5" PointX="16.75" PointY="4.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.Clinic" Width="1.5" PointX="14" PointY="5.125" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.Clinicians" Width="1.5" PointX="7.5" PointY="51.5" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ClinicianTimetable" Width="1.5" PointX="9.75" PointY="51.25" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ContactUs" Width="1.5" PointX="16.75" PointY="8.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.Council" Width="1.5" PointX="14" PointY="1.125" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.CustomerContact" Width="1.5" PointX="16.75" PointY="12.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.EmailSetting" Width="1.5" PointX="16.75" PointY="16.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.EmailTemplate" Width="1.5" PointX="0.75" PointY="17.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.FooterMenu" Width="1.5" PointX="14" PointY="10" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.KeyCollection" Width="1.5" PointX="11.75" PointY="15.875" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.Keyword" Width="1.5" PointX="14" PointY="15.875" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.Link" Width="1.5" PointX="11.75" PointY="11.375" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.Menu" Width="1.5" PointX="14" PointY="12.625" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.Page" Width="1.5" PointX="18.75" PointY="0.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ProviderLog" Width="1.5" PointX="7.5" PointY="47.625" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.ProviderProfiles" Width="1.5" PointX="5.25" PointY="30.25" />
         <EntityTypeShape EntityType="IECHS_ISDModel.ProviderSettings" Width="1.5" PointX="7.5" PointY="56.125" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.Reward" Width="1.5" PointX="10" PointY="3.5" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.RewardImage" Width="1.5" PointX="12.25" PointY="3.125" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.RewardsDetails" Width="1.5" PointX="12.25" PointY="10.125" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.RewardsType" Width="1.5" PointX="7.75" PointY="1.25" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.Sponsor" Width="1.5" PointX="7.75" PointY="4.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.State" Width="1.5" PointX="11.75" PointY="16.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.Suburb" Width="1.5" PointX="16.25" PointY="14.625" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.Reward" Width="1.5" PointX="3" PointY="11.5" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.RewardImage" Width="1.5" PointX="5.25" PointY="11.125" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.RewardsDetails" Width="1.5" PointX="5.25" PointY="14.5" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.RewardsType" Width="1.5" PointX="0.75" PointY="9.25" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.Sponsor" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.State" Width="1.5" PointX="11.75" PointY="3.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.Suburb" Width="1.5" PointX="16.25" PointY="1.625" />
         <EntityTypeShape EntityType="IECHS_ISDModel.UserImage" Width="1.5" PointX="0.75" PointY="1.25" />
         <EntityTypeShape EntityType="IECHS_ISDModel.UserImageDetail" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.UserLog" Width="1.5" PointX="7.5" PointY="64.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.UserProfiles" Width="1.5" PointX="5.25" PointY="66.375" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.UserReference" Width="1.5" PointX="5.25" PointY="11.25" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.UserReward" Width="1.5" PointX="7.5" PointY="68.375" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.UserRewardLog" Width="1.5" PointX="9.75" PointY="68.375" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.UserSavedList" Width="1.5" PointX="7.5" PointY="71.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.VoucherDetails" Width="1.5" PointX="15.25" PointY="4.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.WebAssets" Width="1.5" PointX="19.75" PointY="0.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.WebConfiguration" Width="1.5" PointX="0.75" PointY="19.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.WeblLogAction" Width="1.5" PointX="17" PointY="1" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.WebLog" Width="1.5" PointX="14.75" PointY="1" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_ActivitiesLogExplorer" Width="1.5" PointX="2.75" PointY="19.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_ActivityClinicianExplorer" Width="1.5" PointX="19.75" PointY="4.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_ActivityExpiryView" Width="1.5" PointX="20.75" PointY="11.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_ActivityExplorer" Width="1.5" PointX="20.75" PointY="15.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_ActivityImageExplorer" Width="1.5" PointX="21.75" PointY="0.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_ActivityView" Width="1.5" PointX="4.75" PointY="21.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_ActivityVisitorCount" Width="1.5" PointX="9.75" PointY="0.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_CategoryCount" Width="1.5" PointX="11.75" PointY="0.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_CategoryExplorer" Width="1.5" PointX="21.75" PointY="4.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_CouncilExplorer" Width="1.5" PointX="9.75" PointY="13.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_EmailExplorer" Width="1.5" PointX="6.75" PointY="21.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_FooterMenu" Width="1.5" PointX="16.75" PointY="21.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_KeyCollectionView" Width="1.5" PointX="22.75" PointY="9.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_Menu" Width="1.5" PointX="22.75" PointY="12.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_ProviderActivityCount" Width="1.5" PointX="0.75" PointY="11.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_ProviderClinicians" Width="1.5" PointX="22.75" PointY="16.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_ProviderExplorer" Width="1.5" PointX="22.75" PointY="21.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_RewardExplorer" Width="1.5" PointX="23.75" PointY="0.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_RewardUserExplorer" Width="1.5" PointX="24.75" PointY="7.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_ScheduleCount" Width="1.5" PointX="14.75" PointY="11.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_SubServiceExplorer" Width="1.5" PointX="24.75" PointY="11.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_SuburbExplorer" Width="1.5" PointX="14.75" PointY="24.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_UserAttendanceView" Width="1.5" PointX="16.75" PointY="24.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_UserExplorer" Width="1.5" PointX="24.75" PointY="18.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_VoucherExplorer" Width="1.5" PointX="24.75" PointY="23.75" />
-        <EntityTypeShape EntityType="IECHS_ISDModel.v_WebLogExplorer" Width="1.5" PointX="25.75" PointY="0.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.UserLog" Width="1.5" PointX="7.5" PointY="65.25" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.UserProfiles" Width="1.5" PointX="5.25" PointY="60.5" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.UserReference" Width="1.5" PointX="5.25" PointY="71.5" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.UserReward" Width="1.5" PointX="7.5" PointY="62" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.UserRewardLog" Width="1.5" PointX="9.75" PointY="62" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.UserSavedList" Width="1.5" PointX="7.5" PointY="58.875" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.VoucherDetails" Width="1.5" PointX="5.25" PointY="18.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.WebAssets" Width="1.5" PointX="18.75" PointY="5.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.WebConfiguration" Width="1.5" PointX="18.75" PointY="9.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.WeblLogAction" Width="1.5" PointX="8" PointY="1" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.WebLog" Width="1.5" PointX="5.75" PointY="1" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_ActivitiesLogExplorer" Width="1.5" PointX="11.75" PointY="18.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_ActivityExpiryView" Width="1.5" PointX="13.75" PointY="18.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_ActivityExplorer" Width="1.5" PointX="18.75" PointY="16.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_ActivityImageExplorer" Width="1.5" PointX="20.75" PointY="0.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_ActivityView" Width="1.5" PointX="20.75" PointY="4.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_ActivityVisitorCount" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_CategoryCount" Width="1.5" PointX="4.75" PointY="8.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_CategoryExplorer" Width="1.5" PointX="15.75" PointY="20.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_CouncilExplorer" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_EmailExplorer" Width="1.5" PointX="20.75" PointY="17.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_FooterMenu" Width="1.5" PointX="0.75" PointY="21.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_KeyCollectionView" Width="1.5" PointX="22.75" PointY="0.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_Menu" Width="1.5" PointX="2.75" PointY="22.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_ProviderActivityCount" Width="1.5" PointX="6.75" PointY="8.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_ProviderClinicians" Width="1.5" PointX="22.75" PointY="3.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_ProviderExplorer" Width="1.5" PointX="4.75" PointY="22.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_RewardExplorer" Width="1.5" PointX="22.75" PointY="8.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_RewardUserExplorer" Width="1.5" PointX="22.75" PointY="15.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_ScheduleCount" Width="1.5" PointX="22.75" PointY="19.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_SubServiceExplorer" Width="1.5" PointX="20.75" PointY="22.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_SuburbExplorer" Width="1.5" PointX="22.75" PointY="22.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_UserAttendanceView" Width="1.5" PointX="24.75" PointY="0.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_UserExplorer" Width="1.5" PointX="24.75" PointY="5.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_VoucherExplorer" Width="1.5" PointX="24.75" PointY="10.75" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_WebLogExplorer" Width="1.5" PointX="24.75" PointY="15.75" />
         <AssociationConnector Association="IECHS_ISDModel.FK_ActivitiesLog_ActivitiesLogGroup" />
         <AssociationConnector Association="IECHS_ISDModel.FK_ActivitiesLogGroup_Activity" />
         <AssociationConnector Association="IECHS_ISDModel.FK_Activity_ProviderProfiles" />
@@ -134,6 +133,7 @@
         <AssociationConnector Association="IECHS_ISDModel.FK_UserRewardLog_UserReward" />
         <AssociationConnector Association="IECHS_ISDModel.FK_WeblLogAction_WebLog" />
         <AssociationConnector Association="IECHS_ISDModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="IECHS_ISDModel.v_ActivityClinicianExplorer" Width="1.5" PointX="14.375" PointY="25.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

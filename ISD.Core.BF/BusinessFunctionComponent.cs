@@ -1,5 +1,6 @@
 ﻿using BCUtility;
 using ISD.DA;
+using ISD.Data.EDM;
 using ISD.EDS;
 using ISD.Util;
 using System;
@@ -1777,7 +1778,7 @@ namespace ISD.BF
                 /*Match and save locations from keyword                
                  First we retrieve available locations from db
                  */
-                var suburbs = new DataAccessComponent().RetrieveSuburbs().ToList();
+                var suburbs = new ISDEntities().Clinic.AsEnumerable();
 
                 List<SuburbExplorer> SubsCont = new List<SuburbExplorer>();
                 foreach (var suburb in suburbs)
@@ -1795,12 +1796,14 @@ namespace ISD.BF
 
                 var matchedLocs = SubsCont.Where(x => keywords.Contains(x.Name.ToUpper()));
                 HashSet<int> locsID = new HashSet<int>(matchedLocs.Select(x => x.ID));
-                IEnumerable<DataSetComponent.v_SuburbExplorerRow> matchedSuburbs = suburbs.Where(x => locsID.Contains(x.ID));
+                var matchedSuburbs = suburbs.Where(x => locsID.Contains(x.ID));
 
                 StringBuilder lq = new StringBuilder();
                 foreach (var matchedSuburb in matchedSuburbs)
-                    lq.Append(matchedSuburb.Name + ";");
+                    lq.Append(matchedSuburb.ID + ",");
                 LocationsQuery = lq.ToString();
+                if (!string.IsNullOrEmpty(LocationsQuery))
+                    LocationsQuery = LocationsQuery.Remove(LocationsQuery.Length - 1, 1);
 
                 HashSet<string> locationsHash = new HashSet<string>(SubsCont.Select(x => x.Name.ToUpper()));
                 keywords.RemoveAll(x => locationsHash.Contains(x.ToUpper()));
@@ -2766,5 +2769,5 @@ namespace ISD.BF
         #endregion
     }
 
-    
+
 }

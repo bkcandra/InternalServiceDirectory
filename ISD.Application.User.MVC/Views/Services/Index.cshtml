@@ -32,7 +32,7 @@
             <div class="input-group">
                 <input id="txtSearchServices" name="txtSearchServices" type="text" class="form-control" placeholder="Search services">
                 <span class="input-group-btn">
-                    <button class="btn-u" type="button"><i class="fa fa-search"></i></button>
+                    <button id="btnSearch" class="btn-u" type="button"><i class="fa fa-search"></i></button>
                 </span>
             </div>
         </div>
@@ -196,7 +196,7 @@
         var Query = cat + "&" + clinic + "&" + searchQ;
 
         var url = "/Services/GetServices/?" + Query.toString();
-        alert(url);
+        //alert(url);
         $.ajax({
             url: url,
             cache: false,
@@ -211,5 +211,28 @@
             }
         });
     });
+
+    $("#btnSearch").click(function () {
+
+        var searchQ = "search=" + $('#txtSearchServices').val();
+        var Query = searchQ;
+
+        var url = "/Services/GetServices/?" + Query.toString();
+        //alert(url);
+        $.ajax({
+            url: url,
+            cache: false,
+            type: "GET",
+            success: function (data) {
+                $('#ServiceList').html(data);
+                /* little fade in effect */
+                $('#ServiceList').fadeIn('fast');
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+    });
+    
 
 </script>

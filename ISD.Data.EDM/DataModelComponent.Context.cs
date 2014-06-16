@@ -84,7 +84,6 @@ namespace ISD.Data.EDM
         public virtual DbSet<WeblLogAction> WeblLogAction { get; set; }
         public virtual DbSet<WebLog> WebLog { get; set; }
         public virtual DbSet<v_ActivitiesLogExplorer> v_ActivitiesLogExplorer { get; set; }
-        public virtual DbSet<v_ActivityClinicianExplorer> v_ActivityClinicianExplorer { get; set; }
         public virtual DbSet<v_ActivityExpiryView> v_ActivityExpiryView { get; set; }
         public virtual DbSet<v_ActivityExplorer> v_ActivityExplorer { get; set; }
         public virtual DbSet<v_ActivityImageExplorer> v_ActivityImageExplorer { get; set; }
@@ -109,5 +108,6 @@ namespace ISD.Data.EDM
         public virtual DbSet<v_UserExplorer> v_UserExplorer { get; set; }
         public virtual DbSet<v_VoucherExplorer> v_VoucherExplorer { get; set; }
         public virtual DbSet<v_WebLogExplorer> v_WebLogExplorer { get; set; }
+        public virtual DbSet<v_ActivityClinicianExplorer> v_ActivityClinicianExplorer { get; set; }
     }
 }

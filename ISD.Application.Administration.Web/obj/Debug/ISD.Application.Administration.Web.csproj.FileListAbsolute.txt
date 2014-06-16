@@ -285,6 +285,7 @@ E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\obj
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin\Microsoft.Threading.Tasks.Extensions.Desktop.dll
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin\Microsoft.Threading.Tasks.Extensions.Desktop.xml
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin\Microsoft.WindowsAzure.Configuration.xml
+C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Application.Administration.Web\bin\WebGrease.dll
 C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Application.Administration.Web\bin\ISD.Administration.Web.dll.config
 C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Application.Administration.Web\bin\ISD.Administration.Web.dll
 C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Application.Administration.Web\bin\ISD.Administration.Web.pdb
@@ -347,7 +348,6 @@ C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Application.A
 C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Application.Administration.Web\bin\System.Web.Webpages.Deployment.dll
 C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Application.Administration.Web\bin\System.Web.Webpages.dll
 C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Application.Administration.Web\bin\System.Web.Webpages.Razor.dll
-C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Application.Administration.Web\bin\WebGrease.dll
 C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Application.Administration.Web\bin\Zlib.Portable.dll
 C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Application.Administration.Web\bin\Metaphone.NET.dll
 C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Application.Administration.Web\bin\ISD.BF.pdb
