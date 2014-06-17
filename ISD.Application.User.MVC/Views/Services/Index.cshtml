@@ -1,8 +1,8 @@
 ﻿@using System.Web.UI.WebControls
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Find a Service";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
+    var clinics = new ISD.Data.EDM.ISDEntities().Clinic.AsEnumerable();
 }
 <style>
     .sky-form header {
@@ -26,6 +26,7 @@
 
 @{ViewBag.PageSection = "Services";
 }
+
 <div class="search-block">
     <div class="container">
         <div class="col-md-6 col-md-offset-3">
@@ -38,17 +39,20 @@
         </div>
     </div>
 </div>
+
 <div class="container content">
     <div class="row blog-page">
         <!-- Left Sidebar -->
-
+        @using (Html.BeginForm("index", "Services", FormMethod.Get))
+        {
+            <input id="hdnCategory" name="category"  type="hidden" />
+            <input id="hdnClinic" name="clinic"  type="hidden" />
+            
         <div class="col-md-3">
-
             <header>Filter by</header>
             <div class="row">
                 <div class="col col-md-12">
                     <div class="panel-group acc-v1" id="accordion-1">
-
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
@@ -102,10 +106,6 @@
                                                                                                 </ul>*@
 
                                         </div>
-                                        <script>
-
-                                        </script>
-
                                     </div>
                                 </div>
                             </div>
@@ -126,17 +126,15 @@
                                                 <select id="clinicList">
                                                     <option value="0">Choose Clinic</option>
                                                     @{
-                                                        var clinics = new ISD.Data.EDM.ISDEntities().Clinic.ToList();
                                                         foreach (var clinic in clinics)
                                                         {
-                                                            <option value="@clinic.ID">@clinic.Name</option>
+                                                    <option value="@clinic.ID">@clinic.Name</option>
                                                         }
                                                     }
                                                 </select>
                                                 <i></i>
                                             </label>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -147,14 +145,8 @@
             <footer>
                 <button id="filterBtn" type="submit" class="btn-u">Update</button>
             </footer>
-
-
-
-
-
-
         </div>
-
+        }
         <!-- Right Sidebar -->
         <div id="ServiceList" class="col-md-9">
 
@@ -162,10 +154,50 @@
         <!-- End Right Sidebar -->
     </div>
 </div>
-
-
 <script>
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
+    var query = "";
+    
+    var searchQ = "search=" + $('#txtSearchServices').val();
+    if (getParameterByName('page')) {
+        var par = "page=" + getParameterByName('page');
+        if (query)
+            query = query + '&' + par
+        else
+            query = query + par
+    }
+    if (getParameterByName('category')) {
+        var cat = "category=" + getParameterByName('category');
+        if (query)
+            query = query + '&' + cat
+        else
+            query = query + cat
+    }
+    if (searchQ) {
+        if (query)
+            query = query + '&' + searchQ
+        else
+            query = query + searchQ
+    }
+    if (getParameterByName('clinic')) {
+        var clinic = "clinic=" + getParameterByName('clinic');
+
+        if (query)
+            query = query + '&' + clinic
+        else
+            query = query + clinic
+    }
+
     var url = "/Services/GetServices";
+    if (query)
+        url = url + '?' + query
+
     $.ajax({
         url: url,
         cache: false,
@@ -180,45 +212,46 @@
         }
     });
 
-    $.getJSON("Services/GetCategoriesJson", null, function (data) {
+    if (getParameterByName('category'))
+    {
 
-        $('#CatTree').jstree({
-            'core': {
-                'data': data
-            }
+    }
+    else
+    {
+
+    }
+    if (getParameterByName("category"))
+    {
+        $.getJSON("/Services/GetCategoriesJson?selected=" + getParameterByName("category"), null, function (data) {
+            $('#CatTree').jstree({
+                'core': {
+                    'data': data
+                }
+            });
         });
-    });
+    }
+    else
+    {
+        $.getJSON("/Services/GetCategoriesJson", null, function (data) {
+            $('#CatTree').jstree({
+                'core': {
+                    'data': data
+                }
+            });
+        });
+    }
+
     $("#filterBtn").click(function () {
-        var cat = "category=" + $('#CatTree').jstree('get_selected');
-        var clinic = "clinic=" + $("select[id='clinicList'] option:selected").val();
-        var searchQ = "search=" + $('#txtSearchServices').val();
-
-        var Query = cat + "&" + clinic + "&" + searchQ;
-
-        var url = "/Services/GetServices/?" + Query.toString();
-        //alert(url);
-        $.ajax({
-            url: url,
-            cache: false,
-            type: "GET",
-            success: function (data) {
-                $('#ServiceList').html(data);
-                /* little fade in effect */
-                $('#ServiceList').fadeIn('fast');
-            },
-            error: function (reponse) {
-                alert("error : " + reponse);
-            }
-        });
+        hdnCategory.value = $('#CatTree').jstree('get_selected');
+        hdnClinic.value =$("select[id='clinicList'] option:selected").val()
     });
-
     $("#btnSearch").click(function () {
 
         var searchQ = "search=" + $('#txtSearchServices').val();
         var Query = searchQ;
 
         var url = "/Services/GetServices/?" + Query.toString();
-        //alert(url);
+
         $.ajax({
             url: url,
             cache: false,
@@ -233,6 +266,4 @@
             }
         });
     });
-    
-
 </script>

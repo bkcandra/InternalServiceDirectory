@@ -25,8 +25,6 @@
                 {
                     <tr>
                         <td>@item.ClinicianName</td>
-
-
                         <td>@item.Phone</td>
                         <td>@item.Email</td>
                         @if (item.Type == (int)SystemConstants.CliniciansType.Private)
@@ -58,7 +56,6 @@
                                                     @item.Name
                                                 </div>
                                                 <div class="col-md-6">
-
                                                     @{
                         var locs = item.Location.Split('|');
                         var locString = "";
@@ -103,8 +100,6 @@
                                                 </div>
                                                  <br />
                                             }
-                                           
-
                                             @if (item.TimetableType == 1)
                                             {
 
@@ -204,7 +199,6 @@
                                 </div>
                             </div>
                         </td>
-
                     </tr>
                 }
             </tbody>

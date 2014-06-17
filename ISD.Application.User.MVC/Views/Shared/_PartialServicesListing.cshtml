@@ -1,0 +1,143 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@{
+    @model IEnumerable<ISD.Data.EDM.v_ActivityExplorer>
+    var state = new ISD.Data.EDM.ISDEntities().State.AsEnumerable();
+    var clinics = new ISD.Data.EDM.ISDEntities().Clinic.AsEnumerable();
+    var ACExplorer = new ISD.Data.EDM.ISDEntities().v_ActivityClinicianExplorer.AsEnumerable();
+}
+
+<div class="row">
+    <div class="col-md-6 text-left">
+        Showing: 1 - 5 of 25 services
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 text-left">
+        <label class="select">
+            <select name="gender">
+                <option disabled="" value="0" selected="">Sort By</option>
+                <option value="1">Newly listed</option>
+                <option value="2">Expiry date</option>
+                <option value="3">Title: A - Z</option>
+                <option value="4">Title: Z - Av</option>
+                <option value="5">Cost: Free - Paid</option>
+                <option value="6">Cost: Paid - Free</option>
+            </select>
+            <i></i>
+        </label>
+    </div><div class="col-md-6 text-right">
+        <label class="select">
+            <select name="gender">
+                <option disabled="" value="0" selected="">Show</option>
+                <option value="1">5</option>
+                <option value="2">10</option>
+                <option value="3">25</option>
+                <option value="4">50</option>
+            </select>
+            <i></i>
+        </label>
+    </div>
+</div>
+@foreach (var item in Model)
+{
+    <div class="funny-boxes funny-boxes-top-sea ">
+
+        <div class="row">
+            <div class="col-md-4 funny-boxes-img">
+                @{
+    int imageinfo = new ISD.Data.EDM.ISDEntities().ActivityImage.Where(x => x.ActivityID == item.ID).Select(x => x.ID).FirstOrDefault();
+    var image = new ISD.Data.EDM.ISDEntities().ActivityImageDetail.Where(x => x.ActivityImageID == imageinfo).FirstOrDefault();
+    if (image == null)
+    {
+        <img src="@Url.Content("~/Assets/img/demo.jpg")" class="img-responsive" />
+    }
+    if (image != null)
+    {
+        <img src="~/ImageHandler.ashx?PID=@image.ID" class="img-responsive" />
+    }
+                }
+            </div>
+            <div class="col-md-8">
+                <h2>
+                    @Html.ActionLink(item.Name, "Index", "Service", new { id = item.ID }, "")
+                </h2>
+                <p>
+                    @Html.Label("", item.FullDescription.Length > 250 ? item.FullDescription.Substring(0, 250) : item.FullDescription)
+                    @Html.ActionLink("Read more", item.Name.Replace(" ", string.Empty), "Service")
+                </p>
+                <p>
+                    <uc1:ScheduleViewerUC runat="server" ID="ScheduleViewerUC" />
+                </p>
+                <p>
+                    <asp:Image ID="imgStatus" runat="server" class="img-responsive right" ImageUrl="~/Assets/img/demo.jpg" />
+                    <asp:Label ID="lblExpiryDate" runat="server" CssClass="right" Text="Expiry on"></asp:Label>
+                    <asp:Label ID="lblStatus" runat="server" Text="" CssClass="right"></asp:Label>
+                    <asp:Label ID="lblType" runat="server" Text="" CssClass="right"></asp:Label>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 funny-boxes-img">
+                <ul class="list-unstyled">
+                    <li><i class="fa fa-briefcase"></i>@item.ProviderName</li>
+                </ul>
+            </div>
+            <div class="col-md-8">
+                @{
+    var tts = ACExplorer.Where(x => x.ActivityID == item.ID);
+    if (tts.Where(t => t.TimetableType == 1).Count() != 0)
+    {
+        <strong>Available at</strong>
+                    <br />
+        foreach (var ap in tts)
+        {
+            if (ap.LocationID != null)
+            {
+                var cInfo = clinics.Where(c => c.ID == ap.LocationID.Value).FirstOrDefault();
+
+                <button class="btn btn-u btn-sm" data-toggle="modal" data-target="#modal-@ap.ID">@cInfo.Name</button>
+                    <div id="modal-@ap.ID" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                                    <h4 id="myLargeModalLabel" class="modal-title">@cInfo.Name</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <strong>Address</strong>
+                                    <p>
+                                        @cInfo.Address
+                                        <br />
+                                        @cInfo.Suburb
+                                        @state.Where(s => s.ID == cInfo.StateID).Select(s => s.StateName).FirstOrDefault(), @cInfo.PostCode
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            }
+        }
+    }
+                }
+            </div>
+        </div>
+    </div>
+}
+@Html.PagedListPager((PagedList.IPagedList)Model, page => Url.Action("Index", new { page =page }),PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing( new AjaxOptions(){  HttpMethod = "GET"}))
+<div class="row">
+    <div class="col-md-6 text-left">
+        Showing: 1 - 5 of 25 services
+    </div><div class="col-md-6 text-right">
+        <ul class="pagination">
+            <li><a href="#">«</a></li>
+            <li><a href="#">1</a></li>
+            <li class="active"><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">»</a></li>
+        </ul>
+    </div>
+
+</div>
+<!-- Bordered Funny Boxes -->

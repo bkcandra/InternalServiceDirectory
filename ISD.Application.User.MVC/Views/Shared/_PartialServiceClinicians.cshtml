@@ -1,6 +1,9 @@
 ﻿@using ISD.Util
-@model IEnumerable<ISD.Data.EDM.v_ActivityClinicianExplorer>
-
+@using MoreLinq
+@{
+    @model IEnumerable<ISD.Data.EDM.v_ActivityClinicianExplorer>
+    var clinic = new ISD.Data.EDM.ISDEntities().Clinic.AsEnumerable();
+}
 <div class="panel panel-default margin-bottom-40">
     <div class="panel-heading">
         <h3 class="panel-title"><i class="fa fa-user"></i> Clinicians</h3>
@@ -9,74 +12,188 @@
         <table class="table">
             <thead>
                 <tr>
-
                     <th>Name</th>
-                    <th>Clinic</th>
                     <th>Phone</th>
                     <th>Email</th>
-                    <th>Private</th>
-                    <th>Days</th>
+                    <th>Type</th>
+                    <th></th>
+
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
+                @foreach (var item in Model.DistinctBy(x => x.ACID))
                 {
                     <tr>
-                        <td>@Html.DisplayFor(modelItem => item.ClinicianName)</td>
-                        <td>@item.Location</td>
+                        <td>@item.ClinicianName</td>
                         <td>@item.Phone</td>
                         <td>@item.Email</td>
                         @if (item.Type == (int)SystemConstants.CliniciansType.Private)
                         {
-                            <td>Yes</td>
+                            <td>Private</td>
                         }
                         @if (item.Type == (int)SystemConstants.CliniciansType.Public)
                         {
-                            <td>No</td>
+                            <td>Public</td>
                         }
-                        @{
-                        string days = "";
-                        if (item.OnMonday ?? false)
+                        @if (item.Type == (int)SystemConstants.CliniciansType.Both)
                         {
-                            days += "Monday,";
+                            <td>Public and Private</td>
                         }
-                        if (item.OnTuesday ?? false)
+                        <td>
+
+                            <button class="btn-u" data-toggle="modal" data-target="#modal-@item.ID">See details</button>
+                            <div id="modal-@item.ID" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                                            <h4 id="myLargeModalLabel" class="modal-title">Clinician Details</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <strong>Name</strong><br />
+                                                    @item.Name
+                                                </div>
+                                                <div class="col-md-6">
+                                                    @{
+                        var locs = item.Location.Split('|');
+                        var locString = "";
+
+                        foreach (var loc in locs)
                         {
-                            days += " Tuesday,";
+
+                            locString += " " + @clinic.Where(x => x.ID == Convert.ToInt32(loc)).FirstOrDefault().Name + ",";
                         }
-                        if (item.OnWednesday ?? false)
+                        if (!string.IsNullOrEmpty(locString))
                         {
-                            days += " Wednesday,";
-                        }
-                        if (item.OnThursday ?? false)
-                        {
-                            days += " Thursday,";
-                        }
-                        if (item.OnFriday ?? false)
-                        {
-                            days += " Friday,";
-                        }
-                        if (item.OnSaturday ?? false)
-                        {
-                            days += " Saturday,";
-                        }
-                        if (item.OnSunday ?? false)
-                        {
-                            days += " Sunday,";
-                        }
-                            if (!string.IsNullOrEmpty(days))
+
+                            locString = locString.Remove(locString.Length - 1, 1);
+                            int index = locString.LastIndexOf(",");
+                            if (index != -1)
                             {
-                                days = days.Remove(days.Length - 1, 1);
-                            
-                                int index = days.LastIndexOf(",");
-                                if (index != -1)
-                                {
-                                    days = days.Remove(index, 1);
-                                    days = days.Insert(index, " and");
-                                }
+                                locString = locString.Remove(index, 1);
+                                locString = locString.Insert(index, " and");
                             }
                         }
-                        <td>@days</td>
+                                                    }
+
+                                                    <strong>Clinics</strong><br />@locString
+
+                                                </div>
+                                            </div><br />
+
+
+                                            @if (!string.IsNullOrEmpty(@item.Specialties))
+                                            {
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <strong>
+                                                            Specialties
+                                                        </strong>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        @item.Specialties
+                                                    </div>
+                                                </div>
+                                                <br />
+                                            }
+                                            @if (item.TimetableType == 1)
+                                            {
+
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <strong>
+                                                            Timetable Details
+                                                        </strong>
+                                                        @{
+                                                var tts = Model.Where(x => x.ClinicianID == item.ClinicianID).ToList();
+                                                foreach (var tt in tts)
+                                                {
+                                                    string days = "";
+                                                    if (tt.OnMonday ?? false)
+                                                    {
+                                                        days += "Monday,";
+                                                    }
+                                                    if (tt.OnTuesday ?? false)
+                                                    {
+                                                        days += " Tuesday,";
+                                                    }
+                                                    if (tt.OnWednesday ?? false)
+                                                    {
+                                                        days += " Wednesday,";
+                                                    }
+                                                    if (tt.OnThursday ?? false)
+                                                    {
+                                                        days += " Thursday,";
+                                                    }
+                                                    if (tt.OnFriday ?? false)
+                                                    {
+                                                        days += " Friday,";
+                                                    }
+                                                    if (tt.OnSaturday ?? false)
+                                                    {
+                                                        days += " Saturday,";
+                                                    }
+                                                    if (tt.OnSunday ?? false)
+                                                    {
+                                                        days += " Sunday,";
+                                                    }
+                                                    if (!string.IsNullOrEmpty(days))
+                                                    {
+                                                        days = days.Remove(days.Length - 1, 1);
+                                                        int index = days.LastIndexOf(",");
+                                                        if (index != -1)
+                                                        {
+                                                            days = days.Remove(index, 1);
+                                                            days = days.Insert(index, " and");
+                                                        }
+                                                        //Modal Content
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                @clinic.Where(x => x.ID == tt.LocationID).FirstOrDefault().Name
+                                                            </div>
+                                                            <div class="col-md-3">
+
+                                                                @if (@tt.RecurEvery == (int)SystemConstants.RecurrenceSchedule.Weekly)
+                                                                {
+                                                                    <label>Weekly</label>
+                                                                }
+                                                                @if (@tt.RecurEvery == (int)SystemConstants.RecurrenceSchedule.Fortnightly)
+                                                                {
+                                                                    <label>Fortnight</label>
+                                                                }
+                                                                @if (@tt.RecurEvery == (int)SystemConstants.RecurrenceSchedule.Monthly)
+                                                                {
+                                                                    <label>Monthly</label>
+                                                                }
+                                                                @if (@tt.RecurEvery == (int)SystemConstants.RecurrenceSchedule.NotRecurring)
+                                                                {
+                                                                    <label>Not Recurring / Temporary</label>
+                                                                }
+                                                            </div>
+                                                            <div class="col-md-6">@days</div>
+
+                                                        </div>
+
+                                                        //End Modal Content
+                                                    }
+                                                }
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <br />
+                                            }
+                                            else
+                                            {
+                                                <label>Contact us for availability</label>
+                                            }
+                                        </div></div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                 }
             </tbody>
