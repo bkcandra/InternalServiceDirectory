@@ -657,12 +657,12 @@ namespace HealthyClub.Providers.Web.UserControls
             }
             if (type == "Category")
             {
-                Response.Redirect("~/Activities/Default.aspx?" + SystemConstants.CategoryID + "=" + ID + "&" + SystemConstants.SortValue + "=" + ddSort.SelectedValue + "&" + SystemConstants.PageSize + "=" + PageSize + "&" + SystemConstants.ViewType + "=" + (int)SystemConstants.ActivityViewType.TableView + "&" + SystemConstants.Page + "=" + (page + 1));
+                Response.Redirect("~/Activities/Default.aspx?" + SystemConstants.CategoryID + "=" + ID + "&" + SystemConstants.SortValue + "=" + ddSort.SelectedValue + "&" + SystemConstants.PageSize + "=" + PageSize + "&" + SystemConstants.ViewType + "=" + (int)SystemConstants.ActivityViewType.TableView + "&" + SystemConstants.page + "=" + (page + 1));
             }
 
             else if (type == "Search")
             {
-                Response.Redirect("~/Activities/Default.aspx?" + SystemConstants.SearchKey + "=" + SearchKey + "&" + SystemConstants.SortValue + "=" + SortValue + "&" + SystemConstants.PageSize + "=" + PageSize + "&" + SystemConstants.PageSize + "=" + (int)SystemConstants.ActivityViewType.TableView + "&" + SystemConstants.Page + "=" + (page + 1));
+                Response.Redirect("~/Activities/Default.aspx?" + SystemConstants.SearchKey + "=" + SearchKey + "&" + SystemConstants.SortValue + "=" + SortValue + "&" + SystemConstants.PageSize + "=" + PageSize + "&" + SystemConstants.PageSize + "=" + (int)SystemConstants.ActivityViewType.TableView + "&" + SystemConstants.page + "=" + (page + 1));
             }
         }
 

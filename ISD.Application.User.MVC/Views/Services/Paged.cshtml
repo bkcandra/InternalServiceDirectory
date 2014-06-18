@@ -30,20 +30,20 @@
 
 @{ViewBag.PageSection = "Services";
 }
-      
+
 <div class="search-block">
     <div class="container">
         <div class="col-md-6 col-md-offset-3">
             <div class="input-group">
                 <input id="txtSearchServices" name="txtSearchServices" type="text" class="form-control" placeholder="Search services">
                 <span class="input-group-btn">
-                    <button  id="btnSearch" class="btn-u" type="button"><i class="fa fa-search"></i></button>
+                    <button id="btnSearch" class="btn-u" type="button"><i class="fa fa-search"></i></button>
                 </span>
             </div>
         </div>
     </div>
 </div>
- 
+
 <div class="container content">
     <div class="row blog-page">
         <!-- Left Sidebar -->
@@ -126,7 +126,7 @@
                                                 <select id="clinicList">
                                                     <option value="0">Choose Clinic</option>
                                                     @{
-                                                         foreach (var clinic in clinics)
+                                                        foreach (var clinic in clinics)
                                                         {
                                                             <option value="@clinic.ID">@clinic.Name</option>
                                                         }
@@ -146,14 +146,7 @@
             <footer>
                 <button id="filterBtn" type="submit" class="btn-u">Update</button>
             </footer>
-
-
-
-
-
-
         </div>
-
         <!-- Right Sidebar -->
         <div id="ServiceList" class="col-md-9">
             <div class="row">
@@ -268,14 +261,7 @@
                         }
                     }
                 }
-
-
                             }
-
-
-
-
-
                         </div>
                     </div>
 
@@ -320,15 +306,15 @@
             alert("error : " + reponse);
         }
     }); */
+    $('#CatTree').jstree()
+    //$.getJSON("Services/GetCategoriesJson", null, function (data) {
 
-    $.getJSON("Services/GetCategoriesJson", null, function (data) {
-
-        $('#CatTree').jstree({
-            'core': {
-                'data': data
-            }
-        });
-    });
+    //    $('#CatTree').jstree({
+    //        'core': {
+    //            'data': data
+    //        }
+    //    });
+    //});
     $("#filterBtn").click(function () {
         var cat = "category=" + $('#CatTree').jstree('get_selected');
         var clinic = "clinic=" + $("select[id='clinicList'] option:selected").val();

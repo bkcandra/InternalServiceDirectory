@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 using nullpointer.Metaphone;
 using ISD.BF;
 using PagedList;
+using ISD.Application.User.MVC.Models;
 
 namespace ISD.Application.User.MVC.Controllers
 {
@@ -21,12 +22,53 @@ namespace ISD.Application.User.MVC.Controllers
         private ISDEntities db = new ISDEntities();
         // GET: Services
 
-        public async Task<ActionResult> index()
+
+        public async Task<ActionResult> index(string category, string search, string clinic, string page)
         {
-            return View();
+            page = page ?? "1";
+            string query = "";
+
+            if (!string.IsNullOrEmpty(category))
+            {
+                var par = SystemConstants.selectedCategory + "=" + category;
+                if (!string.IsNullOrEmpty(query))
+                    query = query + '&' + par;
+                else
+                    query = query + par;
+            }
+            if (!string.IsNullOrEmpty(clinic))
+            {
+                var par = SystemConstants.selectedClinic + "=" + clinic;
+                if (!string.IsNullOrEmpty(query))
+                    query = query + '&' + par;
+                else
+                    query = query + par;
+            }
+            if (!string.IsNullOrEmpty(search))
+            {
+                var par = SystemConstants.searchQuery + "=" + search;
+                if (!string.IsNullOrEmpty(query))
+                    query = query + '&' + par;
+                else
+                    query = query + par;
+            }
+            if (!string.IsNullOrEmpty(page))
+            {
+                var par = SystemConstants.page + "=" + page;
+                if (!string.IsNullOrEmpty(query))
+                    query = query + '&' + par;
+                else
+                    query = query + par;
+            }
+
+            var model = new ServicesFinderModel()
+            {
+                searchQuery = search,
+                selectedClinic = clinic,
+                selectedCategory = category
+            };
+            return View(model);
         }
-
-
         public async Task<ActionResult> Paged(int? page, int? pageSize, string category, string clinic, string search)
         {
             bool MonFilter, TueFilter, WedFilter, ThursFilter, FriFilter, SatFilter, SunFilter = false;
@@ -188,11 +230,10 @@ namespace ISD.Application.User.MVC.Controllers
             ViewBag.Services = Pagedresults;
             return View(Pagedresults);
         }
-
         public async Task<ActionResult> GetServices(int? page, int? pageSize, string category, string clinic, string search)
         {
             bool MonFilter, TueFilter, WedFilter, ThursFilter, FriFilter, SatFilter, SunFilter = false;
-
+            
             if (!string.IsNullOrEmpty(search))
             {
                 List<String> parameters = new BusinessFunctionComponent().RefineSearchKey(search);
@@ -242,7 +283,7 @@ namespace ISD.Application.User.MVC.Controllers
             }
             if (!string.IsNullOrEmpty(clinic) && clinic != "0")
             {
-                List<int> clinicsQ = clinic.Split(',').Select(x=> Convert.ToInt32(x)).ToList();
+                List<int> clinicsQ = clinic.Split(',').Select(x => Convert.ToInt32(x)).ToList();
                 var Clinicianinlocs = (await db.ClinicianTimetable.ToListAsync()).Where(x => clinicsQ.Contains(x.LocationID.Value)).Select(x => x.ClinicianID);
                 var ActClinicianList = (await db.ActivityClinician.ToListAsync()).Where(c => Clinicianinlocs.Contains(c.ClinicianID.Value)).Select(c => c.ActivityID);
                 services = services.Where(x => ActClinicianList.Contains(x.ID));
@@ -340,23 +381,88 @@ namespace ISD.Application.User.MVC.Controllers
                 services = services.Where(x => matchesAct.Contains(x.ID));
             }
 
-            
+
             // paging
 
             //end paging
 
-            
+
             //var results = services.OrderBy(x => x.Name).Skip((page ?? 0) * (pageSize ?? 50)).Take(pageSize ?? 50);
             // if no page was specified in the querystring, default to the first page (1)
             var pageNumber = page ?? 1;
-            var results = services.OrderBy(x => x.Name).ToPagedList(pageNumber, 1); // will only contain 25 products max because of the pageSize
-            return PartialView("_PartialServicesListing", results);
+            var results = services.OrderBy(x => x.Name).ToPagedList(pageNumber, pageSize??5); // will only contain 25 products max because of the pageSize
 
-            
+            var model = new ServicesFinderModel()
+            {
+                searchQuery = search,
+                selectedClinic = clinic,
+                selectedCategory = category,
+                services = results,
+                pageSize = pageSize.ToString()
+            };
+
+            return PartialView("_PartialServicesListing", model);
+
+
 
 
 
         }
+        public async Task<ActionResult> combine(string category, string search, string clinic, string page, string pageSize)
+        {
+            page = page ?? "1";
+            pageSize = pageSize ?? "1";
+            string query = "";
+
+            if (!string.IsNullOrEmpty(category))
+            {
+                var par = SystemConstants.selectedCategory + "=" + category;
+                if (!string.IsNullOrEmpty(query))
+                    query = query + '&' + par;
+                else
+                    query = query + par;
+            }
+            if (!string.IsNullOrEmpty(clinic))
+            {
+                var par = SystemConstants.selectedClinic + "=" + clinic;
+                if (!string.IsNullOrEmpty(query))
+                    query = query + '&' + par;
+                else
+                    query = query + par;
+            }
+            if (!string.IsNullOrEmpty(search))
+            {
+                var par = SystemConstants.searchQuery + "=" + search;
+                if (!string.IsNullOrEmpty(query))
+                    query = query + '&' + par;
+                else
+                    query = query + par;
+            }
+            if (!string.IsNullOrEmpty(page))
+            {
+                var par = SystemConstants.page + "=" + page;
+                if (!string.IsNullOrEmpty(query))
+                    query = query + '&' + par;
+                else
+                    query = query + par;
+            }
+
+            var model = new ServicesFinderModel()
+            {
+                searchQuery = search,
+                selectedClinic = clinic,
+                selectedCategory = category,
+                pageSize=pageSize
+                //services = await GetService(Convert.ToInt32(page), Convert.ToInt32(pageSize), category, clinic, search)
+            };
+
+
+
+
+
+            return View(model);
+        }
+
 
         [HttpGet]
         public async Task<JsonResult> GetCategoriesJson(string selected)

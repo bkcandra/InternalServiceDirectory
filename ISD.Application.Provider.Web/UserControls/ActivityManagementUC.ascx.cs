@@ -144,9 +144,9 @@ namespace HealthyClub.Providers.Web.UserControls
                 StartRow = Convert.ToInt32(Request.QueryString[SystemConstants.StartRow]);
             }
 
-            if (Request.QueryString[SystemConstants.Page] != null)
+            if (Request.QueryString[SystemConstants.page] != null)
             {
-                page = Convert.ToInt32(Request.QueryString[SystemConstants.Page]);
+                page = Convert.ToInt32(Request.QueryString[SystemConstants.page]);
             }
 
             if (Request.QueryString[SystemConstants.ViewType] != null)

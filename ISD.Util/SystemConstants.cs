@@ -35,6 +35,10 @@ namespace ISD.Util
         public static string qs_ThumbImageID = "PTID";
         public static string qs_AssetID = "AID";
         public static string qs_UserImageID = "UID";
+        public static string selectedCategory = "category";
+        public static string selectedClinic = "clinic";
+        public static string searchQuery = "search";
+
 
         public static string RewType = "_Rt";
         public static string sortType = "Reward Type";
@@ -93,7 +97,6 @@ namespace ISD.Util
         public static string StartRow = "StartRow";
         public static string PageSize = "PageSize";
         public static string KeyCollectionID = "KeyCollectionID";
-        public static string Page = "Page";
         public static string s_CurrentBrandSelected = "CurrentBrandSelected";
         public static string s_CurrentCategorySelected = "CurrentCategorySelected";
         public static DateTime nodate = Convert.ToDateTime("01/01/0001 00:00:00");
@@ -397,6 +400,8 @@ namespace ISD.Util
         }
 
 
+
+        
     }
 
     public class SuburbExplorer

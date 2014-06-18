@@ -1,8 +1,11 @@
 ﻿@using System.Web.UI.WebControls
 @{
+    @model  ISD.Application.User.MVC.Models.ServicesFinderModel
     ViewBag.Title = "Find a Service";
+    ViewBag.PageSection = "Services";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var clinics = new ISD.Data.EDM.ISDEntities().Clinic.AsEnumerable();
+    var categories = new ISD.Data.EDM.ISDEntities().v_CategoryExplorer.AsEnumerable();
 }
 <style>
     .sky-form header {
@@ -23,15 +26,38 @@
 <link href="~/Scripts/jsTree3/themes/default/style.css" rel="stylesheet" />
 <script src="~/Scripts/jsTree3/jstree.js"></script>
 
-
-@{ViewBag.PageSection = "Services";
+@{
+    if (!string.IsNullOrEmpty(Request.QueryString[ISD.Util.SystemConstants.selectedCategory]))
+    {
+        Model.selectedCategory = Request.QueryString[ISD.Util.SystemConstants.selectedCategory];
+        @Html.HiddenFor(x => x.selectedCategory);
+    } if (!string.IsNullOrEmpty(Request.QueryString[ISD.Util.SystemConstants.selectedClinic]))
+    {
+        Model.selectedClinic = Request.QueryString[ISD.Util.SystemConstants.selectedClinic];
+        @Html.HiddenFor(x => x.selectedClinic);
+    } if (!string.IsNullOrEmpty(Request.QueryString[ISD.Util.SystemConstants.searchQuery]))
+    {
+        Model.searchQuery = Request.QueryString[ISD.Util.SystemConstants.searchQuery];
+        //@Html.HiddenFor(x => x.searchQuery);
+    }
+    if (!string.IsNullOrEmpty(Request.QueryString[ISD.Util.SystemConstants.page]))
+    {
+        Model.page = Request.QueryString[ISD.Util.SystemConstants.page];
+        @Html.HiddenFor(x => x.page);
+    }
+    if (!string.IsNullOrEmpty(Request.QueryString[ISD.Util.SystemConstants.PageSize]))
+    {
+        Model.pageSize = Request.QueryString[ISD.Util.SystemConstants.PageSize];
+        @Html.HiddenFor(x => x.pageSize);
+    }
 }
 
 <div class="search-block">
     <div class="container">
         <div class="col-md-6 col-md-offset-3">
             <div class="input-group">
-                <input id="txtSearchServices" name="txtSearchServices" type="text" class="form-control" placeholder="Search services">
+                @Html.TextBoxFor(x => x.searchQuery, new { @class = "form-control", placeholder = "Search services" })
+
                 <span class="input-group-btn">
                     <button id="btnSearch" class="btn-u" type="button"><i class="fa fa-search"></i></button>
                 </span>
@@ -43,11 +69,8 @@
 <div class="container content">
     <div class="row blog-page">
         <!-- Left Sidebar -->
-        @using (Html.BeginForm("index", "Services", FormMethod.Get))
-        {
-            <input id="hdnCategory" name="category"  type="hidden" />
-            <input id="hdnClinic" name="clinic"  type="hidden" />
-            
+
+
         <div class="col-md-3">
             <header>Filter by</header>
             <div class="row">
@@ -66,44 +89,43 @@
                                     <div class="row">
                                         <div id="CatTree">
                                             @*<ul>
-                                                                                                    @{
+                                                                                                                                                        @{
 
 
-                                                                foreach (var cat in categories.Where((x => x.Level == 0)))
+                                                            foreach (var cat in categories.Where((x => x.Level == 0)))
+                                                            {
+                                                                <li name="Categories" value="@cat.ID" data-jstree='{"icon":"fa fa-folder"}'>
+                                                                    @cat.Name
+                                                                    @{
+                                                                if (categories.Where((x => x.Level == 1)).Count() != 0)
                                                                 {
-                                                                    <li data-jstree='{"icon":"fa fa-folder"}'>
-                                                                        @cat.Name
+                                                                    <ul>
                                                                         @{
-                                                                    if (categories.Where((x => x.Level == 1)).Count() != 0)
+                                                                    foreach (var subCat in categories.Where((x => x.Level == 1)))
                                                                     {
-                                                                        <ul>
-                                                                            @{
-                                                                        foreach (var subCat in categories.Where((x => x.Level == 1)))
+                                                                        if (subCat.Level1ParentID == cat.ID && subCat.Name != "Other")
                                                                         {
-                                                                            if (subCat.Level1ParentID == cat.ID && subCat.Name != "Other")
-                                                                            {
-                                                                                <li data-jstree='{"icon":"fa fa-asterisk"}'>
-                                                                                    @subCat.Name
-                                                                                </li>
-                                                                            }
-                                                                            var subOther = categories.Where((x => x.Level1ParentID == cat.ID && x.Name == "Other")).FirstOrDefault();
-                                                                            if (subOther != null)
-                                                                            {
-                                                                                <li data-jstree='{"icon":"fa fa-asterisk"}'>
-                                                                                    @subOther.Name
-
-                                                                                </li>
-                                                                            }
+                                                                            <li name="Categories" value="@subCat.ID" data-jstree='{" icon":"fa fa-asterisk"}'>
+                                                                                @subCat.Name
+                                                                            </li>
                                                                         }
-                                                }
-                                                                        </ul>
+                                                                        var subOther = categories.Where((x => x.Level1ParentID == cat.ID && x.Name == "Other")).FirstOrDefault();
+                                                                        if (subOther != null)
+                                                                        {
+                                                                            <li name="Categories" value="@subCat.ID" data-jstree='{"icon":"fa fa-asterisk"}'>
+                                                                                @subOther.Name
+                                                                            </li>
+                                                                        }
                                                                     }
-                                                                        }
-                                                                    </li>
-
+                                                }
+                                                                    </ul>
                                                                 }
-                                                                                                    }
-                                                                                                </ul>*@
+                                                                    }
+                                                                </li>
+
+                                                            }
+                                                                                                                                                        }
+                                                                                                                                                    </ul>*@
 
                                         </div>
                                     </div>
@@ -120,21 +142,14 @@
                             </div>
                             <div id="Filter-Suburb" class="panel-collapse collapse" style="height: 0px;">
                                 <div class="panel-body">
+
                                     <div class="row">
-                                        <div class="col-md-12">
-                                            <label class="select">
-                                                <select id="clinicList">
-                                                    <option value="0">Choose Clinic</option>
-                                                    @{
-                                                        foreach (var clinic in clinics)
-                                                        {
-                                                    <option value="@clinic.ID">@clinic.Name</option>
-                                                        }
-                                                    }
-                                                </select>
-                                                <i></i>
-                                            </label>
-                                        </div>
+                                        <section class="col col-md-12">
+                                            <label class="select select-multiple">
+                                                @Html.ListBox("clinicList", new MultiSelectList(clinics, "ID", "Name", Model.selectedClinic))
+                                                @Html.ValidationMessageFor(model => model.selectedClinic, "", new { @class = "text-danger" })
+                                            </label><div class="note"><strong>Note:</strong> hold down the ctrl/cmd button to select multiple options.</div>
+                                        </section>
                                     </div>
                                 </div>
                             </div>
@@ -144,9 +159,10 @@
             </div>
             <footer>
                 <button id="filterBtn" type="submit" class="btn-u">Update</button>
+                @Html.ActionLink("Reset","index",null,new{@class="btn-u"})
             </footer>
         </div>
-        }
+
         <!-- Right Sidebar -->
         <div id="ServiceList" class="col-md-9">
 
@@ -155,46 +171,51 @@
     </div>
 </div>
 <script>
-    function getParameterByName(name) {
-        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-            results = regex.exec(location.search);
-        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-    }
-
     var query = "";
-    
-    var searchQ = "search=" + $('#txtSearchServices').val();
-    if (getParameterByName('page')) {
-        var par = "page=" + getParameterByName('page');
+    var page = $("#page").val();
+    var pageSize = $("#pageSize").val();
+    var category = $("#selectedCategory").val()
+    var search = $("#searchQuery").val()
+    var clinic = $("#selectedClinic").val()
+
+    if (page) {
+        var par = "page=" + page
         if (query)
             query = query + '&' + par
         else
             query = query + par
     }
-    if (getParameterByName('category')) {
-        var cat = "category=" + getParameterByName('category');
+    if (page) {
+        var par = "pageSize=" + pageSize
         if (query)
-            query = query + '&' + cat
+            query = query + '&' + par
         else
-            query = query + cat
+            query = query + par
     }
-    if (searchQ) {
+    if (category) {
+        var par = "category=" + category
         if (query)
-            query = query + '&' + searchQ
+            query = query + '&' + par
         else
-            query = query + searchQ
+            query = query + par
     }
-    if (getParameterByName('clinic')) {
-        var clinic = "clinic=" + getParameterByName('clinic');
+    if (search) {
+        var par = "search=" + search
+        if (query)
+            query = query + '&' + par
+        else
+            query = query + par
+    }
+    if (clinic) {
+        var par = "clinic=" + clinic
+        if (query)
+            query = query + '&' + par
+        else
+            query = query + par
+    }
 
-        if (query)
-            query = query + '&' + clinic
-        else
-            query = query + clinic
-    }
-
-    var url = "/Services/GetServices";
+    var url = "@Url.Content("~/Services/GetServices")"
+    var catUrl = "@Url.Content("~/Services/GetCategoriesJson")";
     if (query)
         url = url + '?' + query
 
@@ -212,17 +233,8 @@
         }
     });
 
-    if (getParameterByName('category'))
-    {
-
-    }
-    else
-    {
-
-    }
-    if (getParameterByName("category"))
-    {
-        $.getJSON("/Services/GetCategoriesJson?selected=" + getParameterByName("category"), null, function (data) {
+    if (category) {
+        $.getJSON(catUrl + "?selected=" + category, null, function (data) {
             $('#CatTree').jstree({
                 'core': {
                     'data': data
@@ -230,9 +242,8 @@
             });
         });
     }
-    else
-    {
-        $.getJSON("/Services/GetCategoriesJson", null, function (data) {
+    else {
+        $.getJSON(catUrl, null, function (data) {
             $('#CatTree').jstree({
                 'core': {
                     'data': data
@@ -240,14 +251,31 @@
             });
         });
     }
-
     $("#filterBtn").click(function () {
-        hdnCategory.value = $('#CatTree').jstree('get_selected');
-        hdnClinic.value =$("select[id='clinicList'] option:selected").val()
+        var category = $('#CatTree').jstree('get_selected').toString()
+        var search = $('#searchQuery').val()
+        var clinic = $("select[id='clinicList'] option:selected").val()
+        var url = "@Url.Content("~/Services/GetServices")"
+        $.ajax({
+            url: url,
+            cache: false,
+            type: "GET",
+            data: {
+                category: category,
+                search: search,
+                clinic: clinic
+            }, success: function (data) {
+                $('#ServiceList').html(data);
+                $('#ServiceList').fadeIn('fast');
+            },
+            error: function (response) {
+                $('#ServiceList').html(response);
+            }
+        })
     });
     $("#btnSearch").click(function () {
 
-        var searchQ = "search=" + $('#txtSearchServices').val();
+        var searchQ = "search=" + $('#searchQuery').val();
         var Query = searchQ;
 
         var url = "/Services/GetServices/?" + Query.toString();
