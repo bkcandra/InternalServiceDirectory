@@ -43,3 +43,5 @@ C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Core.BF\bin\D
 C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Core.BF\obj\Debug\ISD.Core.BF.csprojResolveAssemblyReference.cache
 C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Core.BF\obj\Debug\ISD.BF.dll
 C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Core.BF\obj\Debug\ISD.BF.pdb
+E:\Work\Projects\InternalServiceDirectory\ISD.Core.BF\bin\Debug\MoreLinq.dll
+E:\Work\Projects\InternalServiceDirectory\ISD.Core.BF\bin\Debug\MoreLinq.xml

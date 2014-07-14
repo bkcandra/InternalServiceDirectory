@@ -4069,7 +4069,7 @@ namespace ISD.DA
             act.Price = activityDR.Price;
             act.ExpiryDate = activityDR.ExpiryDate;
             act.ActivityType = activityDR.ActivityType;
-            act.eligibilityDescription = activityDR.eligibilityDescription;
+
             act.Website = activityDR.Website;
             act.Status = activityDR.Status;
 

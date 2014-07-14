@@ -46,8 +46,7 @@ namespace ISD.Application.provider.MVC.Models
         public override string Price { get; set; }
         [DataType(DataType.MultilineText)]
         public override string Keywords { get; set; }
-        [DataType(DataType.MultilineText)]
-        public override string eligibilityDescription { get; set; }
+        [DataType(DataType.MultilineText)]        
 
 
         public List<ListItem> StatesList =

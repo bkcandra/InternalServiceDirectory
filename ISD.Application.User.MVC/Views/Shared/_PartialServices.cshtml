@@ -13,10 +13,10 @@
                 <dl>
                     <dt>Category</dt>
                     <dd class="margin-bottom-5">@item.CategoryName)</dd>
-                    @{if (!string.IsNullOrEmpty(@item.eligibilityDescription))
+                    @{if (!@item.Eligibility??false)
                       {
                     <dt>Eligibility</dt>
-                    <dd class="margin-bottom-5">@item.eligibilityDescription</dd>
+                    <dd class="margin-bottom-5">@item.Eligibility</dd>
                       }
                     }
                     <dt>Service ref</dt>

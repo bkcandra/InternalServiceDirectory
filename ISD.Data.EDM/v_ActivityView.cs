@@ -64,7 +64,6 @@ namespace ISD.Data.EDM
         public string AltMiddleName { get; set; }
         public string AltFirstName { get; set; }
         public Nullable<int> AltTitle { get; set; }
-        public string eligibilityDescription { get; set; }
         public Nullable<int> ActivityID { get; set; }
         public int Status { get; set; }
         public string UserID { get; set; }

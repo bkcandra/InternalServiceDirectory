@@ -15,30 +15,80 @@
         <div class="col-md-6 md-margin-bottom-40">
             <h2>@Model.Name</h2>
             <p>@Html.DisplayFor(model => model.FullDescription)</p>
-            
             <div class="row">
                 <div class="col-md-6">
-                    <h2 class="heading-sm">More info</h2>
+                    <h2 class="heading-sm">Eligibility</h2>
                     <dl>
-                        <dt>Category</dt>
-                        <dd class="margin-bottom-5">@Html.DisplayFor(model => model.CategoryName)</dd>
-                                               @{if (!string.IsNullOrEmpty(@Model.eligibilityDescription))
-                          {
-                              <dt>Eligibility</dt>
-                              <dd class="margin-bottom-5">@Model.eligibilityDescription</dd>
-                          }
+                        @*<dt>Category</dt>*@
+                        @*<dd class="margin-bottom-5">
+                                @Html.DisplayFor(model => model.CategoryName)
+                            </dd>*@
+                        @{
+                            <dt>Requirement</dt>
+                            if (@Model.Eligibility ?? false)
+                            {
+                                <dd>
+                                    <ul>
+                                        @if (Model.MedicareCard ?? false)
+                                        {
+                                        <li>Medicare card is required</li>
+                                        }
+                                        @if (Model.HealthcareCard ?? false)
+                                        {
+                                        <li>Healthcare card is required</li>
+                                        }
+                                        @if (Model.Pensioner ?? false)
+                                        {
+                                        <li>Is pensioner</li>
+                                        }
+
+                                        @if (Model.CityofBoroondara ?? false)
+                                        {
+                                        <li>City of Boroondara residence</li>
+                                        }
+                                        @if (Model.CityofYarra ?? false)
+                                        {
+                                        <li>City of Yarra residence</li>
+                                        }
+                                        @if (Model.HACC ?? false)
+                                        {
+                                        <li>HACC eligible</li>
+                                        }
+                                    </ul>
+                                </dd>
+                            }
+                            else
+                            {
+                                <dd>No requirement for this service. Please see note for more details</dd>
+                            }
                         }
-                        @{if (!string.IsNullOrEmpty(@Model.Price))
-                          {
-                              <dt>Pricing</dt>
-                              <dd class="margin-bottom-5">@Model.Price</dd>
-                          }
+
+                        @{
+                            if (!string.IsNullOrEmpty(@Model.Note))
+                            {
+                                <dt> Note </dt>
+                                <dd></dd>
+                            }
+                            if (!string.IsNullOrEmpty(@Model.Assessment))
+                            {
+                                <dt>Assessment</dt>
+                                <dd></dd>
+                            }
                         }
-                        @*<dt>Service ref</dt>
-                            <dd class="margin-bottom-5">@Model.ReferenceID</dd>*@
+
                     </dl>
                 </div>
+
+
+
                 <div class="col-md-6">
+                    @{if (!string.IsNullOrEmpty(@Model.Price))
+                    {
+                        <h2 class="heading-sm">Pricing</h2>
+
+                        <dd class="margin-bottom-5">@Model.Price</dd>
+                    }
+                    }
                     <h2 class="heading-sm">Address</h2>
                     <address>
                         <strong>@Html.DisplayFor(model => model.ProviderName)</strong><br>
@@ -47,29 +97,29 @@
                         <abbr title="Phone">P:</abbr> @Html.DisplayFor(model => model.PhoneNumber)
                     </address>
                     @{if (!string.IsNullOrEmpty(Model.Website))
-                      {
-                          <address>
-                              <strong>Our site</strong><br>
-                              <a href="http://@Model.Website">@Model.Website</a>
-                          </address>
-                      }
+                    {
+                        <address>
+                            <strong>Our site</strong><br>
+                            <a href="http://@Model.Website">@Model.Website</a>
+                        </address>
+                    }
                     }
                 </div>
             </div><!--/row-->
-            
+
         </div>
         <!-- End Content Info -->
         <!--tagbox-->
         <!-- Carousel -->
         @Html.Partial("_PartialServiceImageView", Model.Images)
-        
+
         <!-- End Carousel -->
-        <div class="col-md-12">
-            @Html.Partial("_PartialServices", Model.Services)
-        </div>
+        @*<div class="col-md-12">
+                @Html.Partial("_PartialServices", Model.Services)
+            </div>*@
         <div class="col-md-12">
             @Html.Partial("_PartialServiceClinicians", Model.Clinicians)
-            
+
         </div>
 
     </div><!--/row-->
@@ -79,4 +129,3 @@
     </p>
     <div class="margin-bottom-20 clearfix"></div>
 </div>
-

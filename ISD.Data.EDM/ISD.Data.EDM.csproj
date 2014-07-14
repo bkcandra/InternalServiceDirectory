@@ -63,6 +63,9 @@
     <Compile Include="ActivityContactDetail.cs">
       <DependentUpon>DataModelComponent.tt</DependentUpon>
     </Compile>
+    <Compile Include="ActivityEligibility.cs">
+      <DependentUpon>DataModelComponent.tt</DependentUpon>
+    </Compile>
     <Compile Include="ActivityGrouping.cs">
       <DependentUpon>DataModelComponent.tt</DependentUpon>
     </Compile>
@@ -79,9 +82,6 @@
       <DependentUpon>DataModelComponent.tt</DependentUpon>
     </Compile>
     <Compile Include="ActivitySchedule.cs">
-      <DependentUpon>DataModelComponent.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ActivitySettings.cs">
       <DependentUpon>DataModelComponent.tt</DependentUpon>
     </Compile>
     <Compile Include="ActivityUserAttendance.cs">

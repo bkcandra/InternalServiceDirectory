@@ -25,7 +25,7 @@ namespace ISD.Data.EDM
             this.ActivityReferenceCode = new HashSet<ActivityReferenceCode>();
             this.ActivityRewards = new HashSet<ActivityRewards>();
             this.ActivitySchedule = new HashSet<ActivitySchedule>();
-            this.ActivitySettings = new HashSet<ActivitySettings>();
+            this.ActivityEligibility = new HashSet<ActivityEligibility>();
             this.ActivityVisitor = new HashSet<ActivityVisitor>();
         }
     
@@ -47,7 +47,6 @@ namespace ISD.Data.EDM
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> ExpiryDate { get; set; }
         public Nullable<int> ActivityType { get; set; }
-        public string eligibilityDescription { get; set; }
         public int Status { get; set; }
         public string Website { get; set; }
         public string Keywords { get; set; }
@@ -55,9 +54,9 @@ namespace ISD.Data.EDM
         public Nullable<bool> isApproved { get; set; }
         public Nullable<bool> isPrimary { get; set; }
         public Nullable<int> PrimaryServiceID { get; set; }
+        public Nullable<bool> Eligibility { get; set; }
     
         public virtual ICollection<ActivitiesLogGroup> ActivitiesLogGroup { get; set; }
-        public virtual ProviderProfiles ProviderProfiles { get; set; }
         public virtual ICollection<ActivityUserAttendance> ActivityUserAttendance { get; set; }
         public virtual ICollection<ActivityClinician> ActivityClinician { get; set; }
         public virtual ICollection<ActivityContactDetail> ActivityContactDetail { get; set; }
@@ -66,7 +65,7 @@ namespace ISD.Data.EDM
         public virtual ICollection<ActivityReferenceCode> ActivityReferenceCode { get; set; }
         public virtual ICollection<ActivityRewards> ActivityRewards { get; set; }
         public virtual ICollection<ActivitySchedule> ActivitySchedule { get; set; }
-        public virtual ICollection<ActivitySettings> ActivitySettings { get; set; }
+        public virtual ICollection<ActivityEligibility> ActivityEligibility { get; set; }
         public virtual ICollection<ActivityVisitor> ActivityVisitor { get; set; }
     }
 }

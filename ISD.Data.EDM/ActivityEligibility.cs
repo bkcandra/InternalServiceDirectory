@@ -12,12 +12,18 @@ namespace ISD.Data.EDM
     using System;
     using System.Collections.Generic;
     
-    public partial class ActivitySettings
+    public partial class ActivityEligibility
     {
         public int ID { get; set; }
         public int ActivityID { get; set; }
-        public Nullable<int> TimetableType { get; set; }
-        public Nullable<int> TimetableSize { get; set; }
+        public Nullable<bool> MedicareCard { get; set; }
+        public Nullable<bool> Pensioner { get; set; }
+        public Nullable<bool> HealthcareCard { get; set; }
+        public Nullable<bool> CityofBoroondara { get; set; }
+        public Nullable<bool> CityofYarra { get; set; }
+        public Nullable<bool> HACC { get; set; }
+        public string Note { get; set; }
+        public string Assessment { get; set; }
     
         public virtual Activity Activity { get; set; }
     }

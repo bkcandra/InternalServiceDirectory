@@ -16,7 +16,6 @@ namespace ISD.Data.EDM
     {
         public ProviderProfiles()
         {
-            this.Activity = new HashSet<Activity>();
             this.Clinicians = new HashSet<Clinicians>();
             this.ProviderLog = new HashSet<ProviderLog>();
         }
@@ -45,7 +44,6 @@ namespace ISD.Data.EDM
         public Nullable<System.DateTime> ModifiedDatetime { get; set; }
         public Nullable<bool> AccountDeletion { get; set; }
     
-        public virtual ICollection<Activity> Activity { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual ICollection<Clinicians> Clinicians { get; set; }
         public virtual ICollection<ProviderLog> ProviderLog { get; set; }
