@@ -122,30 +122,30 @@ namespace ISD.Administration.Web.UserControls
 
             if (e.Item.ItemType == ListViewItemType.DataItem)
             {
-                Image imgEmailIcon = e.Item.FindControl("imgEmailIcon") as Image;
+                //Image imgEmailIcon = e.Item.FindControl("imgEmailIcon") as Image;
                 HyperLink hlnkUserName = e.Item.FindControl("hlnkUserName") as HyperLink;
                 LinkButton lnkResenConfirmation = e.Item.FindControl("lnkResenConfirmation") as LinkButton;
                 LinkButton lnkConfirm = e.Item.FindControl("lnkConfirm") as LinkButton;
                 HyperLink hlnkEdit = e.Item.FindControl("hlnkEdit") as HyperLink;
                 HiddenField hdnUserID = e.Item.FindControl("hdnUserID") as HiddenField;
-                HiddenField hdnConfirmationToken = e.Item.FindControl("hdnConfirmationToken") as HiddenField;
+               // HiddenField hdnConfirmationToken = e.Item.FindControl("hdnConfirmationToken") as HiddenField;
                 Label lblActCount = e.Item.FindControl("lblActCount") as Label;
                 Label lblID = e.Item.FindControl("lblID") as Label;
 
                 if (mgr.IsEmailConfirmed(mgr.FindByName(hlnkUserName.Text).Id))
                 {
-                    imgEmailIcon.ImageUrl = "~/Content/StyleImages/Check.png";
+                    //imgEmailIcon.ImageUrl = "~/Content/images/Check.png";
                     //lnkResenConfirmation.Visible = lnkConfirm.Visible = false;
                 }
                 else
                 {
-                    imgEmailIcon.ImageUrl = "~/Content/StyleImages/Cross.png";
+                    //imgEmailIcon.ImageUrl = "~/Content/images/Cross.png";
                     // lnkResenConfirmation.Visible = lnkConfirm.Visible = true;
                 }
 
 
                 hlnkUserName.NavigateUrl = hlnkEdit.NavigateUrl = "~/User/Provider.aspx?" + SystemConstants.ProviderID + "=" + hdnUserID.Value;
-                hdnConfirmationToken.Value = IdentityHelper.GetCodeFromRequest(Request);
+                //hdnConfirmationToken.Value = IdentityHelper.GetCodeFromRequest(Request);
             }
         }
     }

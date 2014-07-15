@@ -66,10 +66,25 @@
                                         </ul>
                                     </li>
                                     <li class="topbar-devider"></li>
-                                    <li>@Html.ActionLink("Hello " + User.Identity.Name + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
-                                    <li class="topbar-devider"></li>
-                                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                                    @{
+
+                if (User.Identity.IsAuthenticated)
+                {
+                    <li>@Html.ActionLink("Hello " + User.Identity.Name + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
+                                        <li class="topbar-devider"></li>
+                                        <li>
+                                            <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                                        </li>
+                }
+                else
+                {
+                     <li>
+                                            @Html.ActionLink("Login", "login", "Account", null, null)
+                                        </li>
+                }
+                                    }
                                 </ul>
+
                                 <!-- End Topbar Navigation -->
                             </div>
                         </div><div class="navbar-header">
@@ -85,7 +100,7 @@
                                 <div class="collapse navbar-collapse navbar-responsive-collapse">
                                     <ul class="nav navbar-nav">
                                         <li>
-                                            <a class="dropdown-toggle" href="@Url.Content("~")" >
+                                            <a class="dropdown-toggle" href="@Url.Content("~")">
                                                 Home
                                             </a>
                                         </li>
@@ -108,7 +123,7 @@
                         x++;
                         if (drParent.ParentMenuID == 0 && drParent.LinkText != null)
                         {
-                                        <li> @Html.ActionLink(drParent.LinkText, "", "Activity/Default.aspx?" + SystemConstants.CategoryID + "=" + drParent.LinkValue)</li>
+                            <li> @Html.ActionLink(drParent.LinkText, "", "Activity/Default.aspx?" + SystemConstants.CategoryID + "=" + drParent.LinkValue)</li>
 
                             foreach (DataSetComponent.v_MenuRow drChild in dt)
                             {
@@ -125,7 +140,7 @@
                         x++;
                         if (drParent.ParentMenuID == 0 && drParent.LinkText != null)
                         {@:
-                                        <li> @Html.ActionLink(drParent.LinkText, "", "Activity/Default.aspx?" + SystemConstants.ProviderID + "=" + drParent.LinkValue)</li>
+                                            <li> @Html.ActionLink(drParent.LinkText, "", "Activity/Default.aspx?" + SystemConstants.ProviderID + "=" + drParent.LinkValue)</li>
                             foreach (DataSetComponent.v_MenuRow drChild in dt)
                             {
                                 if (drChild.ParentMenuID == drParent.ID && drChild.LinkText != null)
@@ -141,7 +156,7 @@
                         x++;
                         if (drParent.ParentMenuID == 0)
                         {@:
-                                        <li> @Html.ActionLink(drParent.LinkText, "", "Activity/Default.aspx??" + SystemConstants.ActivityID + "=" + drParent.LinkValue)</li>
+                                            <li> @Html.ActionLink(drParent.LinkText, "", "Activity/Default.aspx??" + SystemConstants.ActivityID + "=" + drParent.LinkValue)</li>
                             foreach (DataSetComponent.v_MenuRow drChild in dt)
                             {
                                 if (drChild.ParentMenuID == drParent.ID)
@@ -158,7 +173,7 @@
                         x++;
                         if (drParent.ParentMenuID == 0)
                         {@:
-                                        <li> @Html.ActionLink(drParent.LinkText, drParent.LinkText, "Pages")</li>
+                                            <li> @Html.ActionLink(drParent.LinkText, drParent.LinkText, "Pages")</li>
                             foreach (DataSetComponent.v_MenuRow drChild in dt)
                             {
                                 if (drChild.ParentMenuID == drParent.ID)
@@ -175,7 +190,7 @@
                         x++;
                         if (drParent.ParentMenuID == 0)
                         {@:
-                                        <li> @Html.ActionLink(drParent.LinkText, drParent.LinkText, "Pages")</li>
+                                            <li> @Html.ActionLink(drParent.LinkText, drParent.LinkText, "Pages")</li>
                             foreach (DataSetComponent.v_MenuRow drChild in dt)
                             {
                                 if (drChild.ParentMenuID == drParent.ID)
@@ -196,13 +211,13 @@
                                 var a = dt.Where(y => y.ParentMenuID == drParent.ID).Count();
                                 if (a != 0)
                                 {
-                                        <li class="dropdown">
-                                            <a href="@Url.Content(drParent.LinkValue)">@drParent.LinkText</a>
+                                    <li class="dropdown">
+                                        <a href="@Url.Content(drParent.LinkValue)">@drParent.LinkText</a>
 
-                                            <ul class="dropdown-menu">
+                                        <ul class="dropdown-menu">
 
 
-                                                @foreach (DataSetComponent.v_MenuRow drChild in dt)
+                                            @foreach (DataSetComponent.v_MenuRow drChild in dt)
                                             {
                                                 if (drChild.ParentMenuID == drParent.ID && drChild.LinkType != 6)
                                                 {
@@ -215,34 +230,34 @@
                                                     }
                                                     if (drChild.ParentMenuID == drParent.ID && drChild.LinkType != 6)
                                                     {
-                            <li> @Html.ActionLink(drChild.LinkText, ChildPageName.Name, "Pages")</li>
+                                                        <li> @Html.ActionLink(drChild.LinkText, ChildPageName.Name, "Pages")</li>
                                                     }
                                                     else if (drChild.ParentMenuID == drParent.ID && drChild.LinkType != 6)
                                                     {
-                            <li> @Html.ActionLink(drChild.LinkText, drChild.LinkValue, "Pages")</li>
+                                                        <li> @Html.ActionLink(drChild.LinkText, drChild.LinkValue, "Pages")</li>
                                                     }
 
                                                 }
                                                 else if (drChild.ParentMenuID == drParent.ID && drChild.LinkType == 6)
                                                 {
-                            <li>
-                                <a href="@Url.Content(drChild.LinkValue)">@drChild.LinkText</a>
-                            </li>
+                                                    <li>
+                                                        <a href="@Url.Content(drChild.LinkValue)">@drChild.LinkText</a>
+                                                    </li>
 
                                                 }
                                             }
-                                            </ul>
+                                        </ul>
 
-                                        </li>
+                                    </li>
                                 }
                                 else
                                 {
-                                        <li><a href="@drParent.LinkValue">@drParent.LinkText</a></li>
+                                    <li><a href="@drParent.LinkValue">@drParent.LinkText</a></li>
                                 }
                             }
                             else
                             {
-                                        <li><a href="@drParent.LinkValue">@drParent.LinkText</a></li>
+                                <li><a href="@drParent.LinkValue">@drParent.LinkText</a></li>
                             }
                         }
 

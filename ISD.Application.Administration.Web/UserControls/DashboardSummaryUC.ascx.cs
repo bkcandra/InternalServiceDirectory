@@ -64,6 +64,7 @@ namespace ISD.Administration.Web.UserControls
             var rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
             lblAdmin.Text = rm.FindByName(SystemConstants.AdministratorRole).Users.Count.ToString();
             lblProviders.Text = rm.FindByName(SystemConstants.ProviderRole).Users.Count.ToString();
+            
             lblMember.Text = rm.FindByName(SystemConstants.CustomerRole).Users.Count.ToString();
             lblUser.Text = Context.GetOwinContext().GetUserManager<ApplicationUserManager>().Users.Count().ToString();
             DataAccessComponent dac = new DataAccessComponent();

@@ -45,6 +45,10 @@ namespace ISD.Application.provider.MVC.Models
         [DataType(DataType.MultilineText)]
         public override string Price { get; set; }
         [DataType(DataType.MultilineText)]
+        public override string Note { get; set; }
+        [DataType(DataType.MultilineText)]
+        public override string Assessment { get; set; }
+        [DataType(DataType.MultilineText)]
         public override string Keywords { get; set; }
         [DataType(DataType.MultilineText)]        
 

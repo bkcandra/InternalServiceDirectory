@@ -102,15 +102,13 @@
                             </fieldset>
                             <fieldset>
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <h5>How would you describe your service</h5>
                                         <label class="textarea">
                                             @Html.EditorFor(model => model.FullDescription, new { htmlAttributes = new { @placeholder = "Service description", @rows = "4" } })
                                             @Html.ValidationMessageFor(model => model.FullDescription, "", new { @class = "text-danger" })
                                         </label>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-md-6">
                                         <h5>What is the cost of your activity.</h5>
                                         <label class="textarea">
@@ -118,15 +116,149 @@
                                             @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
                                         </label>
                                     </div>
-                                    <div class="col-md-6">
-                                        <h5>Who is eligible for this activity</h5>
-                                        <label class="textarea">
-                                            @Html.EditorFor(model => model.eligibilityDescription, new { htmlAttributes = new { @placeholder = "Eligibility", @rows = "4" } })
-                                            @Html.ValidationMessageFor(model => model.eligibilityDescription, "", new { @class = "text-danger" })
-                                        </label>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h5>Is there requirements for this service</h5>
+                                        @{
+                    if (Model.Eligibility ?? false)
+                    {
+                        <div class="col col-6">
+                            <label class="radio state-success"><input type="radio" name="Eligibility" value="true" id="enableEl" class="radio" checked="checked" /><i class="rounded-x"></i> Yes</label>
+                        </div>
+                                            <div class="col col-6">
+                                                <label class="radio state-success"><input type="radio" name="Eligibility" value="false" id="DisableEl" class="radio" /><i class="rounded-x"></i> No requirement for this service  </label>
+                                            </div>
+                    }
+                    else
+                    {
+                        <div class="col col-6">
+                            <label class="radio state-success"><input type="radio" name="Eligibility" value="true" id="enableEl" class="radio" /><i class="rounded-x"></i> Yes</label>
+                        </div>
+                                            <div class="col col-6">
+                                                <label class="radio state-success"><input type="radio" name="Eligibility" value="false" id="DisableEl" class="radio" checked="checked" /><i class="rounded-x"></i> No requirement for this service  </label>
+                                            </div>
+                    }
+                                        }
+
+
                                     </div>
                                 </div>
+                                <div id="divRequirements" class="row">
+                                    <section class="col col-md-12">
+                                        <label class="label">Requirements</label>
+                                        <div class="row">
+                                            <div class="col col-3">
+                                                <label class="checkbox">
+                                                    @{
+                    if (Model.MedicareCard ?? false)
+                    {
+                        <input type="checkbox" name="MedicareCard" value="true" id="MedicareCard" checked="checked"><i></i>
+                    }
+                    else
+                    {
+                                                <input type="checkbox" name="MedicareCard" value="True" id="MedicareCard"><i></i>
+                    }
+                                                    }
+                                                    Medicare card is required
+                                                </label>
+                                            </div>
+                                            <div class="col col-3">
+                                                <label class="checkbox">
+                                                    @{
+                    if (Model.HealthcareCard ?? false)
+                    {
+                        <input type="checkbox" name="HealthcareCard" value="True" id="HealthcareCard" checked="checked"><i></i>
+                    }
+                    else
+                    {
+                                                <input type="checkbox" name="HealthcareCard" value="True" id="HealthcareCard"><i></i>
+                    }
+                                                    }
+                                                    Healthcare card is required
+                                                </label>
+                                            </div>
+                                            <div class="col col-3">
+                                                <label class="checkbox">
+                                                    @{
+                    if (Model.Pensioner ?? false)
+                    {
+                        <input type="checkbox" name="Pensioner" value="True" id="Pensioner" checked="checked"><i></i>
+                    }
+                    else
+                    {
+                                                <input type="checkbox" name="Pensioner" value="True" id="Pensioner"><i></i>
+                    }
+                                                    }
+                                                    Client is a pensioner
+                                                </label>
+                                            </div>
+                                            <div class="col col-3">
+                                                <label class="checkbox">
+                                                    @{
+                    if (Model.CityofBoroondara ?? false)
+                    {
+                        <input type="checkbox" name="CityofBoroondara" value="True" id="CityofBoroondara" checked="checked"><i></i>
+                    }
+                    else
+                    {
+                                                <input type="checkbox" name="CityofBoroondara" value="True" id="CityofBoroondara"><i></i>
+                    }
+                                                    } Is City of Boroondara residence
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col col-3">
+                                                <label class="checkbox">
+                                                    @{
+                    if (Model.CityofYarra ?? false)
+                    {
+                        <input type="checkbox" name="CityofYarra" value="True" id="CityofYarra" checked="checked"><i></i>
+                    }
+                    else
+                    {
+                                                <input type="checkbox" name="CityofYarra" value="True" id="CityofYarra"><i></i>
+                    }
+                                                    }
+                                                    Is City of Yarra residence
+                                                </label>
+                                            </div>
+                                            <div class="col col-3">
+                                                <label class="checkbox">
+                                                    @{
+                    if (Model.HACC ?? false)
+                    {
+                        <input type="checkbox" name="HACC" value="True" id="HACC" checked="checked"><i></i>
+                    }
+                    else
+                    {
+                                                <input type="checkbox" name="HACC" value="True" id="HACC"><i></i>
+                    }
+                                                    }
+                                                    HACC eligible
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </section>
+
+                                    <section class="col col-md-12">
+                                        <label class="textarea">
+                                            Assessment
+                                            @Html.EditorFor(model => model.Assessment, new { htmlAttributes = new { @placeholder = "Assessment detail", @rows = "4" } })
+                                        </label>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-md-12">
+                                        <label class="textarea">
+                                            Note
+                                            @Html.EditorFor(model => model.Note, new { htmlAttributes = new { @placeholder = "Note for this service", @rows = "4" } })
+                                        </label>
+                                    </section>
+                                </div>
                             </fieldset>
+
                             <fieldset>
                                 <div class="row">
                                     <div class="col col-md-12">
@@ -304,7 +436,7 @@
 
                                                                                 </div>
                                                                             </div><br />
-                                                                            
+
 
 
                                                                             @if (!string.IsNullOrEmpty(@item.Specialties))
@@ -464,11 +596,29 @@
             </div>
         </div>
     </div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", "Services", null, null)
 </div>
 
 
 <script>
+    $("input[name$='Eligibility']").change(
+function (e) {
+    CheckRequirements();
+});
+
+    $(document).ready(function () {
+        CheckRequirements();
+    });
+
+    function CheckRequirements() {
+        if ($("#enableEl").is(':checked')) {
+            $("#divRequirements").fadeIn();
+
+        }
+        else {
+            $("#divRequirements").fadeOut();
+        }
+    }
     $("input[type=checkbox][name=SelectedCategory]").click(function () {
 
         var bol = $("input[type=checkbox][name=SelectedCategory]:checked").length >= 4;

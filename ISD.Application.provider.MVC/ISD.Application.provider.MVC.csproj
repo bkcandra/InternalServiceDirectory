@@ -1659,6 +1659,7 @@
     <Content Include="assets\plugins\vector-map\jvectormap.jquery.json" />
     <Content Include="assets\plugins\vector-map\README.md" />
     <Content Include="ImageHandler.ashx" />
+    <None Include="Properties\PublishProfiles\ISDProvider.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\bcHandler.js" />
     <Content Include="Scripts\bootstrap.js" />

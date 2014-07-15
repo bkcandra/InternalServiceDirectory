@@ -21,7 +21,7 @@ using System.IO;
 
 namespace ISD.Application.provider.MVC.Controllers
 {
-    
+
     public class ServiceController : Controller
     {
         private ISDEntities db = new ISDEntities();
@@ -84,7 +84,7 @@ namespace ISD.Application.provider.MVC.Controllers
                 model.SuburbList.Add(new ListItem(suburb.Name, suburb.ID.ToString()));
             }
             var PID = User.Identity.GetUserId();
-            model.CliniciansList = await db.Clinicians.Where(x=>x.ProviderID == PID).ToListAsync();
+            model.CliniciansList = await db.Clinicians.Where(x => x.ProviderID == PID).ToListAsync();
             model.Categories = await db.v_CategoryExplorer.ToListAsync();
 
             model.MedicareCard = false;
@@ -163,6 +163,36 @@ namespace ISD.Application.provider.MVC.Controllers
                     if (i == 5) { act.SecondaryCategoryID4 = cat; }
                     i++;
                 }
+                //Setting for activity Eligibility
+                #region activity Eligibility
+
+                var ae = db.ActivityEligibility.Create();
+                ae.MedicareCard = ae.Pensioner = ae.HealthcareCard = ae.CityofBoroondara = ae.CityofYarra = ae.HACC = false;
+                if (model.Eligibility ?? false)
+                {
+                    if (model.MedicareCard ?? false)
+                        ae.MedicareCard = model.MedicareCard;
+                    if (model.Pensioner ?? false)
+                        ae.Pensioner = model.Pensioner;
+                    if (model.HealthcareCard ?? false)
+                        ae.HealthcareCard = model.HealthcareCard;
+                    if (model.CityofBoroondara ?? false)
+                        ae.CityofBoroondara = model.CityofBoroondara;
+                    if (model.CityofYarra ?? false)
+                        ae.CityofYarra = model.CityofYarra;
+                    if (model.HACC ?? false)
+                        ae.HACC = model.HACC;
+                    if (!string.IsNullOrEmpty(model.Assessment))
+                        ae.Assessment = model.Assessment;
+                }
+                else
+                {
+                    ae.Assessment = String.Empty;
+                }
+                ae.Note = model.Note;
+                act.ActivityEligibility.Add(ae);
+                #endregion
+                //Finish setting activity Eligibility
 
                 foreach (var sc in model.SelectedClinicians)
                 {
@@ -176,18 +206,20 @@ namespace ISD.Application.provider.MVC.Controllers
                 }
 
                 var image = db.ActivityImage.Create();
-                foreach (var file in files)
+                if (files.First() != null && files.Count != 0)
                 {
-                    var imageDetail = db.ActivityImageDetail.Create();
+                    foreach (var file in files)
+                    {
+                        var imageDetail = db.ActivityImageDetail.Create();
 
-                    imageDetail.ActivityID = act.ID;
-                    imageDetail.ActivityImageID = 0;
-                    imageDetail.ImageStream = new BCUtility.ImageHandler().ReadFully(file.InputStream);
-                    imageDetail.Filename = file.FileName;
-                    imageDetail.Filesize = file.ContentLength / 1024;
-                    image.ActivityImageDetail.Add(imageDetail);
+                        imageDetail.ActivityID = act.ID;
+                        imageDetail.ActivityImageID = 0;
+                        imageDetail.ImageStream = new BCUtility.ImageHandler().ReadFully(file.InputStream);
+                        imageDetail.Filename = file.FileName;
+                        imageDetail.Filesize = file.ContentLength / 1024;
+                        image.ActivityImageDetail.Add(imageDetail);
+                    }
                 }
-               
                 image.StorageUsed = SizeUploaded;
                 image.FreeStorage = SystemConstants.MaxActivityImageStorage - SizeUploaded;
                 image.ImageAmount = files.Count;
@@ -273,7 +305,7 @@ namespace ISD.Application.provider.MVC.Controllers
             {
                 model.SuburbList.Add(new ListItem(suburb.Name, suburb.ID.ToString()));
             }
-           
+
             var PID = User.Identity.GetUserId();
             model.CliniciansList = await db.Clinicians.Where(x => x.ProviderID == PID).ToListAsync();
             model.Categories = await db.v_CategoryExplorer.ToListAsync();
@@ -326,6 +358,43 @@ namespace ISD.Application.provider.MVC.Controllers
                 act.ExpiryDate = DateTime.Now.AddDays(180);
                 if (model.Price == null)
                     act.Price = string.Empty;
+
+                //Setting for activity Eligibility
+                #region activity Eligibility
+
+                var ae = db.ActivityEligibility.Where(x => x.ActivityID == model.ID).FirstOrDefault();
+                if (ae == null)
+                {
+                    ae = db.ActivityEligibility.Create();
+                    act.ActivityEligibility.Add(ae);
+                }
+                ae.MedicareCard = ae.Pensioner = ae.HealthcareCard = ae.CityofBoroondara = ae.CityofYarra = ae.HACC = false;
+
+                if (model.Eligibility ?? false)
+                {
+                    if (model.MedicareCard ?? false)
+                        ae.MedicareCard = model.MedicareCard;
+                    if (model.Pensioner ?? false)
+                        ae.Pensioner = model.Pensioner;
+                    if (model.HealthcareCard ?? false)
+                        ae.HealthcareCard = model.HealthcareCard;
+                    if (model.CityofBoroondara ?? false)
+                        ae.CityofBoroondara = model.CityofBoroondara;
+                    if (model.CityofYarra ?? false)
+                        ae.CityofYarra = model.CityofYarra;
+                    if (model.HACC ?? false)
+                        ae.HACC = model.HACC;
+
+                    ae.Assessment = model.Assessment;
+                }
+                else
+                {
+                    ae.Assessment = String.Empty;
+                }
+                ae.Note = model.Note;
+              
+                #endregion
+                //Finish setting activity Eligibility
 
                 int i = 1;
                 foreach (var cat in model.SelectedCategory)
@@ -439,12 +508,19 @@ namespace ISD.Application.provider.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Activity activity = await db.Activity.FindAsync(id);
-            if (activity == null)
+            var dbService = await db.v_ActivityExplorer.Where(x => x.ID == id && x.isPrimary == true).FirstOrDefaultAsync();
+            if (dbService == null)
             {
                 return HttpNotFound();
             }
-            return View(activity);
+            ServiceDetailModel model = new ServiceDetailModel();
+            ObjectHandler.CopyPropertyValues(dbService, model);
+            model.ImageInfo = await db.ActivityImage.Where(x => x.ActivityID == id).FirstOrDefaultAsync();
+            if (model.ImageInfo != null)
+                model.Images = await db.ActivityImageDetail.Where(x => x.ActivityImageID == model.ImageInfo.ID).ToListAsync();
+            model.Services = await db.v_ActivityExplorer.Where(x => x.PrimaryServiceID == id).ToListAsync();
+            model.Clinicians = await db.v_ActivityClinicianExplorer.Where(x => x.ActivityID == id).ToListAsync();
+            return View(model);
         }
 
         // POST: Service/Delete/5
@@ -455,7 +531,7 @@ namespace ISD.Application.provider.MVC.Controllers
             Activity activity = await db.Activity.FindAsync(id);
             db.Activity.Remove(activity);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Services", null);
         }
 
         protected override void Dispose(bool disposing)

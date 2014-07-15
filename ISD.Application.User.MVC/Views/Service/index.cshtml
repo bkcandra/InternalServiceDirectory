@@ -67,20 +67,17 @@
                             if (!string.IsNullOrEmpty(@Model.Note))
                             {
                                 <dt> Note </dt>
-                                <dd></dd>
+                                <dd>@Model.Note</dd>
                             }
                             if (!string.IsNullOrEmpty(@Model.Assessment))
                             {
                                 <dt>Assessment</dt>
-                                <dd></dd>
+                                <dd>@Model.Assessment</dd>
                             }
                         }
 
                     </dl>
                 </div>
-
-
-
                 <div class="col-md-6">
                     @{if (!string.IsNullOrEmpty(@Model.Price))
                     {

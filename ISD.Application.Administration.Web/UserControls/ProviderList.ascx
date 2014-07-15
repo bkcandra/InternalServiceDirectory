@@ -64,8 +64,7 @@
         });
 
 
-
-        $('#tblProvider tbody tr td img').live('click', function () {
+        $('#tblProvider tbody').on('click', 'td img', function () {
             var provTr = $(this).parents('tr')[0];
             if (providerTable.fnIsOpen(provTr)) {
                 /* This row is already open - close it */
@@ -116,7 +115,7 @@
                             <th>Ref Code</th>
                             <th>Username</th>
                             <th>Name</th>
-                            <th>Confirmed</th>
+                            
                             <th>Email</th>
                             <th>Activity Count</th>
                             <th>Contact number</th>
@@ -140,7 +139,7 @@
                             <th>Ref Code</th>
                             <th>Username</th>
                             <th>Name</th>
-                            <th>Confirmed</th>
+                            
                             <th>Email</th>
                             <th>Activity Count</th>
                             <th>Contact number</th>
@@ -181,10 +180,10 @@
                     <td>
                         <asp:Label ID="lnkName" runat="server" Text='<%#string.Format("{0} {1}",Eval("FirstName"),Eval("LastName"))%>'></asp:Label>
                     </td>
-                    <td>
+                   <%-- <td>
                         <asp:HiddenField ID="hdnConfirmationToken" runat="server" />
                         <asp:Image ID="imgEmailIcon" runat="server" />
-                    </td>
+                    </td>--%>
                     <td>
                         <asp:Label ID="lblEmail" runat="server" Text='<%#Eval("Email") %>'></asp:Label>
                     </td>

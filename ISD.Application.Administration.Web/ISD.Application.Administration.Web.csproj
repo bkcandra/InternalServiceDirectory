@@ -412,6 +412,8 @@
     <Content Include="Content\iCheck\square\yellow.png" />
     <Content Include="Content\iCheck\square\_all.css" />
     <Content Include="Content\images\animated-overlay.gif" />
+    <Content Include="Content\images\Check.png" />
+    <Content Include="Content\images\Cross.png" />
     <Content Include="Content\images\details_close.png" />
     <Content Include="Content\images\details_open.png" />
     <Content Include="Content\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -1159,6 +1161,7 @@
     <Content Include="Scripts\input-mask\jquery.inputmask.regex.extensions.js" />
     <Content Include="Scripts\input-mask\phone-codes\readme.txt" />
     <Content Include="Scripts\ionslider\ion.rangeSlider.min.js" />
+    <None Include="Properties\PublishProfiles\ISDAdmin.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -1275,7 +1278,9 @@
     <Content Include="User\Member.aspx" />
     <Content Include="User\Provider.aspx" />
     <Content Include="ViewSwitcher.ascx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Bundle.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Site.Mobile.Master" />

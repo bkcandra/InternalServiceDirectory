@@ -370,7 +370,6 @@
     <Content Include="assets\img\logo2-orange.png" />
     <Content Include="assets\img\logo2-purple.png" />
     <Content Include="assets\img\logo2-red.png" />
-    <Content Include="assets\img\Logo_ie - Copy.bmp" />
     <Content Include="assets\img\Logo_ie.bmp" />
     <Content Include="assets\img\main\1.jpg" />
     <Content Include="assets\img\main\10.jpg" />
@@ -1448,6 +1447,7 @@
     <Content Include="assets\plugins\vector-map\jvectormap.jquery.json" />
     <Content Include="assets\plugins\vector-map\README.md" />
     <Content Include="ImageHandler.ashx" />
+    <None Include="Properties\PublishProfiles\ISDMember.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -59,8 +59,7 @@
         });
 
 
-
-        $('#tblUser tbody td img').live('click', function () {
+        $('#tblUser tbody').on('click', 'td img', function () {
             var userTr = $(this).parents('tr')[0];
             if (userTable.fnIsOpen(userTr)) {
                 /* This row is already open - close it */

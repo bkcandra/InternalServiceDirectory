@@ -68,7 +68,7 @@
                         <LoggedInTemplate>
                             <ul class="nav navbar-nav">
                                 <!-- Messages: style can be found in dropdown.less-->
-                                <li class="dropdown messages-menu">
+                               <%-- <li class="dropdown messages-menu">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <i class="fa fa-envelope"></i>
                                         <span class="label label-success">4</span>
@@ -96,7 +96,8 @@
                                                 <li>
                                                     <a href="#">
                                                         <div class="pull-left">
-                                                            <img src="Images/avatar2.png" class="img-circle" alt="user image" />
+                                                             <asp:Image ID="Image3" class="img-circle" runat="server" alt="User Image" ImageUrl="~/Images/avatar2.png" />
+                                                            
                                                         </div>
                                                         <h4>AdminLTE Design Team
                                                    
@@ -108,7 +109,7 @@
                                                 <li>
                                                     <a href="#">
                                                         <div class="pull-left">
-                                                            <img src="Images/avatar.png" class="img-circle" alt="user image" />
+                                                            <asp:Image ID="Image5" class="img-circle" runat="server" alt="User Image" ImageUrl="~/Images/avatar.png" />
                                                         </div>
                                                         <h4>Developers
                                                    
@@ -120,7 +121,7 @@
                                                 <li>
                                                     <a href="#">
                                                         <div class="pull-left">
-                                                            <img src="Images/avatar2.png" class="img-circle" alt="user image" />
+                                                            <asp:Image ID="Image4" class="img-circle" runat="server" alt="User Image" ImageUrl="~/Images/avatar2.png" />
                                                         </div>
                                                         <h4>Sales Department
                                                    
@@ -145,9 +146,9 @@
                                         </li>
                                         <li class="footer"><a href="#">See All Messages</a></li>
                                     </ul>
-                                </li>
+                                </li>--%>
                                 <!-- Notifications: style can be found in dropdown.less -->
-                                <li class="dropdown notifications-menu">
+                               <%-- <li class="dropdown notifications-menu">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <i class="fa fa-warning"></i>
                                         <span class="label label-warning">10</span>
@@ -187,9 +188,9 @@
                                         </li>
                                         <li class="footer"><a href="#">View all</a></li>
                                     </ul>
-                                </li>
+                                </li>--%>
                                 <!-- Tasks: style can be found in dropdown.less -->
-                                <li class="dropdown tasks-menu">
+                                <%--<li class="dropdown tasks-menu">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <i class="fa fa-tasks"></i>
                                         <span class="label label-danger">9</span>
@@ -265,11 +266,8 @@
                                             <a href="#">View all tasks</a>
                                         </li>
                                     </ul>
-                                </li>
+                                </li>--%>
                                 <!-- User Account: style can be found in dropdown.less -->
-
-
-
                                 <li class="dropdown user user-menu">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <i class="glyphicon glyphicon-user"></i>
@@ -351,12 +349,6 @@
                                         <i class="fa fa-angle-double-right"></i>Activities
                                     </asp:HyperLink>
                                 </li>
-                                <li>
-                                    <asp:HyperLink ID="HyperLink22" NavigateUrl="~/Rewards/" runat="server">
-                                        <i class="fa fa-angle-double-right"></i>Rewards
-                                    </asp:HyperLink>
-                                </li>
-
                             </ul>
                         </li>
                         <li class="treeview">
@@ -432,19 +424,18 @@
                     <Scripts>
                         <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>
                         <%--Framework Scripts--%>
-                        <asp:ScriptReference Name="MsAjaxBundle" />
                         <asp:ScriptReference Name="jquery" />
                         <asp:ScriptReference Name="jquery.ui.combined" />
                         <asp:ScriptReference Name="bootstrap" />
                         <asp:ScriptReference Name="respond" />
-                        <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
-                        <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
-                        <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
-                        <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
-                        <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
-                        <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
-                        <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
-                        <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                        <asp:ScriptReference Name="WebForms.js"  Path="~/Scripts/WebForms/WebForms.js" />
+                        <asp:ScriptReference Name="WebUIValidation.js"  Path="~/Scripts/WebForms/WebUIValidation.js" />
+                        <asp:ScriptReference Name="MenuStandards.js"  Path="~/Scripts/WebForms/MenuStandards.js" />
+                        <asp:ScriptReference Name="GridView.js"  Path="~/Scripts/WebForms/GridView.js" />
+                        <asp:ScriptReference Name="DetailsView.js"  Path="~/Scripts/WebForms/DetailsView.js" />
+                        <asp:ScriptReference Name="TreeView.js"  Path="~/Scripts/WebForms/TreeView.js" />
+                        <asp:ScriptReference Name="WebParts.js"  Path="~/Scripts/WebForms/WebParts.js" />
+                        <asp:ScriptReference Name="Focus.js"  Path="~/Scripts/WebForms/Focus.js" />
                         <asp:ScriptReference Name="WebFormsBundle" />
                         <%--Site Scripts--%>
                     </Scripts>
