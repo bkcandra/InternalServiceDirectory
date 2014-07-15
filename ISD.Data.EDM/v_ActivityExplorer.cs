@@ -53,7 +53,6 @@ namespace ISD.Data.EDM
         public virtual Nullable<int> AltPostCode { get; set; }
         public virtual string AltPhoneNumber { get; set; }
         public virtual string AltMobileNumber { get; set; }
-        public virtual string eligibilityDescription { get; set; }
         public virtual string FullDescription { get; set; }
         public Nullable<System.DateTime> ModifiedDateTime { get; set; }
         public virtual Nullable<int> TimetableSize { get; set; }
@@ -79,5 +78,14 @@ namespace ISD.Data.EDM
         public virtual string ProviderID { get; set; }
         public Nullable<bool> isPrimary { get; set; }
         public virtual Nullable<int> PrimaryServiceID { get; set; }
+        public Nullable<bool> MedicareCard { get; set; }
+        public Nullable<bool> Pensioner { get; set; }
+        public Nullable<bool> CityofBoroondara { get; set; }
+        public Nullable<bool> HealthcareCard { get; set; }
+        public Nullable<bool> CityofYarra { get; set; }
+        public Nullable<bool> HACC { get; set; }
+        public virtual string Note { get; set; }
+        public virtual string Assessment { get; set; }
+        public Nullable<bool> Eligibility { get; set; }
     }
 }

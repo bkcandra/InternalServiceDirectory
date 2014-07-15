@@ -14,7 +14,7 @@ namespace ISD.Data.EDM
     
     public partial class v_ActivityClinicianExplorer
     {
-        public long ID { get; set; }
+        public Nullable<long> ID { get; set; }
         public int ACID { get; set; }
         public Nullable<int> ActivityID { get; set; }
         public string ProviderID { get; set; }

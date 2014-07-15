@@ -86,6 +86,14 @@ namespace ISD.Application.provider.MVC.Controllers
             var PID = User.Identity.GetUserId();
             model.CliniciansList = await db.Clinicians.Where(x=>x.ProviderID == PID).ToListAsync();
             model.Categories = await db.v_CategoryExplorer.ToListAsync();
+
+            model.MedicareCard = false;
+            model.Pensioner = false;
+            model.HealthcareCard = false;
+            model.CityofBoroondara = false;
+            model.CityofYarra = false;
+            model.HACC = false;
+
             return View(model);
         }
 
@@ -137,8 +145,6 @@ namespace ISD.Application.provider.MVC.Controllers
                 act.ExpiryDate = DateTime.Now.AddDays(180);
                 if (model.ShortDescription == null)
                     act.ShortDescription = string.Empty;
-                if (model.eligibilityDescription == null)
-                    act.eligibilityDescription = string.Empty;
                 if (model.Price == null)
                     act.Price = string.Empty;
 
@@ -306,7 +312,7 @@ namespace ISD.Application.provider.MVC.Controllers
                 actCon.StateID = model.StateID;
                 actCon.PostCode = model.PostCode;
                 act.FullDescription = model.FullDescription;
-                act.eligibilityDescription = model.eligibilityDescription;
+                act.Eligibility = model.Eligibility;
                 act.Price = model.Price;
                 act.Keywords = model.Keywords;
 
@@ -318,11 +324,6 @@ namespace ISD.Application.provider.MVC.Controllers
                 act.ModifiedBy = User.Identity.Name;
                 act.ModifiedDateTime = DateTime.Now;
                 act.ExpiryDate = DateTime.Now.AddDays(180);
-                if (model.FullDescription == null)
-                    act.FullDescription = string.Empty;
-                else
-                    if (model.eligibilityDescription == null)
-                        act.eligibilityDescription = string.Empty;
                 if (model.Price == null)
                     act.Price = string.Empty;
 

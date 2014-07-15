@@ -18,7 +18,7 @@ namespace ISD.Provider.Web.Controllers
         // GET: Service
         public async Task<ActionResult> Index()
         {
-            var activity = db.Activity.Include(a => a.ProviderProfiles);
+            var activity = db.Activity;
             return View(await activity.ToListAsync());
         }
 

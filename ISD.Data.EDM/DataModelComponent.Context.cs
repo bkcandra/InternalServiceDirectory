@@ -31,13 +31,13 @@ namespace ISD.Data.EDM
         public virtual DbSet<Activity> Activity { get; set; }
         public virtual DbSet<ActivityClinician> ActivityClinician { get; set; }
         public virtual DbSet<ActivityContactDetail> ActivityContactDetail { get; set; }
+        public virtual DbSet<ActivityEligibility> ActivityEligibility { get; set; }
         public virtual DbSet<ActivityGrouping> ActivityGrouping { get; set; }
         public virtual DbSet<ActivityImage> ActivityImage { get; set; }
         public virtual DbSet<ActivityImageDetail> ActivityImageDetail { get; set; }
         public virtual DbSet<ActivityReferenceCode> ActivityReferenceCode { get; set; }
         public virtual DbSet<ActivityRewards> ActivityRewards { get; set; }
         public virtual DbSet<ActivitySchedule> ActivitySchedule { get; set; }
-        public virtual DbSet<ActivitySettings> ActivitySettings { get; set; }
         public virtual DbSet<ActivityUserAttendance> ActivityUserAttendance { get; set; }
         public virtual DbSet<ActivityUserLog> ActivityUserLog { get; set; }
         public virtual DbSet<ActivityVisitor> ActivityVisitor { get; set; }
@@ -84,6 +84,7 @@ namespace ISD.Data.EDM
         public virtual DbSet<WeblLogAction> WeblLogAction { get; set; }
         public virtual DbSet<WebLog> WebLog { get; set; }
         public virtual DbSet<v_ActivitiesLogExplorer> v_ActivitiesLogExplorer { get; set; }
+        public virtual DbSet<v_ActivityClinicianExplorer> v_ActivityClinicianExplorer { get; set; }
         public virtual DbSet<v_ActivityExpiryView> v_ActivityExpiryView { get; set; }
         public virtual DbSet<v_ActivityExplorer> v_ActivityExplorer { get; set; }
         public virtual DbSet<v_ActivityImageExplorer> v_ActivityImageExplorer { get; set; }
@@ -108,6 +109,5 @@ namespace ISD.Data.EDM
         public virtual DbSet<v_UserExplorer> v_UserExplorer { get; set; }
         public virtual DbSet<v_VoucherExplorer> v_VoucherExplorer { get; set; }
         public virtual DbSet<v_WebLogExplorer> v_WebLogExplorer { get; set; }
-        public virtual DbSet<v_ActivityClinicianExplorer> v_ActivityClinicianExplorer { get; set; }
     }
 }
