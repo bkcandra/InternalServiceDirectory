@@ -12,19 +12,20 @@ namespace ISD.Data.EDM
     using System;
     using System.Collections.Generic;
     
-    public partial class v_VoucherExplorer
+    public partial class Clinic
     {
         public int ID { get; set; }
-        public string VoucherCode { get; set; }
-        public int RewardID { get; set; }
-        public System.DateTime ExpiryDate { get; set; }
-        public System.DateTime IssueDate { get; set; }
-        public Nullable<bool> UsageStatus { get; set; }
-        public string RewardName { get; set; }
-        public string SponsorID { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
         public string Address { get; set; }
-        public string Website { get; set; }
-        public Nullable<decimal> PhoneNumber { get; set; }
+        public string Suburb { get; set; }
+        public int StateID { get; set; }
+        public int PostCode { get; set; }
+        public string CreatedBy { get; set; }
+        public string ModifiedBy { get; set; }
+        public Nullable<System.DateTime> CreatedDatetime { get; set; }
+        public System.DateTime ModifiedDatetime { get; set; }
+    
+        public virtual State State { get; set; }
     }
 }

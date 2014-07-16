@@ -178,6 +178,9 @@
     <Compile Include="ProviderSettings.cs">
       <DependentUpon>DataModelComponent.tt</DependentUpon>
     </Compile>
+    <Compile Include="Requirements.cs">
+      <DependentUpon>DataModelComponent.tt</DependentUpon>
+    </Compile>
     <Compile Include="Reward.cs">
       <DependentUpon>DataModelComponent.tt</DependentUpon>
     </Compile>
@@ -284,9 +287,6 @@
       <DependentUpon>DataModelComponent.tt</DependentUpon>
     </Compile>
     <Compile Include="v_ScheduleCount.cs">
-      <DependentUpon>DataModelComponent.tt</DependentUpon>
-    </Compile>
-    <Compile Include="v_SubServiceExplorer.cs">
       <DependentUpon>DataModelComponent.tt</DependentUpon>
     </Compile>
     <Compile Include="v_SuburbExplorer.cs">

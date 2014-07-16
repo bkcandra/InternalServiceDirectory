@@ -1753,6 +1753,7 @@
     <Content Include="Views\Pages\Index.cshtml" />
     <Content Include="Views\Shared\_PartialServiceTimetable.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Collection.cshtml" />
+    <Content Include="Views\Shared\_PartialServiceRequirement.cshtml" />
     <None Include="Web.Backload.Default.config" />
     <None Include="Web.Backload.xsd">
       <SubType>Designer</SubType>

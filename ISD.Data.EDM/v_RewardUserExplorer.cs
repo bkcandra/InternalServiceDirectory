@@ -14,13 +14,13 @@ namespace ISD.Data.EDM
     
     public partial class v_RewardUserExplorer
     {
-        public System.Guid UserID { get; set; }
+        public string UserID { get; set; }
         public Nullable<int> Title { get; set; }
         public string Username { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public System.Guid Expr1 { get; set; }
+        public string Expr1 { get; set; }
         public Nullable<int> RewardPoint { get; set; }
         public Nullable<int> RedeemedtPoint { get; set; }
         public Nullable<int> BonusPoint { get; set; }

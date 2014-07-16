@@ -18,6 +18,7 @@ using ISD.EDS;
 using ISD.Util;
 using Microsoft.AspNet.Identity;
 using System.IO;
+using System.Text;
 
 namespace ISD.Application.provider.MVC.Controllers
 {
@@ -86,14 +87,6 @@ namespace ISD.Application.provider.MVC.Controllers
             var PID = User.Identity.GetUserId();
             model.CliniciansList = await db.Clinicians.Where(x => x.ProviderID == PID).ToListAsync();
             model.Categories = await db.v_CategoryExplorer.ToListAsync();
-
-            model.MedicareCard = false;
-            model.Pensioner = false;
-            model.HealthcareCard = false;
-            model.CityofBoroondara = false;
-            model.CityofYarra = false;
-            model.HACC = false;
-
             return View(model);
         }
 
@@ -167,23 +160,22 @@ namespace ISD.Application.provider.MVC.Controllers
                 #region activity Eligibility
 
                 var ae = db.ActivityEligibility.Create();
-                ae.MedicareCard = ae.Pensioner = ae.HealthcareCard = ae.CityofBoroondara = ae.CityofYarra = ae.HACC = false;
+                
                 if (model.Eligibility ?? false)
                 {
-                    if (model.MedicareCard ?? false)
-                        ae.MedicareCard = model.MedicareCard;
-                    if (model.Pensioner ?? false)
-                        ae.Pensioner = model.Pensioner;
-                    if (model.HealthcareCard ?? false)
-                        ae.HealthcareCard = model.HealthcareCard;
-                    if (model.CityofBoroondara ?? false)
-                        ae.CityofBoroondara = model.CityofBoroondara;
-                    if (model.CityofYarra ?? false)
-                        ae.CityofYarra = model.CityofYarra;
-                    if (model.HACC ?? false)
-                        ae.HACC = model.HACC;
-                    if (!string.IsNullOrEmpty(model.Assessment))
-                        ae.Assessment = model.Assessment;
+                    StringBuilder sb = new StringBuilder();
+                    foreach (var req in model.ServiceRequirements)
+                    {
+                        if (req.Type == (int)SystemConstants.ServiceRequirementsType.AND)
+                            sb.Append("&");
+                        if (req.Type == (int)SystemConstants.ServiceRequirementsType.OR)
+                            sb.Append("|");
+                        sb.Append(req.ValueId);
+
+                    }
+                    sb.Remove(0, 1);
+                    ae.Requirements = sb.ToString();
+                    ae.Assessment = model.Assessment;
                 }
                 else
                 {
@@ -208,6 +200,7 @@ namespace ISD.Application.provider.MVC.Controllers
                 var image = db.ActivityImage.Create();
                 if (files.First() != null && files.Count != 0)
                 {
+                    image.ImageAmount = files.Count;
                     foreach (var file in files)
                     {
                         var imageDetail = db.ActivityImageDetail.Create();
@@ -220,8 +213,12 @@ namespace ISD.Application.provider.MVC.Controllers
                         image.ActivityImageDetail.Add(imageDetail);
                     }
                 }
+                else
+                    image.ImageAmount = 0;
+
                 image.StorageUsed = SizeUploaded;
                 image.FreeStorage = SystemConstants.MaxActivityImageStorage - SizeUploaded;
+
                 image.ImageAmount = files.Count;
                 act.ActivityImage.Add(image);
                 //Image handling
@@ -368,23 +365,22 @@ namespace ISD.Application.provider.MVC.Controllers
                     ae = db.ActivityEligibility.Create();
                     act.ActivityEligibility.Add(ae);
                 }
-                ae.MedicareCard = ae.Pensioner = ae.HealthcareCard = ae.CityofBoroondara = ae.CityofYarra = ae.HACC = false;
+               
 
                 if (model.Eligibility ?? false)
                 {
-                    if (model.MedicareCard ?? false)
-                        ae.MedicareCard = model.MedicareCard;
-                    if (model.Pensioner ?? false)
-                        ae.Pensioner = model.Pensioner;
-                    if (model.HealthcareCard ?? false)
-                        ae.HealthcareCard = model.HealthcareCard;
-                    if (model.CityofBoroondara ?? false)
-                        ae.CityofBoroondara = model.CityofBoroondara;
-                    if (model.CityofYarra ?? false)
-                        ae.CityofYarra = model.CityofYarra;
-                    if (model.HACC ?? false)
-                        ae.HACC = model.HACC;
+                    StringBuilder sb = new StringBuilder();
+                    foreach (var req in model.ServiceRequirements)
+                    {
+                        if (req.Type == (int)SystemConstants.ServiceRequirementsType.AND)
+                            sb.Append("&");
+                        if (req.Type == (int)SystemConstants.ServiceRequirementsType.OR)
+                            sb.Append("|");
+                        sb.Append(req.ValueId);
 
+                    }
+                    sb.Remove(0, 1);
+                    ae.Requirements = sb.ToString();
                     ae.Assessment = model.Assessment;
                 }
                 else
@@ -392,7 +388,7 @@ namespace ISD.Application.provider.MVC.Controllers
                     ae.Assessment = String.Empty;
                 }
                 ae.Note = model.Note;
-              
+
                 #endregion
                 //Finish setting activity Eligibility
 
@@ -543,6 +539,9 @@ namespace ISD.Application.provider.MVC.Controllers
             base.Dispose(disposing);
         }
 
-
+        public ActionResult Requirements()
+        {
+            return PartialView("_PartialServiceRequirement");
+        }
     }
 }

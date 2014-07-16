@@ -12,14 +12,15 @@ namespace ISD.Data.EDM
     using System;
     using System.Collections.Generic;
     
-    public partial class ActivityEligibility
+    public partial class Requirements
     {
         public int ID { get; set; }
-        public int ActivityID { get; set; }
-        public string Note { get; set; }
-        public string Assessment { get; set; }
-        public string Requirements { get; set; }
-    
-        public virtual Activity Activity { get; set; }
+        public string Title { get; set; }
+        public string Text { get; set; }
+        public string Description { get; set; }
+        public string CreatedBy { get; set; }
+        public string ModifiedBy { get; set; }
+        public Nullable<System.DateTime> CreatedDatetime { get; set; }
+        public Nullable<System.DateTime> ModifiedDatetime { get; set; }
     }
 }

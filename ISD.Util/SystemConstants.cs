@@ -223,6 +223,8 @@ namespace ISD.Util
             /// </summary>
             Deleted = 6
         }
+        public enum ServiceRequirementsType { AND = 1, OR = 2 };
+        public enum ServiceRequirementsValue { Medicare = 1, Pensioner = 2, HealthCare = 3, COBoroondara = 4, CIYarra = 5, HACC = 6 };
         public enum LogActionType { Notification1 = 1, Notification2 = 2, NotificationExpired = 3, NoNotification = 4, DeletingActivity = 5, AwardingRewardPoints = 6 }
         public enum ActivityViewType { ListView = 1, TableView = 2 }
         public enum RewardViewType { ListView = 1, TileView = 2 }
@@ -273,7 +275,7 @@ namespace ISD.Util
         public enum ListingNavigationType { search = 1, filter = 2, category = 3 }
         public enum UserRole { Provider = 1, Customer = 2, Guest = 3 }
 
-        public enum CliniciansType { Public = 1, Private = 2, Both = 3}
+        public enum CliniciansType { Public = 1, Private = 2, Both = 3 }
         #endregion
 
         #region ErrorMessage
@@ -398,10 +400,6 @@ namespace ISD.Util
             //4.5 Mb * 1024
             return 4608 * 1024;
         }
-
-
-
-        
     }
 
     public class SuburbExplorer

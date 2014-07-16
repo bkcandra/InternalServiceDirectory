@@ -124,14 +124,9 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ActivityID" Type="int" Nullable="false" />
-          <Property Name="MedicareCard" Type="bit" />
-          <Property Name="Pensioner" Type="bit" />
-          <Property Name="HealthcareCard" Type="bit" />
-          <Property Name="CityofBoroondara" Type="bit" />
-          <Property Name="CityofYarra" Type="bit" />
-          <Property Name="HACC" Type="bit" />
           <Property Name="Note" Type="nvarchar" MaxLength="500" />
           <Property Name="Assessment" Type="nvarchar" MaxLength="500" />
+          <Property Name="Requirements" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ActivityGrouping">
           <Key>
@@ -542,6 +537,19 @@
           <Property Name="TimetableType" Type="int" />
           <Property Name="TimetableSize" Type="int" />
         </EntityType>
+        <EntityType Name="Requirements">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Text" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedDatetime" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedDatetime" Type="datetime2" Precision="7" />
+        </EntityType>
         <EntityType Name="Reward">
           <Key>
             <PropertyRef Name="ID" />
@@ -815,7 +823,7 @@
           <Property Name="Note" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_ActivitiesLogExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IE_ServiceDirectory.dbo.v_ActivitiesLogExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_ActivitiesLogExplorer">
           <Key>
             <PropertyRef Name="ID" />
@@ -836,12 +844,12 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_ActivitiesLogExplorer' does not ha
           <Property Name="Expr1" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_ActivityClinicianExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IE_ServiceDirectory.dbo.v_ActivityClinicianExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_ActivityClinicianExplorer">
           <Key>
             <PropertyRef Name="ACID" />
           </Key>
-          <Property Name="ID" Type="bigint" />
+          <Property Name="Id" Type="uniqueidentifier" />
           <Property Name="ACID" Type="int" Nullable="false" />
           <Property Name="ActivityID" Type="int" />
           <Property Name="ProviderID" Type="nvarchar" MaxLength="128" />
@@ -866,24 +874,23 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_ActivityClinicianExplorer' does no
           <Property Name="LocationID" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_ActivityExpiryView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IE_ServiceDirectory.dbo.v_ActivityExpiryView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_ActivityExpiryView">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="LastName" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="ExpiryDate" Type="datetime" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
           <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
           <Property Name="Title" Type="int" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="ActivityExpiryDate" Type="datetime2" Precision="7" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_ActivityExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IE_ServiceDirectory.dbo.v_ActivityExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_ActivityExplorer">
           <Key>
             <PropertyRef Name="ID" />
@@ -953,18 +960,13 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_ActivityExplorer' does not have a 
           <Property Name="ProviderID" Type="nvarchar" MaxLength="128" />
           <Property Name="isPrimary" Type="bit" />
           <Property Name="PrimaryServiceID" Type="int" />
-          <Property Name="MedicareCard" Type="bit" />
-          <Property Name="Pensioner" Type="bit" />
-          <Property Name="CityofBoroondara" Type="bit" />
-          <Property Name="HealthcareCard" Type="bit" />
-          <Property Name="CityofYarra" Type="bit" />
-          <Property Name="HACC" Type="bit" />
           <Property Name="Note" Type="nvarchar" MaxLength="500" />
           <Property Name="Assessment" Type="nvarchar" MaxLength="500" />
           <Property Name="Eligibility" Type="bit" />
+          <Property Name="Requirements" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_ActivityImageExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IE_ServiceDirectory.dbo.v_ActivityImageExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_ActivityImageExplorer">
           <Key>
             <PropertyRef Name="ActivityID" />
@@ -978,7 +980,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_ActivityImageExplorer' does not ha
           <Property Name="Filesize" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_ActivityView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IE_ServiceDirectory.dbo.v_ActivityView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_ActivityView">
           <Key>
             <PropertyRef Name="ID" />
@@ -1039,7 +1041,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_ActivityView' does not have a prim
           <Property Name="UserID" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_ActivityVisitorCount' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IE_ServiceDirectory.dbo.v_ActivityVisitorCount' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_ActivityVisitorCount">
           <Key>
             <PropertyRef Name="ID" />
@@ -1048,7 +1050,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_ActivityVisitorCount' does not hav
           <Property Name="Visitor" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_CategoryCount' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IE_ServiceDirectory.dbo.v_CategoryCount' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_CategoryCount">
           <Key>
             <PropertyRef Name="ID" />
@@ -1057,7 +1059,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_CategoryCount' does not have a pri
           <Property Name="Activities" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_CategoryExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IE_ServiceDirectory.dbo.v_CategoryExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_CategoryExplorer">
           <Key>
             <PropertyRef Name="ID" />
@@ -1077,7 +1079,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_CategoryExplorer' does not have a 
           <Property Name="Level" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_CouncilExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IE_ServiceDirectory.dbo.v_CouncilExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_CouncilExplorer">
           <Key>
             <PropertyRef Name="ID" />
@@ -1089,7 +1091,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_CouncilExplorer' does not have a p
           <Property Name="StateDetail" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_EmailExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IE_ServiceDirectory.dbo.v_EmailExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_EmailExplorer">
           <Key>
             <PropertyRef Name="ID" />
@@ -1108,7 +1110,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_EmailExplorer' does not have a pri
           <Property Name="ID" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_FooterMenu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IE_ServiceDirectory.dbo.v_FooterMenu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_FooterMenu">
           <Key>
             <PropertyRef Name="ID" />
@@ -1122,7 +1124,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_FooterMenu' does not have a primar
           <Property Name="LinkType" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_KeyCollectionView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IE_ServiceDirectory.dbo.v_KeyCollectionView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_KeyCollectionView">
           <Key>
             <PropertyRef Name="ID" />
@@ -1134,7 +1136,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_KeyCollectionView' does not have a
           <Property Name="Keywords" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_Menu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IE_ServiceDirectory.dbo.v_Menu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_Menu">
           <Key>
             <PropertyRef Name="ID" />
@@ -1150,7 +1152,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_Menu' does not have a primary key 
           <Property Name="MenuType" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_ProviderActivityCount' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IE_ServiceDirectory.dbo.v_ProviderActivityCount' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_ProviderActivityCount">
           <Key>
             <PropertyRef Name="UserID" />
@@ -1159,7 +1161,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_ProviderActivityCount' does not ha
           <Property Name="ActivityCount" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_ProviderClinicians' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IE_ServiceDirectory.dbo.v_ProviderClinicians' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_ProviderClinicians">
           <Key>
             <PropertyRef Name="ID" />
@@ -1183,7 +1185,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_ProviderClinicians' does not have 
           <Property Name="OnSunday" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_ProviderExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IE_ServiceDirectory.dbo.v_ProviderExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_ProviderExplorer">
           <Key>
             <PropertyRef Name="Id" />
@@ -1205,7 +1207,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_ProviderExplorer' does not have a 
           <Property Name="ActivityCount" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_RewardExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IE_ServiceDirectory.dbo.v_RewardExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_RewardExplorer">
           <Key>
             <PropertyRef Name="ID" />
@@ -1239,27 +1241,27 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_RewardExplorer' does not have a pr
           <Property Name="ProviderID" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_RewardUserExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IE_ServiceDirectory.dbo.v_RewardUserExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_RewardUserExplorer">
           <Key>
             <PropertyRef Name="UserID" />
             <PropertyRef Name="Username" />
             <PropertyRef Name="Expr1" />
           </Key>
-          <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Title" Type="int" />
           <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
-          <Property Name="Expr1" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Expr1" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="RewardPoint" Type="int" />
           <Property Name="RedeemedtPoint" Type="int" />
           <Property Name="BonusPoint" Type="int" />
           <Property Name="Status" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_ScheduleCount' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IE_ServiceDirectory.dbo.v_ScheduleCount' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_ScheduleCount">
           <Key>
             <PropertyRef Name="ID" />
@@ -1268,42 +1270,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_ScheduleCount' does not have a pri
           <Property Name="Activities" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_SubServiceExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="v_SubServiceExplorer">
-          <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="Status" />
-          </Key>
-          <Property Name="UserID" Type="nvarchar" MaxLength="128" />
-          <Property Name="ProviderName" Type="varchar" MaxLength="50" />
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="ActivityCode" Type="nvarchar" MaxLength="50" />
-          <Property Name="CategoryID" Type="int" />
-          <Property Name="SecondaryCategoryID1" Type="int" />
-          <Property Name="SecondaryCategoryID4" Type="int" />
-          <Property Name="SecondaryCategoryID3" Type="int" />
-          <Property Name="SecondaryCategoryID2" Type="int" />
-          <Property Name="ShortDescription" Type="nvarchar" MaxLength="500" />
-          <Property Name="FullDescription" Type="nvarchar(max)" />
-          <Property Name="Price" Type="nvarchar" MaxLength="500" />
-          <Property Name="eligibilityDescription" Type="nvarchar(max)" />
-          <Property Name="Status" Type="int" Nullable="false" />
-          <Property Name="Website" Type="nvarchar" MaxLength="100" />
-          <Property Name="Keywords" Type="nvarchar(max)" />
-          <Property Name="TimetableType" Type="int" />
-          <Property Name="isApproved" Type="bit" />
-          <Property Name="isPrimary" Type="bit" />
-          <Property Name="PrimaryServiceID" Type="int" />
-          <Property Name="ExpiryDate" Type="datetime" />
-          <Property Name="ActivityType" Type="int" />
-          <Property Name="CreatedDateTime" Type="datetime" />
-          <Property Name="ModifiedDateTime" Type="datetime" />
-          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_SuburbExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IE_ServiceDirectory.dbo.v_SuburbExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_SuburbExplorer">
           <Key>
             <PropertyRef Name="ID" />
@@ -1318,7 +1285,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_SuburbExplorer' does not have a pr
           <Property Name="CouncilName" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_UserAttendanceView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IE_ServiceDirectory.dbo.v_UserAttendanceView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_UserAttendanceView">
           <Key>
             <PropertyRef Name="ID" />
@@ -1342,7 +1309,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_UserAttendanceView' does not have 
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_UserExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IE_ServiceDirectory.dbo.v_UserExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_UserExplorer">
           <Key>
             <PropertyRef Name="Id" />
@@ -1361,7 +1328,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_UserExplorer' does not have a prim
           <Property Name="PreferredContact" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_VoucherExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IE_ServiceDirectory.dbo.v_VoucherExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_VoucherExplorer">
           <Key>
             <PropertyRef Name="ID" />
@@ -1379,14 +1346,14 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_VoucherExplorer' does not have a p
           <Property Name="IssueDate" Type="date" Nullable="false" />
           <Property Name="UsageStatus" Type="bit" />
           <Property Name="RewardName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="SponsorID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SponsorID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Address" Type="nvarchar" MaxLength="50" />
           <Property Name="Website" Type="nvarchar" MaxLength="50" />
           <Property Name="PhoneNumber" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IE_ServiceDirectory.dbo.v_WebLogExplorer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_WebLogExplorer">
           <Key>
             <PropertyRef Name="LogID" />
@@ -2063,6 +2030,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <EntitySet Name="ProviderLog" EntityType="Self.ProviderLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProviderProfiles" EntityType="Self.ProviderProfiles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProviderSettings" EntityType="Self.ProviderSettings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Requirements" EntityType="Self.Requirements" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reward" EntityType="Self.Reward" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RewardImage" EntityType="Self.RewardImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RewardsDetails" EntityType="Self.RewardsDetails" Schema="dbo" store:Type="Tables" />
@@ -2103,7 +2071,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           </EntitySet>
           <EntitySet Name="v_ActivityClinicianExplorer" EntityType="Self.v_ActivityClinicianExplorer" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [v_ActivityClinicianExplorer].[ID] AS [ID], 
+    [v_ActivityClinicianExplorer].[Id] AS [Id], 
     [v_ActivityClinicianExplorer].[ACID] AS [ACID], 
     [v_ActivityClinicianExplorer].[ActivityID] AS [ActivityID], 
     [v_ActivityClinicianExplorer].[ProviderID] AS [ProviderID], 
@@ -2207,15 +2175,10 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
     [v_ActivityExplorer].[ProviderID] AS [ProviderID], 
     [v_ActivityExplorer].[isPrimary] AS [isPrimary], 
     [v_ActivityExplorer].[PrimaryServiceID] AS [PrimaryServiceID], 
-    [v_ActivityExplorer].[MedicareCard] AS [MedicareCard], 
-    [v_ActivityExplorer].[Pensioner] AS [Pensioner], 
-    [v_ActivityExplorer].[CityofBoroondara] AS [CityofBoroondara], 
-    [v_ActivityExplorer].[HealthcareCard] AS [HealthcareCard], 
-    [v_ActivityExplorer].[CityofYarra] AS [CityofYarra], 
-    [v_ActivityExplorer].[HACC] AS [HACC], 
     [v_ActivityExplorer].[Note] AS [Note], 
     [v_ActivityExplorer].[Assessment] AS [Assessment], 
-    [v_ActivityExplorer].[Eligibility] AS [Eligibility]
+    [v_ActivityExplorer].[Eligibility] AS [Eligibility], 
+    [v_ActivityExplorer].[Requirements] AS [Requirements]
     FROM [dbo].[v_ActivityExplorer] AS [v_ActivityExplorer]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="v_ActivityImageExplorer" EntityType="Self.v_ActivityImageExplorer" store:Type="Views" store:Schema="dbo">
@@ -2463,37 +2426,6 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
     [v_ScheduleCount].[ID] AS [ID], 
     [v_ScheduleCount].[Activities] AS [Activities]
     FROM [dbo].[v_ScheduleCount] AS [v_ScheduleCount]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="v_SubServiceExplorer" EntityType="Self.v_SubServiceExplorer" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [v_SubServiceExplorer].[UserID] AS [UserID], 
-    [v_SubServiceExplorer].[ProviderName] AS [ProviderName], 
-    [v_SubServiceExplorer].[ID] AS [ID], 
-    [v_SubServiceExplorer].[Name] AS [Name], 
-    [v_SubServiceExplorer].[ActivityCode] AS [ActivityCode], 
-    [v_SubServiceExplorer].[CategoryID] AS [CategoryID], 
-    [v_SubServiceExplorer].[SecondaryCategoryID1] AS [SecondaryCategoryID1], 
-    [v_SubServiceExplorer].[SecondaryCategoryID4] AS [SecondaryCategoryID4], 
-    [v_SubServiceExplorer].[SecondaryCategoryID3] AS [SecondaryCategoryID3], 
-    [v_SubServiceExplorer].[SecondaryCategoryID2] AS [SecondaryCategoryID2], 
-    [v_SubServiceExplorer].[ShortDescription] AS [ShortDescription], 
-    [v_SubServiceExplorer].[FullDescription] AS [FullDescription], 
-    [v_SubServiceExplorer].[Price] AS [Price], 
-    [v_SubServiceExplorer].[eligibilityDescription] AS [eligibilityDescription], 
-    [v_SubServiceExplorer].[Status] AS [Status], 
-    [v_SubServiceExplorer].[Website] AS [Website], 
-    [v_SubServiceExplorer].[Keywords] AS [Keywords], 
-    [v_SubServiceExplorer].[TimetableType] AS [TimetableType], 
-    [v_SubServiceExplorer].[isApproved] AS [isApproved], 
-    [v_SubServiceExplorer].[isPrimary] AS [isPrimary], 
-    [v_SubServiceExplorer].[PrimaryServiceID] AS [PrimaryServiceID], 
-    [v_SubServiceExplorer].[ExpiryDate] AS [ExpiryDate], 
-    [v_SubServiceExplorer].[ActivityType] AS [ActivityType], 
-    [v_SubServiceExplorer].[CreatedDateTime] AS [CreatedDateTime], 
-    [v_SubServiceExplorer].[ModifiedDateTime] AS [ModifiedDateTime], 
-    [v_SubServiceExplorer].[ModifiedBy] AS [ModifiedBy], 
-    [v_SubServiceExplorer].[CreatedBy] AS [CreatedBy]
-    FROM [dbo].[v_SubServiceExplorer] AS [v_SubServiceExplorer]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="v_SuburbExplorer" EntityType="Self.v_SuburbExplorer" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -2799,6 +2731,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <EntitySet Name="ProviderLog" EntityType="IECHS_ISDModel.ProviderLog" />
           <EntitySet Name="ProviderProfiles" EntityType="IECHS_ISDModel.ProviderProfiles" />
           <EntitySet Name="ProviderSettings" EntityType="IECHS_ISDModel.ProviderSettings" />
+          <EntitySet Name="Requirements" EntityType="IECHS_ISDModel.Requirements" />
           <EntitySet Name="Reward" EntityType="IECHS_ISDModel.Reward" />
           <EntitySet Name="RewardImage" EntityType="IECHS_ISDModel.RewardImage" />
           <EntitySet Name="RewardsDetails" EntityType="IECHS_ISDModel.RewardsDetails" />
@@ -2839,7 +2772,6 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <EntitySet Name="v_RewardExplorer" EntityType="IECHS_ISDModel.v_RewardExplorer" />
           <EntitySet Name="v_RewardUserExplorer" EntityType="IECHS_ISDModel.v_RewardUserExplorer" />
           <EntitySet Name="v_ScheduleCount" EntityType="IECHS_ISDModel.v_ScheduleCount" />
-          <EntitySet Name="v_SubServiceExplorer" EntityType="IECHS_ISDModel.v_SubServiceExplorer" />
           <EntitySet Name="v_SuburbExplorer" EntityType="IECHS_ISDModel.v_SuburbExplorer" />
           <EntitySet Name="v_UserAttendanceView" EntityType="IECHS_ISDModel.v_UserAttendanceView" />
           <EntitySet Name="v_UserExplorer" EntityType="IECHS_ISDModel.v_UserExplorer" />
@@ -3158,14 +3090,9 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ActivityID" Type="Int32" Nullable="false" />
-          <Property Name="MedicareCard" Type="Boolean" />
-          <Property Name="Pensioner" Type="Boolean" />
-          <Property Name="HealthcareCard" Type="Boolean" />
-          <Property Name="CityofBoroondara" Type="Boolean" />
-          <Property Name="CityofYarra" Type="Boolean" />
-          <Property Name="HACC" Type="Boolean" />
           <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Assessment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Requirements" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Activity" Relationship="IECHS_ISDModel.FK_ActivitySettings_Activity" FromRole="ActivityEligibility" ToRole="Activity" />
         </EntityType>
         <EntityType Name="ActivityGrouping">
@@ -3608,6 +3535,19 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <Property Name="TimetableSize" Type="Int32" />
           <NavigationProperty Name="ProviderProfiles" Relationship="IECHS_ISDModel.FK_ProviderSettings_ProviderProfiles" FromRole="ProviderSettings" ToRole="ProviderProfiles" />
         </EntityType>
+        <EntityType Name="Requirements">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Text" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDatetime" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedDatetime" Type="DateTime" Precision="7" />
+        </EntityType>
         <EntityType Name="Reward">
           <Key>
             <PropertyRef Name="ID" />
@@ -3934,7 +3874,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <Key>
             <PropertyRef Name="ACID" />
           </Key>
-          <Property Name="ID" Type="Int64" />
+          <Property Name="Id" Type="Guid" />
           <Property Name="ACID" Type="Int32" Nullable="false" />
           <Property Name="ActivityID" Type="Int32" />
           <Property Name="ProviderID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
@@ -3961,14 +3901,13 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
         <EntityType Name="v_ActivityExpiryView">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="LastName" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Title" Type="Int32" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ActivityExpiryDate" Type="DateTime" Precision="7" />
@@ -4042,15 +3981,10 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <Property Name="ProviderID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="isPrimary" Type="Boolean" />
           <Property Name="PrimaryServiceID" Type="Int32" />
-          <Property Name="MedicareCard" Type="Boolean" />
-          <Property Name="Pensioner" Type="Boolean" />
-          <Property Name="CityofBoroondara" Type="Boolean" />
-          <Property Name="HealthcareCard" Type="Boolean" />
-          <Property Name="CityofYarra" Type="Boolean" />
-          <Property Name="HACC" Type="Boolean" />
           <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Assessment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Eligibility" Type="Boolean" />
+          <Property Name="Requirements" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="v_ActivityImageExplorer">
           <Key>
@@ -4305,13 +4239,13 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
             <PropertyRef Name="Username" />
             <PropertyRef Name="Expr1" />
           </Key>
-          <Property Name="UserID" Type="Guid" Nullable="false" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Title" Type="Int32" />
           <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Expr1" Type="Guid" Nullable="false" />
+          <Property Name="Expr1" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="RewardPoint" Type="Int32" />
           <Property Name="RedeemedtPoint" Type="Int32" />
           <Property Name="BonusPoint" Type="Int32" />
@@ -4323,39 +4257,6 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Activities" Type="Int32" />
-        </EntityType>
-        <EntityType Name="v_SubServiceExplorer">
-          <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="Status" />
-          </Key>
-          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ProviderName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ActivityCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CategoryID" Type="Int32" />
-          <Property Name="SecondaryCategoryID1" Type="Int32" />
-          <Property Name="SecondaryCategoryID4" Type="Int32" />
-          <Property Name="SecondaryCategoryID3" Type="Int32" />
-          <Property Name="SecondaryCategoryID2" Type="Int32" />
-          <Property Name="ShortDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="FullDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="eligibilityDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <Property Name="Website" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="TimetableType" Type="Int32" />
-          <Property Name="isApproved" Type="Boolean" />
-          <Property Name="isPrimary" Type="Boolean" />
-          <Property Name="PrimaryServiceID" Type="Int32" />
-          <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
-          <Property Name="ActivityType" Type="Int32" />
-          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="v_SuburbExplorer">
           <Key>
@@ -4426,7 +4327,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <Property Name="IssueDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="UsageStatus" Type="Boolean" />
           <Property Name="RewardName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SponsorID" Type="Guid" Nullable="false" />
+          <Property Name="SponsorID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Website" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -5171,14 +5072,9 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <EntitySetMapping Name="ActivityEligibility">
             <EntityTypeMapping TypeName="IECHS_ISDModel.ActivityEligibility">
               <MappingFragment StoreEntitySet="ActivityEligibility">
+                <ScalarProperty Name="Requirements" ColumnName="Requirements" />
                 <ScalarProperty Name="Assessment" ColumnName="Assessment" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="HACC" ColumnName="HACC" />
-                <ScalarProperty Name="CityofYarra" ColumnName="CityofYarra" />
-                <ScalarProperty Name="CityofBoroondara" ColumnName="CityofBoroondara" />
-                <ScalarProperty Name="HealthcareCard" ColumnName="HealthcareCard" />
-                <ScalarProperty Name="Pensioner" ColumnName="Pensioner" />
-                <ScalarProperty Name="MedicareCard" ColumnName="MedicareCard" />
                 <ScalarProperty Name="ActivityID" ColumnName="ActivityID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
@@ -5614,6 +5510,20 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Requirements">
+            <EntityTypeMapping TypeName="IECHS_ISDModel.Requirements">
+              <MappingFragment StoreEntitySet="Requirements">
+                <ScalarProperty Name="ModifiedDatetime" ColumnName="ModifiedDatetime" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Reward">
             <EntityTypeMapping TypeName="IECHS_ISDModel.Reward">
               <MappingFragment StoreEntitySet="Reward">
@@ -5951,7 +5861,7 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
                 <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
                 <ScalarProperty Name="ActivityID" ColumnName="ActivityID" />
                 <ScalarProperty Name="ACID" ColumnName="ACID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5973,15 +5883,10 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
           <EntitySetMapping Name="v_ActivityExplorer">
             <EntityTypeMapping TypeName="IECHS_ISDModel.v_ActivityExplorer">
               <MappingFragment StoreEntitySet="v_ActivityExplorer">
+                <ScalarProperty Name="Requirements" ColumnName="Requirements" />
                 <ScalarProperty Name="Eligibility" ColumnName="Eligibility" />
                 <ScalarProperty Name="Assessment" ColumnName="Assessment" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="HACC" ColumnName="HACC" />
-                <ScalarProperty Name="CityofYarra" ColumnName="CityofYarra" />
-                <ScalarProperty Name="HealthcareCard" ColumnName="HealthcareCard" />
-                <ScalarProperty Name="CityofBoroondara" ColumnName="CityofBoroondara" />
-                <ScalarProperty Name="Pensioner" ColumnName="Pensioner" />
-                <ScalarProperty Name="MedicareCard" ColumnName="MedicareCard" />
                 <ScalarProperty Name="PrimaryServiceID" ColumnName="PrimaryServiceID" />
                 <ScalarProperty Name="isPrimary" ColumnName="isPrimary" />
                 <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
@@ -6324,39 +6229,6 @@ warning 6002: The table/view 'IECHS_ISD.dbo.v_WebLogExplorer' does not have a pr
               <MappingFragment StoreEntitySet="v_ScheduleCount">
                 <ScalarProperty Name="Activities" ColumnName="Activities" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="v_SubServiceExplorer">
-            <EntityTypeMapping TypeName="IECHS_ISDModel.v_SubServiceExplorer">
-              <MappingFragment StoreEntitySet="v_SubServiceExplorer">
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
-                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="ActivityType" ColumnName="ActivityType" />
-                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
-                <ScalarProperty Name="PrimaryServiceID" ColumnName="PrimaryServiceID" />
-                <ScalarProperty Name="isPrimary" ColumnName="isPrimary" />
-                <ScalarProperty Name="isApproved" ColumnName="isApproved" />
-                <ScalarProperty Name="TimetableType" ColumnName="TimetableType" />
-                <ScalarProperty Name="Keywords" ColumnName="Keywords" />
-                <ScalarProperty Name="Website" ColumnName="Website" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="eligibilityDescription" ColumnName="eligibilityDescription" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="FullDescription" ColumnName="FullDescription" />
-                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
-                <ScalarProperty Name="SecondaryCategoryID2" ColumnName="SecondaryCategoryID2" />
-                <ScalarProperty Name="SecondaryCategoryID3" ColumnName="SecondaryCategoryID3" />
-                <ScalarProperty Name="SecondaryCategoryID4" ColumnName="SecondaryCategoryID4" />
-                <ScalarProperty Name="SecondaryCategoryID1" ColumnName="SecondaryCategoryID1" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="ActivityCode" ColumnName="ActivityCode" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ProviderName" ColumnName="ProviderName" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

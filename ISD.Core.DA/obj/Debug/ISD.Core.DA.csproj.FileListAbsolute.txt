@@ -20,6 +20,8 @@ E:\Work\Projects\InternalServiceDirectory\ISD.Core.DA\bin\Debug\EntityFramework.
 E:\Work\Projects\InternalServiceDirectory\ISD.Core.DA\obj\Debug\ISD.Core.DA.csprojResolveAssemblyReference.cache
 E:\Work\Projects\InternalServiceDirectory\ISD.Core.DA\obj\Debug\ISD.DA.dll
 E:\Work\Projects\InternalServiceDirectory\ISD.Core.DA\obj\Debug\ISD.DA.pdb
+E:\Work\Projects\InternalServiceDirectory\ISD.Core.DA\bin\Debug\MoreLinq.dll
+E:\Work\Projects\InternalServiceDirectory\ISD.Core.DA\bin\Debug\MoreLinq.xml
 C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Core.DA\bin\Debug\ISD.DA.dll.config
 C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Core.DA\bin\Debug\ISD.DA.dll
 C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Core.DA\bin\Debug\ISD.DA.pdb
@@ -41,5 +43,3 @@ C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Core.DA\bin\D
 C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Core.DA\obj\Debug\ISD.Core.DA.csprojResolveAssemblyReference.cache
 C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Core.DA\obj\Debug\ISD.DA.dll
 C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Core.DA\obj\Debug\ISD.DA.pdb
-E:\Work\Projects\InternalServiceDirectory\ISD.Core.DA\bin\Debug\MoreLinq.dll
-E:\Work\Projects\InternalServiceDirectory\ISD.Core.DA\bin\Debug\MoreLinq.xml

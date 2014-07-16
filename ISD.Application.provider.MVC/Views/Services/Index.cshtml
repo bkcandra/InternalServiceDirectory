@@ -1,4 +1,5 @@
 ﻿@using System.Web.UI.WebControls
+@using MoreLinq;
 @model IEnumerable<ISD.Data.EDM.v_ActivityExplorer>
 
 @{
@@ -7,6 +8,7 @@
     var state = new ISD.Data.EDM.ISDEntities().State.AsEnumerable();
     var clinic = new ISD.Data.EDM.ISDEntities().Clinic.AsEnumerable();
     var ACExplorer = new ISD.Data.EDM.ISDEntities().v_ActivityClinicianExplorer.AsEnumerable();
+    var CTExplorer = new ISD.Data.EDM.ISDEntities().ClinicianTimetable.AsEnumerable();
 }
 
 <div class="breadcrumbs">
@@ -96,9 +98,11 @@
                             }
                         </div>
                         <div class="col-md-8 ">
-                            <h2>
-                                @Html.ActionLink(item.Name, "Index", "Service", new { id = item.ID }, "")
-                            </h2>
+                            
+                                <h2>
+                                    @Html.ActionLink(item.Name, "Index", "Service", new { id = item.ID }, "")
+                                </h2>
+                            
                             <p>
                                 @Html.Label("", item.FullDescription.Length > 250 ? item.FullDescription.Substring(0, 250) : item.FullDescription)
                                 @Html.ActionLink("Read more", item.Name.Replace(" ", string.Empty), "Service")
@@ -121,37 +125,43 @@
                             </ul>
                         </div>
                         <div class="col-md-8">
-                            <strong>Available at</strong>
-                            <br />
-                            @foreach (var ap in ACExplorer.Where(x => x.ActivityID == item.ID))
-                            {
-                                if (ap.LocationID != null)
-                                {
-                                    var cInfo = clinic.Where(c => c.ID == ap.LocationID.Value).FirstOrDefault();
 
-                                    <button class="btn btn-u btn-sm" data-toggle="modal" data-target="#modal-@ap.ID">@cInfo.Name</button>
-                                    <div id="modal-@ap.ID" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
-                                        <div class="modal-dialog modal-sm">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                                                    <h4 id="myLargeModalLabel" class="modal-title">@cInfo.Name</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <strong>Address</strong>
-                                                    <p>
-                                                        @cInfo.Address
-                                                        <br />
-                                                        @cInfo.Suburb
-                                                        @state.Where(s => s.ID == cInfo.StateID).Select(s => s.StateName).FirstOrDefault(), @cInfo.PostCode
-                                                    </p>
-                                                </div>
+                            @{
+                var aps = ACExplorer.Where(x => x.ActivityID == item.ID).DistinctBy(x => x.ClinicianID);
+                foreach (var ap in aps)
+                {
+                    var cts = CTExplorer.Where(x => x.ClinicianID == ap.ClinicianID);
+
+                    foreach (var ct in cts)
+                    {
+                        if (ct.LocationID != null)
+                        {
+                            var cInfo = clinic.Where(c => c.ID == ct.LocationID.Value).FirstOrDefault();
+
+                            <button class="btn btn-u btn-sm" data-toggle="modal" data-target="#modal-@ct.ID">@cInfo.Name</button>
+                                <div id="modal-@ct.ID" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog modal-sm">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                                                <h4 id="myLargeModalLabel" class="modal-title">@cInfo.Name</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <strong>Address</strong>
+                                                <p>
+                                                    @cInfo.Address
+                                                    <br />
+                                                    @cInfo.Suburb
+                                                    @state.Where(s => s.ID == cInfo.StateID).Select(s => s.StateName).FirstOrDefault(), @cInfo.PostCode
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
-                                }
+                                </div>
+                        }
+                    }
+                }
                             }
-
                         </div>
                     </div>
                 </div>

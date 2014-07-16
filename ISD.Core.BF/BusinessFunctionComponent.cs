@@ -14,6 +14,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Transactions;
 using System.Web;
+using System.Web.UI.WebControls;
 
 namespace ISD.BF
 {
@@ -1249,6 +1250,13 @@ namespace ISD.BF
         #endregion
 
         #region Activity
+        public static List<ListItem> RetrieveServiceRequirementsType()
+        {
+            var items = new List<ListItem>();
+            items.Add(new ListItem("AND",((int)SystemConstants.ServiceRequirementsType.AND).ToString()));
+            items.Add(new ListItem("OR", ((int)SystemConstants.ServiceRequirementsType.OR).ToString()));
+            return items;
+        }
 
         public static void UpdateActivity(int activityID, DataSetComponent.ActivityRow ActivityDetailDR, DataSetComponent.ActivityContactDetailRow contactDetailsDR, DataSetComponent.ActivityGroupingRow ActGroupingDR, DataSetComponent.ActivityScheduleDataTable ActScheduleDT)
         {

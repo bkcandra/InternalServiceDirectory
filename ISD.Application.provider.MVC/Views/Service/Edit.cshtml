@@ -3,6 +3,9 @@
 @{
     ViewBag.Title = @Model.Name + " | Edit Service";
     var clinic = new ISD.Data.EDM.ISDEntities().Clinic.ToList();
+    var first = Guid.NewGuid();
+    var Reqs = new ISD.Data.EDM.ISDEntities().Requirements.ToList();
+    var ReqsType = ISD.BF.BusinessFunctionComponent.RetrieveServiceRequirementsType();
 }
 @Styles.Render("~/assets/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css")
 @Styles.Render("~/assets/plugins/fancybox/source/jquery.fancybox.css")
@@ -117,9 +120,10 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h5>Is there requirements for this service</h5>
+                                <div class="margin-bottom-10">
+                                    <h5>Is there requirements for this service</h5>
+                                    <div class="col-md-8">
+
                                         @{
                     if (Model.Eligibility ?? false)
                     {
@@ -143,105 +147,108 @@
 
 
                                     </div>
+                                    <div class="col col-md-4">
+                                        <input type="button" id="rrButton" value="Add new requirement" class="btn-u" />
+                                    </div>
                                 </div>
                                 <div id="divRequirements" class="row">
-                                    <section class="col col-md-12">
-                                        <label class="label">Requirements</label>
-                                        <div class="row">
-                                            <div class="col col-3">
-                                                <label class="checkbox">
-                                                    @{
-                    if (Model.MedicareCard ?? false)
-                    {
-                        <input type="checkbox" name="MedicareCard" value="true" id="MedicareCard" checked="checked"><i></i>
-                    }
-                    else
-                    {
-                                                <input type="checkbox" name="MedicareCard" value="True" id="MedicareCard"><i></i>
-                    }
-                                                    }
-                                                    Medicare card is required
-                                                </label>
-                                            </div>
-                                            <div class="col col-3">
-                                                <label class="checkbox">
-                                                    @{
-                    if (Model.HealthcareCard ?? false)
-                    {
-                        <input type="checkbox" name="HealthcareCard" value="True" id="HealthcareCard" checked="checked"><i></i>
-                    }
-                    else
-                    {
-                                                <input type="checkbox" name="HealthcareCard" value="True" id="HealthcareCard"><i></i>
-                    }
-                                                    }
-                                                    Healthcare card is required
-                                                </label>
-                                            </div>
-                                            <div class="col col-3">
-                                                <label class="checkbox">
-                                                    @{
-                    if (Model.Pensioner ?? false)
-                    {
-                        <input type="checkbox" name="Pensioner" value="True" id="Pensioner" checked="checked"><i></i>
-                    }
-                    else
-                    {
-                                                <input type="checkbox" name="Pensioner" value="True" id="Pensioner"><i></i>
-                    }
-                                                    }
-                                                    Client is a pensioner
-                                                </label>
-                                            </div>
-                                            <div class="col col-3">
-                                                <label class="checkbox">
-                                                    @{
-                    if (Model.CityofBoroondara ?? false)
-                    {
-                        <input type="checkbox" name="CityofBoroondara" value="True" id="CityofBoroondara" checked="checked"><i></i>
-                    }
-                    else
-                    {
-                                                <input type="checkbox" name="CityofBoroondara" value="True" id="CityofBoroondara"><i></i>
-                    }
-                                                    } Is City of Boroondara residence
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col col-3">
-                                                <label class="checkbox">
-                                                    @{
-                    if (Model.CityofYarra ?? false)
-                    {
-                        <input type="checkbox" name="CityofYarra" value="True" id="CityofYarra" checked="checked"><i></i>
-                    }
-                    else
-                    {
-                                                <input type="checkbox" name="CityofYarra" value="True" id="CityofYarra"><i></i>
-                    }
-                                                    }
-                                                    Is City of Yarra residence
-                                                </label>
-                                            </div>
-                                            <div class="col col-3">
-                                                <label class="checkbox">
-                                                    @{
-                    if (Model.HACC ?? false)
-                    {
-                        <input type="checkbox" name="HACC" value="True" id="HACC" checked="checked"><i></i>
-                    }
-                    else
-                    {
-                                                <input type="checkbox" name="HACC" value="True" id="HACC"><i></i>
-                    }
-                                                    }
-                                                    HACC eligible
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </section>
+                                    <div id="partial" class="col col-md-12">
 
+                                        @{
+                    if (Model.Eligibility ?? false)
+                    {
+                        var sReqs = Model.Requirements.Split('&');
+                        var fsReqs = sReqs[0].Split('|').FirstOrDefault();
+                        <div class="col col-md-4">
+                            <input type="hidden" name="ServiceRequirements.Index" value="@first" />
+                            <div class="row">
+                                @Html.Hidden("ServiceRequirements[" + @first + "].Type", "1")
+                                <label class="input select">
+                                    <select data-val="true" data-val-number="The field LocationID must be a number." id="first" name="ServiceRequirements[@first].ValueId" class="valid">
+                                        @{
+                        foreach (var req in Reqs)
+                        {
+                            if (fsReqs == req.ID.ToString())
+                            {
+                                        <option selected="selected" value="@req.ID">@req.Text</option>
+                            }
+                            else
+                            {
+                                        <option value="@req.ID">@req.Text</option>
+                            }
+                        }
+                                        }
+                                    </select>
+                                    <i></i>
+                                </label>
+
+                            </div>
+                        </div>
+                        foreach (var sReq in sReqs)
+                        {
+                            var SplitReqs = sReq.Split('|');
+                            foreach (var SplitReq in SplitReqs)
+                            {
+
+                            }
+
+                            var index = Guid.NewGuid();
+                            <div class="col col-md-4">
+                                <button data-dismiss="alert" class="close" type="button">×</button>
+                                <input type="hidden" name="ServiceRequirements.Index" value="@index" />
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label class="input select">
+                                            <select data-val="true" data-val-number="The field LocationID must be a number." id="newTimetables_ea6791dc-fc52-4d93-acbf-9303eab3867a__Timetables_0__LocationID" name="Timetables[@index].LocationID" class="valid">
+                                                @{
+                            foreach (var req in ReqsType)
+                            {
+
+                                                <option selected="selected" value="1">AND</option>
+                                                <option value="2">OR</option>
+
+                            }
+                                                }
+                                            </select>
+
+
+
+
+
+                                            <i></i>
+                                        </label>
+                                    </div>
+
+                                    <div class="col-md-7">
+                                        <label class="input select">
+                                            @Html.DropDownList("ServiceRequirements[" + @index + "].ValueId", new SelectList(Reqs, "ID", "Text", Reqs.First()))
+                                            <i></i>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="col col-md-4">
+                            <input type="hidden" name="ServiceRequirements.Index" value="@first" />
+                            <div class="row">
+                                @Html.Hidden("ServiceRequirements[" + @first + "].Type", "1")
+                                <label class="input select">
+
+
+                                    @Html.DropDownList("ServiceRequirements[" + @first + "].ValueId", new SelectList(Reqs, "ID", "Text", Reqs.First()))
+                                    <i></i>
+                                </label>
+
+                            </div>
+                        </div>
+                    }
+                                        }
+
+
+                                    </div>
                                     <section class="col col-md-12">
                                         <label class="textarea">
                                             Assessment
@@ -258,6 +265,36 @@
                                     </section>
                                 </div>
                             </fieldset>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                             <fieldset>
                                 <div class="row">
@@ -436,9 +473,6 @@
 
                                                                                 </div>
                                                                             </div><br />
-
-
-
                                                                             @if (!string.IsNullOrEmpty(@item.Specialties))
                                                                             {
                                                                                 <div class="row">
@@ -584,12 +618,14 @@
             <div class="tab-pane fade in" id="images">
                 @{
                     var serviceImages = new ISD.Application.provider.MVC.Models.ServiceImageDetailModel();
-                    BCUtility.ObjectHandler.CopyPropertyValues(Model.ImageInfo, serviceImages);
+
                     if (Model.Images != null)
                     {
+                        BCUtility.ObjectHandler.CopyPropertyValues(Model.ImageInfo, serviceImages);
                         serviceImages.Images = Model.Images;
+                        serviceImages.ImageInfoID = Model.ImageInfo.ID;
                     }
-                    serviceImages.ImageInfoID = Model.ImageInfo.ID;
+
                 }
                 @Html.Partial("_PartialServiceImagesUpload", serviceImages)
 
@@ -605,10 +641,28 @@
 function (e) {
     CheckRequirements();
 });
+    $("#rrButton").click(function () {
 
-    $(document).ready(function () {
-        CheckRequirements();
+        var url = "/Service/Requirements";
+
+        $.ajax({
+            url: url,
+            cache: false,
+            type: "POST",
+            success: function (data) {
+
+
+                $('#partial').append(data);
+                /* little fade in effect */
+                $('#partial').fadeIn('fast');
+
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
     });
+
 
     function CheckRequirements() {
         if ($("#enableEl").is(':checked')) {
@@ -627,6 +681,7 @@ function (e) {
     });
 
     jQuery(document).ready(function () {
+        CheckRequirements();
         App.initFancybox();
     });
 </script>

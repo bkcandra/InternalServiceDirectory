@@ -1,17 +1,20 @@
 ﻿@using PagedList;
 @using PagedList.Mvc;
+@using MoreLinq;
 @{
     @model ISD.Application.User.MVC.Models.ServicesFinderModel
     var state = new ISD.Data.EDM.ISDEntities().State.AsEnumerable();
     var clinics = new ISD.Data.EDM.ISDEntities().Clinic.AsEnumerable();
-    var ACExplorer = new ISD.Data.EDM.ISDEntities().v_ActivityClinicianExplorer.AsEnumerable();
+    List<ISD.Data.EDM.v_ActivityClinicianExplorer> ACExplorer = new ISD.Data.EDM.ISDEntities().v_ActivityClinicianExplorer.ToList();
+
+    var CTExplorer = new ISD.Data.EDM.ISDEntities().ClinicianTimetable.AsEnumerable();
 
     var ShowNumber = new List<System.Web.UI.WebControls.ListItem>();
     ShowNumber.Add(new System.Web.UI.WebControls.ListItem()
     {
         Text = "5",
         Value = @Url.Action("Index", new { page = 1, category = Model.selectedCategory, clinic = Model.selectedClinic, search = Model.searchQuery, pageSize = 5 })
-     });
+    });
     ShowNumber.Add(new System.Web.UI.WebControls.ListItem()
     {
         Text = "10",
@@ -65,8 +68,9 @@
                 }
             </div>
             <div class="col-md-8">
+
                 <h2>
-                    @Html.ActionLink(item.Name, "Index", "Service", new { id = item.ID }, "")
+                    @Html.ActionLink(item.Name, "Index", "Service", new { id = item.ID }, null)
                 </h2>
                 <p>
                     @Html.Label("", item.FullDescription.Length > 250 ? item.FullDescription.Substring(0, 250) : item.FullDescription)
@@ -90,20 +94,21 @@
                 </ul>
             </div>
             <div class="col-md-8">
-                @{
-    var tts = ACExplorer.Where(x => x.ActivityID == item.ID);
-    if (tts.Where(t => t.TimetableType == 1).Count() != 0)
-    {
-        <strong>Available at</strong>
-                    <br />
-        foreach (var ap in tts)
-        {
-            if (ap.LocationID != null)
-            {
-                var cInfo = clinics.Where(c => c.ID == ap.LocationID.Value).FirstOrDefault();
 
-                <button class="btn btn-u btn-sm" data-toggle="modal" data-target="#modal-@ap.ID">@cInfo.Name</button>
-                    <div id="modal-@ap.ID" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+                @{
+    var aps = ACExplorer.Where(x => x.ActivityID == item.ID).DistinctBy(x => x.ClinicianID);
+    foreach (var ap in aps)
+    {
+        var cts = CTExplorer.Where(x => x.ClinicianID == ap.ClinicianID);
+
+        foreach (var ct in cts)
+        {
+            if (ct.LocationID != null)
+            {
+                var cInfo = clinics.Where(c => c.ID == ct.LocationID.Value).FirstOrDefault();
+
+                <button class="btn btn-u btn-sm" data-toggle="modal" data-target="#modal-@ct.ID">@cInfo.Name</button>
+                    <div id="modal-@ct.ID" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
                         <div class="modal-dialog modal-sm">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -127,6 +132,7 @@
     }
                 }
             </div>
+
         </div>
     </div>
 }
@@ -136,7 +142,7 @@
         Showing: @(((PagedList.IPagedList)Model.services).FirstItemOnPage) - @(((PagedList.IPagedList)Model.services).LastItemOnPage) of @(((PagedList.IPagedList)Model.services).TotalItemCount) services
     </div>
     <div class="col-md-8 text-right">
-        @Html.PagedListPager((PagedList.IPagedList)Model.services, page => Url.Action("Index", new { page = page, category = Model.selectedCategory, clinic = Model.selectedClinic, search = Model.searchQuery,pageSize=Model.pageSize   }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET" }))
+        @Html.PagedListPager((PagedList.IPagedList)Model.services, page => Url.Action("Index", new { page = page, category = Model.selectedCategory, clinic = Model.selectedClinic, search = Model.searchQuery, pageSize = Model.pageSize }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET" }))
     </div>
 </div>
 <!-- Bordered Funny Boxes -->

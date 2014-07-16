@@ -63,6 +63,7 @@ namespace ISD.Data.EDM
         public virtual DbSet<ProviderLog> ProviderLog { get; set; }
         public virtual DbSet<ProviderProfiles> ProviderProfiles { get; set; }
         public virtual DbSet<ProviderSettings> ProviderSettings { get; set; }
+        public virtual DbSet<Requirements> Requirements { get; set; }
         public virtual DbSet<Reward> Reward { get; set; }
         public virtual DbSet<RewardImage> RewardImage { get; set; }
         public virtual DbSet<RewardsDetails> RewardsDetails { get; set; }
@@ -103,7 +104,6 @@ namespace ISD.Data.EDM
         public virtual DbSet<v_RewardExplorer> v_RewardExplorer { get; set; }
         public virtual DbSet<v_RewardUserExplorer> v_RewardUserExplorer { get; set; }
         public virtual DbSet<v_ScheduleCount> v_ScheduleCount { get; set; }
-        public virtual DbSet<v_SubServiceExplorer> v_SubServiceExplorer { get; set; }
         public virtual DbSet<v_SuburbExplorer> v_SuburbExplorer { get; set; }
         public virtual DbSet<v_UserAttendanceView> v_UserAttendanceView { get; set; }
         public virtual DbSet<v_UserExplorer> v_UserExplorer { get; set; }

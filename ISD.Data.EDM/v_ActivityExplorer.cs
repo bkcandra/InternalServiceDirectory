@@ -78,14 +78,9 @@ namespace ISD.Data.EDM
         public virtual string ProviderID { get; set; }
         public Nullable<bool> isPrimary { get; set; }
         public virtual Nullable<int> PrimaryServiceID { get; set; }
-        public Nullable<bool> MedicareCard { get; set; }
-        public Nullable<bool> Pensioner { get; set; }
-        public Nullable<bool> CityofBoroondara { get; set; }
-        public Nullable<bool> HealthcareCard { get; set; }
-        public Nullable<bool> CityofYarra { get; set; }
-        public Nullable<bool> HACC { get; set; }
         public virtual string Note { get; set; }
         public virtual string Assessment { get; set; }
         public Nullable<bool> Eligibility { get; set; }
+        public virtual string Requirements { get; set; }
     }
 }
