@@ -1,4 +1,5 @@
 ﻿@using System.Web.UI.WebControls
+@using Microsoft.AspNet.Identity;
 @using ISD.DA
 @using ISD.Data.EDM
 @using ISD.EDS
@@ -305,22 +306,12 @@
                         <div class="headline">
                             <h2>About</h2>
                         </div>
-                        <p class="margin-bottom-25 md-margin-bottom-40">Unify is an incredibly beautiful responsive Bootstrap Template for corporate and creative professionals.</p>
+                        <p class="margin-bottom-25 md-margin-bottom-40">
+                            As a health provider, IECH is a comprehensive integrated primary health service. Complex patients and clients require multidisciplinary care. The goal of the project is to create an up-to-date internal directory of services providerd by the organisation.
+
+                        </p>
                         <!-- End About -->
-                        <!-- Monthly Newsletter -->
-                        <div class="headline">
-                            <h2>Monthly Newsletter</h2>
-                        </div>
-                        <p>Subscribe to our newsletter and stay up to date with the latest news and deals!</p>
-                        <div class="footer-subsribe">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Email Address">
-                                <span class="input-group-btn">
-                                    <button class="btn-u" type="button">Subscribe</button>
-                                </span>
-                            </div>
-                        </div>
-                        <!-- End Monthly Newsletter -->
+
                     </div>
                     <!--/col-md-4-->
 
@@ -328,38 +319,43 @@
                         <!-- Recent Blogs -->
                         <div class="posts">
                             <div class="headline">
-                                <h2>Recent Blog Entries</h2>
+                                <h3>Recent Entries</h3>
                             </div>
-                            <dl class="dl-horizontal">
-                                <dt>
-                                    <a href="#">
-                                        <img src="~/assets/img/sliders/elastislide/6.jpg" alt="" />
-                                    </a>
-                                </dt>
-                                <dd>
-                                    <p><a href="#">Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template</a></p>
-                                </dd>
-                            </dl>
-                            <dl class="dl-horizontal">
-                                <dt>
-                                    <a href="#">
-                                        <img src="~/assets/img/sliders/elastislide/10.jpg" alt="" />
-                                    </a>
-                                </dt>
-                                <dd>
-                                    <p><a href="#">Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template</a></p>
-                                </dd>
-                            </dl>
-                            <dl class="dl-horizontal">
-                                <dt>
-                                    <a href="#">
-                                        <img src="~/assets/img/sliders/elastislide/11.jpg" alt="" />
-                                    </a>
-                                </dt>
-                                <dd>
-                                    <p><a href="#">Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template</a></p>
-                                </dd>
-                            </dl>
+                            @{
+
+                                var pid = User.Identity.GetUserId();
+                                var services = new ISD.Data.EDM.ISDEntities().v_ActivityExplorer.Where(x => x.ProviderID == pid).OrderByDescending(x => x.ModifiedDateTime).Take((3)).ToList();
+                                foreach (var service in services)
+                                {
+                                    <dl class="dl-horizontal">
+                                        <dt>
+                                            <a href="#">
+
+                                                @{
+                                    int imageinfo = new ISD.Data.EDM.ISDEntities().ActivityImage.Where(x => x.ActivityID == service.ID).Select(x => x.ID).FirstOrDefault();
+                                    var image = new ISD.Data.EDM.ISDEntities().ActivityImageDetail.Where(x => x.ActivityImageID == imageinfo).FirstOrDefault();
+                                    if (image == null)
+                                    {
+                                        <img src="@Url.Content("~/Assets/img/demo.jpg")" class="img-responsive" />
+                                    }
+                                    if (image != null)
+                                    {
+                                        <img src="~/ImageHandler.ashx?PID=@image.ID" class="img-responsive" />
+                                    }
+                                                }
+                                            </a>
+                                        </dt>
+                                        <dd>
+                                            <p>
+                                                @Html.ActionLink(@service.Name, "Index", "Service", new { id = service.ID }, "")
+                                            </p>
+                                            <p>
+                                                @Html.Label("", service.FullDescription.Length > 50 ? service.FullDescription.Substring(0, 50) : service.FullDescription)
+                                            </p>
+                                        </dd>
+                                    </dl>
+                                }
+                            }
                         </div>
                         <!-- End Recent Blogs -->
                     </div>
@@ -371,31 +367,15 @@
                             <h2>Contact Us</h2>
                         </div>
                         <address class="md-margin-bottom-40">
-                            25, Lorem Lis Street, Orange
+                            283 Church Street
                             <br />
-                            California, US
+                            Richmond, VIC
                             <br />
-                            Phone: 800 123 3456
+                            Phone: 03 9420 9114
                             <br />
-                            Fax: 800 123 3456
-                            <br />
-                            Email: <a href="mailto:info@anybiz.com" class="">info@anybiz.com</a>
+                            Email: <a href="mailto:info@iechs.org.au" class="">info@iechs.org.au</a>
                         </address>
                         <!-- End Contact Us -->
-                        <!-- Social Links -->
-                        <div class="headline">
-                            <h2>Stay Connected</h2>
-                        </div>
-                        <ul class="social-icons">
-                            <li><a href="#" data-original-title="Feed" class="social_rss"></a></li>
-                            <li><a href="#" data-original-title="Facebook" class="social_facebook"></a></li>
-                            <li><a href="#" data-original-title="Twitter" class="social_twitter"></a></li>
-                            <li><a href="#" data-original-title="Goole Plus" class="social_googleplus"></a></li>
-                            <li><a href="#" data-original-title="Pinterest" class="social_pintrest"></a></li>
-                            <li><a href="#" data-original-title="Linkedin" class="social_linkedin"></a></li>
-                            <li><a href="#" data-original-title="Vimeo" class="social_vimeo"></a></li>
-                        </ul>
-                        <!-- End Social Links -->
                     </div>
                     <!--/col-md-4-->
                 </div>
@@ -409,12 +389,12 @@
                 <div class="row">
                     <div class="col-md-6">
                         <p>
-                            2014 &copy; Unify. ALL Rights Reserved.
+                            2014 &copy; IECHS. ALL Rights Reserved.
                             <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
                         </p>
                     </div>
                     <div class="col-md-6">
-                        <a href="index.html">
+                        <a href="@Url.Content("~")">
                             <img class="pull-right" id="logo-footer" src="~/assets/img/logo2-default.png" alt="">
                         </a>
                     </div>

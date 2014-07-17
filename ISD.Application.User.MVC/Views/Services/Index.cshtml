@@ -80,7 +80,7 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title">
                                     <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-1" href="#Filter-Tree">
-                                        Category Tree
+                                        Categories
                                     </a>
                                 </h4>
                             </div>
@@ -148,7 +148,7 @@
                                             <label class="select select-multiple">
                                                 @Html.ListBox("clinicList", new MultiSelectList(clinics, "ID", "Name", Model.selectedClinic))
                                                 @Html.ValidationMessageFor(model => model.selectedClinic, "", new { @class = "text-danger" })
-                                            </label><div class="note"><strong>Note:</strong> hold down the ctrl/cmd button to select multiple options.</div>
+                                            </label><div class="note"><strong>Note:</strong> hold down the 'ctrl' button to select multiple options.</div>
                                         </section>
                                     </div>
                                 </div>

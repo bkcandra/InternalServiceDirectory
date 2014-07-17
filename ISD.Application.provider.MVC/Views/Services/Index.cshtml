@@ -51,28 +51,30 @@
         <!-- End Left Sidebar -->
         <!-- Right Sidebar -->
         <div class="col-md-9">
-            <div class="row">
-                <div class="col-md-6 text-left">
-                    Showing: 1 - 5 of 25 services
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 text-left">
+            @*<div class="row">
+                    <div class="col-md-6 text-left">
+                        @{
+                            if (Model.Count() == 0)
+                            {
+                                <span>Showing: 0 - @(((PagedList.IPagedList)Model).LastItemOnPage) of @(((PagedList.IPagedList)Model).TotalItemCount) services</span>
 
-                </div>
-                <div class="col-md-6 text-right">
-                    <label class="select">
-                        <select name="gender">
-                            <option disabled="" value="0" selected="">Show</option>
-                            <option value="1">5</option>
-                            <option value="2">10</option>
-                            <option value="3">25</option>
-                            <option value="4">50</option>
-                        </select>
-                        <i></i>
-                    </label>
-                </div>
-            </div>
+                            }
+                            else
+                            {
+                                <span>Showing: @(((PagedList.IPagedList)Model).FirstItemOnPage) - @(((PagedList.IPagedList)Model).LastItemOnPage) of @(((PagedList.IPagedList)Model).TotalItemCount) services</span>
+                            }
+                        }
+                    </div>
+                    <div class="col col-md-5  text-right">
+                        <label class="select">
+                            @Html.DropDownListFor(model => model.pageSize,
+                                                              new SelectList(ShowNumber,
+                                            "Value", "Text",
+                                                              Model.Show.First().Value), new { page = 1, category = Model.selectedCategory, clinic = Model.selectedClinic, search = Model.searchQuery, @onchange = "location = pageSize=this.value;" })
+                            <i></i>
+                        </label>
+                    </div>
+                </div>*@
             @foreach (var item in Model)
             {
                 <div class="funny-boxes funny-boxes-top-sea ">
@@ -89,20 +91,20 @@
                 var image = new ISD.Data.EDM.ISDEntities().ActivityImageDetail.Where(x => x.ActivityImageID == imageinfo).FirstOrDefault();
                 if (image == null)
                 {
-                    <img src="@Url.Content("~/Assets/img/demo.jpg")" class="img-responsive" />
+                            <img src="@Url.Content("~/Assets/img/demo.jpg")" class="img-responsive" />
                 }
                 if (image != null)
                 {
-                    <img src="~/ImageHandler.ashx?PID=@image.ID" class="img-responsive" />
+                            <img src="~/ImageHandler.ashx?PID=@image.ID" class="img-responsive" />
                 }
                             }
                         </div>
                         <div class="col-md-8 ">
-                            
-                                <h2>
-                                    @Html.ActionLink(item.Name, "Index", "Service", new { id = item.ID }, "")
-                                </h2>
-                            
+
+                            <h2>
+                                @Html.ActionLink(item.Name, "Index", "Service", new { id = item.ID }, "")
+                            </h2>
+
                             <p>
                                 @Html.Label("", item.FullDescription.Length > 250 ? item.FullDescription.Substring(0, 250) : item.FullDescription)
                                 @Html.ActionLink("Read more", item.Name.Replace(" ", string.Empty), "Service")
@@ -139,25 +141,25 @@
                             var cInfo = clinic.Where(c => c.ID == ct.LocationID.Value).FirstOrDefault();
 
                             <button class="btn btn-u btn-sm" data-toggle="modal" data-target="#modal-@ct.ID">@cInfo.Name</button>
-                                <div id="modal-@ct.ID" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
-                                    <div class="modal-dialog modal-sm">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                                                <h4 id="myLargeModalLabel" class="modal-title">@cInfo.Name</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <strong>Address</strong>
-                                                <p>
-                                                    @cInfo.Address
-                                                    <br />
-                                                    @cInfo.Suburb
-                                                    @state.Where(s => s.ID == cInfo.StateID).Select(s => s.StateName).FirstOrDefault(), @cInfo.PostCode
-                                                </p>
-                                            </div>
+                            <div id="modal-@ct.ID" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                                            <h4 id="myLargeModalLabel" class="modal-title">@cInfo.Name</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <strong>Address</strong>
+                                            <p>
+                                                @cInfo.Address
+                                                <br />
+                                                @cInfo.Suburb
+                                                @state.Where(s => s.ID == cInfo.StateID).Select(s => s.StateName).FirstOrDefault(), @cInfo.PostCode
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                         }
                     }
                 }
@@ -166,20 +168,32 @@
                     </div>
                 </div>
             }
-            <div class="row">
-                <div class="col-md-6 text-left">
-                    Showing: 1 - 5 of 25 services
-                </div><div class="col-md-6 text-right">
-                    <ul class="pagination">
-                        <li><a href="#">«</a></li>
-                        <li><a href="#">1</a></li>
-                        <li class="active"><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">»</a></li>
-                    </ul>
+            @if (Model.Count() == 0)
+            {
+                <div class="funny-boxes funny-boxes-top-sea ">
+                    <div class="row">
+                        No Services found
+                    </div>
                 </div>
-            </div>
+            }
+            @*<div class="row">
+                    <div class="col-md-6 text-left">
+                        @{
+                            if (Model.Count() == 0)
+                            {
+                                <span>Showing: 0 - @(((PagedList.IPagedList)Model).LastItemOnPage) of @(((PagedList.IPagedList)Model).TotalItemCount) services</span>
+
+                            }
+                            else
+                            {
+                                <span>Showing: @(((PagedList.IPagedList)Model).FirstItemOnPage) - @(((PagedList.IPagedList)Model).LastItemOnPage) of @(((PagedList.IPagedList)Model).TotalItemCount) services</span>
+                            }
+                        }
+                    </div>
+                    <div class="col-md-5 text-right">
+                        @Html.PagedListPager((PagedList.IPagedList)Model.services, page => Url.Action("Index", new { page = page, category = Model.selectedCategory, clinic = Model.selectedClinic, search = Model.searchQuery, pageSize = Model.pageSize }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET" }))
+                    </div>
+                </div>*@
             <!-- Bordered Funny Boxes -->
         </div>
         <!-- End Right Sidebar -->

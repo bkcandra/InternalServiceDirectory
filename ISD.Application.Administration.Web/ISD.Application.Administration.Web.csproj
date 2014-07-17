@@ -1289,6 +1289,13 @@
     <Content Include="Scripts\jvectormap\.DS_Store" />
     <Content Include="Scripts\slimScroll\slimScroll.jquery.json" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Requirements\Create.cshtml" />
+    <Content Include="Views\Requirements\Delete.cshtml" />
+    <Content Include="Views\Requirements\Details.cshtml" />
+    <Content Include="Views\Requirements\Edit.cshtml" />
+    <Content Include="Views\Requirements\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1427,6 +1434,7 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\RequirementsController.cs" />
     <Compile Include="Council\CouncilSetup.aspx.cs">
       <DependentUpon>CouncilSetup.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2006,7 +2014,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ISD.Core.BF\ISD.Core.BF.csproj">

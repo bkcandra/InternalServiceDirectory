@@ -445,12 +445,6 @@
 
                 <asp:ContentPlaceHolder ID="FeaturedContent" runat="server">
                 </asp:ContentPlaceHolder>
-
-
-
-
-
-
                 <!-- /.content -->
             </aside>
             <!-- /.right-side -->

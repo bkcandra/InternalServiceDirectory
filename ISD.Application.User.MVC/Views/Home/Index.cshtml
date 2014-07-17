@@ -89,8 +89,9 @@
         <!--/col-md-8-->
         <!-- Latest Shots -->
         <div class="col-md-4 posts">
-            <div class="headline"><h3>Recent Entries</h3></div>
-
+            <div class="headline">
+                <h3>Recent Entries</h3>
+            </div>
             @{
                 var services = new ISD.Data.EDM.ISDEntities().v_ActivityExplorer.OrderByDescending(x => x.ModifiedDateTime).Take((3)).ToList();
                 foreach (var service in services)
@@ -114,11 +115,10 @@
                             </a>
                         </dt>
                         <dd>
+                            <p><strong> @Html.ActionLink(@service.Name, "Index", "Service", new { id = service.ID }, "")</strong></p>
                             <p>
-                                @Html.ActionLink(@service.Name, "Index", "Service", new { id = service.ID }, "")
-                            </p>
-                            <p>
-                                @Html.Label("", service.FullDescription.Length > 50 ? service.FullDescription.Substring(0, 50) : service.FullDescription)
+
+                                @(service.FullDescription.Length > 50 ? service.FullDescription.Substring(0, 50) : service.FullDescription)...
                             </p>
                         </dd>
                     </dl>

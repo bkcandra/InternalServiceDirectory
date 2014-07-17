@@ -157,77 +157,92 @@
                                         @{
                     if (Model.Eligibility ?? false)
                     {
-                        var sReqs = Model.Requirements.Split('&');
-                        var fsReqs = sReqs[0].Split('|').FirstOrDefault();
+                        var requirements = Model.Requirements;
+                        string opt = requirements.Substring(0, 1);
                         <div class="col col-md-4">
                             <input type="hidden" name="ServiceRequirements.Index" value="@first" />
                             <div class="row">
                                 @Html.Hidden("ServiceRequirements[" + @first + "].Type", "1")
                                 <label class="input select">
-                                    <select data-val="true" data-val-number="The field LocationID must be a number." id="first" name="ServiceRequirements[@first].ValueId" class="valid">
+                                    <select data-val="true" data-val-number="The field LocationID must be a number." id="ServiceRequirements[@first].ValueId" name="ServiceRequirements[@first].ValueId" class="valid">
                                         @{
                         foreach (var req in Reqs)
                         {
-                            if (fsReqs == req.ID.ToString())
+                            if (opt == req.ID.ToString())
                             {
-                                        <option selected="selected" value="@req.ID">@req.Text</option>
+                                <option selected="selected" value="@req.ID">@req.Text</option>
                             }
                             else
                             {
-                                        <option value="@req.ID">@req.Text</option>
+                                <option value="@req.ID">@req.Text</option>
                             }
                         }
                                         }
                                     </select>
+
                                     <i></i>
                                 </label>
 
                             </div>
                         </div>
-                        foreach (var sReq in sReqs)
-                        {
-                            var SplitReqs = sReq.Split('|');
-                            foreach (var SplitReq in SplitReqs)
+                            requirements = requirements.Remove(0, 1);
+                            // We take 2 char at a time and process it
+                            while (requirements.Length != 0)
                             {
+                                opt = requirements.Substring(0, 2);
+                                var fOp1 = opt.Substring(0, 1);
+                                var fOp2 = opt.Substring(1, 1);
+                                var index = Guid.NewGuid();
+                                <div class="col col-md-4">
+                                    <button data-dismiss="alert" class="close" type="button">×</button>
+                                    <input type="hidden" name="ServiceRequirements.Index" value="@index" />
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label class="input select">
+                                                <select data-val="true" data-val-number="The field LocationID must be a number." id="ServiceRequirements[@index].Type" name="ServiceRequirements[@index].Type" class="valid">
+                                                    @{
 
-                            }
+                                if (fOp1 == "&")
+                                {
+                                            <option selected="selected" value="1">AND</option>
+                                                        <option value="2">OR</option>
+                                }
+                                else
+                                {
+                                            <option value="1">AND</option>
+                                                        <option selected="selected" value="2">OR</option>
+                                }
+                                                    }
+                                                </select>
+                                                <i></i>
+                                            </label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <label class="input select">
+                                                    <select data-val="true" data-val-number="The field LocationID must be a number." id="ServiceRequirements[@index].ValueId" name="ServiceRequirements[@index].ValueId" class="valid"> 
+                                                        @{
+                                foreach (var req in Reqs)
+                                {
+                                    if (fOp2 == req.ID.ToString())
+                                    {
+                                            <option selected="selected" value="@req.ID">@req.Text</option>
+                                    }
+                                    else
+                                    {
+                                            <option value="@req.ID">@req.Text</option>
+                                    }
+                                }
+                                                        }
+                                                    </select>
 
-                            var index = Guid.NewGuid();
-                            <div class="col col-md-4">
-                                <button data-dismiss="alert" class="close" type="button">×</button>
-                                <input type="hidden" name="ServiceRequirements.Index" value="@index" />
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label class="input select">
-                                            <select data-val="true" data-val-number="The field LocationID must be a number." id="newTimetables_ea6791dc-fc52-4d93-acbf-9303eab3867a__Timetables_0__LocationID" name="Timetables[@index].LocationID" class="valid">
-                                                @{
-                            foreach (var req in ReqsType)
-                            {
 
-                                                <option selected="selected" value="1">AND</option>
-                                                <option value="2">OR</option>
-
-                            }
-                                                }
-                                            </select>
-
-
-
-
-
-                                            <i></i>
-                                        </label>
-                                    </div>
-
-                                    <div class="col-md-7">
-                                        <label class="input select">
-                                            @Html.DropDownList("ServiceRequirements[" + @index + "].ValueId", new SelectList(Reqs, "ID", "Text", Reqs.First()))
-                                            <i></i>
-                                        </label>
+                                                    <i></i>
+</label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        }
+                                requirements = requirements.Remove(0, 2);
+                            }
                     }
                     else
                     {
@@ -265,6 +280,164 @@
                                     </section>
                                 </div>
                             </fieldset>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

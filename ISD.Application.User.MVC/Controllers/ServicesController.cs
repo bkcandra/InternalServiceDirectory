@@ -118,7 +118,13 @@ namespace ISD.Application.User.MVC.Controllers
             if (!string.IsNullOrEmpty(category))
             {
                 var cats = category.Split(',').ToList();
-                services = services.Where(x => (cats.Contains(x.CategoryID.ToString()) || cats.Contains(x.CategoryLevel1ParentID.ToString())));
+                services = services.Where(x => (cats.Contains(x.CategoryID.ToString()) ||
+                    cats.Contains(x.CategoryLevel1ParentID.ToString()) ||
+                    cats.Contains(x.CategoryLevel2ParentID.ToString()) ||
+                    cats.Contains(x.SecondaryCategoryID1.ToString()) ||
+                    cats.Contains(x.SecondaryCategoryID2.ToString()) ||
+                    cats.Contains(x.SecondaryCategoryID3.ToString()) ||
+                    cats.Contains(x.SecondaryCategoryID4.ToString())));
             }
             if (!string.IsNullOrEmpty(clinic) && clinic != "0")
             {
@@ -279,7 +285,13 @@ namespace ISD.Application.User.MVC.Controllers
             if (!string.IsNullOrEmpty(category))
             {
                 var cats = category.Split(',').ToList();
-                services = services.Where(x => (cats.Contains(x.CategoryID.ToString()) || cats.Contains(x.CategoryLevel1ParentID.ToString())));
+                services = services.Where(x => (cats.Contains(x.CategoryID.ToString()) || 
+                    cats.Contains(x.CategoryLevel1ParentID.ToString()) || 
+                    cats.Contains(x.CategoryLevel2ParentID.ToString()) || 
+                    cats.Contains(x.SecondaryCategoryID1.ToString()) ||
+                    cats.Contains(x.SecondaryCategoryID2.ToString()) ||
+                    cats.Contains(x.SecondaryCategoryID3.ToString()) ||
+                    cats.Contains(x.SecondaryCategoryID4.ToString())));
             }
             if (!string.IsNullOrEmpty(clinic) && clinic != "0")
             {
