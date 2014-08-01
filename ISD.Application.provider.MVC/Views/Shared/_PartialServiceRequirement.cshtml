@@ -1,0 +1,27 @@
+﻿@using ISD.BF;
+@{
+    var index = Guid.NewGuid();
+    var Reqs = new ISD.Data.EDM.ISDEntities().Requirements.ToList();
+    var ReqsType = BusinessFunctionComponent.RetrieveServiceRequirementsType();
+}
+<div class="col col-md-4">
+
+    <button data-dismiss="alert" class="close" type="button">×</button>
+    <input type="hidden" name="ServiceRequirements.Index" value="@index" />
+
+    <div class="row">
+        <div class="col-md-4">
+            <label class="input select">
+                @Html.DropDownList("ServiceRequirements[" + @index + "].Type", new SelectList(ReqsType, "value", "text", ReqsType.First()))
+                <i></i>
+            </label>
+        </div>
+
+        <div class="col-md-7">
+            <label class="input select">
+                @Html.DropDownList("ServiceRequirements[" + @index + "].ValueId", new SelectList(Reqs, "ID", "Text", Reqs.First()))
+                <i></i>
+            </label>
+        </div>
+    </div>
+</div>
