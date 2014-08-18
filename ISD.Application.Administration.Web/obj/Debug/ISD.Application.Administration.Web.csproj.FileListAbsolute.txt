@@ -452,3 +452,5 @@ C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Application.A
 C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Application.Administration.Web\obj\Debug\ISD.Administration.Web.pdb
 C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Application.Administration.Web\bin\MoreLinq.dll
 C:\Users\bina.candra\Documents\GitHub\InternalServiceDirectory\ISD.Application.Administration.Web\bin\MoreLinq.xml
+E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin\MoreLinq.dll
+E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin\MoreLinq.xml
