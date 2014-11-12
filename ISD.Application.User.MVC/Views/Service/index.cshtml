@@ -17,206 +17,347 @@
     </p>
     <div class="row portfolio-item margin-bottom-25">
         <!-- Content Info -->
-        <div class="col-md-6 md-margin-bottom-40">
-            <div class="row col-md-12">
-                <h2>@Model.Name</h2>
-                <p>@Html.DisplayFor(model => model.FullDescription)</p>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    @{if (!string.IsNullOrEmpty(@Model.Price))
-                    {
-                        <h2 class="heading-sm">Pricing</h2>
+        @{
+            if (Model.Images.Any())
+            {
+                <div class="col-md-6 md-margin-bottom-40">
+                    <div class="row col-md-12">
+                        <h2>@Model.Name</h2>
+                        <p>@Html.DisplayFor(model => model.FullDescription)</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @{if (!string.IsNullOrEmpty(@Model.Price))
+                            {
+                                <h2 class="heading-sm">Pricing</h2>
 
-                        <dd class="margin-bottom-5">@Model.Price</dd>
-                    }
-                    }
-                </div>
-                <div class="col-md-6">
-
-                    <h2 class="heading-sm">Address</h2>
-                    <address>
-                        <strong>@Html.DisplayFor(model => model.ProviderName)</strong><br>
-                        @Html.DisplayFor(model => model.Address)<br>
-                        @Html.DisplayFor(model => model.Suburb), @Model.StateName @Model.PostCode<br>
-                        <abbr title="Phone">P:</abbr> @Html.DisplayFor(model => model.PhoneNumber)
-                    </address>
-                    @{if (!string.IsNullOrEmpty(Model.Website))
-                    {
-                        <address>
-                            <strong>Our site</strong><br>
-                            <a href="http://@Model.Website">@Model.Website</a>
-                        </address>
-                    }
-                    }
-                </div>
-            </div><!--/row-->
-            <div class="row">
-                <div id="detailInfo" class="col-md-12 margin-bottom-25">
-
-                    <h2 class="modal-title">Summary information</h2>
-                    <div id="copyRow" class="row">
-
-
-                        <div class="col-md-12"><strong>Service name </strong>:   @Model.Name</div>
-
-                        <br />
-                        <div class="col-md-12"><strong>Requirements</strong> </div>
-                        <br />
-                        <div class="col-md-12">
-                            @{
-                                if (@Model.Eligibility ?? false)
-                                {
-                                    if (!string.IsNullOrEmpty(Model.Requirements))
-                                    {
-
-                                        <dd>
-                                            <ul>
-                                                @{
-                                        var reqArr = Model.Requirements.Split('&');
-                                        foreach (var req in reqArr)
-                                        {
-                                            <li>
-                                                @{
-                                            var orReqs = req.ToCharArray();
-                                            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                                            foreach (var orReq in orReqs)
-                                            {
-                                                if (Char.IsSymbol(orReq))
-                                                {
-                                                    if (orReq == '|')
-                                                    { sb.Append(" or "); }
-                                                    if (orReq == '&')
-                                                    { sb.Append(" and "); }
-                                                }
-                                                if (Char.IsDigit(orReq))
-                                                {
-                                                    int id = Convert.ToInt32(Char.GetNumericValue(orReq));
-                                                    var sReq = Requirements.Where(x => x.ID == id).FirstOrDefault();
-                                                    sb.Append(sReq.Text);
-                                                }
-                                            }
-                                            <span>@sb.ToString()</span>
-                                                }
-                                            </li>
-                                        }
-                                                }
-                                            </ul>
-                                        </dd>
-                                    }
-                                }
-                                else
-                                {
-                                    <dd>No requirement for this service. Please see note for more details</dd>
-                                }
+                                <dd class="margin-bottom-5">@Model.Price</dd>
+                            }
                             }
                         </div>
+                        <div class="col-md-6">
 
-                        @{
-                            if (!string.IsNullOrEmpty(@Model.Note))
+                            <h2 class="heading-sm">Address</h2>
+                            <address>
+                                <strong>@Html.DisplayFor(model => model.ProviderName)</strong><br>
+                                @Html.DisplayFor(model => model.Address)<br>
+                                @Html.DisplayFor(model => model.Suburb), @Model.StateName @Model.PostCode<br>
+                                <abbr title="Phone">P:</abbr> @Html.DisplayFor(model => model.PhoneNumber)
+                            </address>
+                            @{if (!string.IsNullOrEmpty(Model.Website))
                             {
-                                <br />
-                                <div class="col-md-12"><strong>Note</strong> </div>
-                                <div class="col-md-12">
-                                    @Model.Note
-                                </div>
-
+                                <address>
+                                    <strong>Our site</strong><br>
+                                    <a href="http://@Model.Website">@Model.Website</a>
+                                </address>
                             }
-                            if (!string.IsNullOrEmpty(@Model.Assessment))
+                            }
+                        </div>
+                    </div><!--/row-->
+                    <div class="row">
+                        <div id="detailInfo" class="col-md-12 margin-bottom-25">
+
+                            <h2 class="modal-title">Summary information</h2>
+                            <div id="copyRow" class="row">
+
+
+                                <div class="col-md-12"><strong>Service name </strong>:   @Model.Name</div>
+
+                                <br />
+                                <div class="col-md-12"><strong>Requirements</strong> </div>
+                                <br />
+                                <div class="col-md-12">
+                                    @{
+                if (@Model.Eligibility ?? false)
+                {
+                    if (!string.IsNullOrEmpty(Model.Requirements))
+                    {
+
+                        <dd>
+                            <ul>
+                                @{
+                        var reqArr = Model.Requirements.Split('&');
+                        foreach (var req in reqArr)
+                        {
+                            <li>
+                                @{
+                            var orReqs = req.ToCharArray();
+                            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                            foreach (var orReq in orReqs)
                             {
-
-                                <br />
-                                <div class="col-md-12"><strong>Assessment</strong> </div>
-                                <div class="col-md-12">
-                                    @Model.Assessment
-                                </div>
-
-
+                                if (Char.IsSymbol(orReq))
+                                {
+                                    if (orReq == '|')
+                                    { sb.Append(" or "); }
+                                    if (orReq == '&')
+                                    { sb.Append(" and "); }
+                                }
+                                if (Char.IsDigit(orReq))
+                                {
+                                    int id = Convert.ToInt32(Char.GetNumericValue(orReq));
+                                    var sReq = Requirements.Where(x => x.ID == id).FirstOrDefault();
+                                    sb.Append(sReq.Text);
+                                }
                             }
+                            <span>@sb.ToString()</span>
+                                }
+                            </li>
                         }
+                                }
+                            </ul>
+                        </dd>
+                    }
+                }
+                else
+                {
+                    <dd>No requirement for this service. Please see note for more details</dd>
+                }
+                                    }
+                                </div>
+
+                                @{
+                if (!string.IsNullOrEmpty(@Model.Note))
+                {
+                    <br />
+                                    <div class="col-md-12"><strong>Note</strong> </div>
+                                    <div class="col-md-12">
+                                        @Model.Note
+                                    </div>
+
+                }
+                if (!string.IsNullOrEmpty(@Model.Assessment))
+                {
+
+                    <br />
+                                    <div class="col-md-12"><strong>Assessment</strong> </div>
+                                    <div class="col-md-12">
+                                        @Model.Assessment
+                                    </div>
+
+
+                }
+                                }
 
 
 
 
 
 
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- End Content Info -->
-        <!--tagbox-->
-        <!-- Carousel -->
-        <div class="col-md-6">
-            <div class="row margin-bottom-10">
-                @Html.Partial("_PartialServiceImageView", Model.Images)
-            </div>
-            <div class="row margin-bottom-10" style=" text-align:center">
-                <button class="btn btn-u btn-u-blue" id="btnShowInfo">Select information</button>
-                <button class="btn btn-u btn-u-blue" id="btnCopy" data-clipboard-target="copyRow">Copy</button>
-            </div>
-        </div>
+            }
+            else
+            {
+                <div class="col-md-12 md-margin-bottom-40">
+                    <div class="row col-md-12">
+                        <h2>@Model.Name</h2>
+                        <p>@Html.DisplayFor(model => model.FullDescription)</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @{if (!string.IsNullOrEmpty(@Model.Price))
+                            {
+                                <h2 class="heading-sm">Pricing</h2>
+
+                                <dd class="margin-bottom-5">@Model.Price</dd>
+                            }
+                            }
+                        </div>
+                        <div class="col-md-6">
+
+                            <h2 class="heading-sm">Address</h2>
+                            <address>
+                                <strong>@Html.DisplayFor(model => model.ProviderName)</strong><br>
+                                @Html.DisplayFor(model => model.Address)<br>
+                                @Html.DisplayFor(model => model.Suburb), @Model.StateName @Model.PostCode<br>
+                                <abbr title="Phone">P:</abbr> @Html.DisplayFor(model => model.PhoneNumber)
+                            </address>
+                            @{if (!string.IsNullOrEmpty(Model.Website))
+                            {
+                                <address>
+                                    <strong>Our site</strong><br>
+                                    <a href="http://@Model.Website">@Model.Website</a>
+                                </address>
+                            }
+                            }
+                        </div>
+                    </div><!--/row-->
+                    <div class="row">
+                        <div id="detailInfo" class="col-md-12 margin-bottom-25">
+
+                            <h2 class="modal-title">Summary information</h2>
+                            <div id="copyRow" class="row">
 
 
-        <!-- End Carousel -->
-        @*<div class="col-md-12">
-                @Html.Partial("_PartialServices", Model.Services)
-            </div>*@
+                                <div class="col-md-12"><strong>Service name </strong>:   @Model.Name</div>
+
+                                <br />
+                                <div class="col-md-12"><strong>Requirements</strong> </div>
+                                <br />
+                                <div class="col-md-12">
+                                    @{
+                if (@Model.Eligibility ?? false)
+                {
+                    if (!string.IsNullOrEmpty(Model.Requirements))
+                    {
+
+                        <dd>
+                            <ul>
+                                @{
+                        var reqArr = Model.Requirements.Split('&');
+                        foreach (var req in reqArr)
+                        {
+                            <li>
+                                @{
+                            var orReqs = req.ToCharArray();
+                            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                            foreach (var orReq in orReqs)
+                            {
+                                if (Char.IsSymbol(orReq))
+                                {
+                                    if (orReq == '|')
+                                    { sb.Append(" or "); }
+                                    if (orReq == '&')
+                                    { sb.Append(" and "); }
+                                }
+                                if (Char.IsDigit(orReq))
+                                {
+                                    int id = Convert.ToInt32(Char.GetNumericValue(orReq));
+                                    var sReq = Requirements.Where(x => x.ID == id).FirstOrDefault();
+                                    sb.Append(sReq.Text);
+                                }
+                            }
+                            <span>@sb.ToString()</span>
+                                }
+                            </li>
+                        }
+                                }
+                            </ul>
+                        </dd>
+                    }
+                }
+                else
+                {
+                    <dd>No requirement for this service. Please see note for more details</dd>
+                }
+                                    }
+                                </div>
+
+                                @{
+                if (!string.IsNullOrEmpty(@Model.Note))
+                {
+                    <br />
+                                    <div class="col-md-12"><strong>Note</strong> </div>
+                                    <div class="col-md-12">
+                                        @Model.Note
+                                    </div>
+
+                }
+                if (!string.IsNullOrEmpty(@Model.Assessment))
+                {
+
+                    <br />
+                                    <div class="col-md-12"><strong>Assessment</strong> </div>
+                                    <div class="col-md-12">
+                                        @Model.Assessment
+                                    </div>
 
 
-    </div>
+                }
+                                }
 
 
 
-    <div class="row">
-        <div class="col-md-12">
-            @Html.Partial("_PartialServiceClinicians", Model.Clinicians)
-        </div>
-    </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        }
+
+
+
+
+
+
+                    <!-- End Content Info -->
+                    <!--tagbox-->
+                    <!-- Carousel -->
+                    @if (Model.Images.Any())
+        {
+                        <div class="col-md-6">
+                            <div class="row margin-bottom-10">
+                                @Html.Partial("_PartialServiceImageView", Model.Images)
+                            </div>
+                        </div>
+        }
+
+
+
+                    <!-- End Carousel -->
+                    @*<div class="col-md-12">
+                            @Html.Partial("_PartialServices", Model.Services)
+                        </div>*@
+
+
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.Partial("_PartialServiceClinicians", Model.Clinicians)
+                    </div>
+                </div>
 
     <!--/row-->
-    <p class="text-right">
-        @Html.ActionLink("Edit Primary", "Edit", new { id = Model.ID }) |
-        @Html.ActionLink("Back to List", "", "Services")
-    </p>
-    <div class="margin-bottom-20 clearfix"></div>
-</div>
-<!--[if lt IE 7]> <![endif]-->
-<script src="~/Content/ZeroClipboard-1.17/ZeroClipboard.min.js"></script>
-<script language="JavaScript">
-    var clip = new ZeroClipboard(document.getElementById('btnCopy'), {
-        moviePath: "@Url.Content("~/Content/ZeroClipboard-1.17/ZeroClipboard.swf")"
-    });
-    clip.on('complete', function (client, args) {
-        $("#alert").fadein()
-    });
+                <p class="text-right">
+                    @Html.ActionLink("Back to List", "", "Services")
+                </p>
+                <div class="margin-bottom-20 clearfix"></div>
+            </div>
+            <!--[if lt IE 7]> <![endif]-->
+            <script src="~/Content/ZeroClipboard-1.17/ZeroClipboard.min.js"></script>
+            <script language="JavaScript">
+                var clip = new ZeroClipboard(document.getElementById('btnCopy'), {
+                    moviePath: "@Url.Content("~/Content/ZeroClipboard-1.17/ZeroClipboard.swf")"
+                });
+                clip.on('complete', function (client, args) {
+                    $("#alert").fadein()
+                });
 
 
 
-    $("#btnShowInfo").click(function () {
-        $("#detailInfo").show();
-        SelectText("copyRow");
-    })
-    function SelectText(element) {
-        var doc = document
-            , text = doc.getElementById(element)
-            , range, selection
-        ;
-        if (doc.body.createTextRange) {
-            range = document.body.createTextRange();
-            range.moveToElementText(text);
-            range.select();
-        } else if (window.getSelection) {
-            selection = window.getSelection();
-            range = document.createRange();
-            range.selectNodeContents(text);
-            selection.removeAllRanges();
-            selection.addRange(range);
-        }
-    }
-    $(document).ready(function () {
-        $("#detailInfo").hide();
-        init();
-    });
+                $("#btnShowInfo").click(function () {
+                    $("#detailInfo").show();
+                    SelectText("copyRow");
+                })
+                function SelectText(element) {
+                    var doc = document
+                        , text = doc.getElementById(element)
+                        , range, selection
+                    ;
+                    if (doc.body.createTextRange) {
+                        range = document.body.createTextRange();
+                        range.moveToElementText(text);
+                        range.select();
+                    } else if (window.getSelection) {
+                        selection = window.getSelection();
+                        range = document.createRange();
+                        range.selectNodeContents(text);
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+                    }
+                }
+                $(document).ready(function () {
+                    $("#detailInfo").hide();
+                    init();
+                });
 
-</script>
+            </script>

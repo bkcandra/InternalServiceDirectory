@@ -18,12 +18,12 @@ using BCUtility;
 
 namespace ISD.Application.User.MVC.Controllers
 {
-    
+
     public class ServiceController : Controller
     {
         private ISDEntities db = new ISDEntities();
         // GET: Service
-        public async Task<ActionResult> Index(int? id)
+        public async Task<ActionResult> Index(int? id, string name = "")
         {
             if (id == null)
             {

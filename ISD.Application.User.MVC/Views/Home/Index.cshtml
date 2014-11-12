@@ -3,63 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*<div class="fullwidthbanner-container">
-        <div class="fullwidthbanner">
-            <ul>
-                <!-- THE FIRST SLIDE -->
-                <li data-transition="3dcurtain-vertical" data-slotamount="1" data-masterspeed="300" data-thumb="assets/img/sliders/revolution/thumbs/thumb1.jpg">
-                    <!-- THE MAIN IMAGE IN THE FIRST SLIDE -->
-                    <img src="@Url.Content("~/assets/img/banner/banner1.jpg")" />
-                    <!-- <div class="caption large_text sfb bg-black-opacity"
-                         data-x="176"
-                         data-y="12"
-                         data-speed="300"
-                         data-start="800"
-                         data-easing="easeOutExpo">
-                         OVER
-                          <span style="color: #ffcc00;">7000</span>
-                         SATISFIED CUSTOMERS
-                     </div>-->
-                </li>
 
-                <!-- THE SECOND SLIDE -->
-                <li data-transition="papercut" data-slotamount="1" data-masterspeed="300" data-delay="9400" data-thumb="assets/img/sliders/revolution/thumbs/thumb2.jpg">
-
-                    <img src="Assets/img/banner/banner2.jpg" />
-
-                </li>
-
-                <!-- THE THIRD SLIDE -->
-                <li data-transition="slideleft" data-slotamount="1" data-masterspeed="300" data-thumb="assets/img/sliders/revolution/thumbs/thumb3.jpg">
-
-                    <img src="Assets/img/banner/banner3.jpg" />
-                </li>
-
-                <li data-transition="flyin" data-slotamount="1" data-masterspeed="300" data-thumb="assets/img/sliders/revolution/thumbs/thumb4.jpg">
-
-                    <img src="Assets/img/banner/banner4.jpg" />
-                </li>
-                <li data-transition="flyin" data-slotamount="1" data-masterspeed="300" data-thumb="assets/img/sliders/revolution/thumbs/thumb4.jpg">
-
-                    <img src="Assets/img/banner/banner5.jpg" />
-                </li>
-                <li data-transition="flyin" data-slotamount="1" data-masterspeed="300" data-thumb="assets/img/sliders/revolution/thumbs/thumb4.jpg">
-
-                    <img src="Assets/img/banner/banner6.jpg" />
-                </li>
-                <li data-transition="flyin" data-slotamount="1" data-masterspeed="300" data-thumb="assets/img/sliders/revolution/thumbs/thumb4.jpg">
-
-                    <img src="Assets/img/banner/banner7.jpg" />
-                </li>
-                <li data-transition="flyin" data-slotamount="1" data-masterspeed="300" data-thumb="assets/img/sliders/revolution/thumbs/thumb4.jpg">
-
-                    <img src="Assets/img/banner/banner8.jpg" />
-                </li>
-            </ul>
-
-            <div class="tp-bannertimer tp-bottom"></div>
-        </div>
-    </div>*@
 <!--=== End Slider ===-->
 <!--=== Content Part ===-->
 <div class="container content">
@@ -72,7 +16,7 @@
 
     <div class="row margin-bottom-20">
         <!-- Welcome Block -->
-        <div class="col-md-8 md-margin-bottom-40">
+        <div class="col-md-12 md-margin-bottom-40">
             <div class="headline">
                 <h2>Welcome to the Internal Service Directory</h2>
             </div>
@@ -86,46 +30,7 @@
                 </div>
             </div>
         </div>
-        <!--/col-md-8-->
-        <!-- Latest Shots -->
-        <div class="col-md-4 posts">
-            <div class="headline">
-                <h3>Recent Entries</h3>
-            </div>
-            @{
-                var services = new ISD.Data.EDM.ISDEntities().v_ActivityExplorer.OrderByDescending(x => x.ModifiedDateTime).Take((3)).ToList();
-                foreach (var service in services)
-                {
-                    <dl class="dl-horizontal">
-                        <dt>
-                            <a href="#">
 
-                                @{
-                    int imageinfo = new ISD.Data.EDM.ISDEntities().ActivityImage.Where(x => x.ActivityID == service.ID).Select(x => x.ID).FirstOrDefault();
-                    var image = new ISD.Data.EDM.ISDEntities().ActivityImageDetail.Where(x => x.ActivityImageID == imageinfo).FirstOrDefault();
-                    if (image == null)
-                    {
-                        <img src="@Url.Content("~/Assets/img/demo.jpg")" class="img-responsive" />
-                    }
-                    if (image != null)
-                    {
-                        <img src="~/ImageHandler.ashx?PID=@image.ID" class="img-responsive" />
-                    }
-                                }
-                            </a>
-                        </dt>
-                        <dd>
-                            <p><strong> @Html.ActionLink(@service.Name, "Index", "Service", new { id = service.ID }, "")</strong></p>
-                            <p>
-
-                                @(service.FullDescription.Length > 50 ? service.FullDescription.Substring(0, 50) : service.FullDescription)...
-                            </p>
-                        </dd>
-                    </dl>
-                }
-            }
-        </div>
-        <!--/col-md-4-->
     </div>
 
     <div class="clearfix margin-bottom-30"></div>
