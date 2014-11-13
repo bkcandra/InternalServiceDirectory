@@ -18,8 +18,13 @@ using System.Web.UI.WebControls;
 
 namespace ISD.BF
 {
+
     public class BusinessFunctionComponent
     {
+        private ISDEntities db = new ISDEntities();
+
+
+
         #region category
         public bool DeleteCategories(int categoryID)
         {
@@ -969,10 +974,10 @@ namespace ISD.BF
                     }
                     else if (EmailTemplateType == (int)SystemConstants.EmailTemplateType.ForgotPassword)
                     {
-                        emTemp.EmailBody = emTemp.EmailBody.Replace("[@fullname]", drprov.FirstName + " " + drprov.LastName);
+                        emTemp.EmailBody = emTemp.EmailBody.Replace("[@fullname]", drprov.Email);
                         emTemp.EmailBody = emTemp.EmailBody.Replace("[@username]", drprov.Username);
-                        emTemp.EmailBody = emTemp.EmailBody.Replace("[@recoverylinkwithtoken]", SystemConstants.CustomerUrl + "Account/PasswordRecovery.aspx?" + SystemConstants.token + "=" + ConfirmationUrl);
-                        emTemp.EmailBody = emTemp.EmailBody.Replace("[@cancelregistration]", SystemConstants.CustomerUrl + "Account/CancelAccount.aspx?" + SystemConstants.userID + "=" + userID);
+                        emTemp.EmailBody = emTemp.EmailBody.Replace("[@recoverylinkwithtoken]", ConfirmationUrl);
+                        //emTemp.EmailBody = emTemp.EmailBody.Replace("[@cancelregistration]", SystemConstants.CustomerUrl + "Account/CancelAccount.aspx?" + SystemConstants.userID + "=" + userID);
                     }
                     else if (EmailTemplateType == (int)SystemConstants.EmailTemplateType.Expired2week)
                     {
@@ -1072,6 +1077,17 @@ namespace ISD.BF
                 }
             }
 
+        }
+
+        public void ParseEmail(ref String template, List<ListItem> Texts)
+        {
+            foreach (var item in Texts)
+            {
+                if (!item.Text.Equals(item.Value))
+                {
+                    template = template.Replace(item.Text, item.Value);
+                }
+            }
         }
 
         #endregion
@@ -1475,6 +1491,13 @@ namespace ISD.BF
 
 
         #endregion
+
+        public class ReminderEmail
+        {
+            public String EmailAddress { get; set; }
+            public String Subject { get; set; }
+            public String Body { get; set; }
+        }
 
         public string GenerateUserRefID(string firstName, string LastName)
         {
@@ -1971,8 +1994,6 @@ namespace ISD.BF
             else return false;
         }
 
-
-
         public DataSetComponent.ActivityScheduleGridDataTable RetrieveTimetableGrid(int startIndex, int amount, string activityID, string sortExpression)
         {
             var slots = new DataAccessComponent().RetrieveActivitySchedules(Convert.ToInt32(activityID));
@@ -2146,7 +2167,6 @@ namespace ISD.BF
                 trans.Complete();
             }
         }
-
 
         #region UserImage
         public void CreateUserImage(DataSetComponent.UserImageDetailRow dr, out int imageID, int filesize)
@@ -2777,5 +2797,77 @@ namespace ISD.BF
         #endregion
     }
 
+    public class EmailParser
+    {
+        EmailParser()
+        {
+            TemplateText = new List<ListItem>();
+        }
+        public EmailParser(int TemplateId)
+        {
+            TemplateText = new List<ListItem>();
+            if (TemplateId == (int)SystemConstants.EmailTemplateType.ProviderWelcomeEmail || TemplateId == (int)SystemConstants.EmailTemplateType.WelcomeEmail)
+            {
+                TemplateText.Add(new ListItem() { Text = "[@Fullname]" });
+                TemplateText.Add(new ListItem() { Text = "[@LoginUrl]" });
+                TemplateText.Add(new ListItem() { Text = "[@EmailAddress]" });
+                TemplateText.Add(new ListItem() { Text = "[@ConfirmationTokenWithUrl]" });
+                TemplateText.Add(new ListItem() { Text = "[@Token]" });
+                TemplateText.Add(new ListItem() { Text = "[@ConfirmationUrl]" });
+                TemplateText.Add(new ListItem() { Text = "[@CancelRegistration]" });
+                TemplateText.Add(new ListItem() { Text = "[@ResetPasswordUrl]" });
+
+            }
+            else if (TemplateId == (int)SystemConstants.EmailTemplateType.ProviderConfirmationEmail || TemplateId == (int)SystemConstants.EmailTemplateType.ConfirmationEmail)
+            {
+                TemplateText.Add(new ListItem() { Text = "[@Fullname]" });
+                TemplateText.Add(new ListItem() { Text = "[@LoginUrl]" });
+                TemplateText.Add(new ListItem() { Text = "[@EmailAddress]" });
+                TemplateText.Add(new ListItem() { Text = "[@ConfirmationTokenWithUrl]" });
+                TemplateText.Add(new ListItem() { Text = "[@Token]" });
+                TemplateText.Add(new ListItem() { Text = "[@ConfirmationUrl]" });
+                TemplateText.Add(new ListItem() { Text = "[@CancelRegistration]" });
+                TemplateText.Add(new ListItem() { Text = "[@ResetPasswordUrl]" });
+
+            }
+            else if (TemplateId == (int)SystemConstants.EmailTemplateType.ForgotPassword)
+            {
+                TemplateText.Add(new ListItem() { Text = "[@Fullname]" });
+                TemplateText.Add(new ListItem() { Text = "[@EmailAddress]" });
+                TemplateText.Add(new ListItem() { Text = "[@RecoveryLinkWithToken]" });
+                TemplateText.Add(new ListItem() { Text = "[@Token]" });
+                TemplateText.Add(new ListItem() { Text = "[@CancelRegistration]" });
+            }
+           
+                       else if (TemplateId == (int)SystemConstants.EmailTemplateType.Expired)
+            {
+                TemplateText.Add(new ListItem() { Text = "[@Fullname]" });
+                TemplateText.Add(new ListItem() { Text = "[@NumberOfRequest]" });
+                TemplateText.Add(new ListItem() { Text = "[@RequestList]" });
+                TemplateText.Add(new ListItem() { Text = "[@EmailAddress]" });
+                TemplateText.Add(new ListItem() { Text = "[@SiteUrl]" });
+            }
+            else if (TemplateId == (int)SystemConstants.EmailTemplateType.Expired1week)
+            {
+                TemplateText.Add(new ListItem() { Text = "[@Fullname]" });
+                TemplateText.Add(new ListItem() { Text = "[@NumberOfRequest]" });
+                TemplateText.Add(new ListItem() { Text = "[@EmailAddress]" });
+                TemplateText.Add(new ListItem() { Text = "[@SiteUrl]" });
+                TemplateText.Add(new ListItem() { Text = "[@InstitutionName]" });
+            }
+            else if (TemplateId == (int)SystemConstants.EmailTemplateType.Expired2week)
+            {
+                TemplateText.Add(new ListItem() { Text = "[@Fullname]" });
+                TemplateText.Add(new ListItem() { Text = "[@PlanPrice]" });
+                TemplateText.Add(new ListItem() { Text = "[@PlanName]" });
+                TemplateText.Add(new ListItem() { Text = "[@ExpiryDate]" });
+                TemplateText.Add(new ListItem() { Text = "[@EmailAddress]" });
+                TemplateText.Add(new ListItem() { Text = "[@InvoiceNumber]" });
+
+            }
+        }
+
+        public List<ListItem> TemplateText { get; set; }
+    }
 
 }

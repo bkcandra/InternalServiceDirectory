@@ -174,7 +174,6 @@ E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin\System.Net.Http.Primitives.dll
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin\System.Spatial.dll
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin\System.Web.Helpers.dll
-E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin\System.Web.Mvc.dll
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin\System.Web.Optimization.dll
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin\System.Web.Providers.dll
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin\System.Web.Razor.dll
@@ -222,7 +221,6 @@ E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin\System.Web.Webpages.Deployment.xml
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin\System.Web.Webpages.Razor.xml
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin\System.Web.Helpers.xml
-E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin\System.Web.Mvc.xml
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin\EntityFramework.xml
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin\EntityFramework.SqlServer.xml
 E:\Work\Projects\InternalServiceDirectory\ISD.Application.Administration.Web\bin\Microsoft.Owin.xml

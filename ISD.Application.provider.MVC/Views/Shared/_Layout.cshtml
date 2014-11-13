@@ -32,7 +32,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/unifi")
-    @RenderSection("scripts", required: false)
+    @RenderSection("styles", required: false)
     <script type="text/javascript">
         $(document).ready(function () {
             App.init();
@@ -408,4 +408,5 @@
 
 
 </body>
+@RenderSection("scripts", required: false)
 </html>

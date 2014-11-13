@@ -1,0 +1,101 @@
+﻿@model ISD.Data.EDM.Menu
+@using ISD.Data.EDM
+@using ISD.Util
+
+    @{
+        ViewBag.Title = "Create";
+
+    }
+
+    <div class="container content">
+        <div class="col-md-12 col-lg-6">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Create a new navigation</h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                @using (Html.BeginForm("Create", "Navigation", FormMethod.Post, new { Id = "formNav" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="box-body">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MenuType, htmlAttributes: new { @class = "control-label" })
+                            <select id="MenuType" name="MenuType" class="form-control">
+                                <option value="@((int)SystemConstants.MenuTargetType.Page)">Page</option>
+                                <option value="@((int)SystemConstants.MenuTargetType.ExternalLink)">External Link</option>
+                            </select>
+                        </div>
+                        <div id="ExternalText" class="form-group">
+                            <label>Link Text</label>
+                            @Html.Editor("LinkText", new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="form-group">
+                            <label>Target</label>
+                            @Html.Hidden("ParentMenuID","0")
+                            <select id="ValueSelect" class="form-control">
+                                @foreach (var item in new ISDEntities().Page.ToList())
+                                {
+                                    <option value="@item.ID">@item.Name</option>
+                                }
+                            </select>
+                            <input id="LinkID" type="text" class="form-control" />
+                            @Html.ValidationMessageFor(model => model.LinkID, "", new { @class = "text-danger" })
+                        </div>
+                        
+                        <div class="box-footer">
+                            <button id="btnNavSubmit" type="button" class="btn btn-primary">Create</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            @Html.ActionLink("Back to List", null, "Email", null, null)
+        </div>
+        <!-- /.row -->
+    </div>
+    @section Scripts {
+        <script>
+            $(document).ready(function () {
+                checkTargetType();
+            });
+
+            $("#MenuType").change(function () {
+                checkTargetType();
+            })
+
+            function checkTargetType() {
+                var asd = $("#MenuType").val();
+                if ($("#MenuType").val() != 4) {
+                    $("#LinkID").val("Http://");
+                    $("#LinkID").show();
+                    $("#ExternalText").show();
+                    $("#ValueSelect").hide();
+                }
+                else {
+                    
+                    $("#ExternalText").hide();
+                    $("#LinkID").hide();
+                    $("#ValueSelect").show();
+                }
+            }
+
+            $("#btnNavSubmit").click(function () {
+                var target, restrict;
+                if ($("#MenuType").val() != 4) {
+                    target = $("#LinkID").val();
+                }
+                else {
+                    target = $("#ValueSelect").val();
+                }
+
+                
+                $("#Value").val(target);
+                formNav.submit();
+            })
+        </script>
+        @Scripts.Render("~/bundles/jqueryval")
+    }

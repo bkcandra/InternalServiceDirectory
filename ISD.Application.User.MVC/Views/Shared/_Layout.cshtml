@@ -325,8 +325,14 @@
                             <h2>About</h2>
                         </div>
                         <p class="margin-bottom-25 md-margin-bottom-40">
-                            As a health provider, IECH is a comprehensive integrated primary health service. Complex patients and clients require multidisciplinary care. The goal of the project is to create an up-to-date internal directory of services providerd by the organisation.
-                            
+                            @{
+                                var page = new ISD.Data.EDM.ISDEntities().Page.Where(x => x.Name == "Footer").FirstOrDefault();
+                                if (page != null)
+                                {
+                                      @Html.Raw(page.PageContent)
+                                }
+                            }
+
                         </p>
                         <!-- End About -->
 

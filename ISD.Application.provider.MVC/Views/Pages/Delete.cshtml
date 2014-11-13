@@ -1,0 +1,29 @@
+﻿@model ISD.Data.EDM.Page
+
+@{
+    ViewBag.Title = "Delete";
+}
+<div class="container content">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title">Page preview</h3>
+            </div>
+            <div class="box-body">
+                @Html.Raw(Model.PageContent)
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+    <!-- /.row -->
+</div>

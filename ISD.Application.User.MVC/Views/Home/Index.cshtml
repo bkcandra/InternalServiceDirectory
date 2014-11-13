@@ -16,20 +16,31 @@
 
     <div class="row margin-bottom-20">
         <!-- Welcome Block -->
-        <div class="col-md-12 md-margin-bottom-40">
-            <div class="headline">
-                <h2>Welcome to the Internal Service Directory</h2>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <img alt="" src="assets/img/new/img11.jpg" class="img-responsive margin-bottom-20">
+        @{
+            var page = new ISD.Data.EDM.ISDEntities().Page.Where(x => x.Name == "Home").FirstOrDefault();
+            if (page == null)
+            {
+                <div class="col-md-12 md-margin-bottom-40">
+                    <div class="headline">
+                        <h2>Welcome to the Internal Service Directory</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <img alt="" src="assets/img/new/img11.jpg" class="img-responsive margin-bottom-20">
+                        </div>
+                        <div class="col-sm-8">
+                            <p>We aspire to be an integrated health service. This internal service provider allows clinicians to find services for clients or patients. </p>
+                            <p>To begin click <a href="@Url.Content("~/Services")">Find a Service</a></p>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm-8">
-                    <p>We aspire to be an integrated health service. This internal service provider allows clinicians to find services for clients or patients. </p>
-                    <p>To begin click <a href="@Url.Content("~/Services")">Find a Service</a></p>
-                </div>
-            </div>
-        </div>
+
+            }
+            else
+            {
+                @Html.Raw(page.PageContent)
+            }
+        }
 
     </div>
 

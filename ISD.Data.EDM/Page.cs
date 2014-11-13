@@ -11,15 +11,19 @@ namespace ISD.Data.EDM
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Page
     {
         public int ID { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Title { get; set; }
         public string MetaTag { get; set; }
         public string MetaDescription { get; set; }
         public Nullable<int> PageType { get; set; }
+        [Required]
         public string PageContent { get; set; }
         public Nullable<System.DateTime> CreatedDatetime { get; set; }
         public Nullable<System.DateTime> ModifiedDatetime { get; set; }

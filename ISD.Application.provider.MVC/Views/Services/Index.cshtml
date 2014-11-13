@@ -26,27 +26,7 @@
     <div class="row blog-page">
         <!-- Left Sidebar -->
         <div class="col-md-3">
-            <ul class="list-group sidebar-nav-v1" id="sidebar-nav">
-                <!-- Service -->
-                <li class="list-group-item list-toggle active">
-                    <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-service" class="collapsed">Services</a>
-                    <ul id="collapse-service" class="collapse in" style="height: auto   ;">
-                        <li class="active"><a href="@Url.Content("~/Services") "><i class="fa fa-bars"></i>Service list</a></li>
-                        <li><a href="@Url.Content("~/Service/create") "><i class="fa fa-chevron-circle-right"></i></i>Create a service</a></li>
-                    </ul>
-                </li>
-                <li class="list-group-item list-toggle">
-                    <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-clinicians" class="collapsed">Clinicians</a>
-                    <ul id="collapse-clinicians" class="collapse" style="height: 0px;">
-                        <li><a href="@Url.Content("~/Clinicians") "><i class="fa fa-bars"></i>Clinician list</a></li>
-                        <li><a href="@Url.Content("~/clinician/create") "><i class="fa fa-chevron-circle-right"></i></i>add a clinician</a></li>
-
-
-
-                    </ul>
-                </li>
-                <!-- End Service -->
-            </ul>
+           @Html.Partial("_PartialListingSidebar")
         </div>
         <!-- End Left Sidebar -->
         <!-- Right Sidebar -->
@@ -102,12 +82,12 @@
                         <div class="col-md-8 ">
 
                             <h2>
-                                @Html.ActionLink(item.Name, "Index", "Service", new { id = item.ID }, "")
+                                @Html.ActionLink(item.Name, "Index", "Service", new { id = item.ID, name = item.Name.Replace(" ", string.Empty) }, null)
                             </h2>
 
                             <p>
                                 @Html.Label("", item.FullDescription.Length > 250 ? item.FullDescription.Substring(0, 250) : item.FullDescription)
-                                @Html.ActionLink("Read more", item.Name.Replace(" ", string.Empty), "Service")
+                                @Html.ActionLink("Read more", "Index", "Service", new { id = item.ID, name = item.Name.Replace(" ", string.Empty) }, null)
                             </p>
                             <p>
                                 <uc1:ScheduleViewerUC runat="server" ID="ScheduleViewerUC" />

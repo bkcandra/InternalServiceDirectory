@@ -1,0 +1,91 @@
+﻿@model ISD.Data.EDM.Page
+
+@{
+    ViewBag.Title = "Create";
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="//cdn.ckeditor.com/4.4.4/standard/ckeditor.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            // Replace the <textarea id="editor1"> with a CKEditor
+            // instance, using default configuration.
+            CKEDITOR.replace('PageContent', {
+                htmlEncodeOutput: true
+            });
+        });
+    </script>
+
+}
+
+<div class="container content">
+    <div class="col-md-6">
+        <div class="box-header">
+            <h3 class="box-title">Create a new page</h3>
+        </div><!-- /.box-header -->
+        <!-- form start -->
+        @using (Html.BeginForm("Create", "Pages", FormMethod.Post, new { Id = "PageCreate" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="box-body">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Name</label>
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Title</label>
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">MetaTag</label>
+                    @Html.EditorFor(model => model.MetaTag, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MetaTag, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">MetaDescription</label>
+                    @Html.EditorFor(model => model.MetaDescription, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MetaDescription, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PageContent, htmlAttributes: new { @class = "control-label" })
+                    @Html.TextAreaFor(x => x.PageContent, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PageContent, "", new { @class = "text-danger" })
+                
+                </div>
+            </div>
+
+
+            <div class="box-footer">
+                <button id="btnCreatePage" type="submit" class="btn btn-primary">Create</button>
+            </div>
+        }
+
+    </div>
+    <div class="col-md-6">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title">Note</h3>
+            </div><!-- /.box-header -->
+            <!-- form start -->
+            <div class="box-body">
+                By design, page with the following name will automatically be used for site content.
+                <p>
+                    <ol>
+                        <li>"Home" : Website homepage for all user.  </li>
+                        <li>"Footer" : Footer section.</li>
+                        <li>"TermsAndCondition" : Terms and condition page.</li>
+
+                    </ol>
+                </p>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-12">
+        @Html.ActionLink("Back to List", "index", "Pages", null, null)
+    </div>
+    <!-- /.row -->
+</div>

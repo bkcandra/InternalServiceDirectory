@@ -22,9 +22,19 @@ namespace ISD.Application.provider.MVC.Controllers
         {
 
             var provID = User.Identity.GetUserId();
-            var services = db.v_ActivityExplorer.Where(x => x.ProviderID == provID).OrderByDescending(x => x.ModifiedDateTime).Skip((page ?? 0) * (pageSize ?? 50)).Take((pageSize ?? 50)).ToListAsync();
+            var userRoles = db.AspNetUsers.Where(x => x.Email == User.Identity.Name).FirstOrDefault().AspNetRoles.Select(r => r.Name);
+            if (userRoles.Contains(SystemConstants.AdministratorRole))
+            {
+                var services = db.v_ActivityExplorer.OrderByDescending(x => x.ModifiedDateTime).Skip((page ?? 0) * (pageSize ?? 50)).Take((pageSize ?? 50)).ToListAsync();
+                return View(await services);
+            }
+            else
+            {
+                var services = db.v_ActivityExplorer.Where(x => x.ProviderID == provID).OrderByDescending(x => x.ModifiedDateTime).Skip((page ?? 0) * (pageSize ?? 50)).Take((pageSize ?? 50)).ToListAsync();
+                return View(await services);
+            }
 
-            return View(await services);
+
         }
     }
 }
