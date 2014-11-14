@@ -20,21 +20,21 @@ namespace ISD.Application.provider.MVC
             );
             routes.MapRoute(
                name: "ISDPage",
-               url: "Pages/{name}",
-               defaults: new { controller = "Pages", action = "Index" }
+               url: "Page/{name}",
+               defaults: new { controller = "Page", action = "Index" }
            );
-            routes.MapRoute(
-                name: "ServiceDetail",
-                url: "Service/{name})",
-                defaults: new { controller = "Service", action = "Detail" }
-            );
+           
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                url: "{controller}/{action}/{id}/{name}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional, name = UrlParameter.Optional }
             );
-
+            routes.MapRoute(
+            name: "ServiceNoAction",
+            url: "Service/{id}/{name}",
+            defaults: new { controller = "Service", action = "Index", name = UrlParameter.Optional }
+        );
            
         }
 

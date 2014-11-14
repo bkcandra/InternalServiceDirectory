@@ -6,6 +6,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using ISD.DA;
+using ISD.EDS;
 using ISD.Util;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -16,6 +18,7 @@ using ISD.Application.provider.MVC.Models;
 using ISD.Data.EDM;
 using System.Web.UI.WebControls;
 using ISD.BF;
+using BCUtility;
 
 
 namespace ISD.Application.provider.MVC.Controllers
@@ -218,18 +221,25 @@ namespace ISD.Application.provider.MVC.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                if (user == null)
                 {
                     ModelState.AddModelError("", "The user either does not exist or is not confirmed.");
                     return View();
                 }
+                
+                DataAccessComponent dac = new DataAccessComponent();
+                var MailConf = dac.RetrieveWebConfiguration();
+                var ProviderProfiles = dac.RetrieveProviderProfilesByID(user.Id);
+                DataSetComponent.v_EmailExplorerRow emTemp = dac.RetrieveMailTemplate((int)SystemConstants.EmailTemplateType.ForgotPassword);
+                string code = UserManager.GeneratePasswordResetToken(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
 
+                new BusinessFunctionComponent().ParseEmail(emTemp, user.Id, callbackUrl, (int)SystemConstants.EmailTemplateType.ForgotPassword, 0);
+                EmailSender.SendEmail("noreply@IEDirectory", ProviderProfiles.Email, emTemp.EmailSubject, emTemp.EmailBody, MailConf.SMTPHost, MailConf.SMTPPort, MailConf.SMTPUserName, MailConf.SMTPPassword, MailConf.SMTPSSL, MailConf.SMTPIIS);
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
                 // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form

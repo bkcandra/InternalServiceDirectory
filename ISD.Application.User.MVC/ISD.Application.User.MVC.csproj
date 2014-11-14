@@ -371,6 +371,7 @@
     <Content Include="assets\img\logo2-purple.png" />
     <Content Include="assets\img\logo2-red.png" />
     <Content Include="assets\img\Logo_ie.bmp" />
+    <Content Include="assets\img\Logo_ie.png" />
     <Content Include="assets\img\main\1.jpg" />
     <Content Include="assets\img\main\10.jpg" />
     <Content Include="assets\img\main\11.jpg" />
@@ -1470,7 +1471,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

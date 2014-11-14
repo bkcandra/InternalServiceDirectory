@@ -77,11 +77,11 @@
             <div class="col-md-8">
 
                 <h2>
-                    @Html.ActionLink(item.Name, "Index", "Service", new { id = item.ID }, null)
+                    @Html.ActionLink(item.Name, "Index", "Service", new { id = item.ID, name = item.Name.Replace(" ", string.Empty) }, null)
                 </h2>
                 <p>
                     @Html.Label("", item.FullDescription.Length > 250 ? item.FullDescription.Substring(0, 250) : item.FullDescription)
-                    @Html.ActionLink("Read more", item.Name.Replace(" ", string.Empty), "Service")
+                    @Html.ActionLink("Read more", "Index", "Service", new { id = item.ID, name = item.Name.Replace(" ", string.Empty) }, null)
                 </p>
                 <p>
                     <uc1:ScheduleViewerUC runat="server" ID="ScheduleViewerUC" />

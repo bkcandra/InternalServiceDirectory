@@ -1,0 +1,157 @@
+﻿@model IEnumerable<ISD.Data.EDM.AspNetUsers>
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework
+@using ISD.Data.EDM
+@using Microsoft.AspNet.Identity.Owin;
+@using ISD.Util;
+
+@{
+    var db = new ISDEntities();
+    ViewBag.Title = "Site Users";
+    var rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ISD.Application.provider.MVC.Models.ApplicationDbContext()));
+    var ProviderRole = rm.FindByName(SystemConstants.ProviderRole).Users.Select(x => x.UserId);
+    var SystemAdminRole = rm.FindByName(SystemConstants.AdministratorRole).Users.Select(x => x.UserId);
+
+    var provider = Model.Where(x => ProviderRole.Contains(x.ProviderProfiles.UserID)).ToList();
+    var admin = db.AspNetUsers.Where(x => SystemAdminRole.Contains(x.Id)).ToList();
+}
+
+@section styles
+{
+    @Styles.Render("~/Content/css/datatables/dataTables.bootstrap.css")
+    <style>
+        hr {
+            margin-top: 0 !important;
+        }
+    </style>
+}
+@section scripts
+{
+    @Scripts.Render("~/Scripts/plugins/datatables/jquery.dataTables.js")
+    @Scripts.Render("~/Scripts/plugins/datatables/dataTables.bootstrap.js")
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function () {
+            $('#tabUsers').dataTable();
+            $('#tabRefs').dataTable();
+            $('#tabSAdmins').dataTable();
+            $('#tabSysAdmins').dataTable();
+        });
+        $("#btnNewSAdmin").click(function () {
+            var sel = $('#SAdminUniv option:selected').text();
+            sel = sel.replace(" ", "");
+            url = "@Url.Action("Create", "UniversityAdmin")/" + sel;
+            window.location.href = url;
+        });
+
+    </script>
+}
+<div class="container content">
+    <div class="col-md-3">
+        @Html.Partial("_PartialListingSidebar")
+    </div>
+    <!-- End Left Sidebar -->
+    <!-- Right Sidebar -->
+    <div class="col-md-9">
+
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Site Users </h3>
+            </div>
+            <div class="box-body">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li><a href="#Referee" data-toggle="tab">Provider</a></li>
+                        <li><a href="#SystemAdmin" data-toggle="tab">System Administrator</a></li>
+                        <li class="pull-right"><a><i class="fa fa-user"></i></a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="Referee">
+                            <div class="table-responsive">
+                                <table id="tabRefs" class="table table-bordered table-hover">
+                                    <thead>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Email)
+                                    </th>
+
+
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ProviderProfiles.ProviderName)
+                                    </th>
+
+
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ProviderProfiles.CreatedDatetime)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ProviderProfiles.ModifiedDatetime)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ProviderProfiles.ModifiedBy)
+                                    </th>
+                                    </thead>
+
+                                    @foreach (var item in provider)
+                                    {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Email)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ProviderProfiles.ProviderName)
+                                        </td>
+                                        <td>
+                                            @item.ProviderProfiles.CreatedDatetime.Value.ToString("dd MMM yyyy")
+                                        </td>
+                                        <td>
+                                            @item.ProviderProfiles.ModifiedDatetime.Value.ToString("dd MMM yyyy")
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ProviderProfiles.ModifiedBy)
+                                        </td>
+                                    </tr>
+                                    }
+
+                                </table>
+                            </div>
+                        </div><!-- /.tab-pane -->
+                        <div class="tab-pane" id="SystemAdmin">
+                            <p>
+                                @Html.ActionLink("Create New", "Register", "Account", null, null)
+                            </p>
+                            <div class="table-responsive">
+                                <table id="tabSysAdmins" class="table table-bordered table-hover">
+                                    <thead>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Email)
+                                    </th>
+
+
+                                    <th></th>
+                                    </thead>
+
+                                    @foreach (var item in admin)
+                                    {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Email)
+                                        </td>
+
+
+                                        <td>
+
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                        </td>
+                                    </tr>
+                                    }
+
+                                </table>
+                            </div>
+                        </div>
+                    </div><!-- /.tab-content -->
+                </div>
+            </div><!-- /.box-body -->
+        </div>
+    </div>
+</div>
+
+

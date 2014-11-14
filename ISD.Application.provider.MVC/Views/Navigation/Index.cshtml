@@ -1,0 +1,201 @@
+﻿@model IEnumerable<ISD.Data.EDM.Menu>
+@{
+    ViewBag.Title = "Index";
+    var pages = new ISD.Data.EDM.ISDEntities().Page.ToList();
+    var link = new ISD.Data.EDM.ISDEntities().Link.ToList();
+}
+@section styles
+{
+    @Styles.Render("~/Content/DataTables-1.10.3/css/dataTables.bootstrap.css")
+    <style>
+        hr {
+            margin-top: 0 !important;
+        }
+    </style>
+}
+@section scripts
+{
+
+    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
+    @Scripts.Render("~/Scripts/DataTables-1.10.3/jquery.dataTables.js")
+    @Scripts.Render("~/Scripts/DataTables-1.10.3/dataTables.bootstrap.js")
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function () {
+            $('#tabNav').DataTable();
+        });
+
+
+        $(".OrderUp").click(function () {
+            var cId = $(this).parent().siblings("#NavId").val();
+            var cOr = $(this).parent().siblings("#hdnOrder").val();
+            var cOrVal = parseInt(cOr);
+            $.ajax({
+                url: '@Url.Action("Ordering")',
+                cache: false,
+                type: "POST",
+                data: {
+                    id: cId,
+                    increaseOrder: true
+                },
+                success: function (data) {
+                    if (data.status != false) {
+                        var curr = $("#nav-" + data.fromId)
+                        var prev = $("#nav-" + data.toId)
+                        $(curr).swapWith(prev);
+                    }
+                    else {
+                    }
+
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            });
+        })
+        $(".OrderDown").click(function () {
+            var cId = $(this).parent().siblings("#NavId").val();
+
+            $.ajax({
+                url: '@Url.Action("Ordering")',
+                cache: false,
+                type: "POST",
+                data: {
+                    id: cId,
+                    increaseOrder: false
+                },
+                success: function (data) {
+                    if (data.status != false) {
+                        var curr = $("#nav-" + data.fromId)
+                        var next = $("#nav-" + data.toId)
+                        $(curr).swapWith(next);
+                    }
+                    else {
+                    }
+
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            });
+        })
+
+        jQuery.fn.swapWith = function (to) {
+            return this.each(function () {
+                var copy_to = $(to).clone(true);
+                var copy_from = $(this).clone(true);
+                $(to).replaceWith(copy_from);
+                $(this).replaceWith(copy_to);
+            });
+        };
+    </script>
+}
+<div class="container content">
+    <div class="row blog-page">
+        <!-- Left Sidebar -->
+        <div class="col-md-3">
+            @Html.Partial("_PartialListingSidebar")
+        </div>
+        <!-- End Left Sidebar -->
+        <!-- Right Sidebar -->
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-12">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title">Site navigation </h3>
+                            </div>
+                            <div class="box-body table-responsive">
+                                @Html.ActionLink("Create", "Create")
+                                <hr />
+                                <table id="tabNav" class="table table-bordered table-hover">
+                                    <thead>
+                                    <th> Order</th>
+                                    <th>
+                                        Type
+                                    </th>
+                                    <th>
+                                        Target
+                                    </th>
+                                    <th></th>
+                                    </thead>
+
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr id="nav-@item.ID">
+                                            <td>
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-6" style="margin:0;padding:0">
+                                                            <a class="btn btn-default btn-sm btn-block pull-left OrderUp">
+                                                                <i class="fa fa-arrow-circle-up"></i>
+                                                            </a>
+
+                                                        </div>
+                                                        <div class="col-md-6" style="margin:0;padding:0">
+                                                            <a class="btn btn-default btn-sm btn-block pull-right OrderDown">
+                                                                <i class="fa fa-arrow-circle-down"></i>
+                                                            </a>
+                                                        </div>
+                                                        @Html.Hidden("NavId", item.ID)
+                                                        @Html.Hidden("hdnOrder", item.Sequence)
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                @if (item.MenuType.Value == ((int)ISD.Util.SystemConstants.MenuTargetType.ExternalLink))
+                                                {
+                                                    <p>External Link</p>
+                                                }
+                                                @if (item.MenuType.Value == ((int)ISD.Util.SystemConstants.MenuTargetType.Page))
+                                                {
+                                                    <p>Page</p>
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (item.MenuType == ((int)ISD.Util.SystemConstants.MenuTargetType.Page))
+                                                {
+                                                    var p = pages.Where(x => x.ID == item.LinkID).FirstOrDefault();
+                                                    if (p == null)
+                                                    {
+                                                        <p>Could not find page</p>
+                                                    }
+                                                    else
+                                                    {
+
+                                                        <p>@p.Title</p>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    var p = link.Where(x => x.ID == item.LinkID).FirstOrDefault();
+                                                    if (p == null)
+                                                    {
+                                                        <p>Could not find page</p>
+                                                    }
+                                                    else
+                                                    {
+
+                                                        <p><a href="@p.LinkValue">@p.LinkText</a></p>
+                                                    }
+                                                }
+
+                                            </td>
+
+
+
+                                            <td>
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </table>
+                            </div><!-- /.box-body -->
+                        </div>
+                    </div>
+               
+            </div>
+        </div>
+    </div>
+</div>

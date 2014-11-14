@@ -89,7 +89,7 @@ namespace ISD.Util
         public static string s_SpecificationPage = "~/Specification/";
         public static string CategoryRoot = "CategoryRoot";
         public static string DevUser = "Developer";
-        public static string AdministratorRole = "Administrator";
+        public const string AdministratorRole = "Administrator";
         public const string ProviderRole = "Provider";
         public static string CustomerRole = "Customer";
         public static string GuestRole = "Guest";
@@ -135,6 +135,14 @@ namespace ISD.Util
         public static string sortLatestDesc = "Latest DESC";
         public static string sortPriceDesc = "Fee DESC";
         public static string sortPointsDesc = "points DESC";
+
+        #region Application Message
+        public static string EditSuccess = "Your changes has been saved.";
+        public static string CreateSuccess = "New record has been saved.";
+        public static string DeleteSuccess = "Record has been deleted.";
+        public static string FormErrorMessage = "An error has occurred.";
+        public static string ErrorTemplateDelete = "Template is currently in used. Please change the setting to avoid empty email delivery.";
+        #endregion
 
         #region IconUrl
         public static string IconImageUrl = "~/Content/StyleImages/";
@@ -189,7 +197,7 @@ namespace ISD.Util
         #endregion
 
         #region enum
-
+        public enum FormMessageId { CreateSuccess, EditSuccess, DeleteSuccess, Error, ErrorTemplateDelete }
         public enum FormMode { View = 1, Edit = 2, New = 0 }
         public enum ActivityFeeCategory { Public_Free = 1, Public_Paid = 2, Private_Free = 3, Private_Paid = 4 }
         public enum ActivityStatus
