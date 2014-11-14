@@ -7,14 +7,15 @@
 }
 <style>
     .blog-post-tags {
-        border-top:none !important;
+        border-top: none !important;
     }
 </style>
 @Styles.Render("~/assets/css/pages/blog.css")
 <div class="breadcrumbs">
     <div class="container">
         <h1 class="pull-left">
-           @Html.DisplayFor(model => model.Title)</h1>
+            @Html.DisplayFor(model => model.Title)
+        </h1>
         <ul class="pull-right breadcrumb">
             <li><a href="index.html">Home</a></li>
             <li><a href="">Page</a></li>
@@ -31,73 +32,29 @@
                 <div class="blog-post-tags">
                     <ul class="list-unstyled list-inline blog-info">
                         <li><i class="fa fa-calendar"></i> @Model.ModifiedDatetime.Value.ToString("d MMM yyyy")</li>
-                        <li><i class="fa fa-pencil"></i> @Model.Author</li>
-                        <li><i class="fa fa-comments"></i><a href="#"> 0 Comments</a></li>
+
                     </ul>
-                    @if(!string.IsNullOrEmpty(Model.Tag))
-                        {
-                    <ul class="list-unstyled list-inline blog-tags">
-                        <li>
-                            <i class="fa fa-tags"></i>
-                            @{
-                                string[] tags = Model.Tag.Split('|');
-                                foreach (var tag in tags)
-                                {  <a href="#">@tag</a>
-                            }
-                            }
-                        </li>
-                    </ul>
+                    @if (!string.IsNullOrEmpty(Model.Tag))
+                    {
+                        <ul class="list-unstyled list-inline blog-tags">
+                            <li>
+                                <i class="fa fa-tags"></i>
+                                @{
+                        string[] tags = Model.Tag.Split('|');
+                        foreach (var tag in tags)
+                        {  <a href="#">@tag</a>
+                        }
+                                }
+                            </li>
+                        </ul>
                     }
                 </div>
-                @{
-                    @Html.HiddenFor(x => x.PageContent, new { @id = "hdnContent" });
-                }
-                <div id="pageContent"></div>
+                <div id="pageContent">@Html.Raw(Model.PageContent)</div>
             </div>
             <!--End Blog Post-->
-            <hr>
-            <!-- Comment Form -->
-            <div class="post-comment">
-                <h3>Leave a Comment</h3>
-                <form>
-                    <label>Name</label>
-                    <div class="row margin-bottom-20">
-                        <div class="col-md-7 col-md-offset-0">
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-
-                    <label>Email <span class="color-red">*</span></label>
-                    <div class="row margin-bottom-20">
-                        <div class="col-md-7 col-md-offset-0">
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-
-                    <label>Message</label>
-                    <div class="row margin-bottom-20">
-                        <div class="col-md-11 col-md-offset-0">
-                            <textarea class="form-control" rows="8"></textarea>
-                        </div>
-                    </div>
-
-                    <p><button class="btn-u" type="submit">Send Message</button></p>
-                </form>
-            </div>
-            <!-- End Comment Form -->
         </div>
         <!-- End Left Sidebar -->
 
     </div><!--/row-->
 </div>
 
-
-
-
-<script>
-    $(document).ready(function () {
-        var hdnContent = document.getElementById("hdnContent");
-        var pageContent = document.getElementById("pageContent");
-        pageContent.innerHTML = hdnContent.value;
-    });
-</script>

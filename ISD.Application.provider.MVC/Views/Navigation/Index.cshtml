@@ -87,16 +87,24 @@
                 $(this).replaceWith(copy_to);
             });
         };
+
+        $(".DeletePage").click(function () {
+            if (!confirm('Are you sure?')) return false;
+            var ID = $(this).siblings("#itemNavId").val()
+            $("#id").val(ID);
+            $("#DeleteNav").submit();
+            return true;
+
+           
+            
+        });
     </script>
 }
 <div class="container content">
     <div class="row blog-page">
-        <!-- Left Sidebar -->
         <div class="col-md-3">
             @Html.Partial("_PartialListingSidebar")
         </div>
-        <!-- End Left Sidebar -->
-        <!-- Right Sidebar -->
         <div class="col-md-9">
             <div class="row">
                 <div class="col-md-12">
@@ -154,7 +162,14 @@
                                             <td>
                                                 @if (item.MenuType == ((int)ISD.Util.SystemConstants.MenuTargetType.Page))
                                                 {
-                                                    var p = pages.Where(x => x.ID == item.LinkID).FirstOrDefault();
+                                                    var linkItem = link.Where(x => x.ID == item.LinkID).FirstOrDefault();
+                                                    if (linkItem == null)
+                                                    {
+                                                        <p>Could not find page</p>
+                                                    }
+                                                    else
+                                                    { 
+                                                    var p = pages.Where(x => x.ID.ToString() == linkItem.LinkValue).FirstOrDefault();
                                                     if (p == null)
                                                     {
                                                         <p>Could not find page</p>
@@ -163,6 +178,7 @@
                                                     {
 
                                                         <p>@p.Title</p>
+                                                    }
                                                     }
                                                 }
                                                 else
@@ -183,9 +199,22 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                                             <td>
                                                 @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                                <a href="#" class="DeletePage">Delete</a>
+                                                @Html.Hidden("itemNavId",item.ID)
                                             </td>
                                         </tr>
                                     }
@@ -196,6 +225,13 @@
                     </div>
                
             </div>
+        </div>
+        <div class="deleteform">
+            @using (Html.BeginForm("Delete", "Navigation", FormMethod.Post, new { @id = "DeleteNav" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("id")
+            }
         </div>
     </div>
 </div>

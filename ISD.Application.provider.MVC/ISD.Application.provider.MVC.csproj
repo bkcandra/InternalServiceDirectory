@@ -2197,7 +2197,6 @@
     <Content Include="Views\Pages\Edit.cshtml" />
     <Content Include="Views\Shared\_PartialListingSidebar.cshtml" />
     <Content Include="Views\Navigation\Create.cshtml" />
-    <Content Include="Views\Navigation\Delete.cshtml" />
     <Content Include="Views\Navigation\Edit.cshtml" />
     <Content Include="Views\Navigation\Index.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />

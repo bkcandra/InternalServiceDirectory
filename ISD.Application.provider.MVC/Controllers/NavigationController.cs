@@ -56,9 +56,16 @@ namespace ISD.Application.provider.MVC.Controllers
                 menu.ParentMenuID = 0;
                 if (Menu.MenuType == ((int)ISD.Util.SystemConstants.MenuTargetType.Page))
                 {
-                   
+                    int pageID = Convert.ToInt32(Menu.LinkValue);
+                    var page = db.Page.Where(x => x.ID == pageID).FirstOrDefault();
+
+                    var link = new Link();
+                    link.LinkType = Menu.MenuType;
+                    link.LinkText = page.Name;
+                    link.LinkValue = Menu.LinkValue;
+
                     menu.Sequence = OrderNavigation();
-                    menu.LinkID = Menu.LinkID;
+                    menu.Link = link;
                     menu.MenuType = Menu.MenuType;
                     db.Menu.Add(menu);
                     await db.SaveChangesAsync();
@@ -69,6 +76,7 @@ namespace ISD.Application.provider.MVC.Controllers
                     var link = new Link();
                     link.LinkType = Menu.MenuType;
                     link.LinkText = Menu.LinkText;
+                    link.LinkValue = Menu.LinkValue;
 
                     menu.Link = link;
                     menu.Sequence = OrderNavigation();

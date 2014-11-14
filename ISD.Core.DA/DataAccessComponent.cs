@@ -1780,7 +1780,21 @@ namespace ISD.DA
             ObjectHandler.CopyEnumerableToDataTable(Menu, dt, LoadOption.PreserveChanges);
             return dt;
         }
+        public DataSetComponent.v_MenuDataTable RetrieveMenuExplorers()
+        {
 
+
+            var query = from v in ent.v_Menu
+                        orderby v.Sequence
+                        select v;
+
+
+            DataSetComponent.v_MenuDataTable dt = new DataSetComponent.v_MenuDataTable();
+            var Menu = query.AsEnumerable();
+
+            ObjectHandler.CopyEnumerableToDataTable(Menu, dt, LoadOption.PreserveChanges);
+            return dt;
+        }
         public void DeleteMenu(int menuID, out int linkID)
         {
 

@@ -109,10 +109,23 @@
                                                 Find a Service
                                             </a>
                                         </li>
+                                       
+                                        <li class="dropdown">
+                                            <a href="http://provider.iedirectory.iechs.internal/">
+                                                Service Provider
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a href="http://provider.iedirectory.iechs.internal/Account/Register">
+                                                        Provider Registration
+                                                    </a>
+                                                </li>
+                                            </ul>
 
+                                        </li>
                                         @{
 
-                var dt = new DataAccessComponent().RetrieveMenuExplorers((int)SystemConstants.MenuType.MemberMenu);
+                var dt = new DataAccessComponent().RetrieveMenuExplorers();
                 var dtPages = new DataAccessComponent().RetrievePages();
 
                 int x = 0;
@@ -329,7 +342,7 @@
                                 var page = new ISD.Data.EDM.ISDEntities().Page.Where(x => x.Name == "Footer").FirstOrDefault();
                                 if (page != null)
                                 {
-                                      @Html.Raw(page.PageContent)
+                                    @Html.Raw(page.PageContent)
                                 }
                             }
 

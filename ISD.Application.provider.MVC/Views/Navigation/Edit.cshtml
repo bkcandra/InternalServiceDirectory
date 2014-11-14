@@ -16,8 +16,8 @@
             <!-- form start -->
             @using (Html.BeginForm("Edit", "Navigation", FormMethod.Post, new { Id = "formNav" }))
             {
-                @Html.HiddenFor(x=>x.ID)
-                @Html.HiddenFor(x=>x.LinkID)
+                @Html.HiddenFor(x => x.ID)
+                @Html.HiddenFor(x => x.LinkID)
                 @Html.AntiForgeryToken()
                 <div class="box-body">
 
@@ -62,7 +62,9 @@
                         }
                         else
                         {
+
                             @Html.TextBox("LinkValue", Model.LinkValue, new { @class = "form-control" })
+
                         }
                     </div>
 
@@ -75,10 +77,11 @@
     </div>
 
     <div class="col-md-12">
-        @Html.ActionLink("Back to List", null, "Email", null, null)
+        @Html.ActionLink("Back to List", "Index", "Navigation", null, null)
     </div>
     <!-- /.row -->
 </div>
+
 @section Scripts {
     <script>
         $(document).ready(function () {
@@ -95,12 +98,14 @@
                 $("#LinkID").show();
                 $("#ExternalText").show();
                 $("#ValueSelect").hide();
+                $("#LinkValue").show();
             }
             else {
 
                 $("#ExternalText").hide();
                 $("#LinkID").hide();
                 $("#ValueSelect").show();
+                $("#LinkValue").hide();
             }
         }
 

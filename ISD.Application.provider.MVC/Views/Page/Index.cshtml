@@ -31,8 +31,7 @@
                 <div class="blog-post-tags">
                     <ul class="list-unstyled list-inline blog-info">
                         <li><i class="fa fa-calendar"></i> @Model.ModifiedDatetime.Value.ToString("d MMM yyyy")</li>
-                        <li><i class="fa fa-pencil"></i> @Model.Author</li>
-                        <li><i class="fa fa-comments"></i><a href="#"> 0 Comments</a></li>
+                        
                     </ul>
                     @if(!string.IsNullOrEmpty(Model.Tag))
                         {
@@ -55,45 +54,11 @@
                 <div id="pageContent"></div>
             </div>
             <!--End Blog Post-->
-            <hr>
-            <!-- Comment Form -->
-            <div class="post-comment">
-                <h3>Leave a Comment</h3>
-                <form>
-                    <label>Name</label>
-                    <div class="row margin-bottom-20">
-                        <div class="col-md-7 col-md-offset-0">
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-
-                    <label>Email <span class="color-red">*</span></label>
-                    <div class="row margin-bottom-20">
-                        <div class="col-md-7 col-md-offset-0">
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-
-                    <label>Message</label>
-                    <div class="row margin-bottom-20">
-                        <div class="col-md-11 col-md-offset-0">
-                            <textarea class="form-control" rows="8"></textarea>
-                        </div>
-                    </div>
-
-                    <p><button class="btn-u" type="submit">Send Message</button></p>
-                </form>
-            </div>
-            <!-- End Comment Form -->
         </div>
         <!-- End Left Sidebar -->
 
     </div><!--/row-->
 </div>
-
-
-
-
 <script>
     $(document).ready(function () {
         var hdnContent = document.getElementById("hdnContent");

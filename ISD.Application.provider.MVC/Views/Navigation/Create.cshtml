@@ -34,6 +34,7 @@
                         <div class="form-group">
                             <label>Target</label>
                             @Html.Hidden("ParentMenuID","0")
+                            @Html.Hidden("LinkValue", "0")
                             <select id="ValueSelect" class="form-control">
                                 @foreach (var item in new ISDEntities().Page.ToList())
                                 {
@@ -93,7 +94,7 @@
                 }
 
                 
-                $("#Value").val(target);
+                $("#LinkValue").val(target);
                 formNav.submit();
             })
         </script>
